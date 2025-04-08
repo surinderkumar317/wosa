@@ -12,7 +12,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import {
@@ -91,6 +90,17 @@ const verificationSchema = z.object({
   verificationCode: z.string().length(4, "Code must be 4 digits").regex(/^[0-9]+$/, "Only numbers allowed"),
 });
 
+type FeedbackData = {
+  name: string,
+  email: string,
+  source: string,
+  feedbackBranch: string,
+  productServices: string,
+  subject: string,
+  message: string,
+  rating: number, // Default value
+};
+
 const Feedback = () => {
   const [selectedFeedbackType, setSelectedFeedbackType] = useState("phone");
   const [selectedBranch, setSelectedBranch] = useState("");
@@ -106,7 +116,7 @@ const Feedback = () => {
   const [submittedPhoneNumber, setSubmittedPhoneNumber] = useState("");
   const [userDetails, setUserDetails] = useState({ name: "", uniqueId: "", password: "" });
 
-  const [feedbackData, setfeedbackData] = useState<Record<string, any> | null>(null);
+  const [feedbackData, setFeedbackData] = useState<FeedbackData | null>(null);
 
   // feedback Type Hook
   const feedbacktypeForm = useForm({
@@ -151,7 +161,7 @@ const Feedback = () => {
     feedbackForm.reset();
 
     // Store form data before moving to the next step
-    setfeedbackData(data);
+    setFeedbackData(data);
 
     setIsFeedbackOpen(false);
     setIsVarificationOpen(true);
