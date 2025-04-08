@@ -146,7 +146,7 @@ const WebMedia: React.FC = () => {
     },
   });
 
-  const { watch, setValue } = form; // Get values from form
+  const { watch } = form; // Get values from form
   const searchQuery = watch("search");
   const category = watch("webcategory");
   const mediaType = watch("mediaType");

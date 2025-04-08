@@ -138,7 +138,7 @@ const OnlineCourse = () => {
       <div className="container m-auto py-40">
         <div className="courses-content">
           <h2>Practice Packs</h2>
-          <h3>Let's Find Your Courses. What are you looking for?</h3>
+          <h3>Let&apos;s Find Your Courses. What are you looking for?</h3>
         </div>
 
         <div className="m-auto w-3/4 mt-10 form-middle-container">
@@ -158,8 +158,11 @@ const OnlineCourse = () => {
                       <FormItem className="form-row w-full">
                         <Label>Select Your Course</Label>
                         <Select
-                          onValueChange={handleCourseChange}
-                          value={selectedCourse ?? ""}
+                          onValueChange={(value) => {
+                            field.onChange(value);
+                            handleCourseChange(value);
+                          }}
+                          value={field.value}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Select Course" />
@@ -203,8 +206,11 @@ const OnlineCourse = () => {
                       <FormItem className="form-row w-full">
                         <Label>Select Your Program</Label>
                         <Select
-                          onValueChange={handleProgramChange}
-                          value={selectedProgram ?? ""}
+                          onValueChange={(value) => {
+                            field.onChange(value);
+                            handleProgramChange(value);
+                          }}
+                          value={field.value}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Select Program" />
@@ -307,8 +313,11 @@ const OnlineCourse = () => {
                       <FormItem className="form-row w-full">
                         <Label>Select Module Type</Label>
                         <Select
-                          onValueChange={handleModuleTypeChange}
-                          value={selectedModuleType ?? ""}
+                          onValueChange={(value) => {
+                            field.onChange(value);
+                            handleModuleTypeChange(value);
+                          }}
+                          value={field.value}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Select Module Type" />
@@ -330,8 +339,11 @@ const OnlineCourse = () => {
                       <FormItem className="form-row w-full">
                         <Label>Select Module</Label>
                         <Select
-                          onValueChange={handleModuleChange}
-                          value={selectedModule ?? ""}
+                          onValueChange={(value) => {
+                            field.onChange(value);
+                            handleModuleChange(value);
+                          }}
+                          value={field.value}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Select Module" />
@@ -356,8 +368,11 @@ const OnlineCourse = () => {
                       <FormItem className="form-row w-full">
                         <Label>Select Course Type</Label>
                         <Select
-                          onValueChange={handleCourseTypeChange}
-                          value={selectedCourseType ?? ""}
+                          onValueChange={(value) => {
+                            field.onChange(value);
+                            handleCourseTypeChange(value);
+                          }}
+                          value={field.value}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Select Course Type" />
@@ -387,8 +402,11 @@ const OnlineCourse = () => {
                       <FormItem className="form-row w-full">
                         <Label>Select Duration</Label>
                         <Select
-                          onValueChange={handleDurationChange}
-                          value={selectedDuration ?? ""}
+                          onValueChange={(value) => {
+                            field.onChange(value);
+                            handleDurationChange(value);
+                          }}
+                          value={field.value}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Select Duration" />

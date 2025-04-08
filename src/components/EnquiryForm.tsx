@@ -38,7 +38,15 @@ const verificationSchema = z.object({
     verificationCode: z.string().length(4, "Code must be 4 digits").regex(/^[0-9]+$/, "Only numbers allowed"),
 });
 
-
+type EnquiryData = {
+    name: string;
+    email: string;
+    source: string;
+    interestedServices: string;
+    interestedSubServices: string;
+    interestedCountries: string;
+    message: string;
+  };
 
 const EnquiryForm = () => {
     const [selectedCountry, setSelectedCountry] = useState("+91");
@@ -54,7 +62,7 @@ const EnquiryForm = () => {
     const [submittedPhoneNumber, setSubmittedPhoneNumber] = useState("");
     const [userDetails, setUserDetails] = useState({ name: "", uniqueId: "", password: "" });
     
-    const [enquiryData, setEnquiryData] = useState<Record<string, any> | null>(null);
+    const [enquiryData, setEnquiryData] = useState<EnquiryData | null>(null);
 
     const phoneForm = useForm({
         resolver: zodResolver(phoneSchema),

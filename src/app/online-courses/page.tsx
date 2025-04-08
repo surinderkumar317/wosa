@@ -156,8 +156,11 @@ const OnlineCourse = () => {
                       <FormItem className="form-row w-full">
                         <Label>Select Your Course</Label>
                         <Select
-                          onValueChange={handleCourseChange}
-                          value={selectedCourse ?? ""}
+                          onValueChange={(value) => {
+                            field.onChange(value);
+                            handleCourseChange(value);
+                          }}
+                          value={field.value}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Select Course" />
@@ -256,8 +259,11 @@ const OnlineCourse = () => {
                       <FormItem className="form-row w-full">
                         <Label>Select Module Type</Label>
                         <Select
-                          onValueChange={handleModuleTypeChange}
-                          value={selectedModuleType ?? ""}
+                          onValueChange={(value) => {
+                            field.onChange(value);
+                            handleModuleTypeChange(value);
+                          }}
+                          value={field.value}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Select Module Type" />
@@ -279,8 +285,11 @@ const OnlineCourse = () => {
                       <FormItem className="form-row w-full">
                         <Label>Select Module</Label>
                         <Select
-                          onValueChange={handleModuleChange}
-                          value={selectedModule ?? ""}
+                          onValueChange={(value) => {
+                            field.onChange(value);
+                            handleModuleChange(value);
+                          }}
+                          value={field.value}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Select Module" />
@@ -305,8 +314,11 @@ const OnlineCourse = () => {
                       <FormItem className="form-row w-full">
                         <Label>Select Course Type</Label>
                         <Select
-                          onValueChange={handleCourseTypeChange}
-                          value={selectedCourseType ?? ""}
+                          onValueChange={(value) => {
+                            field.onChange(value);
+                            handleCourseTypeChange(value);
+                          }}
+                          value={field.value}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Select Course Type" />
@@ -336,8 +348,11 @@ const OnlineCourse = () => {
                       <FormItem className="form-row w-full">
                         <Label>Select Duration</Label>
                         <Select
-                          onValueChange={handleDurationChange}
-                          value={selectedDuration ?? ""}
+                          onValueChange={(value) => {
+                            field.onChange(value);
+                            handleDurationChange(value);
+                          }}
+                          value={field.value}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Select Duration" />
