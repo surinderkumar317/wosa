@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; // ✅ Import useRouter
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -12,7 +11,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import {
@@ -69,10 +67,18 @@ const verificationSchema = z.object({
   verificationCode: z.string().length(4, "Code must be 4 digits").regex(/^[0-9]+$/, "Only numbers allowed"),
 });
 
-const Register = () => {
-  const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+type RegistrationData = {
+  name: string,
+  email: string,
+  dob: string,
+  city: string,
+  source: string,
+  interestedServcies: string,
+  interestedSubServcies: string,
+  interestedCountries: string,
+};
 
+const Register = () => {
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState("+91");
@@ -85,7 +91,7 @@ const Register = () => {
   const [submittedPhoneNumber, setSubmittedPhoneNumber] = useState("");
   const [userDetails, setUserDetails] = useState({ name: "", uniqueId: "", password: "" });
   
-  const [registrationData, setRegistrationData] = useState<Record<string, any> | null>(null);
+  const [registrationData, setRegistrationData] = useState<RegistrationData | null>(null);
 
   // Phone Form Hook
   const phoneForm = useForm({

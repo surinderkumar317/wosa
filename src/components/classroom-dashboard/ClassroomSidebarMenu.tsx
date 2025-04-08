@@ -5,8 +5,7 @@ import CommonImage from "../common/Image";
 import { Button } from "../ui/button";
 import SwitchClassroom from "@/components/dashboard/SwitchClassroom";
 
-const ClassroomSidebarMenu = () => {
-  const [open, setOpen] = useState(false);
+const ClassroomSidebarMenu = () => {  
   const [isSwitchClassroomOpen, setIsSwitchClassroomOpen] = useState(false);
 
    // Function to open SwitchClassroom modal

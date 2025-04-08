@@ -34,7 +34,7 @@ const tabData: TabContent[] = [
         />
         <h3>Why do we need study VISA consultants?</h3>
         <p>
-          Let's find out why international education has touched the pinnacle.
+          Let&aposs find out why international education has touched the pinnacle.
         </p>
         <h3>Our Achievements:</h3>
         <ul>

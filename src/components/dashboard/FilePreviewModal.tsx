@@ -8,7 +8,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import CommonImage from "../common/Image";
-import { ScrollArea } from "../ui/scroll-area";
 
 const FilePreviewModal = () => {
   return (

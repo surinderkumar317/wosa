@@ -108,7 +108,7 @@ const ProfilePicture = () => {
             <FormField
               control={profileChangeForm.control}
               name="attachments"
-              render={({ field: { onChange }, fieldState: { error } }) => (
+              render={({ field: { onChange } }) => (
                 <FormItem className="form-row w-full file-attachment profile-pic">
                   <div className="flex flex-col gap-2 relative">
                     <Label htmlFor="file-upload" className="font-medium">
