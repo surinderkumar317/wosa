@@ -142,7 +142,7 @@ const OnlineCourse = () => {
             <div className="container m-auto py-40">
                 <div className="courses-content">
                     <h2>Inhouse Courses</h2>
-                    <h3>Let's Find Your Courses. What are you looking for?</h3>
+                    <h3>Let&apos;s Find Your Courses. What are you looking for?</h3>
                 </div>
 
                 <div className="m-auto w-3/4 mt-10 form-middle-container">
