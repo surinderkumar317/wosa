@@ -1,7 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; // ✅ Import useRouter
-import { useForm } from "react-hook-form";
+import React, { useState} from "react";
+import { useForm, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -34,7 +33,6 @@ import { Eye, EyeOff } from "lucide-react";
 
 import { toast } from "sonner";
 import { Toaster } from "sonner";
-import Register from "./Register";
 
 const countryOptions = [
   { value: "+91", label: "🇮🇳 +91 (India)" },
@@ -99,38 +97,10 @@ const Login = () => {
     console.log("Form Data Submitted:", data); 
     toast.success("Login successful! 🎉");
       setIsLoginOpen(false);
-      loginForm.reset();
-
-    // const isAuthenticated = true; // Simulating successful login
-    // if (isAuthenticated) {
-    //   localStorage.setItem("authToken", "your_token_here");
-    //   setIsAuthenticated(true);
-      
-      
-    //   // Redirect to dashboard after login
-    //   router.push("/student-dashboard");
-    // } else {
-    //   toast.error("Invalid credentials. Please try again.");
-    // }
+      loginForm.reset();   
   };
 
-  const handleLogout = () => {
-    // localStorage.removeItem("authToken"); // ✅ Clear stored token
-    // setIsAuthenticated(false); // ✅ Update state
   
-    toast.success("Logged out successfully! 👋");
-  
-    // ✅ Force a hard reload to fully reset auth state
-    // router.push("/");
-    // setTimeout(() => {
-    //   router.refresh(); // ✅ Ensures Next.js recognizes state change
-    // }, 200);
-  };
-  // // Debugging function
-  // const onInvalid = (errors: any) => {
-  //   console.log("Validation Errors:", errors);
-  //   toast.error("Please correct the errors before submitting.");
-  // };
 
   // Define validation schemas for forgotpassword
   const forgotPasswordSchema = z.object({
@@ -144,7 +114,7 @@ const Login = () => {
     defaultValues: { forgotEmail: "" },
   });
 
-  const onInvalid = (errors: any) => {
+  const onInvalid = (errors: FieldErrors) => {
     console.log("Validation Errors:", errors);
     toast.error("Please correct the errors before submitting.");
   };

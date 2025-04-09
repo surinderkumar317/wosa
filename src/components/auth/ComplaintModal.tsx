@@ -12,7 +12,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import {
@@ -84,6 +83,17 @@ interface ComplaintsProps {
   buttonText?: string;
 }
 
+type ComplaintData = {
+  name: string;
+  email: string;
+  source: string;
+  complaintBranch: string;
+  productServices: string;
+  subject: string;
+  message: string;
+  attachments?: File[]; // match form type
+};
+
 const Complaints: React.FC<ComplaintsProps> = ({ buttonText = "Complaint" }) => {
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
   const [isComplaintOpen, setIsComplaintOpen] = useState(false);
@@ -97,7 +107,7 @@ const Complaints: React.FC<ComplaintsProps> = ({ buttonText = "Complaint" }) => 
   const [submittedPhoneNumber, setSubmittedPhoneNumber] = useState("");
   const [userDetails, setUserDetails] = useState({ name: "", uniqueId: "", password: "" });
 
-  const [complaintData, setcomplaintData] = useState<Record<string, any> | null>(null);
+  const [complaintData, setcomplaintData] = useState<ComplaintData | null>(null);
 
   // Phone Form Hook
   const phoneForm = useForm({

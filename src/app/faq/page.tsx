@@ -42,8 +42,8 @@ interface FAQItem {
 
 const faqData: FAQItem[] = [
   { id: "item-1", question: "Is it accessible?", answer: "Yes. It adheres to the WAI-ARIA design pattern.", category: "Visa Application Process" },
-  { id: "item-2", question: "Is it styled?", answer: "Yes. It comes with default styles that match the other components' aesthetic.", category: "Required Documents" },
-  { id: "item-3", question: "Is it animated?", answer: "Yes. It's animated by default, but you can disable it if you prefer.", category: "Admission Requirements" },
+  { id: "item-2", question: "Is it styled?", answer: "Yes. It comes with default styles that match the other components aesthetic.", category: "Required Documents" },
+  { id: "item-3", question: "Is it animated?", answer: "Yes. Its animated by default, but you can disable it if you prefer.", category: "Admission Requirements" },
 ];
 
 const FAQ: React.FC = () => {
@@ -76,7 +76,7 @@ const FAQ: React.FC = () => {
     <div className="faq-container">
       <div className="commonbanner-form py-10 items-center flex flex-col">
         <div className="container m-auto relative z-20">
-          <h1 className="text-center">FAQ'S</h1>
+          <h1 className="text-center">FAQ&apos;S</h1>
           <div className="webmeida-filter-box p-6 bg-white mt-5">
             <Form {...form}>
               <form className="flex gap-5">

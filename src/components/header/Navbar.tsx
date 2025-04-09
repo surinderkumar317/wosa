@@ -1,15 +1,11 @@
 "use client";
-
-import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { HEADER_LINKS } from "@/app/constants/links";
 import CommonImage from "@/components/common/Image";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Button } from "@/components/ui/button";
 import TimeZone from "./TimeZone";
 import Login from "../auth/Login";
-import Register from "../auth/Register";
 
 import {
   Sheet,
@@ -31,15 +27,7 @@ interface IMenuItem {
 
 const menuData: IMenuItem[] = HEADER_LINKS;
 
-const Navbar: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const pathname = usePathname();
-
-  useEffect(() => {
-    // Check if user is logged in (Example: Using localStorage or API check)
-    const token = localStorage.getItem("authToken"); // Example authentication check
-    setIsLoggedIn(!!token);
-  }, [pathname]);
+const Navbar: React.FC = () => { 
 
   return (
     <>
