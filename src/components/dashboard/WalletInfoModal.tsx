@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link"; // ✅ Import Next.js Link correctly
 import {
   Dialog,
   DialogContent,
@@ -12,14 +11,12 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,

@@ -6,7 +6,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "../ui/button";
 import Complaints from "../auth/ComplaintModal";
 import StudentComlaintModal from "./StudentComplaintsModal";
 

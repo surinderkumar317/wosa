@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import SocialIcons from "@/components/header/SocialIcons";
 import Navbar from "@/components/header/Navbar";
-import Marquee from "@/components/header/Marquee";
 import { Button } from "@/components/ui/button";
 import CommonImage from "@/components/common/Image";
 import { BASE_URL, ENQUIRY_URL, VIRTUALOFFICE_URL } from "@/app/constants/common";

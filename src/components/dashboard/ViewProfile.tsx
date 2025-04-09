@@ -16,8 +16,6 @@ import {
 } from "@/components/ui/form";
 import { Button } from "../ui/button";
 
-
-
 const viewProfileSchema = z.object({
   firstName: z.string().min(2, "Name is required"),
   lastName: z.string().min(2, "Last name is required"),
@@ -30,39 +28,46 @@ const viewProfileSchema = z.object({
   permanentAddress: z.string().min(1, "Please enter your address"),
 });
 
-  const ViewProfile = () => {
+const ViewProfile = () => {
+  const router = useRouter();
 
-    const router = useRouter();
+  const viewProfileForm = useForm({
+    resolver: zodResolver(viewProfileSchema),
+    defaultValues: {
+      firstName: "John",
+      lastName: "Doe",
+      countryCode: "+91",
+      phoneNumber: "1234567890",
+      gender: "Male",
+      email: "johndoe@example.com",
+      dob: new Date().toISOString().split("T")[0], // Default to today’s date
+      anniversary: "",
+      permanentAddress: "123 Main St, City, Country",
+    },
+  });
 
-    const viewProfileForm = useForm({
-      resolver: zodResolver(viewProfileSchema),
-      defaultValues: {
-        firstName: "John",
-        lastName: "Doe",
-        countryCode: "+91",
-        phoneNumber: "1234567890",
-        gender: "Male",
-        email: "johndoe@example.com",
-        dob: new Date().toISOString().split("T")[0], // Default to today’s date
-        anniversary: "",
-        permanentAddress: "123 Main St, City, Country",
-      },
-    });
-
-  const handleViewProfileSubmit = async (data: z.infer<typeof viewProfileSchema>) => {
-      console.log("Form Data Submitted:", data);      
-};
+  const handleViewProfileSubmit = async (
+    data: z.infer<typeof viewProfileSchema>
+  ) => {
+    console.log("Form Data Submitted:", data);
+  };
 
   return (
     <div className="view-profile mt-5">
       <div className="dash-header flex justify-between items-center">
         <h2 className="text-2xl font-bold">View Profile</h2>
-        <Button onClick={() => router.push("/student-dashboard")}>Back</Button> {/* ✅ Navigate back */}
+        <Button onClick={() => router.push("/student-dashboard")}>
+          Back
+        </Button>{" "}
+        {/* ✅ Navigate back */}
       </div>
 
       <div className="view-profile-form">
         <Form {...viewProfileForm}>
-          <form  onSubmit={viewProfileForm.handleSubmit(handleViewProfileSubmit)} className="space-y-4 p-4 w-full">
+          <form
+            onSubmit={viewProfileForm.handleSubmit(handleViewProfileSubmit)}
+            className="space-y-4 p-4 w-full"
+          >
             <div className="flex justify-between w-full gap-5">
               {/* First Name */}
               <FormField
@@ -101,7 +106,7 @@ const viewProfileSchema = z.object({
               <FormField
                 control={viewProfileForm.control}
                 name="countryCode"
-                render={({ field }) => (
+                render={() => (
                   <FormItem className="form-row w-full">
                     <Label>Country Code</Label>
                     <FormControl>

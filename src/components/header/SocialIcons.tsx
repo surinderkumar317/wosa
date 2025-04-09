@@ -3,12 +3,6 @@ import { SOCIAL_LINKS_HEADER } from '@/app/constants/links';
 import CommonImage from '../common/Image';
 import Link from 'next/link';
 
-interface ISocialIcon {
-  href: string;
-  src: string;
-  alt: string;
-}
-
 const SocialIcons: React.FC = () => {
   return (
     <ul className="socialIco flex gap-2 items-center">
