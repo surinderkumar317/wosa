@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export function middleware(_req: NextRequest) {
+export function middleware() {
   const res = NextResponse.next();
 
   // Apply global cache headers for all pages
