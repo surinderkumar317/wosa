@@ -8,7 +8,7 @@ const Content = () => {
     <div className="image-gallery-text">
       <h2>Video Gallery</h2>
       <Button className="gallery-btn" asChild>
-        <Link href="/">
+        <Link href="/web-media">
           View All{" "}          
            <CommonImage
             classname={"large-arrow"}

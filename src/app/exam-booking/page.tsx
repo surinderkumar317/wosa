@@ -18,7 +18,11 @@ const Testimonials = dynamic(() => import("@/components/Testimonials"), {
 const page = () => {
   return (
     <div className="exam-booking">
-      <FormSlider heading={'Book Exam at Discounted Price'} paragraph={'Exclusive Discounts: Book Your PTE, TOEFL or IELTS Exam Now and Save Big!'} />
+      <FormSlider 
+        heading={'Book Exam at Discounted Price'} 
+        paragraph={'Exclusive Discounts: Book Your PTE, TOEFL or IELTS Exam Now and Save Big!'} 
+        modalType="Enquiry"
+      />
 
       <Suspense fallback={<Loading />}>
         <LazySection>

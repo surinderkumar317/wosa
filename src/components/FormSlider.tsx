@@ -4,10 +4,13 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import CommonImage from "./common/Image";
 import EnquiryForm from "./EnquiryForm";
+import B2bRegistrationEnquiry from "./b2bform/B2bRegistrationEnquiry";
+import EventTimeModal from "./coaching/EventModal";
 
 interface FormSliderProps {
   heading: string;
   paragraph: string;
+  modalType: "Enquiry" | "B2bRegistration" | "eventmodal";
 }
 const images: string[] = [
   "/images/1000x665(1).webp",
@@ -15,7 +18,7 @@ const images: string[] = [
   "/images/1000x665(3).webp",
 ];
 
-const FormSlider = ({ heading, paragraph }: FormSliderProps) => {
+const FormSlider = ({ heading, paragraph, modalType }: FormSliderProps) => {
 
   const autoplayRef = useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplayRef.current]);
@@ -81,7 +84,9 @@ const FormSlider = ({ heading, paragraph }: FormSliderProps) => {
       <div className="lg:w-1/3 lg:p-6 lg:ml-11 w-full p-10 left-slideform">
         <h1>{heading}</h1>
         <p>{paragraph}</p>
-        <EnquiryForm/>        
+        {modalType === "Enquiry" && <EnquiryForm/>} 
+        {modalType === "B2bRegistration" && <B2bRegistrationEnquiry/>}
+        {modalType === "eventmodal" && <EventTimeModal heading="Event Time Slot" />}        
       </div>
       <div className="lg:w-2/4 lg:p-0 px-5 pt-5 w-full form-slider-img relative">
         <div className="overflow-hidden" ref={emblaRef}>

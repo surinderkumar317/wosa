@@ -38,6 +38,7 @@ const page = () => {
         paragraph={
           "Get free online and offline counseling from experts on courses, colleges, admission criteria, and the application process."
         }
+        modalType="Enquiry"
       />
       <Suspense fallback={<Loading />}>
         <LazySection>

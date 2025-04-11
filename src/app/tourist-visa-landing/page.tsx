@@ -24,7 +24,11 @@ const ImmigrationVisaSlider = dynamic(() => import("@/components/ImmigrationVisa
 const page = () => {
   return (
     <div className="visa-landing">
-      <FormSlider heading={'Apply for a Visitor visa'} paragraph={'A visitor visa allows you to visit family or friends, attend business meetings, and medical treatments. Get a free online profile assessment with Western Overseas'} />
+      <FormSlider 
+        heading={'Apply for a Visitor visa'} 
+        paragraph={'A visitor visa allows you to visit family or friends, attend business meetings, and medical treatments. Get a free online profile assessment with Western Overseas'} 
+        modalType="Enquiry"  
+      />
 
       <Suspense fallback={<Loading />}>
         <LazySection>

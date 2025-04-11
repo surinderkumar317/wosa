@@ -24,7 +24,11 @@ const ImmigrationVisaSlider = dynamic(() => import("@/components/ImmigrationVisa
 const page = () => {
   return (
     <div className="visa-landing">
-      <FormSlider heading={'Apply for a Work Visa'} paragraph={'A work visa allows you to work for a specific employer under certain conditions mentioned on your permit. Western Overseas provides the best route to apply for a work visa in Canada and Au'} />
+      <FormSlider 
+        heading={'Apply for a Work Visa'} 
+        paragraph={'A work visa allows you to work for a specific employer under certain conditions mentioned on your permit. Western Overseas provides the best route to apply for a work visa in Canada and Au'} 
+        modalType="Enquiry"
+      />
 
       <Suspense fallback={<Loading />}>
         <LazySection>

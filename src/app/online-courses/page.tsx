@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import CommonImage from "@/components/common/Image";
+import Link from "next/link";
 
 const formSchema = z.object({
   // branch: z.string().min(1, "Branch is required"),
@@ -26,8 +27,24 @@ const formSchema = z.object({
   duration: z.string().min(1, "Duration Type is required"),
 });
 
-const CoursesList = [
+interface Course {
+  id: number;
+  src: string;
+  title: string;
+  days: string;
+  branch: string;
+  module: string;
+  coursestype: string;
+  durations: string;
+  price: string;
+  moreinfo: string;
+  buynow: string;
+  link: string;
+}
+
+const CoursesList: Course[] = [
   {
+    id: 1,
     src: "/images/course.webp",
     title: "CELPIP | General",
     days: "CELPIP | 90 DAYS",
@@ -38,6 +55,7 @@ const CoursesList = [
     price: "INR 14500",
     moreinfo: "More Information",
     buynow: "INR 11441",
+    link: "/online-courses/duolingo-60-days",
   },
 ];
 
@@ -399,53 +417,42 @@ const OnlineCourse = () => {
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
           transition={{ duration: 0.5 }}
           className="container m-auto courses-main-cont"
         >
           <div className="courses-box-container flex flex-wrap gap-4">
-            {CoursesList.map((courses, index) => (
-              <div key={index} className="w-[24%]">
+            {CoursesList.map((course) => (
+              <div key={course.id} className="w-[24%]">
                 <Card className="courses-box p-4 rounded-xl border bg-card shadow">
                   <CardContent className="p-0">
-                    <div className="course-img">
-                      <CommonImage
-                        src={courses.src}
-                        alt={courses.title}
-                        width={500}
-                        height={500}
-                        classname="cursor-pointer w-full"
-                      />
-                    </div>
-                    <div className="courses-heading text-center">
-                      <h2>{courses.title}</h2>
-                      <p>{courses.days}</p>
-                    </div>
-                    <div className="courses-list">
+                    <Link href={course.link} className="no-underline">
+                      <div className="course-img">
+                        <CommonImage
+                          src={course.src}
+                          alt={course.title}
+                          width={500}
+                          height={500}
+                          classname="cursor-pointer w-full"
+                        />
+                      </div>
+                      <div className="courses-heading text-center">
+                        <h2>{course.title}</h2>
+                        <p>{course.days}</p>
+                      </div>
                       <ul className="my-5">
-                        <li>
-                          <p>Branch: {courses.branch}</p>
-                        </li>
-                        <li>
-                          <p>Module: {courses.module}</p>
-                        </li>
-                        <li>
-                          <p>Course Type: {courses.coursestype}</p>
-                        </li>
-                        <li>
-                          <p>Duration: {courses.durations}</p>
-                        </li>
-                        <li>
-                          <p>Price: {courses.price}</p>
-                        </li>
+                        <li><p>Branch: {course.branch}</p></li>
+                        <li><p>Module: {course.module}</p></li>
+                        <li><p>Course Type: {course.coursestype}</p></li>
+                        <li><p>Duration: {course.durations}</p></li>
+                        <li><p>Price: {course.price}</p></li>
                       </ul>
-                    </div>
-                    <div className="courses-btn-box flex justify-between items-center">
-                      <p className="!text-sm">{courses.moreinfo}</p>
-                      <Button className="courses-btn">
-                        Buy Now: {courses.buynow}
-                      </Button>
-                    </div>
+                      <div className="courses-btn-box flex justify-between items-center">
+                        <p className="!text-sm">{course.moreinfo}</p>
+                        <Button className="courses-btn">
+                          Buy Now: {course.buynow}
+                        </Button>
+                      </div>
+                    </Link>
                   </CardContent>
                 </Card>
               </div>
@@ -456,5 +463,4 @@ const OnlineCourse = () => {
     </div>
   );
 };
-
 export default OnlineCourse;

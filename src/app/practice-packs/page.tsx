@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import CommonImage from "@/components/common/Image";
+import Link from "next/link";
 
 const formSchema = z.object({
   program: z.string().min(1, "Program is required"),
@@ -26,8 +27,24 @@ const formSchema = z.object({
   duration: z.string().min(1, "Duration Type is required"),
 });
 
-const CoursesList = [
+interface Course {
+  id: number;
+  src: string;
+  title: string;
+  days: string;
+  branch: string;
+  module: string;
+  coursestype: string;
+  durations: string;
+  price: string;
+  moreinfo: string;
+  buynow: string;
+  link: string;
+}
+
+const CoursesList: Course[] = [
   {
+    id: 1,
     src: "/images/course.webp",
     title: "CELPIP | General",
     days: "CELPIP | 90 DAYS",
@@ -38,6 +55,7 @@ const CoursesList = [
     price: "INR 14500",
     moreinfo: "More Information",
     buynow: "INR 11441",
+    link: "/practice-packs/value-pack",
   },
 ];
 
@@ -100,7 +118,7 @@ const OnlineCourse = () => {
 
   const handleBack = () => {
     setShowProgramForm(false);
-  setShowCourseForm(true);
+    setShowCourseForm(true);
   };
   const handleBackAdvanced = () => {
     setShowAdvancedForm(false);
@@ -250,7 +268,7 @@ const OnlineCourse = () => {
           {/* Branch & Course Display After Search */}
           {/* Show Branch & Course Selection Summary */}
           {(searchClicked || form || showCourseForm || showAdvancedForm) && (
-            <ul className="flex justify-center branches-course-list">              
+            <ul className="flex justify-center branches-course-list">
               {selectedCourse && <li>Course: {selectedCourse}</li>}
               {selectedProgram && <li>Program: {selectedProgram}</li>}
               {selectedModuleType && <li>Module Type: {selectedModuleType}</li>}
@@ -458,48 +476,50 @@ const OnlineCourse = () => {
           className="container m-auto courses-main-cont"
         >
           <div className="courses-box-container flex flex-wrap gap-4">
-            {CoursesList.map((courses, index) => (
-              <div key={index} className="w-[24%]">
+            {CoursesList.map((courses) => (
+              <div key={courses.id} className="w-[24%]">
                 <Card className="courses-box p-4 rounded-xl border bg-card shadow">
                   <CardContent className="p-0">
-                    <div className="course-img">
-                      <CommonImage
-                        src={courses.src}
-                        alt={courses.title}
-                        width={500}
-                        height={500}
-                        classname="cursor-pointer w-full"
-                      />
-                    </div>
-                    <div className="courses-heading text-center">
-                      <h2>{courses.title}</h2>
-                      <p>{courses.days}</p>
-                    </div>
-                    <div className="courses-list">
-                      <ul className="my-5">
-                        <li>
-                          <p>Program: {courses.branch}</p>
-                        </li>
-                        <li>
-                          <p>Module: {courses.module}</p>
-                        </li>
-                        <li>
-                          <p>Course Type: {courses.coursestype}</p>
-                        </li>
-                        <li>
-                          <p>Duration: {courses.durations}</p>
-                        </li>
-                        <li>
-                          <p>Price: {courses.price}</p>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="courses-btn-box flex justify-between items-center">
-                      <p className="!text-sm">{courses.moreinfo}</p>
-                      <Button className="courses-btn">
-                        Buy Now: {courses.buynow}
-                      </Button>
-                    </div>
+                    <Link href={courses.link} className="no-underline">
+                      <div className="course-img">
+                        <CommonImage
+                          src={courses.src}
+                          alt={courses.title}
+                          width={500}
+                          height={500}
+                          classname="cursor-pointer w-full"
+                        />
+                      </div>
+                      <div className="courses-heading text-center">
+                        <h2>{courses.title}</h2>
+                        <p>{courses.days}</p>
+                      </div>
+                      <div className="courses-list">
+                        <ul className="my-5">
+                          <li>
+                            <p>Program: {courses.branch}</p>
+                          </li>
+                          <li>
+                            <p>Module: {courses.module}</p>
+                          </li>
+                          <li>
+                            <p>Course Type: {courses.coursestype}</p>
+                          </li>
+                          <li>
+                            <p>Duration: {courses.durations}</p>
+                          </li>
+                          <li>
+                            <p>Price: {courses.price}</p>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="courses-btn-box flex justify-between items-center">
+                        <p className="!text-sm">{courses.moreinfo}</p>
+                        <Button className="courses-btn">
+                          Buy Now: {courses.buynow}
+                        </Button>
+                      </div>
+                    </Link>
                   </CardContent>
                 </Card>
               </div>

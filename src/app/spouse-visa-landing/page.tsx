@@ -24,7 +24,11 @@ const ImmigrationVisaSlider = dynamic(() => import("@/components/ImmigrationVisa
 const page = () => {
   return (
     <div className="visa-landing">
-      <FormSlider heading={'Apply for Spouse Visa'} paragraph={'A spouse visa allows married partners to bring their spouses abroad to live together. Western Overseas is the top choice for spouse visas in Canada, Australia, USA, UK, New Zealand etc.'} />
+      <FormSlider 
+        heading={'Apply for Spouse Visa'} 
+        paragraph={'A spouse visa allows married partners to bring their spouses abroad to live together. Western Overseas is the top choice for spouse visas in Canada, Australia, USA, UK, New Zealand etc.'} 
+        modalType="Enquiry"  
+      />
 
       <Suspense fallback={<Loading />}>
         <LazySection>

@@ -25,7 +25,11 @@ const page = () => {
   return (
     <div className="visa-landing">
       {/* High Priority: Loads first */}
-      <FormSlider heading={'Apply for Dependent Visa'} paragraph={'Dependents can be a spouse or minor children (unmarried) who want to join the main applicant in any of the countries. Apply with western overseas to accompany your family member abroad.'} />
+      <FormSlider 
+        heading={'Apply for Dependent Visa'} 
+        paragraph={'Dependents can be a spouse or minor children (unmarried) who want to join the main applicant in any of the countries. Apply with western overseas to accompany your family member abroad.'} 
+        modalType="Enquiry"
+      />
 
       {/* Wrap non-critical sections inside Suspense */}
       <Suspense fallback={<Loading />}>

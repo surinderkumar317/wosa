@@ -146,11 +146,12 @@ const StudentRequestModal = () => {
           <i className="fa-solid fa-bell"></i> Conversations
         </Button>
       </DialogTrigger>
-      <DialogContent className="common-modal-form w-full max-w-[1200px] max-h-[90vh] overflow-auto">
+      <DialogContent className="common-modal-form w-full max-w-[1200px]">
         <DialogHeader>
           <DialogTitle className="text-4xl">Conversations</DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
+        <div className="max-h-[80vh] overflow-auto pr-2">
         {studentConversations.map((request) => (
           <div key={request.id}>
             <div className="flex gap-5 w-full flex-wrap">
@@ -334,6 +335,7 @@ const StudentRequestModal = () => {
             </div>
           </form>
         </Form>
+        </div>
       </DialogContent>
     </Dialog>
   );

@@ -24,7 +24,11 @@ const ImmigrationVisaSlider = dynamic(() => import("@/components/ImmigrationVisa
 const page = () => {
   return (
     <div className="visa-landing">
-      <FormSlider heading={'Apply for PR Visa'} paragraph={'Permanent Residency status allows you to be a legal resident of another country like Canada or Australia, etc. PR includes Express Entry and PNP programs.'} />
+      <FormSlider 
+        heading={'Apply for PR Visa'} 
+        paragraph={'Permanent Residency status allows you to be a legal resident of another country like Canada or Australia, etc. PR includes Express Entry and PNP programs.'} 
+        modalType="Enquiry"
+      />
 
       <Suspense fallback={<Loading />}>
         <LazySection>

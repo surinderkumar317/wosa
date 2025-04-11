@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 import Loading from "@/app/loading"; // ✅ Correct import for Next.js 15
 import LazySection from "@/components/LazySection";
 
-const FormSlider = dynamic(() => import("@/components/FormSlider"), {
+const FormBanner = dynamic(() => import("@/components/coaching/FormBanner"), {
   loading: () => <Loading />,
 });
 const PageContent = dynamic(
@@ -17,24 +17,24 @@ const PageContent = dynamic(
   }
 );
 
-const singleEvents = [
-  "educationfair",
+const singleInhouseCourse = [
+  "duolingo-90-days",
 ];
 
-export default function SingleEventPage() {
+export default function SinleInhouseCourse() {
   const pathname = usePathname();
-  const singleevent = pathname.split("/").pop()?.toLowerCase(); // Extract the last part of the pathname
+  const singleinhouse = pathname.split("/").pop()?.toLowerCase(); // Extract the last part of the pathname
 
-  if (!singleevent || !singleEvents.includes(singleevent)) {
+  if (!singleinhouse || !singleInhouseCourse .includes(singleinhouse)) {
     return notFound();
   }
 
   return (
     <>
-      <FormSlider
-        heading={`Biggest Education & Immigration Fair 2025`}
-        paragraph={'We invite you to be a part of India Biggest Education and Immigration Fair 2025, taking place from 8th to 20th April across 12 cities.'}
-        modalType="eventmodal"
+      <FormBanner
+        heading={`CELPIP | 90 DAYS | AMBALA`}
+        paragraph={'Terms and conditions are mentioned below.'}
+        modalType="course"
       />
 
       <Suspense fallback={<Loading />}>

@@ -50,6 +50,7 @@ export default function CountryVisaPage() {
       <FormSlider
         heading={`Country ${country.toUpperCase()}`}
         paragraph={'If you have a question or need assistance with Visa and immigration services, please feel free to ask, our experts at Western Overseas will provide you with the best information & support'}
+        modalType="Enquiry"
       />
 
       <Suspense fallback={<Loading />}>

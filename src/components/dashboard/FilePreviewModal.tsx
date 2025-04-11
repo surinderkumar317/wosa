@@ -26,6 +26,7 @@ const FilePreviewModal = () => {
           <DialogTitle>File Preview</DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
+        <div className="max-h-[65vh] overflow-auto pr-2">
           <CommonImage
             classname="dashboard-icon"
             src="/images/image-gallery01.webp"
@@ -33,6 +34,7 @@ const FilePreviewModal = () => {
             width={1080}
             height={1080}
           />
+        </div>
       </DialogContent>
     </Dialog>
   );

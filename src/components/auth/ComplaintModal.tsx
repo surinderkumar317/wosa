@@ -66,7 +66,10 @@ const ComplaintSchema = z.object({
       z
         .instanceof(File)
         .refine(
-          (file) => allowedFormats.includes(file.name.split(".").pop()?.toLowerCase() || ""),
+          (file) =>
+            allowedFormats.includes(
+              file.name.split(".").pop()?.toLowerCase() || ""
+            ),
           { message: "Invalid file format" }
         )
     )
@@ -74,7 +77,10 @@ const ComplaintSchema = z.object({
 });
 
 const verificationSchema = z.object({
-  verificationCode: z.string().length(4, "Code must be 4 digits").regex(/^[0-9]+$/, "Only numbers allowed"),
+  verificationCode: z
+    .string()
+    .length(4, "Code must be 4 digits")
+    .regex(/^[0-9]+$/, "Only numbers allowed"),
 });
 
 const allowedFormats = ["jpg", "png", "jpeg", "pdf", "webp", "mp3", "mp4"];
@@ -94,7 +100,9 @@ type ComplaintData = {
   attachments?: File[]; // match form type
 };
 
-const Complaints: React.FC<ComplaintsProps> = ({ buttonText = "Complaint" }) => {
+const Complaints: React.FC<ComplaintsProps> = ({
+  buttonText = "Complaint",
+}) => {
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
   const [isComplaintOpen, setIsComplaintOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState("+91");
@@ -105,9 +113,15 @@ const Complaints: React.FC<ComplaintsProps> = ({ buttonText = "Complaint" }) => 
   const [isVarificationOpen, setIsVarificationOpen] = useState(false);
   const [isFormInfoOpen, setIsFormInfoOpen] = useState(false);
   const [submittedPhoneNumber, setSubmittedPhoneNumber] = useState("");
-  const [userDetails, setUserDetails] = useState({ name: "", uniqueId: "", password: "" });
+  const [userDetails, setUserDetails] = useState({
+    name: "",
+    uniqueId: "",
+    password: "",
+  });
 
-  const [complaintData, setcomplaintData] = useState<ComplaintData | null>(null);
+  const [complaintData, setcomplaintData] = useState<ComplaintData | null>(
+    null
+  );
 
   // Phone Form Hook
   const phoneForm = useForm({
@@ -166,10 +180,12 @@ const Complaints: React.FC<ComplaintsProps> = ({ buttonText = "Complaint" }) => 
     setIsComplaintOpen(true);
   };
 
-  const handleComplaintSubmit = async (data: z.infer<typeof ComplaintSchema>) => {
+  const handleComplaintSubmit = async (
+    data: z.infer<typeof ComplaintSchema>
+  ) => {
     console.log("Form Data Submitted:", data);
     toast.success("Complaint successful! 🎉");
-    setMessageLength(0); // Reset message length    
+    setMessageLength(0); // Reset message length
     complaintForm.reset();
 
     // Store form data before moving to the next step
@@ -234,7 +250,9 @@ const Complaints: React.FC<ComplaintsProps> = ({ buttonText = "Complaint" }) => 
       <Toaster position="bottom-center" />
       <Dialog open={isPhoneOpen} onOpenChange={setIsPhoneOpen}>
         <DialogTrigger asChild>
-          <Button variant="ghost" onClick={() => setIsPhoneOpen(true)}>{buttonText}</Button>
+          <Button variant="ghost" onClick={() => setIsPhoneOpen(true)}>
+            {buttonText}
+          </Button>
         </DialogTrigger>
         <DialogContent className="common-modal-form w-full max-w-xl">
           <DialogHeader>
@@ -256,7 +274,6 @@ const Complaints: React.FC<ComplaintsProps> = ({ buttonText = "Complaint" }) => 
                       Phone Number<span className="text-red-500">*</span>
                     </Label>
                     <FormControl>
-
                       <div className="flex space-x-2">
                         {/* Country Code Select */}
                         <Select
@@ -306,7 +323,11 @@ const Complaints: React.FC<ComplaintsProps> = ({ buttonText = "Complaint" }) => 
               />
               {/* Next Button */}
               <div className="common-button-rows registration-justify-end">
-                <Button type="submit" variant="link" className="p-0 submit-common">
+                <Button
+                  type="submit"
+                  variant="link"
+                  className="p-0 submit-common"
+                >
                   Next <i className="fa fa-angle-right"></i>
                 </Button>
               </div>
@@ -317,210 +338,279 @@ const Complaints: React.FC<ComplaintsProps> = ({ buttonText = "Complaint" }) => 
 
       {/* Complaints Dialog */}
       <Dialog open={isComplaintOpen} onOpenChange={setIsComplaintOpen}>
-        <DialogContent className="common-modal-form w-full max-w-xl max-h-[90vh] overflow-auto">
+        <DialogContent className="common-modal-form w-full max-w-xl">
           <DialogHeader>
             <DialogTitle>Complaints</DialogTitle>
             <DialogDescription></DialogDescription>
           </DialogHeader>
           <Form {...complaintForm}>
-            <form onSubmit={complaintForm.handleSubmit(handleComplaintSubmit)}
+            <form
+              onSubmit={complaintForm.handleSubmit(handleComplaintSubmit)}
               className="space-y-4 p-0 w-full"
             >
-              <div className="flex justify-between w-full gap-5">
-                {/* Name Field */}
-                <FormField
-                  control={complaintForm.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem className="form-row w-full">
-                      <Label>Name<span className="text-red-500">*</span></Label>
-                      <FormControl>
-                        <Input type="text" placeholder="Enter your Name" {...field} />
-                      </FormControl>
-                      <FormMessage className="common-error-msg" />
-                    </FormItem>
-                  )}
-                />
-                {/* Email Field */}
-                <FormField
-                  control={complaintForm.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem className="form-row w-full">
-                      <Label>Email<span className="text-red-500">*</span></Label>
-                      <FormControl>
-                        <Input type="email" placeholder="Enter your email" {...field} />
-                      </FormControl>
-                      <FormMessage className="common-error-msg" />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <div className="flex justify-between w-full gap-5">
-                {/* How did you hear Field */}
-                <FormField
-                  control={complaintForm.control}
-                  name="source"
-                  render={({ field }) => (
-                    <FormItem className="form-row w-full">
-                      <Label>How did you hear about us?<span className="text-red-500">*</span></Label>
-                      <Select onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="friend">Friend</SelectItem>
-                          <SelectItem value="google">Google</SelectItem>
-                          <SelectItem value="internet">Internet</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage className="common-error-msg" />
-                    </FormItem>
-                  )}
-                />
-                {/* Complaint Field */}
-                <FormField
-                  control={complaintForm.control}
-                  name="complaintBranch"
-                  render={({ field }) => (
-                    <FormItem className="form-row w-full">
-                      <Label>Complaint For<span className="text-red-500">*</span></Label>
-                      <Select onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Ambala">Ambala</SelectItem>
-                          <SelectItem value="Amritsar">Amritsar</SelectItem>
-                          <SelectItem value="Chandigarh">Chandigarh</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage className="common-error-msg" />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <div className="flex justify-between w-full gap-5">
-                {/* Product Servcies */}
-                <FormField
-                  control={complaintForm.control}
-                  name="productServices"
-                  render={({ field }) => (
-                    <FormItem className="form-row w-full">
-                      <Label>Product/Services<span className="text-red-500">*</span></Label>
-                      <FormControl>
-                        <Select onValueChange={field.onChange} value={field.value}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select Product/Services" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Inhouse Pack">Inhouse Pack</SelectItem>
-                            <SelectItem value="Online Pack">Online Pack</SelectItem>
-                            <SelectItem value="Practice Pack">Practice Pack</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <FormMessage className="common-error-msg" />
-                    </FormItem>
-                  )}
-                />
-
-                {/* Subject */}
-                <FormField
-                  control={complaintForm.control}
-                  name="subject"
-                  render={({ field }) => (
-                    <FormItem className="form-row w-full">
-                      <Label>Select Subject<span className="text-red-500">*</span></Label>
-                      <FormControl>
-                        <Select onValueChange={field.onChange} value={field.value}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select Subject" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Inhouse Pack">Other</SelectItem>
-                            <SelectItem value="Online Pack">Services Issues</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <FormMessage className="common-error-msg" />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <div className="flex justify-between w-full gap-5">
-                {/* Message Field */}
-                <FormField
-                  control={complaintForm.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem className="form-row w-full">
-                      <div className="flex justify-between items-center">
-                        <Label>Complaint Message<span className="text-red-500">*</span></Label>
-                        <div className="message-text">Entered Characters : <span>{messageLength}</span></div>
-                      </div>
-                      <FormControl>
-                        <Textarea
-                          {...field}
-                          className="h-24"
-                          onChange={(e) => {
-                            field.onChange(e.target.value);
-                            setMessageLength(e.target.value.length);
-                          }}
-                        />
-                      </FormControl>
-                      <FormMessage className="common-error-msg" />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <div className="flex flex-col w-full gap-5">
-                {/* File Upload Field */}
-                <FormField
-                  control={complaintForm.control}
-                  name="attachments"
-                  render={() => (
-                    <FormItem className="form-row w-full file-attachment">
-                      <div className="flex justify-between items-center">
-                        <Label htmlFor="file-upload" className="flex items-center gap-2">
-                          <Button className="flex gap-4">
-                            <i className="fa fa-paperclip" aria-hidden="true"></i>
-                            Add Attachments
-                          </Button>
-                          <small>(Allowed: jpg, png, jpeg, pdf, webp, mp3, mp4)</small>
+              <div className="max-h-[65vh] overflow-auto pr-2">
+                <div className="flex justify-between w-full gap-5 mb-5">
+                  {/* Name Field */}
+                  <FormField
+                    control={complaintForm.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem className="form-row w-full">
+                        <Label>
+                          Name<span className="text-red-500">*</span>
                         </Label>
-                      </div>
-                      <FormControl>
-                        <Input type="file" id="file-upload" multiple onChange={handleFileChange} />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
+                        <FormControl>
+                          <Input
+                            type="text"
+                            placeholder="Enter your Name"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage className="common-error-msg" />
+                      </FormItem>
+                    )}
+                  />
+                  {/* Email Field */}
+                  <FormField
+                    control={complaintForm.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem className="form-row w-full">
+                        <Label>
+                          Email<span className="text-red-500">*</span>
+                        </Label>
+                        <FormControl>
+                          <Input
+                            type="email"
+                            placeholder="Enter your email"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage className="common-error-msg" />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
-                {/* Display Attached Files */}
-                <div className="mt-3 w-full flex flex-wrap">
-                  {selectedFiles.length > 0 ? (
-                    selectedFiles.map((file, index) => (
-                      <div key={index} className="flex items-center justify-between bg-gray-100 p-2 rounded-md mb-2">
-                        <span className="truncate">{file.name}</span>
-                        <button
-                          onClick={() => removeFile(index)}
-                          className="text-red-500 hover:text-red-700 ml-2"
+                <div className="flex justify-between w-full gap-5 mb-5">
+                  {/* How did you hear Field */}
+                  <FormField
+                    control={complaintForm.control}
+                    name="source"
+                    render={({ field }) => (
+                      <FormItem className="form-row w-full">
+                        <Label>
+                          How did you hear about us?
+                          <span className="text-red-500">*</span>
+                        </Label>
+                        <Select
+                          onValueChange={field.onChange}
+                          value={field.value}
                         >
-                          ❌
-                        </button>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-gray-500">No attachments added</p>
-                  )}
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="friend">Friend</SelectItem>
+                            <SelectItem value="google">Google</SelectItem>
+                            <SelectItem value="internet">Internet</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage className="common-error-msg" />
+                      </FormItem>
+                    )}
+                  />
+                  {/* Complaint Field */}
+                  <FormField
+                    control={complaintForm.control}
+                    name="complaintBranch"
+                    render={({ field }) => (
+                      <FormItem className="form-row w-full">
+                        <Label>
+                          Complaint For<span className="text-red-500">*</span>
+                        </Label>
+                        <Select
+                          onValueChange={field.onChange}
+                          value={field.value}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Ambala">Ambala</SelectItem>
+                            <SelectItem value="Amritsar">Amritsar</SelectItem>
+                            <SelectItem value="Chandigarh">
+                              Chandigarh
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage className="common-error-msg" />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="flex justify-between w-full gap-5 mb-5">
+                  {/* Product Servcies */}
+                  <FormField
+                    control={complaintForm.control}
+                    name="productServices"
+                    render={({ field }) => (
+                      <FormItem className="form-row w-full">
+                        <Label>
+                          Product/Services
+                          <span className="text-red-500">*</span>
+                        </Label>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            value={field.value}
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select Product/Services" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Inhouse Pack">
+                                Inhouse Pack
+                              </SelectItem>
+                              <SelectItem value="Online Pack">
+                                Online Pack
+                              </SelectItem>
+                              <SelectItem value="Practice Pack">
+                                Practice Pack
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage className="common-error-msg" />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Subject */}
+                  <FormField
+                    control={complaintForm.control}
+                    name="subject"
+                    render={({ field }) => (
+                      <FormItem className="form-row w-full">
+                        <Label>
+                          Select Subject<span className="text-red-500">*</span>
+                        </Label>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            value={field.value}
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select Subject" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Inhouse Pack">
+                                Other
+                              </SelectItem>
+                              <SelectItem value="Online Pack">
+                                Services Issues
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage className="common-error-msg" />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="flex justify-between w-full gap-5 mb-5">
+                  {/* Message Field */}
+                  <FormField
+                    control={complaintForm.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem className="form-row w-full">
+                        <div className="flex justify-between items-center">
+                          <Label>
+                            Complaint Message
+                            <span className="text-red-500">*</span>
+                          </Label>
+                          <div className="message-text">
+                            Entered Characters : <span>{messageLength}</span>
+                          </div>
+                        </div>
+                        <FormControl>
+                          <Textarea
+                            {...field}
+                            className="h-24"
+                            onChange={(e) => {
+                              field.onChange(e.target.value);
+                              setMessageLength(e.target.value.length);
+                            }}
+                          />
+                        </FormControl>
+                        <FormMessage className="common-error-msg" />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="flex flex-col w-full gap-5 mb-5">
+                  {/* File Upload Field */}
+                  <FormField
+                    control={complaintForm.control}
+                    name="attachments"
+                    render={() => (
+                      <FormItem className="form-row w-full file-attachment">
+                        <div className="flex justify-between items-center">
+                          <Label
+                            htmlFor="file-upload"
+                            className="flex items-center gap-2"
+                          >
+                            <Button className="flex gap-4">
+                              <i
+                                className="fa fa-paperclip"
+                                aria-hidden="true"
+                              ></i>
+                              Add Attachments
+                            </Button>
+                            <small>
+                              (Allowed: jpg, png, jpeg, pdf, webp, mp3, mp4)
+                            </small>
+                          </Label>
+                        </div>
+                        <FormControl>
+                          <Input
+                            type="file"
+                            id="file-upload"
+                            multiple
+                            onChange={handleFileChange}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Display Attached Files */}
+                  <div className="mt-3 w-full flex flex-wrap">
+                    {selectedFiles.length > 0 ? (
+                      selectedFiles.map((file, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between bg-gray-100 p-2 rounded-md mb-2"
+                        >
+                          <span className="truncate">{file.name}</span>
+                          <button
+                            onClick={() => removeFile(index)}
+                            className="text-red-500 hover:text-red-700 ml-2"
+                          >
+                            ❌
+                          </button>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-gray-500">No attachments added</p>
+                    )}
+                  </div>
                 </div>
               </div>
-
               {/* Submit Button */}
               <div className="common-button-rows">
                 <Button
@@ -531,7 +621,9 @@ const Complaints: React.FC<ComplaintsProps> = ({ buttonText = "Complaint" }) => 
                     setIsPhoneOpen(true);
                   }}
                   className="back-btn"
-                ><i className="fa fa-angle-left" aria-hidden="true"></i> Back</Button>
+                >
+                  <i className="fa fa-angle-left" aria-hidden="true"></i> Back
+                </Button>
                 <Button variant="link" type="submit" className="submit-common">
                   Submit <i className="fa fa-angle-right"></i>
                 </Button>
@@ -547,11 +639,15 @@ const Complaints: React.FC<ComplaintsProps> = ({ buttonText = "Complaint" }) => 
           <DialogHeader>
             <DialogTitle>Verification</DialogTitle>
             <DialogDescription>
-              A verification code has been sent to your mobile <span>{submittedPhoneNumber}</span>. Please enter the code below.
+              A verification code has been sent to your mobile{" "}
+              <span>{submittedPhoneNumber}</span>. Please enter the code below.
             </DialogDescription>
           </DialogHeader>
           <Form {...verifyForm}>
-            <form onSubmit={verifyForm.handleSubmit(handleVarifySubmit)} className="flex gap-4 flex-col">
+            <form
+              onSubmit={verifyForm.handleSubmit(handleVarifySubmit)}
+              className="flex gap-4 flex-col"
+            >
               <div className="flex items-end gap-5">
                 <FormField
                   control={verifyForm.control}
@@ -574,7 +670,9 @@ const Complaints: React.FC<ComplaintsProps> = ({ buttonText = "Complaint" }) => 
                     disabled={resendTimer > 0} // Disable while countdown is active
                     className="resend-btn"
                   >
-                    {resendTimer > 0 ? `Resend Code in ${resendTimer}s` : "Resend Code"}
+                    {resendTimer > 0
+                      ? `Resend Code in ${resendTimer}s`
+                      : "Resend Code"}
                   </Button>
                 </div>
               </div>
@@ -584,7 +682,7 @@ const Complaints: React.FC<ComplaintsProps> = ({ buttonText = "Complaint" }) => 
                   variant="link"
                   onClick={() => {
                     setIsVarificationOpen(false);
-                    setIsComplaintOpen(true)
+                    setIsComplaintOpen(true);
                   }}
                   className="back-btn"
                 >
@@ -606,10 +704,19 @@ const Complaints: React.FC<ComplaintsProps> = ({ buttonText = "Complaint" }) => 
             <DialogTitle>Enquiry Details</DialogTitle>
             <DialogDescription></DialogDescription>
           </DialogHeader>
-          <p>Dear <span>{userDetails.name}</span>,</p>
-          <p>Your complaint has been submitted successfully. Here are your details:</p>
-          <p>Unique ID: <span>{userDetails.uniqueId}</span></p>
-          <p>Password: <span>{userDetails.password}</span></p>
+          <p>
+            Dear <span>{userDetails.name}</span>,
+          </p>
+          <p>
+            Your complaint has been submitted successfully. Here are your
+            details:
+          </p>
+          <p>
+            Unique ID: <span>{userDetails.uniqueId}</span>
+          </p>
+          <p>
+            Password: <span>{userDetails.password}</span>
+          </p>
           <p>Your Password and Other details are send to your email.</p>
         </DialogContent>
       </Dialog>

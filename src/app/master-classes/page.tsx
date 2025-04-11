@@ -18,7 +18,12 @@ const Testimonials = dynamic(() => import("@/components/Testimonials"), {
 const page = () => {
   return (
     <div className="master-classes">
-      <FormSlider heading={'Free Live Master Class'} paragraph={'⭐⭐⭐⭐⭐ 4.8 of 1000 + Reviews ✅11M+ Students Trusted Brand. We will happy to assist you to reach your desired band score.'} />
+      <FormSlider 
+        heading={'Free Live Master Class'} 
+        paragraph={'⭐⭐⭐⭐⭐ 4.8 of 1000 + Reviews ✅11M+ Students Trusted Brand. We will happy to assist you to reach your desired band score.'} 
+        modalType="Enquiry"  
+      />
+        
 
       <Suspense fallback={<Loading />}>
         <LazySection>

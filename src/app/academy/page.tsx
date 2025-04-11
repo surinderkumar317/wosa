@@ -25,7 +25,11 @@ const page = () => {
   return (
     <div className="academy-container">
       {/* High Priority: Loads first */}
-      <FormSlider heading={'IELTS  PTE TOEFL COACHING'} paragraph={'Try our online and offline coaching to get instant scores on English proficiency tests like IELTS, PTE, TOEFL, DUOLINGO, and Foreign Languages.'} />
+      <FormSlider 
+        heading={'IELTS  PTE TOEFL COACHING'} 
+        paragraph={'Try our online and offline coaching to get instant scores on English proficiency tests like IELTS, PTE, TOEFL, DUOLINGO, and Foreign Languages.'} 
+        modalType="Enquiry"
+      />
 
       {/* Wrap non-critical sections inside Suspense */}
       <Suspense fallback={<Loading />}>

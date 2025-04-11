@@ -136,121 +136,127 @@ const StudentComlaintModal = () => {
   };
 
   return (
-    <Dialog open={isOpen}
-    onOpenChange={(open) => {
-      setIsOpen(open);
-      if (!open) {
-        conversationForm.reset(); // Reset the form when modal closes
-        setSelectedFiles([]); // Clear selected files
-        setMessageLength(0); // Reset message length
-      }
-    }}>
+    <Dialog
+      open={isOpen}
+      onOpenChange={(open) => {
+        setIsOpen(open);
+        if (!open) {
+          conversationForm.reset(); // Reset the form when modal closes
+          setSelectedFiles([]); // Clear selected files
+          setMessageLength(0); // Reset message length
+        }
+      }}
+    >
       <DialogTrigger asChild>
         <Button className="w-full max-w-[150px] bg-[#d9070a]">
           <i className="fa-solid fa-bell"></i> Conversations
         </Button>
       </DialogTrigger>
-      <DialogContent className="common-modal-form w-full max-w-[1200px] max-h-[90vh] overflow-auto">
+      <DialogContent className="common-modal-form w-full max-w-[1200px]">
         <DialogHeader>
           <DialogTitle className="text-4xl">Conversations</DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
-        {studentConversations.map((request) => (
-          <div key={request.id}>
-            <div className="flex gap-5 w-full flex-wrap">
-              <div className="w-full">
-                <h2>
-                  Complaint ID: <strong>{request.complaintId}</strong>
-                </h2>
-              </div>
-              <div className="flex w-full">
-                <div className="w-2/4">
-                  <p>
-                    Name: <strong>{request.name}</strong>
-                  </p>
+        <div className="max-h-[80vh] overflow-auto pr-2">
+          {studentConversations.map((request) => (
+            <div key={request.id}>
+              <div className="flex gap-5 w-full flex-wrap">
+                <div className="w-full">
+                  <h2>
+                    Complaint ID: <strong>{request.complaintId}</strong>
+                  </h2>
                 </div>
-                <div className="w-2/4">
-                  <p>
-                    Email: <strong>{request.email}</strong>
-                  </p>
-                </div>                
-              </div>
-              <div className="flex w-full">  
-                <div className="w-2/4">
-                  <p>
-                    Mobile: <strong>{request.mobile}</strong>
-                  </p>
+                <div className="flex w-full">
+                  <div className="w-2/4">
+                    <p>
+                      Name: <strong>{request.name}</strong>
+                    </p>
+                  </div>
+                  <div className="w-2/4">
+                    <p>
+                      Email: <strong>{request.email}</strong>
+                    </p>
+                  </div>
+                </div>
+                <div className="flex w-full">
+                  <div className="w-2/4">
+                    <p>
+                      Mobile: <strong>{request.mobile}</strong>
+                    </p>
+                  </div>
+
+                  <div className="w-2/4">
+                    <p>
+                      Complaint Status:{" "}
+                      <strong className="bg-[#d9070a] p-1 px-2 text-white">
+                        {request.complaintStatus}
+                      </strong>
+                    </p>
+                  </div>
+                </div>
+                <div className="flex w-full">
+                  <div className="w-2/4">
+                    <p>
+                      Complaint For:{" "}
+                      <strong className="bg-[#337ab7] p-1 px-2 text-white">
+                        {request.complaintFor}
+                      </strong>
+                    </p>
+                  </div>
+                  <div className="w-2/4">
+                    <p>
+                      Complaint Subject:{" "}
+                      <strong>{request.complaintSubject}</strong>
+                    </p>
+                  </div>
                 </div>
 
-                <div className="w-2/4">
+                <div className="w-full">
                   <p>
-                    Complaint Status:{" "}
-                    <strong className="bg-[#d9070a] p-1 px-2 text-white">
-                      {request.complaintStatus}
+                    Request Message: <strong>{request.complaintMessage}</strong>
+                  </p>
+                </div>
+                <div className="w-full">
+                  <p>
+                    Attachment:{" "}
+                    <strong className="flex gap-3 items-center">
+                      <FilePreviewModal />{" "}
+                      <i className="fa-solid fa-download"></i>
                     </strong>
                   </p>
                 </div>
-              </div>
-              <div className="flex w-full">
-                <div className="w-2/4">
-                  <p>
-                    Complaint For:{" "}
-                    <strong className="bg-[#337ab7] p-1 px-2 text-white">
-                      {request.complaintFor}
-                    </strong>
-                  </p>
-                </div>           
-                <div className="w-2/4">
-                  <p>
-                    Complaint Subject: <strong>{request.complaintSubject}</strong>
-                  </p>
+                <div className="flex w-full">
+                  <div className="w-2/4">
+                    <p>
+                      Request Created By:{" "}
+                      <strong>{request.complaintCreatedBy}</strong>
+                    </p>
+                  </div>
+                  <div className="w-2/4">
+                    <p>
+                      Request Created On:{" "}
+                      <strong>{request.complaintCreatedOn}</strong>
+                    </p>
+                  </div>
                 </div>
               </div>
-
-              <div className="w-full">
-                <p>
-                  Request Message: <strong>{request.complaintMessage}</strong>
-                </p>
-              </div>
-              <div className="w-full">
-                <p>
-                  Attachment:{" "}
-                  <strong className="flex gap-3 items-center">
-                    <FilePreviewModal />{" "}
-                    <i className="fa-solid fa-download"></i>
-                  </strong>
-                </p>
-              </div>
-              <div className="flex w-full">
-                <div className="w-2/4">
-                  <p>
-                    Request Created By:{" "}
-                    <strong>{request.complaintCreatedBy}</strong>
-                  </p>
-                </div>
-                <div className="w-2/4">
-                  <p>
-                    Request Created On:{" "}
-                    <strong>{request.complaintCreatedOn}</strong>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-
-        <div className="replyby-container w-full bg-[#f1f1f1] p-3 mt-4">
-          {replybys.map((reply, index) => (
-            <div key={index} className="flex justify-between w-full">
-              <p>Reply by: {reply.nameReply}</p>
-              <p>Date: {reply.date}</p>
             </div>
           ))}
-          <p className="text-base mt-2">
-             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, 
-          </p>
-        </div>
 
+          <div className="replyby-container w-full bg-[#f1f1f1] p-3 mt-4">
+            {replybys.map((reply, index) => (
+              <div key={index} className="flex justify-between w-full">
+                <p>Reply by: {reply.nameReply}</p>
+                <p>Date: {reply.date}</p>
+              </div>
+            ))}
+            <p className="text-base mt-2">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry&apos;s standard dummy
+              text ever since the 1500s,
+            </p>
+          </div>
+        
         <Form {...conversationForm}>
           <form
             onSubmit={conversationForm.handleSubmit(handleConvesationSubmit)}
@@ -351,6 +357,7 @@ const StudentComlaintModal = () => {
             </div>
           </form>
         </Form>
+        </div>
       </DialogContent>
     </Dialog>
   );

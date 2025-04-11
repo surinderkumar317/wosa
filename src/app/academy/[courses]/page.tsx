@@ -33,6 +33,7 @@ export default function AcademyCoursePage() {
       <FormSlider
         heading={`Course: ${course.toUpperCase()}`}
         paragraph={`Learn more about ${course.toUpperCase()} with Western Overseas.`}
+        modalType="Enquiry"
       />
 
       <Suspense fallback={<Loading />}>

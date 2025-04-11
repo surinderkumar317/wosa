@@ -19,9 +19,8 @@ const Contact = () => {
       {/* High Priority: Loads first */}
       <FormSlider
         heading={"Contact Us"}
-        paragraph={
-          "If you have a question or need assistance with Visa and immigration services, please feel free to ask, our experts at Western Overseas will provide you with the best information & support"
-        }
+        paragraph={"If you have a question or need assistance with Visa and immigration services, please feel free to ask, our experts at Western Overseas will provide you with the best information & support"}
+        modalType="Enquiry"
       />
       
       {/* Wrap non-critical sections inside Suspense */}

@@ -50,7 +50,7 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
           Wallet
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-[1800px] max-h-[90vh] overflow-auto">
+      <DialogContent className="w-full max-w-[1300px]">
         <DialogHeader>
           <DialogTitle className="text-[30px] font-bold mb-0">
             Wallet Info
@@ -58,48 +58,50 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
           <DialogDescription></DialogDescription>
         </DialogHeader>
 
-        <div className="flex gap-4 bg-gray-100 p-5">
-          <Card className="w-[10%] relative">
-            <CardHeader className="py-2 mt-3">
-              <CardTitle>INR</CardTitle>
-              <CardDescription></CardDescription>
-            </CardHeader>
-            <CardContent className="pb-3">
-              <p>1100</p>
-            </CardContent>
-            <div className="wall-img absolute right-5 bottom-3">
-              <CommonImage
-                classname={"icon"}
-                src={"/dashboard-images/wallet-icn.webp"}
-                alt={"Profile Image"}
-                width={42}
-                height={42}
-              />
-            </div>
-          </Card>
+        <div className="w-full  bg-gray-100 p-5 overflow-x-auto">
+          <div className="flex flex-row gap-4 min-w-max">
+            <Card className="w-[15%] relative flex-shrink-0">
+              <CardHeader className="py-2 mt-3">
+                <CardTitle>INR</CardTitle>
+                <CardDescription></CardDescription>
+              </CardHeader>
+              <CardContent className="pb-3">
+                <p>1100</p>
+              </CardContent>
+              <div className="wall-img absolute right-5 bottom-3">
+                <CommonImage
+                  classname={"icon"}
+                  src={"/dashboard-images/wallet-icn.webp"}
+                  alt={"Profile Image"}
+                  width={42}
+                  height={42}
+                />
+              </div>
+            </Card>
 
-          <Card className="w-[10%] relative">
-            <CardHeader className="py-2 mt-3">
-              <CardTitle>INR</CardTitle>
-              <CardDescription></CardDescription>
-            </CardHeader>
-            <CardContent className="pb-3">
-              <p>1100</p>
-            </CardContent>
-            <div className="wall-img absolute right-5 bottom-3">
-              <CommonImage
-                classname={"icon"}
-                src={"/dashboard-images/wallet-icn.webp"}
-                alt={"Profile Image"}
-                width={42}
-                height={42}
-              />
-            </div>
-          </Card>
+            <Card className="w-[15%] relative flex-shrink-0">
+              <CardHeader className="py-2 mt-3">
+                <CardTitle>INR</CardTitle>
+                <CardDescription></CardDescription>
+              </CardHeader>
+              <CardContent className="pb-3">
+                <p>1100</p>
+              </CardContent>
+              <div className="wall-img absolute right-5 bottom-3">
+                <CommonImage
+                  classname={"icon"}
+                  src={"/dashboard-images/wallet-icn.webp"}
+                  alt={"Profile Image"}
+                  width={42}
+                  height={42}
+                />
+              </div>
+            </Card>
+          </div>
         </div>
         <h2 className="text-xl font-bold">Previous History</h2>
-        <ScrollArea className="h-[400px] w-full rounded-md p-0">
-          <Table>            
+        <ScrollArea className="h-[250px] w-full rounded-md p-0">
+          <Table>
             <TableHeader>
               <TableRow className="text-xl">
                 <TableHead className="text-black">Sr.</TableHead>
@@ -110,7 +112,9 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
                 <TableHead className="text-black">Balance</TableHead>
                 <TableHead className="text-black">Remarks</TableHead>
                 <TableHead className="text-black">Done By</TableHead>
-                <TableHead className="text-black">Transaction Screenshot</TableHead>
+                <TableHead className="text-black">
+                  Transaction Screenshot
+                </TableHead>
                 <TableHead className="text-black">Created</TableHead>
               </TableRow>
             </TableHeader>
@@ -124,7 +128,9 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
                 <TableCell>21</TableCell>
                 <TableCell>This is a test remarks.</TableCell>
                 <TableCell>Aman Bachhal</TableCell>
-                <TableCell><FilePreviewModal/> <i className="fa-solid fa-download"></i></TableCell>
+                <TableCell>
+                  <FilePreviewModal /> <i className="fa-solid fa-download"></i>
+                </TableCell>
                 <TableCell>18-03-2025 05:05 PM</TableCell>
               </TableRow>
 
@@ -137,7 +143,9 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
                 <TableCell>21</TableCell>
                 <TableCell>This is a test remarks.</TableCell>
                 <TableCell>Aman Bachhal</TableCell>
-                <TableCell><FilePreviewModal/> <i className="fa-solid fa-download"></i></TableCell>
+                <TableCell>
+                  <FilePreviewModal /> <i className="fa-solid fa-download"></i>
+                </TableCell>
                 <TableCell>18-03-2025 05:05 PM</TableCell>
               </TableRow>
 
@@ -150,7 +158,9 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
                 <TableCell>21</TableCell>
                 <TableCell>This is a test remarks.</TableCell>
                 <TableCell>Aman Bachhal</TableCell>
-                <TableCell><FilePreviewModal/> <i className="fa-solid fa-download"></i></TableCell>
+                <TableCell>
+                  <FilePreviewModal /> <i className="fa-solid fa-download"></i>
+                </TableCell>
                 <TableCell>18-03-2025 05:05 PM</TableCell>
               </TableRow>
             </TableBody>

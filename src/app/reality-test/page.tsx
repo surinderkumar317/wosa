@@ -48,7 +48,7 @@ const realityTests: RealityTestItem[] = [
     date: "Feb 28, 2025",
     time: "10:30 AM | 01:30 PM",
     price: "INR 254",
-    link: "/",
+    link: "/reality-test/toefl",
   },
   {
     title: "REALITY TEST | CD IELTS",
@@ -57,7 +57,7 @@ const realityTests: RealityTestItem[] = [
     date: "Feb 08, 2025",
     time: "10:30 AM | 01:30 PM",
     price: "INR 254",
-    link: "/",
+    link: "/reality-test/cd-ielts",
   },
 ];
 
@@ -179,7 +179,7 @@ const RealityTest: React.FC = () => {
                           value={field.value}
                         >
                           <SelectTrigger>
-                            <SelectValue placeholder="Select Branch" />
+                            <SelectValue placeholder="All Venue" />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="Bathinda">Bathinda</SelectItem>

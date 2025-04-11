@@ -21,7 +21,7 @@ const coachingMediums: CoachingMedium[] = [
       "Explore our inhouse coaching courses to improve your English skills and crack English proficiency tests such as IELTS, PTE, TOEFL, learn foreign languages etc.",
     imageSrc: "/images/Inhouse-Coaching.webp",
     iconSrc: "/images/our-services-icon07.webp",
-    link: "/",
+    link: "/inhouse-courses",
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const coachingMediums: CoachingMedium[] = [
       "Take online coaching at western overseas from anywhere to prepare for IELTS, PTE, TOEFL, Foreign languages and prepare more effectively at your own pace.",
     imageSrc: "/images/Online-Coaching.webp",
     iconSrc: "/images/our-services-icon08.webp",
-    link: "/",
+    link: "/online-courses",
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const coachingMediums: CoachingMedium[] = [
       "Practice packs at Western Overseas analyze and improve performance. It removes difficulties and hesitation on the exam day to give confidence to crack the exam.",
     imageSrc: "/images/Practice-Pack.webp",
     iconSrc: "/images/our-services-icon09.webp",
-    link: "/",
+    link: "/practice-packs",
   },
 ];
 

@@ -1,5 +1,5 @@
 // @import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css');
+//@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css');
 
 $blackColor:#000;
 $darkBlueColor:#073255;
@@ -1463,6 +1463,27 @@ input::placeholder {
     color: #fff;
 }
 
+// coaching page css
+.coaching-text {
+    .single-reality-list
+    {
+        ul{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            li {
+                display:flex;
+                gap:15px;
+                font-size: 18px;
+                i{
+                    position: relative;
+                    top:2px;
+                }
+            }
+        }
+    }
+}
+
 // common courses css
 .common-courses
 {
@@ -2236,6 +2257,115 @@ background: #ccc;
       transform: translateX(-250%);
     }
   }
+
+// checkout page css
+.checkout-scroll-area
+{
+    p{
+        margin:0 0 15px;
+    }
+    ul{
+        
+        li{
+            list-style: disc;
+            list-style-position: outside;
+            padding:3px 0;
+        }
+    }
+}
+
+// realitytest page css
+.reality-date-container
+{
+    .reality-date-box {
+        width: 100%;
+        padding: 10px 10px 20px;
+        display: flex;
+        flex-direction: row;
+        gap:10px;
+        .reality-date-time-box-inner {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width:100%;
+            max-width:120px;            
+        }
+    }
+}
+.reality-time-container
+{
+    .reality-time-box {
+        width: 100%;
+        padding: 10px 10px 20px;
+        display: flex;
+        flex-direction:row;
+        gap:10px;
+        .reality-date-time-box-inner {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width:100%;
+            min-width:120px;            
+        }
+    }
+}
+
+// event time page css
+.event-date-container
+{
+    .event-date-box {
+        width: 100%;
+        padding: 10px 10px 20px;
+        display: flex;
+        flex-direction: row;
+        gap:10px;        
+    }
+}
+.event-time-container
+{
+    .event-time-box {
+        width: 100%;
+        padding: 10px 10px 20px;
+        display: flex;
+        flex-direction:row;
+        gap:10px;        
+    }
+}
+.common-date-time-box-inner {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    max-width:160px;
+    min-width:160px;            
+}
+
+// time zone css
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  
+    .animate-fadeIn {
+      animation: fadeIn 0.5s ease-in-out forwards;
+    }
 
 // responsive css
 @media screen and (max-width:1366px)

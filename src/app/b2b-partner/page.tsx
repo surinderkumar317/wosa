@@ -3,6 +3,8 @@ import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import LazySection from "@/components/LazySection";
 import Loading from "@/app/loading"; // ✅ Correct import for Next.js 15
+import B2bRegistrationEnquiry from '@/components/b2bform/B2bRegistrationEnquiry';
+import FormSlider from '@/components/FormSlider';
 
 const EmblaCarousel = dynamic(() => import("@/components/EmblaCarousel"), {
   loading: () => <Loading />,
@@ -19,7 +21,11 @@ const page = () => {
   return (
     <div className="b2b-partner">
       {/* High Priority: Loads first */}
-      <EmblaCarousel />
+      <FormSlider
+        heading={`Partner With Us`}
+        paragraph={'Let us connect for immigration industry'}
+        modalType="B2bRegistration"
+      />
 
       {/* Wrap non-critical sections inside Suspense */}
       <Suspense fallback={<Loading />}>

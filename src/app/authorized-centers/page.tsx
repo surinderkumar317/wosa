@@ -18,7 +18,11 @@ const page = () => {
   return (
     <div className="about-reality-test">
       {/* High Priority: Loads first */}
-      <FormSlider heading={'Authorized TOEFL Test Centres'} paragraph={'Western Overseas - Ambala & Bathinda!'} />
+      <FormSlider 
+        heading={'Authorized TOEFL Test Centres'} 
+        paragraph={'Western Overseas - Ambala & Bathinda!'} 
+        modalType="Enquiry"
+      />
 
       {/* Wrap non-critical sections inside Suspense */}
       <Suspense fallback={<Loading />}>

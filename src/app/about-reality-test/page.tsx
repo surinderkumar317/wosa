@@ -18,7 +18,11 @@ const page = () => {
   return (
     <div className="about-reality-test">
       {/* High Priority: Loads first */}
-      <FormSlider heading={'BOOK REALITY TEST'} paragraph={'PTE | TOEFL | CD-IELTS | Assess your Actual Level Before Final Exam'}/>
+      <FormSlider 
+        heading={'BOOK REALITY TEST'} 
+        paragraph={'PTE | TOEFL | CD-IELTS | Assess your Actual Level Before Final Exam'}
+        modalType="Enquiry"
+      />
       
       {/* Wrap non-critical sections inside Suspense */}
       <Suspense fallback={<Loading />}>        
