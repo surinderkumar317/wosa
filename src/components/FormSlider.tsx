@@ -80,7 +80,7 @@ const FormSlider = ({ heading, paragraph, modalType }: FormSliderProps) => {
   );
 
   return (
-    <div className="form-slider-container lg:relative flex lg:justify-between lg:items-center lg:mx-auto lg:py-20 lg:flex-row flex-col flex-col-reverse">
+    <div className="form-slider-container lg:relative flex lg:justify-between lg:items-center lg:mx-auto 2xl:py-20 xl:py-11 lg:flex-row flex-col flex-col-reverse">
       <div className="lg:w-1/3 lg:p-6 lg:ml-11 w-full p-10 left-slideform">
         <h1>{heading}</h1>
         <p>{paragraph}</p>
@@ -99,7 +99,7 @@ const FormSlider = ({ heading, paragraph, modalType }: FormSliderProps) => {
           </div>
         </div>
         {images.length > 1 && (
-          <div className="flex justify-center mt-4 space-x-2 absolute w-full -bottom-20">
+          <div className="flex justify-center mt-4 space-x-2 absolute w-full -bottom-20 xl:-bottom-14">
             {images.map((_, index: number) => (
               <button
                 key={index}

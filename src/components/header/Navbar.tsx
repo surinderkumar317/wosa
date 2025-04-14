@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
     <>
       {/* desktop view */}
       <nav className="hidden lg:flex lg:gap-5">
-        <ul className="flex gap-6 navi">
+        <ul className="flex 2xl:gap-6 gap-4 navi">
           {menuData.map((menuItem, index) => (
             <li key={index}>
               <Link
@@ -211,7 +211,7 @@ const Navbar: React.FC = () => {
             </ul>
             <ul className="mobile-login-register">
               <li>
-                <TimeZone />
+                {/* <TimeZone /> */}
               </li>
               <li className="m-login-register">
                 <Login />

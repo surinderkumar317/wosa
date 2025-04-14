@@ -245,7 +245,7 @@ const Events: React.FC = () => {
                                       mode="single"
                                       selected={field.value}
                                       onSelect={field.onChange}
-                                      initialFocus
+                                      //initialFocus
                                     />
                                   </PopoverContent>
                                 </Popover>

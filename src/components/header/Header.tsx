@@ -40,7 +40,7 @@ const Header = () => {
   return (
     <div
       className={`header z-50 ${
-        isScrolled ? "-top-32" : ""
+        isScrolled ? "!-top-32" : ""
       } transition-all duration-300`}
     >
       <div className="header-topbar p-2">

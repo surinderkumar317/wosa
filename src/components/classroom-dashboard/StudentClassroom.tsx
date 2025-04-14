@@ -30,7 +30,7 @@ const StudentClassroom = () => {
             </Button>
           </div>
           <div className="full-class-row mb-10 flex gap-5 flex-wrap">
-            <Card className="w-[32.2%]">
+            <Card className="w-[32.2%] full-class-room">
               <CardHeader className="hidden">
                 <CardTitle></CardTitle>
                 <CardDescription></CardDescription>
@@ -64,7 +64,7 @@ const StudentClassroom = () => {
                 </div>
               </CardContent>
             </Card>
-            <Card className="w-[32.2%]">
+            <Card className="w-[32.2%] full-class-room">
               <CardHeader className="hidden">
                 <CardTitle></CardTitle>
                 <CardDescription></CardDescription>
@@ -98,7 +98,7 @@ const StudentClassroom = () => {
                 </div>
               </CardContent>
             </Card>
-            <Card className="w-[32.2%]">
+            <Card className="w-[32.2%] full-class-room">
               <CardHeader className="hidden">
                 <CardTitle></CardTitle>
                 <CardDescription></CardDescription>
@@ -155,7 +155,7 @@ const StudentClassroom = () => {
           </div>
 
           <div className="full-class-row mb-10 flex gap-5 flex-wrap">
-            <Card className="w-[32.2%]">
+            <Card className="w-[32.2%] recorded-box">
               <CardHeader className="hidden">
                 <CardTitle></CardTitle>
                 <CardDescription></CardDescription>
@@ -179,7 +179,7 @@ const StudentClassroom = () => {
               </CardContent>
             </Card>
 
-            <Card className="w-[32.2%]">
+            <Card className="w-[32.2%] recorded-box">
               <CardHeader className="hidden">
                 <CardTitle></CardTitle>
                 <CardDescription></CardDescription>
@@ -203,7 +203,7 @@ const StudentClassroom = () => {
               </CardContent>
             </Card>
 
-            <Card className="w-[32.2%]">
+            <Card className="w-[32.2%] recorded-box">
               <CardHeader className="hidden">
                 <CardTitle></CardTitle>
                 <CardDescription></CardDescription>
@@ -251,7 +251,7 @@ const StudentClassroom = () => {
           </div>
 
           <div className="full-class-row mb-10 flex gap-5 flex-wrap">
-            <Card className="w-[32.2%]">
+            <Card className="w-[32.2%] classroom-matrial">
               <CardHeader className="hidden">
                 <CardTitle></CardTitle>
                 <CardDescription></CardDescription>
@@ -275,7 +275,7 @@ const StudentClassroom = () => {
               </CardContent>
             </Card>
 
-            <Card className="w-[32.2%]">
+            <Card className="w-[32.2%] classroom-matrial">
               <CardHeader className="hidden">
                 <CardTitle></CardTitle>
                 <CardDescription></CardDescription>
@@ -299,7 +299,7 @@ const StudentClassroom = () => {
               </CardContent>
             </Card>
 
-            <Card className="w-[32.2%]">
+            <Card className="w-[32.2%] classroom-matrial">
               <CardHeader className="hidden">
                 <CardTitle></CardTitle>
                 <CardDescription></CardDescription>

@@ -2,6 +2,8 @@
 import React from "react";
 import Link from "next/link";
 import { FOOTER_LINKS } from "@/app/constants/links";
+import Complaints from "../auth/ComplaintModal";
+import Feedback from "../auth/FeedbackModal";
 
 interface ILinkItem {
   name: string;
@@ -22,6 +24,13 @@ const FooterLinks: React.FC = () => {
                 <Link href={link.href}>{link.name}</Link>
               </li>
             ))}
+            {/* Render only if category title is 'Other' */}
+            {category.title === "Others" && (
+              <>
+                <li className="footer-complaint-feedback"><Complaints /></li>
+                <li className="footer-complaint-feedback"><Feedback /></li>
+              </>
+            )}           
           </ul>
         </div>
       ))}

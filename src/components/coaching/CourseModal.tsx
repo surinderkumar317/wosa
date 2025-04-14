@@ -326,7 +326,7 @@ const CourseModal = ({ heading }: FormBannerProps) => {
                               selected={field.value}
                               onSelect={field.onChange}
                               disabled={{ before: new Date() }} // ⛔ Disable past dates
-                              initialFocus
+                              //initialFocus
                             />
                           </PopoverContent>
                         </Popover>

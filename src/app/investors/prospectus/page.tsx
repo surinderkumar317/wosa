@@ -1,6 +1,6 @@
 import React from "react";
 
-const Prospectus = () => {
+const page = () => {
   return (
     <div className="investor-container py-24">
       <div className="container m-auto">
@@ -21,4 +21,4 @@ const Prospectus = () => {
   );
 };
 
-export default Prospectus;
+export default page;

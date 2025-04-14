@@ -63,7 +63,7 @@ const RealityTestBookings: React.FC = () => {
 
       <div className="mock-card-container mt-5 flex flex-wrap gap-3">
         {realityTests.map((test) => (
-          <Card key={test.id} className="w-[32.6%] min-h-[250px] relative">
+          <Card key={test.id} className="w-[32.6%] min-h-[250px] relative reality-box">
             <CardHeader className="pb-2">
               <CardTitle>{test.title}</CardTitle>
               <CardDescription></CardDescription>

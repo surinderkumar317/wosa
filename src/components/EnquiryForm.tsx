@@ -46,7 +46,7 @@ type EnquiryData = {
     interestedSubServices: string;
     interestedCountries: string;
     message: string;
-  };
+};
 
 const EnquiryForm = () => {
     const [selectedCountry, setSelectedCountry] = useState("+91");
@@ -61,7 +61,7 @@ const EnquiryForm = () => {
     const [isFormInfoOpen, setIsFormInfoOpen] = useState(false);
     const [submittedPhoneNumber, setSubmittedPhoneNumber] = useState("");
     const [userDetails, setUserDetails] = useState({ name: "", uniqueId: "", password: "" });
-    
+
     const [enquiryData, setEnquiryData] = useState<EnquiryData | null>(null);
 
     const phoneForm = useForm({
@@ -101,7 +101,7 @@ const EnquiryForm = () => {
         setMessageLength(0); // Reset message length
         setIsEnquiryOpen(false);
         setIsVarificationOpen(true); // Open verification modal
-        
+
         // Store form data before moving to the next step
         setEnquiryData(data);
 
@@ -113,13 +113,13 @@ const EnquiryForm = () => {
         };
         setUserDetails(generatedUserDetails);
     };
-    
+
     useEffect(() => {
         if (isEnquiryOpen && enquiryData) {
             enquiryForm.reset(enquiryData); // ✅ Restore values when reopening
         }
-      }, [isEnquiryOpen]);
-    
+    }, [isEnquiryOpen]);
+
     const verifyForm = useForm({
         resolver: zodResolver(verificationSchema),
         defaultValues: { verificationCode: "" },
@@ -210,123 +210,91 @@ const EnquiryForm = () => {
                     <DialogHeader>
                         <DialogTitle>Enquiry</DialogTitle>
                     </DialogHeader>
-
                     <Form {...enquiryForm}>
                         <form onSubmit={enquiryForm.handleSubmit(handleEnquirySubmit)}
                             className="space-y-4 p-0 w-full"
                         >
-                            <div className="flex justify-between w-full gap-5">
-                                {/* Name Field */}
-                                <FormField
-                                    control={enquiryForm.control}
-                                    name="name"
-                                    render={({ field }) => (
-                                        <FormItem className="form-row w-full">
-                                            <Label>Name<span className="text-red-500">*</span></Label>
-                                            <FormControl>
-                                                <Input type="text" placeholder="Enter your Name" {...field} />
-                                            </FormControl>
-                                            <FormMessage className="common-error-msg" />
-                                        </FormItem>
-                                    )}
-                                />
-                                {/* Email Field */}
-                                <FormField
-                                    control={enquiryForm.control}
-                                    name="email"
-                                    render={({ field }) => (
-                                        <FormItem className="form-row w-full">
-                                            <Label>Email<span className="text-red-500">*</span></Label>
-                                            <FormControl>
-                                                <Input type="email" placeholder="Enter your email" {...field} />
-                                            </FormControl>
-                                            <FormMessage className="common-error-msg" />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
-
-                            <div className="flex justify-between w-full gap-5">
-                                <FormField
-                                    control={enquiryForm.control}
-                                    name="source"
-                                    render={({ field }) => (
-                                        <FormItem className="form-row w-full">
-                                            <Label>How did you hear about us?</Label>
-                                            <Select onValueChange={field.onChange} value={field.value}>
-                                                <SelectTrigger>
-                                                    <SelectValue placeholder="Select" />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectItem value="friend">Friend</SelectItem>
-                                                    <SelectItem value="google">Google</SelectItem>
-                                                    <SelectItem value="internet">Internet</SelectItem>
-                                                </SelectContent>
-                                            </Select>
-                                            <FormMessage className="common-error-msg" />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
-
-                            <div className="flex justify-between w-full gap-5 flex-wrap">
-                                {/* Interested Services */}
-                                <FormField
-                                    control={enquiryForm.control}
-                                    name="interestedServices"
-                                    render={({ field }) => (
-                                        <FormItem className="form-row w-[45%]">
-                                            <Label>Interested Services<span className="text-red-500">*</span></Label>
-                                            <FormControl>
-                                                <Select
-                                                    onValueChange={(value) => {
-                                                        setSelectedService(value);
-                                                        field.onChange(value);
-                                                        setSelectedSubService("");
-                                                        enquiryForm.setValue("interestedSubServices", "");
-                                                        enquiryForm.setValue("interestedCountries", "");
-                                                    }}
-                                                    value={field.value}
-                                                >
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Select Interested Services" />
-                                                    </SelectTrigger>
-                                                    <SelectContent>
-                                                        <SelectItem value="Visa">Visa</SelectItem>
-                                                        <SelectItem value="Reality Test">Reality Test</SelectItem>
-                                                        <SelectItem value="Exam Booking">Exam Booking</SelectItem>
-                                                    </SelectContent>
-                                                </Select>
-                                            </FormControl>
-                                            <FormMessage className="common-error-msg" />
-                                        </FormItem>
-                                    )}
-                                />
-
-                                {/* Interested Sub Services - Conditional */}
-                                {selectedService && (
+                            <div className="max-h-[66vh] overflow-auto pr-2">
+                                <div className="flex justify-between w-full gap-5 mb-5">
+                                    {/* Name Field */}
                                     <FormField
                                         control={enquiryForm.control}
-                                        name="interestedSubServices"
+                                        name="name"
+                                        render={({ field }) => (
+                                            <FormItem className="form-row w-full">
+                                                <Label>Name<span className="text-red-500">*</span></Label>
+                                                <FormControl>
+                                                    <Input type="text" placeholder="Enter your Name" {...field} />
+                                                </FormControl>
+                                                <FormMessage className="common-error-msg" />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    {/* Email Field */}
+                                    <FormField
+                                        control={enquiryForm.control}
+                                        name="email"
+                                        render={({ field }) => (
+                                            <FormItem className="form-row w-full">
+                                                <Label>Email<span className="text-red-500">*</span></Label>
+                                                <FormControl>
+                                                    <Input type="email" placeholder="Enter your email" {...field} />
+                                                </FormControl>
+                                                <FormMessage className="common-error-msg" />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+
+                                <div className="flex justify-between w-full gap-5 mb-5">
+                                    <FormField
+                                        control={enquiryForm.control}
+                                        name="source"
+                                        render={({ field }) => (
+                                            <FormItem className="form-row w-full">
+                                                <Label>How did you hear about us?</Label>
+                                                <Select onValueChange={field.onChange} value={field.value}>
+                                                    <SelectTrigger>
+                                                        <SelectValue placeholder="Select" />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectItem value="friend">Friend</SelectItem>
+                                                        <SelectItem value="google">Google</SelectItem>
+                                                        <SelectItem value="internet">Internet</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                                <FormMessage className="common-error-msg" />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+
+                                <div className="flex justify-between w-full gap-5 flex-wrap mb-5">
+                                    {/* Interested Services */}
+                                    <FormField
+                                        control={enquiryForm.control}
+                                        name="interestedServices"
                                         render={({ field }) => (
                                             <FormItem className="form-row w-[45%]">
-                                                <Label>Interested Sub Services<span className="text-red-500">*</span></Label>
+                                                <Label>Interested Services<span className="text-red-500">*</span></Label>
                                                 <FormControl>
                                                     <Select
                                                         onValueChange={(value) => {
-                                                            setSelectedSubService(value);
+                                                            setSelectedService(value);
                                                             field.onChange(value);
+                                                            setSelectedSubService("");
+                                                            enquiryForm.setValue("interestedSubServices", "");
                                                             enquiryForm.setValue("interestedCountries", "");
                                                         }}
                                                         value={field.value}
                                                     >
                                                         <SelectTrigger>
-                                                            <SelectValue placeholder="Select Interested Sub Services" />
+                                                            <SelectValue placeholder="Select Interested Services" />
                                                         </SelectTrigger>
                                                         <SelectContent>
-                                                            <SelectItem value="Study Visa">Study Visa</SelectItem>
-                                                            <SelectItem value="Visitor Visa">Visitor Visa</SelectItem>
-                                                            <SelectItem value="Work Visa">Work Visa</SelectItem>
+                                                            <SelectItem value="Visa">Visa</SelectItem>
+                                                            <SelectItem value="Reality Test">Reality Test</SelectItem>
+                                                            <SelectItem value="Exam Booking">Exam Booking</SelectItem>
                                                         </SelectContent>
                                                     </Select>
                                                 </FormControl>
@@ -334,63 +302,96 @@ const EnquiryForm = () => {
                                             </FormItem>
                                         )}
                                     />
-                                )}
 
-                                {/* Interested Country - Conditional */}
-                                {selectedSubService && (
+                                    {/* Interested Sub Services - Conditional */}
+                                    {selectedService && (
+                                        <FormField
+                                            control={enquiryForm.control}
+                                            name="interestedSubServices"
+                                            render={({ field }) => (
+                                                <FormItem className="form-row w-[45%]">
+                                                    <Label>Interested Sub Services<span className="text-red-500">*</span></Label>
+                                                    <FormControl>
+                                                        <Select
+                                                            onValueChange={(value) => {
+                                                                setSelectedSubService(value);
+                                                                field.onChange(value);
+                                                                enquiryForm.setValue("interestedCountries", "");
+                                                            }}
+                                                            value={field.value}
+                                                        >
+                                                            <SelectTrigger>
+                                                                <SelectValue placeholder="Select Interested Sub Services" />
+                                                            </SelectTrigger>
+                                                            <SelectContent>
+                                                                <SelectItem value="Study Visa">Study Visa</SelectItem>
+                                                                <SelectItem value="Visitor Visa">Visitor Visa</SelectItem>
+                                                                <SelectItem value="Work Visa">Work Visa</SelectItem>
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </FormControl>
+                                                    <FormMessage className="common-error-msg" />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    )}
+
+                                    {/* Interested Country - Conditional */}
+                                    {selectedSubService && (
+                                        <FormField
+                                            control={enquiryForm.control}
+                                            name="interestedCountries"
+                                            render={({ field }) => (
+                                                <FormItem className="form-row w-[45%]">
+                                                    <Label>Interested Country<span className="text-red-500">*</span></Label>
+                                                    <FormControl>
+                                                        <Select
+                                                            onValueChange={field.onChange}
+                                                            value={field.value}
+                                                        >
+                                                            <SelectTrigger>
+                                                                <SelectValue placeholder="Select Interested Country" />
+                                                            </SelectTrigger>
+                                                            <SelectContent>
+                                                                <SelectItem value="India">India</SelectItem>
+                                                                <SelectItem value="Australia">Australia</SelectItem>
+                                                                <SelectItem value="Canada">Canada</SelectItem>
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </FormControl>
+                                                    <FormMessage className="common-error-msg" />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    )}
+                                </div>
+
+                                <div className="flex justify-between w-full gap-5 mb-5">
+                                    {/* Message Field */}
                                     <FormField
                                         control={enquiryForm.control}
-                                        name="interestedCountries"
+                                        name="message"
                                         render={({ field }) => (
-                                            <FormItem className="form-row w-[45%]">
-                                                <Label>Interested Country<span className="text-red-500">*</span></Label>
+                                            <FormItem className="form-row w-full">
+                                                <div className="flex justify-between items-center">
+                                                    <Label>Message<span className="text-red-500">*</span></Label>
+                                                    <div className="message-text">Entered Characters : <span>{messageLength}</span></div>
+                                                </div>
                                                 <FormControl>
-                                                    <Select
-                                                        onValueChange={field.onChange}
-                                                        value={field.value}
-                                                    >
-                                                        <SelectTrigger>
-                                                            <SelectValue placeholder="Select Interested Country" />
-                                                        </SelectTrigger>
-                                                        <SelectContent>
-                                                            <SelectItem value="India">India</SelectItem>
-                                                            <SelectItem value="Australia">Australia</SelectItem>
-                                                            <SelectItem value="Canada">Canada</SelectItem>
-                                                        </SelectContent>
-                                                    </Select>
+                                                    <Textarea
+                                                        {...field}
+                                                        className="h-24"
+                                                        onChange={(e) => {
+                                                            field.onChange(e.target.value);
+                                                            setMessageLength(e.target.value.length);
+                                                        }}
+                                                    />
                                                 </FormControl>
                                                 <FormMessage className="common-error-msg" />
                                             </FormItem>
                                         )}
                                     />
-                                )}
-                            </div>
-
-                            <div className="flex justify-between w-full gap-5">
-                                {/* Message Field */}
-                                <FormField
-                                    control={enquiryForm.control}
-                                    name="message"
-                                    render={({ field }) => (
-                                        <FormItem className="form-row w-full">
-                                            <div className="flex justify-between items-center">
-                                                <Label>Message<span className="text-red-500">*</span></Label>
-                                                <div className="message-text">Entered Characters : <span>{messageLength}</span></div>
-                                            </div>
-                                            <FormControl>
-                                                <Textarea
-                                                    {...field}
-                                                    className="h-24"
-                                                    onChange={(e) => {
-                                                        field.onChange(e.target.value);
-                                                        setMessageLength(e.target.value.length);
-                                                    }}
-                                                />
-                                            </FormControl>
-                                            <FormMessage className="common-error-msg" />
-                                        </FormItem>
-                                    )}
-                                />
+                                </div>
                             </div>
                             {/* Submit Button */}
                             <div className="common-button-rows enq-row">

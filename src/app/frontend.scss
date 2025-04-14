@@ -11,12 +11,20 @@ $bgGrayLight:#f1f1f1;
 $darkGraycolor:#141b23;
 $lightBlueColor:#E8F0FE;
 
-@mixin comman-text{font-size:1.3rem;}
+@mixin comman-text{font-size:1.2rem;}
 @mixin content-container{
     display: flex;
     flex-direction: column;
     h3{color:$darkGray;font-size:1.8rem;font-weight:600;line-height:35px;margin-bottom:10px; text-align: center;}
     h2{color:$blackColor;font-size:2.9rem;margin:0;font-weight:bold;line-height:45px;text-align: center;}
+    @media screen and (max-width:1536px){
+        h3{font-size: 1.4rem;line-height:1.6rem;}
+        h2{font-size:2.3rem;line-height:2rem;}
+    }
+    @media screen and (max-width:1024px){
+        h3{font-size: 1rem;line-height:1.6rem;}
+        h2{font-size:2rem;line-height:2rem;}
+    }
     @media screen and (max-width:767px){
         h3{font-size: 1.3rem;line-height:1.6rem;}
         h2{font-size:1.5rem;line-height:2rem;}
@@ -271,7 +279,9 @@ input::placeholder {
             }
         }
     }   
-    
+    &.-top-32 {
+        top: -8rem !important;
+    }    
 }
 
 // main slider
@@ -996,7 +1006,20 @@ input::placeholder {
                     &:hover{
                         color:$redColor;
                     }
-                } 
+                }
+              &.footer-complaint-feedback
+              {
+                padding:0px;
+                button {
+                    padding: 0;
+                    font-size: 1.2rem;
+                    color:#fff;
+                    &:hover{
+                        background:none;
+                        color:$redColor;
+                    }
+                }
+              } 
             }
         }
     }
@@ -1699,7 +1722,17 @@ input::placeholder {
             border-top: 25px solid $bgGrayLight;
             border-bottom: 25px solid $bgGrayLight;
             border-radius: 15px 0 0 15px;   
-            box-shadow: 0px 2px 10px 4px #ccc;       
+            box-shadow: 0px 2px 10px 4px #ccc;
+            position: relative;
+            background: #fff;
+            min-height: 420px;
+            .coaching-text{
+                z-index: 9;
+            }
+            .pricebanner-img {
+                position: absolute;
+                bottom: 0;
+            }       
         }
     .common-button-rows{
         margin:0px !important;
@@ -2352,6 +2385,9 @@ background: #ccc;
     min-width:160px;            
 }
 
+// coaching page css
+.common-coaching-box {width: 32%;}
+
 // time zone css
 
     @keyframes fadeIn {
@@ -2368,21 +2404,50 @@ background: #ccc;
     }
 
 // responsive css
-@media screen and (max-width:1366px)
+@media screen and (max-width:1536px)
 {
+    body.padding-top {padding-top: 6rem !important;}
+    .header .header-topbar,
+    .navigation-container {
+        padding: 0.5rem 3%;
+    }
     .header{
         .navigation-container{
+            .logo-cont {
+                max-width: 190px;
+            }
             .navbar {
                 .navi {
                     li{
                         a{
                             font-size: 1rem;
-                        }
-                    } 
+                        } 
+                        &.complaint-feedback-btn {
+                            button
+                            {
+                                font-size: 1rem !important;
+                            }    
+                        }                                                 
+                    }                                      
                 } 
             } 
         }
-    } 
+    }
+    .main-slider-container {
+        .left-slide-content {
+            h1 {
+                font-size: 2.5rem;
+            }
+            p{
+                font-size: 1.5rem;
+                line-height: 1.9rem;
+            }
+            a{
+                font-size: 1.2rem !important;
+                padding: 25px;
+            }
+        }
+    }    
     .dashboard-section {
         .user-left-section
         {
@@ -2392,26 +2457,306 @@ background: #ccc;
             width: 30%;
         }
     }
+    .aboutcomp-container {
+        .aboutcomp-list {
+            ul {
+                li {
+                    h3 {
+                        font-size: 1.3rem;
+                    }
+                }
+            }
+        }
+    }
+    .achievements-container {
+        .achievement-numbers {
+            .achievement-num-container {
+                h2 {
+                    font-size:3rem;
+                }
+            }
+        }
+    }
+    .latest-articles-section {
+        .big-article-container {
+            h4 {
+                font-size: 1.4rem;
+            }
+        }
+    }
+    .latest-articles-section {
+        .small-article-container {
+            .small-article-box {
+                .small-art-content-cont {
+                    h4 {
+                        font-size: 1.4rem;
+                    }
+                }
+            }
+        }
+    }
+    .tool-section {
+        .tool-content {
+            h2 {
+                font-size: 2.3rem;
+            }
+        }
+        .tool-white-container {
+            .tool-box {
+                h2 {
+                    font-size: 1.4rem;
+                    max-width: 145px;
+                }
+            }
+        }
+    }
+    .gallery-section {
+        .gallery-inner-section {
+            .container {
+                .image-gallery-text {
+                    h2 {
+                        font-size: 2.3rem;
+                        max-width: 180px;
+                    }
+                }
+            }
+        }
+    }
+    .acolades-section {
+        .acolade-container {
+            .certificate-common-box {
+                min-height: 395px;
+            }
+        }
+    }    
+    .stu-classroom-row-content .full-class-room,
+    .stu-classroom-row-content .recorded-box,
+    .stu-classroom-row-content .classroom-matrial 
+    {width:31.8%}
+    
+    .common-courses {
+        .form-middle-container {
+            ul {
+                &.branches-course-list {
+                    gap: 15px;
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }    
 }
-@media screen and (min-width:768px) and (max-width:1024px)
+@media screen and (max-width:1366px)
 {
+    .main-slider-container{
+        padding:30px 0 !important;
+    }
+    .reality-box, .mocktest-box, .exambooking-box, .event-booking 
+    {
+        width: 32.3%;
+    } 
+}
+@media screen and (max-width:1280px)
+{
+    .container {
+        max-width: 1220px;
+    }
+    .common-coaching-box {
+        width: 31.5%;
+    }
+}
+@media screen and (max-width:1152px)
+{
+    .header .header-topbar .login-reg-cont ul li button, .header .header-topbar .login-reg-cont ul li a {
+        font-size: 0.9rem !important;
+    }
+    .header {
+        .header-topbar {
+            .quick-btn-cont {
+                .quick-enquiry {
+                    padding: 4px 6px;
+                    height: auto;
+                }
+            }
+        }
+        .navigation-container {
+            .navbar {
+                .navi {
+                    li {
+                        a {
+                            font-size: 0.8rem;
+                        }
+                        &.complaint-feedback-btn{
+                            button
+                            {
+                                font-size: 0.8rem !important; 
+                            }  
+                        } 
+                    }
+                }
+            }
+        }
+    }
+    .form-slider-container {
+        padding: 36px 0;
+    }
+    .form-slider-img {
+        .-bottom-20 {
+            bottom: -50px !important;
+        }
+    }
+    .container {
+        max-width: 1050px;
+    }
+    .investor-container {
+        .investor-grid-container {
+            .investor-grid {
+                h2 {
+                    font-size: 1.3rem;
+                    font-weight: 600;
+                    transition: transform 0.3sease-in-out;
+                }
+            }
+        }
+    }
+    .stu-classroom-row-content .full-class-room, .stu-classroom-row-content .recorded-box, .stu-classroom-row-content .classroom-matrial {
+        width: 31.6%;
+    }
+    .profile-list {
+        li {
+            button {
+                font-size: 0.7rem;
+            }
+        }
+    }
+    .sidebar-navigation {
+        li {
+            a {
+                font-size: 0.7rem;
+            }
+            button{
+                font-size: 0.7rem;
+            }
+        }
+    }
+    .stu-classroom-header {
+        p {
+            font-size: 0.8rem;
+        }
+    }
+    
+    
+}
+@media screen and (max-width:1024px)
+{
+    .container {
+        max-width:980px;
+    }
     .padding-top {
         padding-top: 4.6rem !important;
+    }    
+    .header {        
+        .navigation-container {
+            .logo-cont {
+                max-width: 160px;
+            }
+            .navbar {
+                .navi {
+                    li {
+                        a {
+                            font-size: 0.6rem;
+                            padding:5px 3px !important;
+                            img{
+                                width: 20px;
+                            }
+                        }
+                        &.complaint-feedback-btn{
+                            padding: 8px 5px !important;
+                            img{
+                                width: 20px;
+                                height: 20px;
+                            } 
+                            button
+                            {
+                                padding:0 13px !important;
+                                font-size: 0.6rem !important;
+                                line-height: inherit !important;
+                                height: auto;
+                                
+                            }  
+                        } 
+                    }
+                }
+            }
+        }
     }
+    .header .header-topbar .login-reg-cont ul li button, .header .header-topbar .login-reg-cont ul li a {
+        font-size: 0.7rem !important;
+    }
+    .header .navigation-container .navbar .navi li ul.navi-dropdown, .header .navigation-container .navbar .navi li ul.navi-sub-dropdown
+    {
+        height:300px;
+    }
+    
     .main-slider-container {
+        .left-slide-content {
+            h1 {
+                font-size: 2rem;
+            }
+        }
         .main-slider-img {
             img {
                 border: 5px solid $whiteColor;
                 border-radius: 5px;
             }
         }
+    }
+    .acolades-section {
+        .acolade-container {
+            .certificate-common-box {
+                min-height: 305px;
+            }
+        }
+    }
+    .our-office-container {
+        .office-tab-content {
+            .office-left-content {
+                h2 {
+                    font-size: 1.3rem;
+                    color: #000;
+                    font-weight: bold;
+                }
+                p{
+                    font-size: 0.9rem;
+                    line-height:20px;
+                }
+                ul
+                {
+                    li{
+                        font-size: 0.9rem;
+                        line-height:15px; 
+                    }
+                }
+            }
+        }
+    } 
+    .reality-box, .mocktest-box, .exambooking-box, .event-booking 
+    {
+        width: 32.1%;
+    }
+    .sidebar-navigation {
+        li {
+            a {
+                font-size: 0.6rem;
+            }
+            button{
+                font-size: 0.6rem;
+            }
+        }
     }   
 }
 @media screen and (max-width:767px)
 {
-    .padding-top {
-        padding-top: 4.6rem !important;
-    }
+    body.padding-top {padding-top: 4.6rem !important;}
     .main-slider-container {
         .main-slider-img {
             img {
@@ -2424,12 +2769,12 @@ background: #ccc;
     .certificate-common-box{
         //display: none;
         min-height: 345px !important;
-      &.mobile-show{
-        display: block;
-      }
-      &::after{
-        bottom: -60px !important;
-      }
+        &.mobile-show{
+            display: block;
+        }
+        &::after{
+            bottom: -60px !important;
+        }
     }
     .our-services-new-section {
         .ourservices-box {
@@ -2457,18 +2802,7 @@ background: #ccc;
             }
         }
     }
-    .common-modal-content, .gallery-modal {
-        width: 95% !important;
-    }
-    .aboutcomp-container .aboutcomp-list ul li h3{font-size:1.1rem}
-    .achievements-container .achievement-numbers .achievement-num-container h2,
-    .gallery-section .gallery-inner-section .container .image-gallery-text h2,
-    .acolades-section .acolade-container .accolades-heading
-    {font-size: 2rem;}
+    .common-modal-content, .gallery-modal {width: 95% !important;}    
     .achievements-container .achievement-numbers{flex-direction: row;flex-wrap: wrap;}
     .achievements-container .achievement-numbers .achievement-num-container {max-width: 168px;}
-    .latest-articles-section .big-article-container h4, .tool-section .tool-content h2,
-    .latest-articles-section .small-article-container .small-article-box .small-art-content-cont h4,
-    .tool-section .tool-white-container .tool-box h2 
-    {font-size:1.5rem;line-height:1.6rem}
 }

@@ -65,7 +65,7 @@ const EventsBookings: React.FC = () => {
 
       <div className="mock-card-container mt-5 flex flex-wrap gap-3">
         {eventBookings.map((event) => (
-          <Card key={event.id} className="w-[32.6%] min-h-[250px] relative">
+          <Card key={event.id} className="w-[32.6%] min-h-[250px] relative event-booking">
             <CardHeader className="pb-2">
               <CardTitle>{event.title}</CardTitle>
               <h2 className="font-bold">{event.language}</h2>

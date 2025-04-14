@@ -104,7 +104,7 @@ const StudentMakeNewRequest = () => {
     setSelectedFiles([]); // Clear selected files
     setIsMakeRequestOpen(false); // Close modal
   };
-  
+
 
   return (
     <>
@@ -112,7 +112,7 @@ const StudentMakeNewRequest = () => {
       <Dialog open={isMakeRequestOpen} onOpenChange={setIsMakeRequestOpen}>
         <DialogTrigger asChild>
           <Button className="w-full max-w-[150px]">
-             Make New Request
+            Make New Request
           </Button>
         </DialogTrigger>
         <DialogContent className="common-modal-form w-full max-w-xl max-h-[90vh] overflow-auto">
@@ -127,161 +127,163 @@ const StudentMakeNewRequest = () => {
               )}
               className="space-y-4 p-0 w-full"
             >
-              <div className="flex justify-between w-full gap-5 flex-col">
-                {/* Product Servcies */}
-                <FormField
-                  control={MakeNewRequestForm.control}
-                  name="productServices"
-                  render={({ field }) => (
-                    <FormItem className="form-row w-full">
-                      <Label>
-                        Product/Services<span className="text-red-500">*</span>
-                      </Label>
-                      <FormControl>
-                        <Select
-                          onValueChange={field.onChange}
-                          value={field.value}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select Product/Services" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Inhouse Pack">
-                              Inhouse Pack
-                            </SelectItem>
-                            <SelectItem value="Online Pack">
-                              Online Pack
-                            </SelectItem>
-                            <SelectItem value="Practice Pack">
-                              Practice Pack
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <FormMessage className="common-error-msg" />
-                    </FormItem>
-                  )}
-                />
-
-                {/* Subject */}
-                <FormField
-                  control={MakeNewRequestForm.control}
-                  name="subject"
-                  render={({ field }) => (
-                    <FormItem className="form-row w-full">
-                      <Label>
-                        Select Subject<span className="text-red-500">*</span>
-                      </Label>
-                      <FormControl>
-                        <Select
-                          onValueChange={field.onChange}
-                          value={field.value}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select Subject" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Inhouse Pack">Other</SelectItem>
-                            <SelectItem value="Online Pack">
-                              Services Issues
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <FormMessage className="common-error-msg" />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <div className="flex justify-between w-full gap-5">
-                {/* Message Field */}
-                <FormField
-                  control={MakeNewRequestForm.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem className="form-row w-full">
-                      <div className="flex justify-between items-center">
+              <div className="max-h-[65vh] overflow-auto pr-2">
+                <div className="flex justify-between w-full gap-5 flex-col">
+                  {/* Product Servcies */}
+                  <FormField
+                    control={MakeNewRequestForm.control}
+                    name="productServices"
+                    render={({ field }) => (
+                      <FormItem className="form-row w-full">
                         <Label>
-                          Complaint Message
-                          <span className="text-red-500">*</span>
+                          Product/Services<span className="text-red-500">*</span>
                         </Label>
-                        <div className="message-text">
-                          Entered Characters : <span>{messageLength}</span>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            value={field.value}
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select Product/Services" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Inhouse Pack">
+                                Inhouse Pack
+                              </SelectItem>
+                              <SelectItem value="Online Pack">
+                                Online Pack
+                              </SelectItem>
+                              <SelectItem value="Practice Pack">
+                                Practice Pack
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage className="common-error-msg" />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Subject */}
+                  <FormField
+                    control={MakeNewRequestForm.control}
+                    name="subject"
+                    render={({ field }) => (
+                      <FormItem className="form-row w-full">
+                        <Label>
+                          Select Subject<span className="text-red-500">*</span>
+                        </Label>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            value={field.value}
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select Subject" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Inhouse Pack">Other</SelectItem>
+                              <SelectItem value="Online Pack">
+                                Services Issues
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage className="common-error-msg" />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="flex justify-between w-full gap-5">
+                  {/* Message Field */}
+                  <FormField
+                    control={MakeNewRequestForm.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem className="form-row w-full">
+                        <div className="flex justify-between items-center">
+                          <Label>
+                            Complaint Message
+                            <span className="text-red-500">*</span>
+                          </Label>
+                          <div className="message-text">
+                            Entered Characters : <span>{messageLength}</span>
+                          </div>
                         </div>
-                      </div>
-                      <FormControl>
-                        <Textarea
-                          {...field}
-                          className="h-24"
-                          onChange={(e) => {
-                            field.onChange(e.target.value);
-                            setMessageLength(e.target.value.length);
-                          }}
-                        />
-                      </FormControl>
-                      <FormMessage className="common-error-msg" />
-                    </FormItem>
-                  )}
-                />
-              </div>
+                        <FormControl>
+                          <Textarea
+                            {...field}
+                            className="h-24"
+                            onChange={(e) => {
+                              field.onChange(e.target.value);
+                              setMessageLength(e.target.value.length);
+                            }}
+                          />
+                        </FormControl>
+                        <FormMessage className="common-error-msg" />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
-              <div className="flex flex-col w-full gap-5">
-                {/* File Upload Field */}
-                <FormField
-                  control={MakeNewRequestForm.control}
-                  name="attachments"
-                  render={() => (
-                    <FormItem className="form-row w-full file-attachment">
-                      <div className="flex justify-between items-center">
-                        <Label
-                          htmlFor="file-upload"
-                          className="flex items-center gap-2"
-                        >
-                          <Button className="flex gap-4">
-                            <i
-                              className="fa fa-paperclip"
-                              aria-hidden="true"
-                            ></i>
-                            Add Attachments
-                          </Button>
-                          <small>
-                            (Allowed: jpg, png, jpeg, pdf, webp, mp3, mp4)
-                          </small>
-                        </Label>
-                      </div>
-                      <FormControl>
-                        <Input
-                          type="file"
-                          id="file-upload"
-                          multiple
-                          onChange={handleFileChange}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
+                <div className="flex flex-col w-full gap-5">
+                  {/* File Upload Field */}
+                  <FormField
+                    control={MakeNewRequestForm.control}
+                    name="attachments"
+                    render={() => (
+                      <FormItem className="form-row w-full file-attachment">
+                        <div className="flex justify-between items-center">
+                          <Label
+                            htmlFor="file-upload"
+                            className="flex items-center gap-2"
+                          >
+                            <Button className="flex gap-4">
+                              <i
+                                className="fa fa-paperclip"
+                                aria-hidden="true"
+                              ></i>
+                              Add Attachments
+                            </Button>
+                            <small>
+                              (Allowed: jpg, png, jpeg, pdf, webp, mp3, mp4)
+                            </small>
+                          </Label>
+                        </div>
+                        <FormControl>
+                          <Input
+                            type="file"
+                            id="file-upload"
+                            multiple
+                            onChange={handleFileChange}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
 
-                {/* Display Attached Files */}
-                <div className="mt-3 w-full flex flex-wrap">
-                  {selectedFiles.length > 0 ? (
-                    selectedFiles.map((file, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center justify-between bg-gray-100 p-2 rounded-md mb-2"
-                      >
-                        <span className="truncate">{file.name}</span>
-                        <button
-                          onClick={() => removeFile(index)}
-                          className="text-red-500 hover:text-red-700 ml-2"
+                  {/* Display Attached Files */}
+                  <div className="mt-3 w-full flex flex-wrap">
+                    {selectedFiles.length > 0 ? (
+                      selectedFiles.map((file, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between bg-gray-100 p-2 rounded-md mb-2"
                         >
-                          ❌
-                        </button>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-gray-500">No attachments added</p>
-                  )}
+                          <span className="truncate">{file.name}</span>
+                          <button
+                            onClick={() => removeFile(index)}
+                            className="text-red-500 hover:text-red-700 ml-2"
+                          >
+                            ❌
+                          </button>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-gray-500">No attachments added</p>
+                    )}
+                  </div>
                 </div>
               </div>
 

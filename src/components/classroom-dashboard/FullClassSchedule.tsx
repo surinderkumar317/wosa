@@ -111,7 +111,7 @@ const FullClassSchedule = () => {
           <div className="full-class-row mb-10 flex gap-5 flex-wrap">
             {filteredClasses.length > 0 ? (
               filteredClasses.map((cls, index) => (
-                <Card key={index} className="w-[32.2%]">
+                <Card key={index} className="w-[32.2%] full-class-room">
                   <CardHeader className="hidden" />
                   <CardContent className="p-5">
                     <p className="mb-2"><strong>Topic: </strong>{cls.topic}</p>

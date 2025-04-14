@@ -37,13 +37,13 @@ const investorContent: InvestorContent[] = [
 
 const investorLinks: InvestorLink[] = [
   {
-    href: "#",
+    href: "/investors/board-of-directors",
     src: "/images/board-dirctors.webp",
     alt: "Board Director",
     title: "Board Of Directors",
   },
   {
-    href: "#",
+    href: "/investors/committee-board",
     src: "/images/committee-board.webp",
     alt: "Committee Board",
     title: "Committee Board",
@@ -55,7 +55,7 @@ const investorLinks: InvestorLink[] = [
     title: "Financial Results",
   },
   {
-    href: "#",
+    href: "/investors/shareholding-pattern",
     src: "/images/shareholding-pattern.webp",
     alt: "Shareholding Pattern",
     title: "Shareholding Pattern",
@@ -73,7 +73,7 @@ const investorLinks: InvestorLink[] = [
     title: "Annual Report",
   },
   {
-    href: "#",
+    href: "/investors/investor-grievance",
     src: "/images/investor-grievances.webp",
     alt: "Investor Grievances",
     title: "Investor Grievances",

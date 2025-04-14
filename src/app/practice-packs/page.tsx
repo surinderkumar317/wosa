@@ -279,8 +279,10 @@ const OnlineCourse = () => {
           )}
 
           {/* Show Advanced Search & Reset Buttons AFTER Search */}
-          {searchClicked && (
+          {searchClicked && !showCourseForm && (
             <div className="advanced-reset-btn flex gap-5">
+              {!showAdvancedForm && (
+              <>
               <Button
                 onClick={handleAdvancedSearch}
                 className="advanced-search"
@@ -316,6 +318,8 @@ const OnlineCourse = () => {
               >
                 Reset
               </Button>
+              </>
+            )}
             </div>
           )}
 
@@ -477,7 +481,7 @@ const OnlineCourse = () => {
         >
           <div className="courses-box-container flex flex-wrap gap-4">
             {CoursesList.map((courses) => (
-              <div key={courses.id} className="w-[24%]">
+              <div key={courses.id} className="w-1/3 common-coaching-box">
                 <Card className="courses-box p-4 rounded-xl border bg-card shadow">
                   <CardContent className="p-0">
                     <Link href={courses.link} className="no-underline">

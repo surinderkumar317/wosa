@@ -51,7 +51,7 @@ export default function RootLayout({
         <Footer />
 
         {/* marketing modal */}
-        <MarketingModal/>
+         <MarketingModal/>
       </body>
     </html>
   );

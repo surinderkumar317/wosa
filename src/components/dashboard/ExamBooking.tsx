@@ -56,7 +56,7 @@ const ExamBookings: React.FC = () => {
 
       <div className="mock-card-container mt-5 flex flex-wrap gap-3">
         {examBookings.map((booking) => (
-          <Card key={booking.id} className="w-[32.6%] min-h-[250px] relative">
+          <Card key={booking.id} className="w-[32.6%] min-h-[250px] relative exambooking-box">
             <CardHeader className="pb-2">
               <CardTitle>{booking.title}</CardTitle>
               <CardDescription></CardDescription>
