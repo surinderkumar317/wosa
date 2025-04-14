@@ -16,7 +16,7 @@ const Sheet = ({ children, ...props }: SheetPrimitive.DialogProps) => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <SheetContext.Provider value={{ closeSheet: () => setOpen(true) }}>
+    <SheetContext.Provider value={{ closeSheet: () => setOpen(false) }}>
       <SheetPrimitive.Root open={open} onOpenChange={setOpen} {...props}>
         {children}
       </SheetPrimitive.Root>
@@ -66,11 +66,22 @@ interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
     VariantProps<typeof sheetVariants> {}
 
-const SheetContent = React.forwardRef<
+    const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps
 >(({ side = "right", className, children, ...props }, ref) => {
   const { closeSheet } = React.useContext(SheetContext);
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+
+    // Looks for any clickable item inside `.mobile-list` (Link, span, div etc.)
+    const linkElement = target.closest(".mobile-list [data-close-sheet]");
+
+    if (linkElement) {
+      closeSheet();
+    }
+  };
 
   return (
     <SheetPortal>
@@ -79,6 +90,7 @@ const SheetContent = React.forwardRef<
         ref={ref}
         className={cn(sheetVariants({ side }), className)}
         {...props}
+        onClick={handleClick} // ✅ only trigger close when a link is clicked
       >
         {/* Close button */}
         <SheetPrimitive.Close
@@ -89,7 +101,7 @@ const SheetContent = React.forwardRef<
         </SheetPrimitive.Close>
 
         {/* Pass closeSheet function to children */}
-        <div onClick={closeSheet}>{children}</div>
+        {children}
       </SheetPrimitive.Content>
     </SheetPortal>
   );

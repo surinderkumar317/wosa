@@ -147,7 +147,7 @@ const Navbar: React.FC = () => {
                 <Link href="/">Quick Enquiry</Link>
               </Button>
             </div>
-            <ul className="flex flex-col gap-4 mt-4">
+            <ul className="flex flex-col gap-4 mt-4 mobile-list">
               {menuData.map((menuItem, index) => (
                 <li key={index}>
                   <Link
