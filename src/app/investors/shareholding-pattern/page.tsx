@@ -1,5 +1,4 @@
 "use client";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 import React from "react";
 
 const page = () => {

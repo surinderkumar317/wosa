@@ -3,12 +3,8 @@ import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import LazySection from "@/components/LazySection";
 import Loading from "@/app/loading"; // ✅ Correct import for Next.js 15
-import B2bRegistrationEnquiry from '@/components/b2bform/B2bRegistrationEnquiry';
 import FormSlider from '@/components/FormSlider';
 
-const EmblaCarousel = dynamic(() => import("@/components/EmblaCarousel"), {
-  loading: () => <Loading />,
-});
 const OurservicesSlider = dynamic(() => import("@/components/OurservicesSlider"), {
   loading: () => <Loading />,
 });

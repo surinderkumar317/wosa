@@ -3,7 +3,6 @@ import CommonImage from "../common/Image";
 import CourseModal from "./CourseModal";
 import PrackticePackModal from "./PrackticePackModal";
 import RealitytestModal from "./RealitytestModal";
-import EventTimeModal from "./EventModal";
 
 interface FormBannerProps {
   heading: string;

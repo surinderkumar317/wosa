@@ -1,5 +1,4 @@
 "use client";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 import Link from "next/link";
 import React from "react";
 
