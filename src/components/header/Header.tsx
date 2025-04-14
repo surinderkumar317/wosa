@@ -75,7 +75,7 @@ const Header = () => {
       <div className="navigation-container p-2">
         <div className="container 2xl m-auto flex gap-4 justify-items-center justify-between">
           <div className="logo-cont">
-            <Link href={BASE_URL}>
+            <Link href="/">
               <CommonImage
                 classname={"logo"}
                 src={"/images/logo-wide.svg"}

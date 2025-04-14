@@ -12,6 +12,8 @@ const SheetContext = React.createContext({
   closeSheet: () => {},
 });
 
+export const useSheet = () => React.useContext(SheetContext);
+
 const Sheet = ({ children, ...props }: SheetPrimitive.DialogProps) => {
   const [open, setOpen] = React.useState(false);
 
@@ -74,12 +76,16 @@ interface SheetContentProps
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
-
-    // Looks for any clickable item inside `.mobile-list` (Link, span, div etc.)
-    const linkElement = target.closest(".mobile-list [data-close-sheet]");
-
-    if (linkElement) {
-      closeSheet();
+  
+    // Check if clicked element is an <a> tag or inside one
+    const link = target.closest("Link");
+  
+    // Check if it's inside .mobile-list
+    if (link && link.closest(".mobile-list")) {
+      // Add slight delay to allow route change to register
+      setTimeout(() => {
+        closeSheet();
+      }, 50);
     }
   };
 
