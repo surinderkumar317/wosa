@@ -7,7 +7,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { DialogClose } from "@/components/ui/dialog"; // 👈 make sure to import
 import {
   Select,
   SelectContent,
@@ -47,34 +46,38 @@ const formatTimezoneOffset = (timezone: string): string => {
 export default function CountryTimeSelector() {
   const [selectedTimezone, setSelectedTimezone] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
-  const [isInitialSelection, setIsInitialSelection] = useState(true);
 
+  // Show modal only if not selected before
   useEffect(() => {
-    setOpen(true);
+    const saved = localStorage.getItem("selected-timezone");
+    if (saved) {
+      setSelectedTimezone(saved);
+    } else {
+      setOpen(true);
+    }
   }, []);
 
   const selectedCountry = countries.find((c) => c.value === selectedTimezone);
 
+  const handleSelect = (value: string) => {
+    setSelectedTimezone(value);
+    localStorage.setItem("selected-timezone", value);
+    setOpen(false);
+  };
+
   return (
     <div className="space-y-6">
+      {/* The dialog only opens once on first load */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="w-full max-w-[700px] px-10 pt-15">
           <DialogHeader>
-            {isInitialSelection && (
-              <h2 className="text-2xl font-bold text-center w-full my-6">
-                HI! There are multiple time zones in your country. Please select one to continue.
-              </h2>
-            )}
-            <DialogTitle className="!font-normal mt-7">Select Your Country</DialogTitle>            
+            <h2 className="text-2xl font-bold text-center w-full my-6">
+              Hi! There are multiple time zones in your country. Please select one to continue.
+            </h2>
+            <DialogTitle className="!font-normal mt-7">Select Your Country</DialogTitle>
           </DialogHeader>
           <div className="w-full flex flex-col pb-5">
-            <Select
-              onValueChange={(value) => {
-                setSelectedTimezone(value);
-                setIsInitialSelection(false); // hide message after first selection
-                setOpen(false);
-              }}
-            >
+            <Select onValueChange={handleSelect}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select a country" />
               </SelectTrigger>
@@ -90,11 +93,9 @@ export default function CountryTimeSelector() {
         </DialogContent>
       </Dialog>
 
+      {/* Show selected timezone anywhere */}
       {selectedTimezone && (
-        <div
-          className="flex animate-fade-in cursor-pointer"
-          onClick={() => setOpen(true)}
-        >
+        <div className="flex cursor-pointer" onClick={() => setOpen(true)}>
           <p className="text-[1rem] font-bold flex gap-2">
             <span>{selectedCountry?.label}</span>
             <span>{formatTimezoneOffset(selectedTimezone)}</span>

@@ -11,7 +11,7 @@ const FormSlider = dynamic(() => import("@/components/FormSlider"), {
 const AboutCompany = dynamic(() => import("@/components/about-company/AboutCompany"), {
   loading: () => <Loading />,
 });
-const Testimonials = dynamic(() => import("@/components/Testimonials"), {
+const Testimonials = dynamic(() => import("@/components/testimonials/Testimonials"), {
   loading: () => <Loading />,
 });
 

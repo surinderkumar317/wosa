@@ -523,7 +523,12 @@ input::placeholder {
     .event-button{
         @include common-buttons;
         z-index: 9;
-      }
+    }
+    .event-box-container {
+        flex-wrap: nowrap;
+        width: 100%;
+        overflow: auto;
+    }
 }
 
 // lates articles section
@@ -1705,16 +1710,14 @@ input::placeholder {
 // common form with slider css
 .form-slider-container{
     .left-slideform{
-        h1{            
-            font-size: 3vw;
-            line-height: 3.2vw;
+        h1{
+            font-size: 2.5rem; 
             color:$blackColor;
             font-weight: bold;
             margin-bottom: 15px;
         }
         p{
-            font-size: 1.2vw;
-            line-height: 1.6vw;
+            font-size: 1.5rem;
         }
     }
     .form-slider-img{    
@@ -1821,6 +1824,13 @@ input::placeholder {
                 button{
                     text-align: left;
                     justify-content: start;
+                }
+            }
+            &.m-timezone-list
+            {
+                padding: 0 15px;
+                p{
+                    font-weight: normal;
                 }
             }
         }
@@ -2754,10 +2764,19 @@ background: #ccc;
         }
     }   
 }
-@media screen and (max-width:767px)
+@media screen and (max-width:992px)
 {
     body.padding-top {padding-top: 4.6rem !important;}
     .main-slider-container {
+        .left-slide-content 
+        {
+            h1{
+                min-height: 70px;
+            }
+            p{
+                min-height: 160px;
+            }
+        }
         .main-slider-img {
             img {
                 border: 5px solid $whiteColor;
@@ -2766,9 +2785,51 @@ background: #ccc;
         }
         .slider-dots{left:4px;}
     }
+    .event-main-container
+    {
+        .event-box-container {
+            padding:0 14% 5%;
+            a.event-box{
+                min-width: 300px;
+            }
+        }
+    }
+    .latest-articles-section {
+        .big-article-container
+        {
+            h4
+            {
+                font-size: 1.5rem;
+                line-height: 25px;
+                margin: 15px 0;
+            }
+        } 
+        .small-article-container {
+            .small-article-box {
+                flex-direction: row;
+                display: flex;
+                gap: 15px;
+                .small-art-img
+                {
+                    max-width: 100px;
+                }
+                .small-art-content-cont 
+                {
+                    h4
+                    {
+                        font-size: 1.2rem;
+                        line-height: 20px;
+                    }
+                }
+                
+            }
+        }
+    }
+    
     .certificate-common-box{
-        //display: none;
         min-height: 345px !important;
+        max-width: 350px;
+        margin:0 auto;
         &.mobile-show{
             display: block;
         }
@@ -2778,11 +2839,16 @@ background: #ccc;
     }
     .our-services-new-section {
         .ourservices-box {
-            width: 85%;
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
             .ourservices-content-container {
                 p {
                     max-width: 380px;
                     min-height: 240px;
+                }
+                button{
+                    max-width: 210px;
                 }
             }
         }
@@ -2798,11 +2864,365 @@ background: #ccc;
                     padding: 0 10px;
                     width: 100%;
                     max-width: 340px;
+                }                
+            }
+        }
+    }
+    .common-modal-content, .gallery-modal {
+        width: 95% !important;
+    }
+    .achievements-container {
+        .achievement-content
+        {
+            margin-bottom: 30px;
+            h3
+            {
+                margin-bottom: 0;
+            }
+        } 
+        .achievement-numbers {
+            flex-direction: row;
+            flex-wrap: wrap;
+            .achievement-num-container {
+                width: 45%;
+                max-width: 100%;
+                justify-content: start;
+                align-items: center;
+                display: flex;
+                h2{
+                    font-size: 2.5rem;
+                    margin:0 0 10px;
+                }
+                p{
+                    font-size: 1.2rem;
                 }
             }
         }
     }
-    .common-modal-content, .gallery-modal {width: 95% !important;}    
-    .achievements-container .achievement-numbers{flex-direction: row;flex-wrap: wrap;}
-    .achievements-container .achievement-numbers .achievement-num-container {max-width: 168px;}
+    .gallery-section {
+        .gallery-inner-section {           
+            .container {
+                .image-gallery-text {
+                    align-items: center;
+                    h2{
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    
+    .tool-section {
+        .tool-content {
+            h2 {
+                font-size: 1.5rem;
+                line-height: 30px;
+            }
+        }
+        .tool-white-container {
+            flex-wrap: wrap;
+            flex-direction: row;
+            .tool-box {
+                padding: 5px;
+                max-width:100%;
+                flex-direction: row;
+                gap: 9px;
+                border: none;
+                width: 45%;
+                justify-content: center;
+                h2 {
+                    font-size: 1.2rem;
+                    max-width: 145px;
+                    line-height: 25px;
+                    min-height: 45px;
+                    display: flex;
+                    align-items: center;
+                }
+                .tool-links {
+                    a {
+                        display: flex;
+                        align-items: center;
+                        gap: 15px;
+                        font-size: 1rem;
+                        img {
+                            width: 25px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .footer {
+        .footer-bottom-cont {
+            display: flex;
+            flex-direction: column-reverse;
+            .footer-copyright {
+                .footer-copy-text {
+                    color: #fff;
+                    font-size: 1.2rem;
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+            span#iasBadge {
+                position: relative;
+                top:-10px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+
+    // about us page css
+    .slider-full-width {
+        padding: 2% 0;
+        img
+        {
+            padding:5px;
+        }
+    }
+    .page-content-container {
+        padding: 5%;
+        h2{
+            font-size: 2rem;
+            line-height: 40px;
+        }
+    }
+    .our-offices-main-cont {
+        flex-direction: column;
+        .office-tab-list {
+            flex-direction: column;
+		    height: auto;
+		    min-height: initial;
+            max-width: 100%;
+            h4.tablist-heading{display:none;}
+            .office-tab-scroller {
+                flex-direction: row;
+                max-height:initial;
+                overflow: auto;
+            }
+        }
+        .office-tab-content {
+            margin: 0px;
+            flex-direction: column;
+            width: 100%;
+            .office-left-content {
+                padding: 15px;
+                width: 100%;
+                .office-content-top
+                {
+                    margin:0px;
+                }
+            }
+            .office-iframe-cont
+            {
+                width: 100%;
+                min-height: 350px;
+                iframe{
+                    min-height:350px;
+                }
+            }
+
+        }
+    }
+
+    // contact us page css
+    .form-slider-container {
+        padding: 36px 5%;
+        .left-slideform {
+            padding: 2%;
+            margin: 55px 0 0;
+            h1{
+                font-size: 2rem;
+            }
+            p {
+                font-size: 1.3rem;
+            }
+        }
+        .form-slider-img {
+            border: 10px solid #f1f1f1;
+            border-radius: 10px;
+            min-height: inherit;
+            padding: 5px;
+        }
+    }
+    .hotline-section {
+        padding: 55px 15px;
+        .hotline-inner-container
+        {
+            flex-direction: column-reverse;
+        }
+        ul {
+            &.hotlineicons {
+                li {
+                    img {
+                        width: 25px;
+                        height: 25px;
+                    }
+                }
+            }
+        }
+    }
+
+    // content tab css
+    .content-tab-mobile {
+        padding: 0 5%;
+        .content-tab-list {
+            background: #f1f1f1;
+            padding: 0 15px;
+            border-radius: 15px;
+            border: none;
+            margin: 0 0 10px;
+            h3 {
+                &.flex {
+                    button {
+                        font-weight: bold;
+                        font-size: 1rem;
+                    }
+                }
+            }
+            .tab-content
+            {
+                padding:10px 0;
+                h2{
+                    font-size:1.8rem;
+                    line-height:30px;
+                    font-weight: 800;
+                    color:$blackColor;
+                }
+                p{
+                    font-size: 1.2rem;
+                    line-height: 26px;
+                    margin:10px 0 20px;
+                }
+                img{
+                    width: 100%;
+                    box-shadow: 0 0px 5px $bgGrayLight;
+                    border: 15px solid $whiteColor;
+                }
+                h3{
+                    font-size: 1.5rem;
+                    font-weight: 800;
+                    color:$blackColor;
+                    margin: 10px 0;
+                }
+                ul{
+                    list-style-type: disc;
+                    list-style-position: outside;
+                    padding: 0 0 0 20px;
+                li{
+                    padding:10px 0 0 5px;
+                }
+                }
+            }
+        }
+    }
+
+    // investore page css
+    .investor-container {
+        padding: 5%;        
+        .investor-grid-container {
+            grid-template-columns: 90%;
+        }
+        .inverstor-content {
+            h2 {
+                font-size:2rem;
+                line-height: 2rem;
+            }
+        }
+    }
+    .borad-director-section {
+        padding: 0 5%;
+        h1{
+            font-size: 2rem;
+        }
+        .director-full-bg{
+            margin: 5% 0;
+            .director-section {
+                flex-direction: column-reverse;
+                gap: 25px;
+                .left-content
+                {
+                    width: 90%;
+                    padding: 0;
+                }
+                .right-img
+                {
+                    width: 90%;
+                }
+            }
+        }
+    }
+    .committee-board-section {
+        .container {
+            padding: 0 5%;
+            h1{
+                font-size: 2rem;
+                text-align: center;
+            }
+        }
+        .committee-table th, .committee-table td {
+            font-size: 1rem;
+            line-height: 20px;
+            border: 1px solid #ccc;
+        }
+    }
+    .shareholder-container {
+        padding: 7% 5%;
+    }
+    
+    // coaching mediums section
+    .our-coaching-mediums {
+        flex-wrap: nowrap;
+        overflow: auto;
+        padding: 0 2% 10%;
+        .coaching-medium-box {
+            width: 100%;
+            min-width: 290px;
+        }
+    }
+
+    .immigration-visa-cont {
+        .container {
+            .visa-slider {
+                .visa-item {
+                    .visa-item-links {
+                        width: 90%;
+                        min-height: 160px;
+                        min-width: 110px;
+                        img.visa-flag-icon
+                        {
+                            width:50px;
+                            height:50px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // commom coaching courses
+    .common-courses {
+        .container
+        {
+            padding: 6% 0;
+            .form-middle-container {
+                width: 90%;
+                form {
+                    width: 100%;  
+                }
+                .common-button-rows
+                {
+                    width: 100%;
+                }
+            }
+        }        
+    }
+    
+
+    // all modal 
+    div[role="dialog"] {
+        max-width: 95%;
+    }
 }

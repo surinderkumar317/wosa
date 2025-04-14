@@ -27,9 +27,9 @@ const OurOffices: React.FC = () => {
         ))}
       </div>
       <div className="our-branch-offices">
-        <Tabs defaultValue="branch-one" className="w-full flex">
+        <Tabs defaultValue="branch-one" className="w-full flex our-offices-main-cont">
           <TabsList className="office-tab-list w-1/4">
-            <h4>Our Offices</h4>
+            <h4 className="tablist-heading">Our Offices</h4>
             <div className="office-tab-scroller scroll-y">
               <TabsTrigger value="branch-one">Ambala</TabsTrigger>
               <TabsTrigger value="branch-two">Amritsar</TabsTrigger>

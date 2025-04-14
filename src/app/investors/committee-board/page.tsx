@@ -19,7 +19,7 @@ const page = () => {
         <h2 className="font-bold text-xl">Audit Committee</h2>
         <p>The Audit committee comprises of the following:</p>
 
-        <Table className="border mt-5">
+        <Table className="border mt-5 committee-table">
           <TableHeader>
             <TableRow className="bg-gray-100">
               <TableHead className="text-xl font-bold text-black">Name of the Directors</TableHead>
@@ -51,7 +51,7 @@ const page = () => {
         <h2 className="font-bold text-xl">Stakeholders’ Relationship Committee</h2>
         <p>The Stakeholder’s Relationship Committee comprises of the following:</p>
 
-        <Table className="border mt-5">
+        <Table className="border mt-5 committee-table">
           <TableHeader>
             <TableRow className="bg-gray-100">
               <TableHead className="text-xl font-bold text-black">Name of the Directors</TableHead>
@@ -83,7 +83,7 @@ const page = () => {
         <h2 className="font-bold text-xl">Nomination and Remuneration Committee</h2>
         <p>The Nomination and Remuneration Committee comprises of the following:</p>
 
-        <Table className="border mt-5">
+        <Table className="border mt-5 committee-table">
           <TableHeader>
             <TableRow className="bg-gray-100">
               <TableHead className="text-xl font-bold text-black">Name of the Directors</TableHead>

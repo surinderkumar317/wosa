@@ -55,7 +55,14 @@ const testimonials: Testimonial[] = [
 
 const TestimonialsSlider: React.FC = () => {
   const autoplayInstance = useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplayInstance.current]);
+  const [emblaRef, emblaApi] = useEmblaCarousel
+  ({ 
+    loop: true,
+    align: "start",
+    containScroll: "trimSnaps",
+    slidesToScroll: 1,
+
+  }, [autoplayInstance.current]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [selectedTestimonial, setSelectedTestimonial] = useState<Testimonial | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
@@ -109,7 +116,7 @@ const TestimonialsSlider: React.FC = () => {
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="embla__slide flex-shrink-0 lg:w-1/3 px-4 pt-10 pb-10 w-full cursor-pointer"
+                className="embla__slide px-4 pt-10 pb-10 w-full cursor-pointer flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] testimonail-boxs-holder"
                 onClick={() => openModal(testimonial)}
               >
                 <Card className="testimonials-box w-full bg-white p-4 rounded-lg shadow-md">

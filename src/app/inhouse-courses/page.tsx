@@ -198,7 +198,7 @@ const OnlineCourse = () => {
                   />
                 </form>
                 {selectedBranch && (
-                  <div className="flex justify-end w-1/2 m-auto">
+                  <div className="flex !justify-end w-1/2 m-auto common-button-rows">
                     <Button onClick={handleNext} className="mt-4 !px-8">
                       Next
                     </Button>

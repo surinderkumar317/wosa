@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/sheet";
 import Complaints from "../auth/ComplaintModal";
 import Feedback from "../auth/FeedbackModal";
+import Register from "../auth/Register";
 
 interface IMenuItem {
   title: string;
@@ -210,11 +211,14 @@ const Navbar: React.FC = () => {
               </li>
             </ul>
             <ul className="mobile-login-register">
-              <li>
-                {/* <TimeZone /> */}
+              <li className="m-timezone-list">
+                <TimeZone />
               </li>
               <li className="m-login-register">
                 <Login />
+              </li>
+              <li className="m-login-register">
+                <Register />
               </li>
               <li>
                 <Complaints />

@@ -61,8 +61,8 @@ const hotlineContent: HotlineData = {
 const HotLineServices = () => {
     return (
         <div className='hotline-section py-24'>
-            <div className='container flex lg:flex-row flex-col m-auto'>
-                <div className='w-3/4'>
+            <div className='container flex lg:flex-row flex-col m-auto hotline-inner-container'>
+                <div className='lg:w-3/4 md:w-full sm:w-full'>
                     <h2>{hotlineContent.Heading}</h2>
                     <p>{hotlineContent.ParagraphContent}</p>
                     <ul className="hotlineicons">
@@ -80,7 +80,7 @@ const HotLineServices = () => {
                         ))}
                     </ul>
                 </div>
-                <div className='w-1/4'>
+                <div className='lg:w-3/4 md:w-full sm:w-full p-1'>
                     {hotlineContent.image.map((image, imgIdx) => (
                         <CommonImage
                             key={imgIdx}

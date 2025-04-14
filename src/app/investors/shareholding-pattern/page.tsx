@@ -4,7 +4,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="investor-container py-24">
+    <div className="investor-container shareholder-container py-24">
       <div className="container m-auto">
         <div className="inverstor-content">
           <h2>Shareholding Pattern</h2>

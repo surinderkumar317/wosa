@@ -90,7 +90,6 @@ const items: ServiceItem[] = [
     buttonImage: "/images/our-services-arrow.webp",
     link: "/dependent-visa",
   },
-
   
 ];
 
@@ -178,7 +177,7 @@ const OurservicesSlider: React.FC = () => {
             {items.map((item, index) => (
               <div
                 key={index}
-                className="embla__slide flex-shrink-0 lg:w-1/3 px-4 pt-10 pb-10 sm:w-full"
+                className="embla__slide px-4 pt-10 pb-10 flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%]"
               >
                 <Link href={item.link} className="no-underline">
                   <Card className="border p-3 bg-white shadow-lg rounded-md ourservices-box">

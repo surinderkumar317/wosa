@@ -52,12 +52,12 @@ const EventList = () => {
   return (
     <div className="event-list py-5">
       {/* Events Listing */}
-      <div className="courses-box-container flex gap-4 mt-10">
+      <div className="courses-box-container event-box-container flex gap-4 mt-10">
         {eventItems.map((eventItem) => (
           <Link
             key={eventItem.id}
             href={eventItem.link}
-            className="no-underline w-1/3"
+            className="no-underline w-1/3 event-box"
           >
             <Card className="courses-box w-full p-4 rounded-xl border bg-card shadow">
               <CardContent className="webmedia-box p-0">

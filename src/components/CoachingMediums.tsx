@@ -54,7 +54,7 @@ const CoachingMediums: React.FC = () => {
 
         <div className="our-coaching-mediums our-services-new-section flex gap-10">
           {coachingMediums.map((medium) => (
-            <Link key={medium.id} href={medium.link} className="no-underline w-2/6">
+            <Link key={medium.id} href={medium.link} className="no-underline w-2/6 coaching-medium-box">
               <Card className="border p-3 bg-white shadow-lg rounded-md ourservices-box">
                 <CardContent className="p-0">
                   <CommonImage

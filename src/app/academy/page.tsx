@@ -16,7 +16,7 @@ const ImageGallery = dynamic(() => import("@/components/imagesgallery/ImageGalle
 const LanguageCourses = dynamic(() => import("@/components/LanguageCourses"), {
   loading: () => <Loading />,
 });
-const Testimonials = dynamic(() => import("@/components/Testimonials"), {
+const Testimonials = dynamic(() => import("@/components/testimonials/Testimonials"), {
   loading: () => <Loading />,
 });
 

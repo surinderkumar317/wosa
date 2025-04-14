@@ -38,7 +38,7 @@ const VideoGallery = dynamic(
   () => import("@/components/videogallery/VideoGallery"),
   { loading: () => <Loading /> }
 );
-const Testimonials = dynamic(() => import("@/components/Testimonials"), {
+const Testimonials = dynamic(() => import("@/components/testimonials/Testimonials"), {
   loading: () => <Loading />,
 });
 const Accolades = dynamic(() => import("@/components/Accolades"), {

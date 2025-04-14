@@ -128,11 +128,11 @@ const ContantTabs: React.FC = () => {
 
       {/* Accordion - Visible only on mobile screens */}
       <div className="md:hidden">
-        <Accordion type="single" collapsible>
+        <Accordion type="single" collapsible className="content-tab-mobile">
           {tabData.map((tab) => (
-            <AccordionItem key={tab.id} value={tab.id}>
+            <AccordionItem key={tab.id} value={tab.id} className="content-tab-list">
               <AccordionTrigger>{tab.title}</AccordionTrigger>
-              <AccordionContent>{tab.content}</AccordionContent>
+              <AccordionContent className="tab-content">{tab.content}</AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
