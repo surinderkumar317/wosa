@@ -23,7 +23,7 @@ const Announcements = () => {
             <Accordion type="single" collapsible className="mb-3">
               <AccordionItem value="item-1">
                 <AccordionTrigger className="announcement-accordion justify-between gap-5 bg-gray-100 p-2">
-                  <p className="p-0 flex gap-3 items-center text-[18px]">
+                  <p className="p-0 flex gap-3 items-center text-[18px] announcement-accordian">
                     <strong className="bg-yellow-300 p-3">
                       02/04/2025 03:07 PM
                     </strong>
@@ -39,7 +39,7 @@ const Announcements = () => {
             <Accordion type="single" collapsible className="mb-3">
               <AccordionItem value="item-1">
                 <AccordionTrigger className="announcement-accordion justify-between gap-5 bg-gray-100 p-2">
-                  <p className="p-0 flex gap-3 items-center text-[18px]">
+                  <p className="p-0 flex gap-3 items-center text-[18px] announcement-accordian">
                     <strong className="bg-yellow-300 p-3">
                       02/04/2025 03:07 PM
                     </strong>

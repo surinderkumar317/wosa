@@ -15,11 +15,11 @@ const page = () => {
 
   return (
     <div className="dashboard-section py-20">
-      <div className="container m-auto flex gap-8">
+      <div className="container m-auto flex gap-8 dashboard-inner-section">
         <div className="w-1/6 user-left-section rounded-sm">
            <ClassroomSidebarMenu/>
         </div>
-        <div className="w-5/6">           
+        <div className="w-5/6 user-right-section">           
            <FullClassSchedule/>
         </div>
       </div>

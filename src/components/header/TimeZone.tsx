@@ -46,6 +46,7 @@ const formatTimezoneOffset = (timezone: string): string => {
 export default function CountryTimeSelector() {
   const [selectedTimezone, setSelectedTimezone] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
+  const [isInitialSelection, setIsInitialSelection] = useState(true);
 
   // Show modal only if not selected before
   useEffect(() => {
@@ -62,6 +63,7 @@ export default function CountryTimeSelector() {
   const handleSelect = (value: string) => {
     setSelectedTimezone(value);
     localStorage.setItem("selected-timezone", value);
+    setIsInitialSelection(false);
     setOpen(false);
   };
 
@@ -71,9 +73,11 @@ export default function CountryTimeSelector() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="w-full max-w-[700px] px-10 pt-15">
           <DialogHeader>
+          {isInitialSelection && (
             <h2 className="text-2xl font-bold text-center w-full my-6">
               Hi! There are multiple time zones in your country. Please select one to continue.
             </h2>
+            )}
             <DialogTitle className="!font-normal mt-7">Select Your Country</DialogTitle>
           </DialogHeader>
           <div className="w-full flex flex-col pb-5">

@@ -47,7 +47,7 @@ const StudentRequest: React.FC = () => {
 
       <div className="mock-card-container mt-5 flex flex-wrap gap-3">
         {studentRequests.map((request) => (
-          <Card key={request.id} className="w-[49%] min-h-[250px] relative">
+          <Card key={request.id} className="w-[49%] min-h-[250px] relative mocktest-box">
             <CardHeader className="pb-2">
               <CardTitle>Request ID: {request.title}</CardTitle>
               <CardDescription></CardDescription>

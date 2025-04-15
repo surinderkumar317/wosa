@@ -1,12 +1,14 @@
 "use client"
 import React, { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation"; // Import this
 import CommonImage from "../common/Image";
 import { Button } from "../ui/button";
 import WalletInfoModal from "./WalletInfoModal";
 import SwitchClassroom from "./SwitchClassroom";
 
 const SidebarMenu = () => {
+  const pathname = usePathname(); // Get the current path
   const [open, setOpen] = useState(false);
   const [isSwitchClassroomOpen, setIsSwitchClassroomOpen] = useState(false);
 
@@ -20,10 +22,12 @@ const SidebarMenu = () => {
     setIsSwitchClassroomOpen(false);
   };
 
+  const isActive = (path: string) => pathname === path;
+
   return (
     <div className="sidebar-navigation">
       <ul className="flex flex-col gap-2">
-        <li>
+        <li className={isActive("/student-dashboard") ? "active" : ""}>
           <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
             <Link href="/student-dashboard">
               <CommonImage
@@ -37,7 +41,7 @@ const SidebarMenu = () => {
             </Link>
           </Button>
         </li>
-        <li>
+        <li className={isActive("/student-dashboard") ? "active" : ""}>
           <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
             <Link href="/student-dashboard">
               <CommonImage
@@ -54,7 +58,7 @@ const SidebarMenu = () => {
         <li>
           <WalletInfoModal open={open} setOpen={setOpen} />
         </li>        
-        <li>
+        <li className={isActive("/student-dashboard/orders") ? "active" : ""}>
           <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
             <Link href="/student-dashboard/orders">
               <CommonImage
@@ -99,7 +103,7 @@ const SidebarMenu = () => {
             </Link>
           </Button>
         </li>
-        <li>
+        <li className={isActive("/student-dashboard/mock_test_reports") ? "active" : ""}>
           <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
             <Link href="/student-dashboard/mock_test_reports">
               <CommonImage
@@ -113,7 +117,7 @@ const SidebarMenu = () => {
             </Link>
           </Button>
         </li>
-        <li>
+        <li className={isActive("/student-dashboard/reality_test_bookings") ? "active" : ""}>
           <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
             <Link href="/student-dashboard/reality_test_bookings">
               <CommonImage
@@ -127,7 +131,7 @@ const SidebarMenu = () => {
             </Link>
           </Button>
         </li>
-        <li>
+        <li className={isActive("/student-dashboard/exam_bookings") ? "active" : ""}>
           <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
             <Link href="/student-dashboard/exam_bookings">
               <CommonImage
@@ -141,7 +145,7 @@ const SidebarMenu = () => {
             </Link>
           </Button>
         </li>
-        <li>
+        <li className={isActive("/student-dashboard/event_bookings") ? "active" : ""}>
           <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
             <Link href="/student-dashboard/event_bookings">
               <CommonImage
@@ -155,7 +159,7 @@ const SidebarMenu = () => {
             </Link>
           </Button>
         </li>
-        <li>
+        <li className={isActive("/student-dashboard/student_requests") ? "active" : ""}>
           <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
             <Link href="/student-dashboard/student_requests">
               <CommonImage
@@ -169,7 +173,7 @@ const SidebarMenu = () => {
             </Link>
           </Button>
         </li>
-        <li>
+        <li className={isActive("/student-dashboard/complaints") ? "active" : ""}>
           <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
             <Link href="/student-dashboard/complaints">
               <CommonImage

@@ -156,12 +156,12 @@ const Testimonials: React.FC = () => {
           <h1 className="text-center">Testimonials</h1>
           <div className="webmeida-filter-box p-6 bg-white mt-5">
             <Form {...form}>
-              <form className="flex gap-5">
+              <form className="flex gap-5 testimonial-form-box">
                 <FormField
                   control={form.control}
                   name="search"
                   render={({ field }) => (
-                    <FormItem className="w-1/3">
+                    <FormItem className="w-1/3 testimonial-form-row">
                       <FormControl>
                         <Input placeholder="Search" {...field} />
                       </FormControl>
@@ -173,7 +173,7 @@ const Testimonials: React.FC = () => {
                   control={form.control}
                   name="webcategory"
                   render={({ field }) => (
-                    <FormItem className="w-1/3">
+                    <FormItem className="w-1/3 testimonial-form-row">
                       <FormControl>
                         <Select
                           onValueChange={field.onChange}
@@ -201,7 +201,7 @@ const Testimonials: React.FC = () => {
                   control={form.control}
                   name="uploadTime"
                   render={({ field }) => (
-                    <FormItem className="w-1/3">
+                    <FormItem className="w-1/3 testimonial-form-row">
                       <FormControl>
                         <Select
                           onValueChange={field.onChange}
@@ -257,7 +257,7 @@ const Testimonials: React.FC = () => {
         <div className="testimonial-grid relative">
           {filteredTestimonials.length > 0 ? (
             filteredTestimonials.slice(0, visibleCount).map((testimonial, index) => (
-              <Card className="mb-10" key={index}>
+              <Card className="mb-10 testimonial-items" key={index}>
                 <CardContent className="p-[25px] flex flex-col items-center">
                   <CommonImage
                     src={testimonial.image}

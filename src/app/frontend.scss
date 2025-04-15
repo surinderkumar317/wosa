@@ -1728,7 +1728,7 @@ input::placeholder {
             box-shadow: 0px 2px 10px 4px #ccc;
             position: relative;
             background: #fff;
-            min-height: 420px;
+            min-height:450px;
             .coaching-text{
                 z-index: 9;
             }
@@ -1973,8 +1973,7 @@ input::placeholder {
     }
     .office-tab-list {
         display: flex;
-        width: 100%;
-        max-width: 381px;
+        width:20%;
         border-radius: 0;
         background:$darkBlueColor;
         flex-direction: column;
@@ -2277,6 +2276,21 @@ background: #ccc;
     display: none;
 }
 
+.sidebar-navigation
+{
+    ul 
+    {
+        li{
+            &.active{
+                a{
+                    background:$bgGrayLight;
+                    color:$redColor;
+                }
+            }
+        }
+    }
+}
+
 .announcement-marquee-container {
     overflow: hidden;
     white-space: nowrap;
@@ -2414,6 +2428,34 @@ background: #ccc;
     }
 
 // responsive css
+@media screen and (min-width:1921px) and (max-width:5000px)
+{
+    .main-slider-container {
+        .left-slide-content {
+            h1 {
+                font-size: 3vw;
+            }
+            p{
+                font-size: 1.6vw;
+                line-height: 2vw;
+            }
+        }
+    }
+    .form-slider-container
+    {
+        .left-slideform
+        {
+            h1 {
+                font-size: 3vw;
+            }
+            p{
+                font-size: 1.6vw;
+                line-height: 2vw;
+            }
+        }
+    }
+    
+}
 @media screen and (max-width:1536px)
 {
     body.padding-top {padding-top: 6rem !important;}
@@ -2788,7 +2830,8 @@ background: #ccc;
     .event-main-container
     {
         .event-box-container {
-            padding:0 14% 5%;
+            padding:0 10% 5%;
+            gap: 10px;
             a.event-box{
                 min-width: 300px;
             }
@@ -3220,6 +3263,337 @@ background: #ccc;
         }        
     }
     
+    .common-courses
+    {
+        .courses-box-container {
+            flex-direction: row;
+            flex-wrap: nowrap;
+            overflow: auto;
+            padding-bottom: 20px;
+            .common-coaching-box {
+                width: 100%;
+                min-width: 290px;
+                margin: 0 3%;
+                .courses-btn-box {
+                    flex-direction: column;
+                }
+            }
+        }
+        .advanced-form {
+            flex-direction: column;
+        }
+        ul.branches-course-list
+        {
+            gap: 5px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .form-slider-container.form-banner {
+        .form-slider-img {
+            .coaching-text {
+                z-index: 9;
+                position: relative;
+            }
+        }
+        .pricebanner-img
+        {
+            position: relative;
+        }
+    }
+    
+    // reality test page css
+    .webmeida-filter-box
+    {
+        margin: 0 3%;
+        .reality-test-from {
+            flex-direction: column;
+            .reality-form-row
+            {
+                width: 100%;
+            }
+        }
+    }
+    .reality-test-container {
+        flex-wrap: nowrap;
+        overflow: auto;
+        gap: 5px;
+        .reality-test-box {
+            width: 100%;
+            min-width: 300px;
+            margin: 0 3%;
+            padding-bottom: 5%;
+        }
+    }
+
+    // event page css
+    .event-container
+    {
+        .webmeida-filter-box
+        {
+            margin: 0 3%;
+            padding: 0px;
+            .upcoming-event-form {
+                flex-direction: column;
+                .event-form-row
+                {
+                    width: 100%;
+                }
+            }
+        }
+
+        .event-container {
+            flex-wrap: nowrap;
+            overflow: auto;
+            gap: 5px;
+            justify-content: start;
+            padding-bottom: 20px;
+            .event-box {
+                width: 100%;
+                min-width: 300px;
+                margin: 0 3%;
+                padding-bottom: 5%;
+            }
+        }
+    }
+    
+    // international-english-language-telent-hunt page css
+    .talenthunt-container
+    {
+        .container
+        {
+            padding: 0 5%;
+        }
+    }
+
+    // e-ticketing page css
+    .eticketing-container
+    {
+        .container
+        {
+            padding: 0 5%;
+        }
+    }
+
+    // forex page css
+    .forex-container
+    {
+        .container
+        {
+            padding: 0 5%;
+        }
+    }
+
+    // article page css
+    .blog-post-container
+    {
+        h2{
+            font-size:1.3rem;
+        }
+        h1{
+            font-size: 1.5rem;
+        }
+        .tab-article-container {
+            margin: 10px 5% !important;
+            ul{
+                flex-direction: column;
+                li{
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+    
+    // web-media page css
+    .web-media-container
+    {
+        .webmeida-filter-box
+        {
+            margin: 0 3%;
+            padding: 0px;
+            .webmedia-form {
+                flex-direction: column;
+                padding:5%;
+                .webmedia-form-row
+                {
+                    width: 100%;
+                }
+            }
+        }
+        .webmedia-boxes-cont {
+            grid-template-columns:100%;
+            margin: 0 5%;            
+        }
+    }
+
+    // testimonial page css
+    .testimonials-container
+    {
+        .webmeida-filter-box
+        {
+            margin: 0 3%;
+            padding: 0px;
+            .testimonial-form-box {
+                flex-direction: column;
+                padding:5%;
+                .testimonial-form-row
+                {
+                    width: 100%;
+                }
+            }
+        }
+
+        .testimonial-grid
+        {
+            grid-template-columns: 100%;
+            margin: 0 5%;
+            gap: 5px;   
+        }
+    }
+
+    // faq page css
+    .faq-container
+    {
+        .webmeida-filter-box
+        {
+            margin: 0 3%;
+            padding: 0px;
+            .faq-form-box {
+                flex-direction: column;
+                padding:5%;
+                .faq-form-row
+                {
+                    width: 100%;
+                }
+            }
+        }
+        .faq-accordian-container {
+            padding: 0 6%;
+        }
+       
+    }
+
+    // testimonials page css
+    .term-condition-section
+    {
+        .container
+        {
+            padding: 0 5%;
+        }
+    }
+    
+    // mobile navigation css
+    .mobile-list
+    {
+        li {
+            a
+            {
+                font-weight: bold;
+                font-size: 1.1rem;
+
+            }
+            ul.mobile-subdropdowns
+            {
+                li {
+                    a{
+                        font-weight: normal;
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }  
+    }
+
+    // dashboard css
+    .dashboard-section
+    {
+        padding:5% 0;
+        .dashboard-inner-section
+        {
+            flex-direction: column;
+            padding:0 5%;
+            .user-left-section, .user-right-section
+            {
+                width: 100%;
+            }
+            .user-right-section
+            {
+                .dashboard-main-cont
+                {
+                    .dashboard-grid
+                    {
+                        .dashboard-boxes
+                        {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+
+            .view-profile-form
+            {
+                .view-profile-row
+                {
+                    flex-direction: column;
+                }
+            }
+
+            .student-request-cont
+            {
+                .dash-header
+                {
+                    flex-direction: column;
+                }
+            }
+
+            .reality-box, .mocktest-box, .exambooking-box, .event-booking {
+                width:100%;
+            }
+            .stu-classroom-row-content .full-class-room, .stu-classroom-row-content .recorded-box, .stu-classroom-row-content .classroom-matrial {
+                width:100%;
+            }
+
+            .full-class-sch-form
+            {
+                flex-direction: column;
+                .full-class-row
+                {
+                    width: 100%;
+                }
+            }
+            .stu-classroom-header {
+                flex-direction: column;
+            }
+            .announcement-accordian {
+                flex-direction: column;
+                align-items: start;
+                width: 100%;
+                strong{
+                    padding: 5px;
+                    font-size: 13px;
+                }
+                span{
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+
+            .sidebar-navigation {
+                li {
+                    a {
+                        font-size: 0.9rem;
+                    }
+                    button{
+                        font-size: 0.9rem;
+                    }
+                }
+            } 
+            .profile-list li button {
+                font-size: 0.9rem;
+            }
+        }
+    }
 
     // all modal 
     div[role="dialog"] {

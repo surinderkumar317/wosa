@@ -198,7 +198,7 @@ const OnlineCourse = () => {
                   />
                 </form>
                 {selectedCourse && (
-                  <div className="flex justify-end w-1/2 m-auto">
+                  <div className="flex !justify-end w-1/2 m-auto common-button-rows">
                     <Button onClick={handleNext} className="mt-4 !px-8">
                       Next
                     </Button>
@@ -327,7 +327,7 @@ const OnlineCourse = () => {
           {showAdvancedForm && (
             <Form {...form}>
               <form className="flex flex-col gap-10">
-                <div className="flex gap-5 mt-10">
+                <div className="flex gap-5 mt-10 advanced-form">
                   <FormField
                     control={form.control}
                     name="moduleType"

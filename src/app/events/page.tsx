@@ -173,13 +173,13 @@ const Events: React.FC = () => {
                 <div className="form-holder">
                   <div className="webmeida-filter-box p-6 mt-5">
                     <Form {...form}>
-                      <form className="flex gap-5">
+                      <form className="flex gap-5 upcoming-event-form">
                         {/* Search Input */}
                         <FormField
                           control={form.control}
                           name="search"
                           render={({ field }) => (
-                            <FormItem className="w-1/3">
+                            <FormItem className="w-1/3 event-form-row">
                               <FormControl>
                                 <Input
                                   placeholder="Search by Title or Venue"
@@ -196,7 +196,7 @@ const Events: React.FC = () => {
                           control={form.control}
                           name="eventType"
                           render={({ field }) => (
-                            <FormItem className="w-1/3">
+                            <FormItem className="w-1/3 event-form-row">
                               <FormControl>
                                 <Select
                                   onValueChange={(value) =>
@@ -226,7 +226,7 @@ const Events: React.FC = () => {
                           control={form.control}
                           name="date"
                           render={({ field }) => (
-                            <FormItem className="w-1/3">
+                            <FormItem className="w-1/3 event-form-row">
                               <FormControl>
                                 <Popover>
                                   <PopoverTrigger asChild>
@@ -270,12 +270,12 @@ const Events: React.FC = () => {
               </div>
 
               {/* Events Listing */}
-              <div className="courses-box-container flex flex-wrap gap-4 mt-10 justify-center">
+              <div className="courses-box-container event-container flex flex-wrap gap-4 mt-10 justify-center">
                 {filteredEvents.length > 0 ? (
                   filteredEvents.slice(0, visibleItems).map((eventItem) => (
                     <Card
                       key={eventItem.id}
-                      className="courses-box w-[23%] p-4 rounded-xl border bg-card shadow"
+                      className="courses-box event-box w-[23%] p-4 rounded-xl border bg-card shadow"
                     >
                       <CardContent className="webmedia-box p-0">
                         <Link href={eventItem.link} className="no-underline">

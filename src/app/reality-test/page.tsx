@@ -109,12 +109,12 @@ const RealityTest: React.FC = () => {
           <h1 className="text-center">Reality Test</h1>
           <div className="webmeida-filter-box p-6 bg-white mt-5">
             <Form {...form}>
-              <form className="flex gap-5">
+              <form className="flex gap-5 reality-test-from">
                 <FormField
                   control={control}
                   name="testType"
                   render={({ field }) => (
-                    <FormItem className="w-1/3">
+                    <FormItem className="w-1/3 reality-form-row">
                       <FormControl>
                         <Select
                           onValueChange={field.onChange}
@@ -139,7 +139,7 @@ const RealityTest: React.FC = () => {
                   control={control}
                   name="date"
                   render={({ field }) => (
-                    <FormItem className="w-1/3">
+                    <FormItem className="w-1/3 reality-form-row">
                       <FormControl>
                         <Popover>
                           <PopoverTrigger asChild>
@@ -172,7 +172,7 @@ const RealityTest: React.FC = () => {
                   control={control}
                   name="branch"
                   render={({ field }) => (
-                    <FormItem className="w-1/3">
+                    <FormItem className="w-1/3 reality-form-row">
                       <FormControl>
                         <Select
                           onValueChange={field.onChange}
@@ -215,9 +215,9 @@ const RealityTest: React.FC = () => {
       </div>
 
       <div className="container m-auto py-10">
-        <div className="courses-box-container flex flex-wrap gap-4">
+        <div className="courses-box-container reality-test-container flex flex-wrap gap-4">
           {filteredTests.slice(0, visibleCount).map((test, index) => (
-            <div key={index} className="w-[24%]">
+            <div key={index} className="w-[24%] reality-test-box">
               <Link href={test.link} className="no-underline">
                 <Card className="courses-box p-4 rounded-xl border bg-card shadow">
                   <CardContent className="p-0">

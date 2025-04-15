@@ -106,7 +106,7 @@ const EventList = () => {
 
       <div className="flex justify-center mt-10">
         <Button className="event-button flex justify-center mb-12" asChild>
-          <Link href="/post">
+          <Link href="/events">
             View All{" "}
             <CommonImage
               classname={"arrow"}

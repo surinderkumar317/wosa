@@ -14,11 +14,11 @@ const StudentRequest = dynamic(() => import("@/components/dashboard/StudentReque
 const page = () => {
   return (
     <div className="dashboard-section py-20">
-      <div className="container m-auto flex gap-8">
+      <div className="container m-auto flex gap-8 dashboard-inner-section">
         <div className="w-1/6 user-left-section rounded-sm p-5">
           <SidebarMenu />
         </div>
-        <div className="w-5/6">
+        <div className="w-5/6 user-right-section">
             <StudentRequest/>
         </div>
       </div>

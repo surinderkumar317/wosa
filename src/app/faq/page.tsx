@@ -79,9 +79,9 @@ const FAQ: React.FC = () => {
           <h1 className="text-center">FAQ&apos;S</h1>
           <div className="webmeida-filter-box p-6 bg-white mt-5">
             <Form {...form}>
-              <form className="flex gap-5">
+              <form className="flex gap-5 faq-form-box">
                 <FormField control={form.control} name="search" render={({ field }) => (
-                  <FormItem className="w-1/3">
+                  <FormItem className="w-1/3 faq-form-row">
                     <FormControl>
                       <Input placeholder="Search" {...field} />
                     </FormControl>
@@ -90,7 +90,7 @@ const FAQ: React.FC = () => {
                 )} />
 
                 <FormField control={form.control} name="Faqcategory" render={({ field }) => (
-                  <FormItem className="w-1/3">
+                  <FormItem className="w-1/3 faq-form-row">
                     <FormControl>
                       <Select onValueChange={field.onChange} value={field.value || ""}>
                         <SelectTrigger>
@@ -112,7 +112,7 @@ const FAQ: React.FC = () => {
                   control={form.control}
                   name="topics"
                   render={({ field }) => (
-                    <FormItem className="w-1/3">
+                    <FormItem className="w-1/3 faq-form-row">
                       <FormControl>
                         <Select
                           onValueChange={field.onChange}
@@ -150,7 +150,7 @@ const FAQ: React.FC = () => {
 
       <div className="container m-auto py-10">
         <div className="w-full">
-          <Accordion type="single" collapsible className="w-full faq-container">
+          <Accordion type="single" collapsible className="w-full faq-accordian-container">
             {filteredFaqData.length > 0 ? (
               filteredFaqData.map((faq) => (
                 <AccordionItem key={faq.id} value={faq.id}>

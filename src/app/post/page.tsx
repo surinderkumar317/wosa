@@ -23,7 +23,7 @@ const PostArticle: React.FC = () => {
 
   return (
     <>
-      <div className="commonbanner-form py-10">
+      <div className="commonbanner-form py-10 blog-post-container">
         <div className="container m-auto">
           <h2 className="text-center">Reading Resources</h2>
           <h1 className="text-center">Articles, News, Test Prep Material</h1>

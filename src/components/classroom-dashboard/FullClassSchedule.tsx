@@ -64,12 +64,12 @@ const FullClassSchedule = () => {
         <ClassroomHeaderData />
         <div className="p-6 bg-gray-100 my-4">
           <Form {...form}>
-            <form className="flex gap-5">
+            <form className="flex gap-5 full-class-sch-form">
               <FormField
                 control={form.control}
                 name="search"
                 render={({ field }) => (
-                  <FormItem className="w-1/2">
+                  <FormItem className="w-1/2 full-class-row">
                     <FormControl>
                       <Input placeholder="Search by Title or Venue" {...field} />
                     </FormControl>
@@ -81,7 +81,7 @@ const FullClassSchedule = () => {
                 control={form.control}
                 name="selectTopic"
                 render={({ field }) => (
-                  <FormItem className="w-1/2">
+                  <FormItem className="w-1/2 full-class-row">
                     <FormControl>
                       <Select
                         onValueChange={(value) => setValue("selectTopic", value)}

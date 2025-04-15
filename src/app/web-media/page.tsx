@@ -196,13 +196,13 @@ const WebMedia: React.FC = () => {
           <h1 className="text-center">LATEST WEB MEDIA</h1>
           <div className="webmeida-filter-box p-6 bg-white mt-5">
             <Form {...form}>
-              <form className="flex gap-5">
+              <form className="flex gap-5 webmedia-form">
                 {/* Search Input */}
                 <FormField
                   control={form.control}
                   name="search"
                   render={({ field }) => (
-                    <FormItem className="w-1/4">
+                    <FormItem className="w-1/4 webmedia-form-row">
                       <FormControl>
                         <Input placeholder="Search" {...field} />
                       </FormControl>
@@ -216,7 +216,7 @@ const WebMedia: React.FC = () => {
                   control={form.control}
                   name="webcategory"
                   render={({ field }) => (
-                    <FormItem className="w-1/4">
+                    <FormItem className="w-1/4 webmedia-form-row">
                       <FormControl>
                         <Select
                           onValueChange={field.onChange} value={field.value || ""}
@@ -244,7 +244,7 @@ const WebMedia: React.FC = () => {
                   control={form.control}
                   name="mediaType"
                   render={({ field }) => (
-                    <FormItem className="w-1/4">
+                    <FormItem className="w-1/4 webmedia-form-row">
                       <FormControl>
                         <Select
                           onValueChange={field.onChange}
@@ -269,7 +269,7 @@ const WebMedia: React.FC = () => {
                   control={form.control}
                   name="uploadTime"
                   render={({ field }) => (
-                    <FormItem className="w-1/4">
+                    <FormItem className="w-1/4 webmedia-form-row">
                       <FormControl>
                         <Select
                           onValueChange={field.onChange} value={field.value || ""}
@@ -327,8 +327,8 @@ const WebMedia: React.FC = () => {
         <div className="webmedia-boxes-cont relative">
           {filteredMedia.length > 0 ? (
             filteredMedia.slice(0, visibleItems).map((media) => (
-              <Card key={media.id}>
-                <CardContent className="webmedia-box">
+              <Card key={media.id} className="webmedia-box">
+                <CardContent>
                   <Link
                     href="#"
                     className="webmedia-img"

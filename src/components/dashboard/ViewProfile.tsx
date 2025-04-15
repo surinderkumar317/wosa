@@ -68,7 +68,7 @@ const ViewProfile = () => {
             onSubmit={viewProfileForm.handleSubmit(handleViewProfileSubmit)}
             className="space-y-4 p-4 w-full"
           >
-            <div className="flex justify-between w-full gap-5">
+            <div className="flex justify-between w-full gap-5 view-profile-row">
               {/* First Name */}
               <FormField
                 control={viewProfileForm.control}
@@ -101,7 +101,7 @@ const ViewProfile = () => {
             </div>
 
             {/* Country Code & Phone Number */}
-            <div className="flex justify-between w-full gap-5">
+            <div className="flex justify-between w-full gap-5 view-profile-row">
               {/* Country Code Input */}
               <FormField
                 control={viewProfileForm.control}
@@ -154,7 +154,7 @@ const ViewProfile = () => {
               />
             </div>
 
-            <div className="flex justify-between w-full gap-5">
+            <div className="flex justify-between w-full gap-5 view-profile-row">
               {/* Gender */}
               <FormField
                 control={viewProfileForm.control}
@@ -186,7 +186,7 @@ const ViewProfile = () => {
               />
             </div>
 
-            <div className="flex justify-between w-full gap-5">
+            <div className="flex justify-between w-full gap-5 view-profile-row">
               {/* Date of Birth */}
               <FormField
                 control={viewProfileForm.control}

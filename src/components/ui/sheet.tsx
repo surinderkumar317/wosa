@@ -76,17 +76,16 @@ interface SheetContentProps
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
-  
-    // Check if clicked element is an <a> tag or inside one
-    const link = target.closest("Link");
-  
-    // Check if it's inside .mobile-list
-    if (link && link.closest(".mobile-list")) {
-      // Add slight delay to allow route change to register
-      setTimeout(() => {
-        closeSheet();
-      }, 50);
-    }
+  const link = target.closest("a"); // Use 'a' instead of 'Link'
+  //console.log("Clicked element:", target);
+  //console.log("Link element:", link);
+  //console.log("Is inside .mobile-list:", link?.closest(".mobile-list"));
+
+  if (link && link.closest(".mobile-list")) {
+    setTimeout(() => {
+      closeSheet();
+    }, 50);
+  }
   };
 
   return (

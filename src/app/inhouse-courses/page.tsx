@@ -329,7 +329,7 @@ const OnlineCourse = () => {
           {showAdvancedForm && (
             <Form {...form}>
               <form className="flex flex-col gap-10">
-                <div className="flex gap-5 mt-10">
+                <div className="flex gap-5 mt-10 advanced-form">
                   <FormField
                     control={form.control}
                     name="moduleType"
