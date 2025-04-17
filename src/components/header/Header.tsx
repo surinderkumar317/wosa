@@ -1,12 +1,11 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import SocialIcons from "@/components/header/SocialIcons";
 import Navbar from "@/components/header/Navbar";
 import { Button } from "@/components/ui/button";
 import CommonImage from "@/components/common/Image";
-import { BASE_URL, ENQUIRY_URL, VIRTUALOFFICE_URL } from "@/app/constants/common";
+import { ENQUIRY_URL, VIRTUALOFFICE_URL } from "@/app/constants/common";
 import TimeZone from "./TimeZone";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
@@ -79,7 +78,7 @@ const Header = () => {
               <CommonImage
                 classname={"logo"}
                 src={"/images/logo-wide.svg"}
-                alt={"About Company"}
+                alt={"Logo"}
                 width={277}
                 height={54}
               />

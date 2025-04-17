@@ -1,14 +1,11 @@
 "use client"; // Now this is a client component
-import { notFound } from "next/navigation";
-import { usePathname } from "next/navigation";
-import React from "react";
-import { Suspense } from "react";
+import { notFound, usePathname, useRouter } from "next/navigation";
+import React, { Suspense } from "react";
 import Loading from "@/app/loading"; // ✅ Correct import for Next.js 15
 import LazySection from "@/components/LazySection";
 import ClassroomHeaderData from "@/components/classroom-dashboard/ClassroomHeaderData";
 import PageContent from "@/components/pagecontent/pageContent";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 
 const singleEvents = ["classroom-marterial01", "classroom-marterial02"];
 

@@ -64,14 +64,14 @@ const ClassroomSidebarMenu = dynamic( () => import("@/components/classroom-dashb
 );
 
 
-const page = () => {
+const Page = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: { search: "", selectTopic: "" },
   });
 
-  const { setValue, watch } = form; // Make sure to destructure inside the component
-  const searchQuery = watch("search")?.toLowerCase() || ""; // Ensure it's always a string
+  const { setValue, watch } = form;
+  const searchQuery = watch("search")?.toLowerCase() || "";
   const selectedTopic = watch("selectTopic") || "";
 
   const filteredClasses = useMemo(() => {
@@ -208,4 +208,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
