@@ -11,12 +11,13 @@ const singleEvents = ["classroom-marterial01", "classroom-marterial02"];
 
 export default function SingleEventPage() {
   const pathname = usePathname();
-  const singleevent = pathname.split("/").pop()?.toLowerCase(); // Extract the last part of the pathname
+  const router = useRouter(); // ✅ Move this here to avoid conditional hook call
+
+  const singleevent = pathname.split("/").pop()?.toLowerCase();
 
   if (!singleevent || !singleEvents.includes(singleevent)) {
-    return notFound();
+    return notFound(); // Early return is now safe
   }
-  const router = useRouter();
 
   return (
     <>
