@@ -3746,7 +3746,7 @@ background: #ccc;
             align-items: center;
         } 
     }
-    .switchclass-room-modal, .fliepreview-modal
+    .switchclass-room-modal, .fliepreview-modal, .mocktestreport-modal
     {
         width: 95%;
         .switchclassroom-cards
@@ -3769,4 +3769,37 @@ background: #ccc;
         }
         
     }
+    .mocktestreport-modal
+    {
+        padding:15px 10px;
+        border-radius: 10px;
+        .mock-test-container
+        {
+            flex-direction: column;
+            .mocktest-box
+            {
+                width: 100%;
+                h1{margin-bottom: 2px;}
+                .mocktext-scroll
+                {
+                    height: 130px;
+                }
+            }            
+        }
+        .mock-test-container + button
+        {
+            right: -8px;
+            top: -16px;
+            background: #fff;
+            opacity: 9;
+            border-radius: 100px;
+            width: 32px;
+            height: 33px;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        } 
+    }
+    
 }

@@ -221,21 +221,23 @@ const StudentComlaintModal = () => {
                   <p>
                     Attachment:{" "}
                     <strong className="flex gap-3 items-center">
-                      <FilePreviewModal 
+                      <FilePreviewModal
                         trigger={
-                          <CommonImage
-                            classname="dashboard-icon"
-                            src="/images/image-gallery01.webp"
-                            alt="icon01"
-                            width={25}
-                            height={25}
-                          />
+                          <span className="inline-flex gap-2 items-center cursor-pointer">
+                            <CommonImage
+                              classname="dashboard-icon"
+                              src="/images/image-gallery01.webp"
+                              alt="icon01"
+                              width={25}
+                              height={25}
+                            />
+                            <i className="fa-solid fa-download"></i>
+                          </span>
                         }
                         type="image"
                         src="/images/image-gallery01.webp"
                         title="Image Preview"
                       />
-                      <i className="fa-solid fa-download"></i>
                     </strong>
                   </p>
                 </div>
@@ -270,107 +272,110 @@ const StudentComlaintModal = () => {
               text ever since the 1500s,
             </p>
           </div>
-        
-        <Form {...conversationForm}>
-          <form
-            onSubmit={conversationForm.handleSubmit(handleConvesationSubmit)}
-            className="space-y-4 p-0 pt-4 w-full"
-          >
-            <div className="flex justify-between w-full gap-5 border-t pt-3">
-              {/* Message Field */}
-              <FormField
-                control={conversationForm.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem className="form-row w-full">
-                    <div className="flex justify-between items-center">
-                      <Label>
-                        Reply<span className="text-red-500">*</span>
-                      </Label>
-                      <div className="message-text">
-                        Entered Characters : <span>{messageLength}</span>
+
+          <Form {...conversationForm}>
+            <form
+              onSubmit={conversationForm.handleSubmit(handleConvesationSubmit)}
+              className="space-y-4 p-0 pt-4 w-full"
+            >
+              <div className="flex justify-between w-full gap-5 border-t pt-3">
+                {/* Message Field */}
+                <FormField
+                  control={conversationForm.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem className="form-row w-full">
+                      <div className="flex justify-between items-center">
+                        <Label>
+                          Reply<span className="text-red-500">*</span>
+                        </Label>
+                        <div className="message-text">
+                          Entered Characters : <span>{messageLength}</span>
+                        </div>
                       </div>
-                    </div>
-                    <FormControl>
-                      <Textarea
-                        {...field}
-                        className="h-24"
-                        onChange={(e) => {
-                          field.onChange(e.target.value);
-                          setMessageLength(e.target.value.length);
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage className="common-error-msg" />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="flex flex-col w-full gap-5">
-              {/* File Upload Field */}
-              <FormField
-                control={conversationForm.control}
-                name="attachments"
-                render={() => (
-                  <FormItem className="form-row w-full file-attachment">
-                    <div className="flex justify-between items-center">
-                      <Label
-                        htmlFor="file-upload"
-                        className="flex items-center gap-2"
-                      >
-                        <Button className="flex gap-4">
-                          <i className="fa fa-paperclip" aria-hidden="true"></i>
-                          Add Attachments
-                        </Button>
-                        <small>
-                          (Allowed: jpg, png, jpeg, pdf, webp, mp3, mp4)
-                        </small>
-                      </Label>
-                    </div>
-                    <FormControl>
-                      <Input
-                        type="file"
-                        id="file-upload"
-                        multiple
-                        onChange={handleFileChange}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-
-              {/* Display Attached Files */}
-              <div className="mt-3 w-full flex flex-wrap">
-                {selectedFiles.length > 0 ? (
-                  selectedFiles.map((file, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between bg-gray-100 p-2 rounded-md mb-2"
-                    >
-                      <span className="truncate">{file.name}</span>
-                      <button
-                        onClick={() => removeFile(index)}
-                        className="text-red-500 hover:text-red-700 ml-2"
-                      >
-                        ❌
-                      </button>
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-gray-500">No attachments added</p>
-                )}
+                      <FormControl>
+                        <Textarea
+                          {...field}
+                          className="h-24"
+                          onChange={(e) => {
+                            field.onChange(e.target.value);
+                            setMessageLength(e.target.value.length);
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage className="common-error-msg" />
+                    </FormItem>
+                  )}
+                />
               </div>
-            </div>
 
-            {/* Submit Button */}
-            <div className="common-button-rows !justify-end flex">
-              <Button type="submit" className="">
-                Send <i className="fa fa-angle-right"></i>
-              </Button>
-            </div>
-          </form>
-        </Form>
+              <div className="flex flex-col w-full gap-5">
+                {/* File Upload Field */}
+                <FormField
+                  control={conversationForm.control}
+                  name="attachments"
+                  render={() => (
+                    <FormItem className="form-row w-full file-attachment">
+                      <div className="flex justify-between items-center">
+                        <Label
+                          htmlFor="file-upload"
+                          className="flex items-center gap-2"
+                        >
+                          <Button className="flex gap-4">
+                            <i
+                              className="fa fa-paperclip"
+                              aria-hidden="true"
+                            ></i>
+                            Add Attachments
+                          </Button>
+                          <small>
+                            (Allowed: jpg, png, jpeg, pdf, webp, mp3, mp4)
+                          </small>
+                        </Label>
+                      </div>
+                      <FormControl>
+                        <Input
+                          type="file"
+                          id="file-upload"
+                          multiple
+                          onChange={handleFileChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+
+                {/* Display Attached Files */}
+                <div className="mt-3 w-full flex flex-wrap">
+                  {selectedFiles.length > 0 ? (
+                    selectedFiles.map((file, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between bg-gray-100 p-2 rounded-md mb-2"
+                      >
+                        <span className="truncate">{file.name}</span>
+                        <button
+                          onClick={() => removeFile(index)}
+                          className="text-red-500 hover:text-red-700 ml-2"
+                        >
+                          ❌
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-gray-500">No attachments added</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="common-button-rows !justify-end flex">
+                <Button type="submit" className="">
+                  Send <i className="fa fa-angle-right"></i>
+                </Button>
+              </div>
+            </form>
+          </Form>
         </div>
       </DialogContent>
     </Dialog>

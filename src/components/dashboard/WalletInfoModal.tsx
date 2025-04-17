@@ -31,6 +31,58 @@ interface WalletInfoModalProps {
   setOpen: (open: boolean) => void;
 }
 
+const walletCards = [
+  {
+    title: "INR",
+    amount: "1100",
+    icon: "/dashboard-images/wallet-icn.webp",
+  },
+  {
+    title: "INR",
+    amount: "1100",
+    icon: "/dashboard-images/wallet-icn.webp",
+  },
+];
+
+const walletHistory = [
+  {
+    sr: 1,
+    currency: "INR",
+    amount: 21,
+    transactionType: "Money added to wallet",
+    type: "Credit",
+    balance: 21,
+    remarks: "This is a test remarks.",
+    doneBy: "Aman Bachhal",
+    screenshot: "/images/image-gallery01.webp",
+    created: "18-03-2025 05:05 PM",
+  },
+  {
+    sr: 2,
+    currency: "INR",
+    amount: 21,
+    transactionType: "Money added to wallet",
+    type: "Credit",
+    balance: 21,
+    remarks: "This is a test remarks.",
+    doneBy: "Aman Bachhal",
+    screenshot: "/images/image-gallery01.webp",
+    created: "18-03-2025 05:05 PM",
+  },
+  {
+    sr: 3,
+    currency: "INR",
+    amount: 21,
+    transactionType: "Money added to wallet",
+    type: "Credit",
+    balance: 21,
+    remarks: "This is a test remarks.",
+    doneBy: "Aman Bachhal",
+    screenshot: "/images/image-gallery01.webp",
+    created: "18-03-2025 05:05 PM",
+  },
+];
+
 const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -56,48 +108,34 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
           </DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
-
         <div className="w-full  bg-gray-100 p-5 overflow-x-auto">
           <div className="flex flex-row gap-4 min-w-max">
-            <Card className="w-[15%] relative flex-shrink-0 wallet-box">
-              <CardHeader className="py-2 mt-3">
-                <CardTitle>INR</CardTitle>
-                <CardDescription></CardDescription>
-              </CardHeader>
-              <CardContent className="pb-3">
-                <p>1100</p>
-              </CardContent>
-              <div className="wall-img absolute right-5 bottom-3">
-                <CommonImage
-                  classname={"icon"}
-                  src={"/dashboard-images/wallet-icn.webp"}
-                  alt={"Profile Image"}
-                  width={42}
-                  height={42}
-                />
-              </div>
-            </Card>
-
-            <Card className="w-[15%] relative flex-shrink-0 wallet-box">
-              <CardHeader className="py-2 mt-3">
-                <CardTitle>INR</CardTitle>
-                <CardDescription></CardDescription>
-              </CardHeader>
-              <CardContent className="pb-3">
-                <p>1100</p>
-              </CardContent>
-              <div className="wall-img absolute right-5 bottom-3">
-                <CommonImage
-                  classname={"icon"}
-                  src={"/dashboard-images/wallet-icn.webp"}
-                  alt={"Profile Image"}
-                  width={42}
-                  height={42}
-                />
-              </div>
-            </Card>
+            {walletCards.map((card, index) => (
+              <Card
+                key={index}
+                className="w-[15%] relative flex-shrink-0 wallet-box"
+              >
+                <CardHeader className="py-2 mt-3">
+                  <CardTitle>{card.title}</CardTitle>
+                  <CardDescription></CardDescription>
+                </CardHeader>
+                <CardContent className="pb-3">
+                  <p>{card.amount}</p>
+                </CardContent>
+                <div className="wall-img absolute right-5 bottom-3">
+                  <CommonImage
+                    classname="icon"
+                    src={card.icon}
+                    alt="Wallet Icon"
+                    width={42}
+                    height={42}
+                  />
+                </div>
+              </Card>
+            ))}
           </div>
         </div>
+
         <h2 className="text-xl font-bold">Previous History</h2>
         <div className="h-[250px] w-full rounded-md p-0 overflow-x-auto wallet-table">
           <Table>
@@ -118,98 +156,38 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell>1</TableCell>
-                <TableCell>INR</TableCell>
-                <TableCell>21</TableCell>
-                <TableCell>Money added to wallet</TableCell>
-                <TableCell>Credit</TableCell>
-                <TableCell>21</TableCell>
-                <TableCell>This is a test remarks.</TableCell>
-                <TableCell>Aman Bachhal</TableCell>
-                <TableCell>
-                  <FilePreviewModal
-                    trigger={
-                      <span className="inline-flex gap-2 items-center cursor-pointer">
-                        <CommonImage
-                          classname="dashboard-icon"
-                          src="/images/image-gallery01.webp"
-                          alt="icon01"
-                          width={25}
-                          height={25}
-                        />
-                        <i className="fa-solid fa-download"></i>
-                      </span>
-                    }
-                    type="image"
-                    src="/images/image-gallery01.webp"
-                    title="Image Preview"
-                  />
-                </TableCell>
-                <TableCell>18-03-2025 05:05 PM</TableCell>
-              </TableRow>
-
-              <TableRow>
-                <TableCell>2</TableCell>
-                <TableCell>INR</TableCell>
-                <TableCell>21</TableCell>
-                <TableCell>Money added to wallet</TableCell>
-                <TableCell>Credit</TableCell>
-                <TableCell>21</TableCell>
-                <TableCell>This is a test remarks.</TableCell>
-                <TableCell>Aman Bachhal</TableCell>
-                <TableCell>
-                  <FilePreviewModal
-                    trigger={
-                      <span className="inline-flex gap-2 items-center cursor-pointer">
-                        <CommonImage
-                          classname="dashboard-icon"
-                          src="/images/image-gallery01.webp"
-                          alt="icon01"
-                          width={25}
-                          height={25}
-                        />
-                        <i className="fa-solid fa-download"></i>
-                      </span>
-                    }
-                    type="image"
-                    src="/images/image-gallery01.webp"
-                    title="Image Preview"
-                  />
-                </TableCell>
-                <TableCell>18-03-2025 05:05 PM</TableCell>
-              </TableRow>
-
-              <TableRow>
-                <TableCell>3</TableCell>
-                <TableCell>INR</TableCell>
-                <TableCell>21</TableCell>
-                <TableCell>Money added to wallet</TableCell>
-                <TableCell>Credit</TableCell>
-                <TableCell>21</TableCell>
-                <TableCell>This is a test remarks.</TableCell>
-                <TableCell>Aman Bachhal</TableCell>
-                <TableCell>
-                  <FilePreviewModal
-                    trigger={
-                      <span className="inline-flex gap-2 items-center cursor-pointer">
-                        <CommonImage
-                          classname="dashboard-icon"
-                          src="/images/image-gallery01.webp"
-                          alt="icon01"
-                          width={25}
-                          height={25}
-                        />
-                        <i className="fa-solid fa-download"></i>
-                      </span>
-                    }
-                    type="image"
-                    src="/images/image-gallery01.webp"
-                    title="Image Preview"
-                  />
-                </TableCell>
-                <TableCell>18-03-2025 05:05 PM</TableCell>
-              </TableRow>
+              {walletHistory.map((entry, index) => (
+                <TableRow key={index}>
+                  <TableCell>{entry.sr}</TableCell>
+                  <TableCell>{entry.currency}</TableCell>
+                  <TableCell>{entry.amount}</TableCell>
+                  <TableCell>{entry.transactionType}</TableCell>
+                  <TableCell>{entry.type}</TableCell>
+                  <TableCell>{entry.balance}</TableCell>
+                  <TableCell>{entry.remarks}</TableCell>
+                  <TableCell>{entry.doneBy}</TableCell>
+                  <TableCell>
+                    <FilePreviewModal
+                      trigger={
+                        <span className="inline-flex gap-2 items-center cursor-pointer">
+                          <CommonImage
+                            classname="dashboard-icon"
+                            src={entry.screenshot}
+                            alt="icon01"
+                            width={25}
+                            height={25}
+                          />
+                          <i className="fa-solid fa-download"></i>
+                        </span>
+                      }
+                      type="image"
+                      src={entry.screenshot}
+                      title="Image Preview"
+                    />
+                  </TableCell>
+                  <TableCell>{entry.created}</TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </div>

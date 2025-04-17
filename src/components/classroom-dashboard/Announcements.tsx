@@ -10,6 +10,19 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+const announcements = [
+  {
+    date: "02/04/2025 03:07 PM",
+    title: "Rakhi 50% off",
+    content: "Yes. It adheres to the WAI-ARIA design pattern.",
+  },
+  {
+    date: "02/04/2025 03:07 PM",
+    title: "Dewali 50% off",
+    content: "Yes. It adheres to the WAI-ARIA design pattern.",
+  },
+];
+
 const Announcements = () => {
   return (
     <div className="stu-classroom-cont flex flex-col w-full">
@@ -20,37 +33,23 @@ const Announcements = () => {
           <h2 className="text-2xl mb-5">Announcements</h2>
 
           <div className="annoucement-accord">
-            <Accordion type="single" collapsible className="mb-3">
-              <AccordionItem value="item-1">
-                <AccordionTrigger className="announcement-accordion justify-between gap-5 bg-gray-100 p-2">
-                  <p className="p-0 flex gap-3 items-center text-[18px] announcement-accordian">
-                    <strong className="bg-yellow-300 p-3">
-                      02/04/2025 03:07 PM
-                    </strong>
-                    <span>Rakhi 50% off</span>
-                  </p>
-                </AccordionTrigger>
-                <AccordionContent className="p-5">
-                  Yes. It adheres to the WAI-ARIA design pattern.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-
-            <Accordion type="single" collapsible className="mb-3">
-              <AccordionItem value="item-1">
-                <AccordionTrigger className="announcement-accordion justify-between gap-5 bg-gray-100 p-2">
-                  <p className="p-0 flex gap-3 items-center text-[18px] announcement-accordian">
-                    <strong className="bg-yellow-300 p-3">
-                      02/04/2025 03:07 PM
-                    </strong>
-                    <span>Dewali 50% off</span>
-                  </p>
-                </AccordionTrigger>
-                <AccordionContent className="p-5">
-                  Yes. It adheres to the WAI-ARIA design pattern.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+            {announcements.map((item, index) => (
+              <Accordion key={index} type="single" collapsible className="mb-3">
+                <AccordionItem value={`item-${index}`}>
+                  <AccordionTrigger className="announcement-accordion justify-between gap-5 bg-gray-100 p-2">
+                    <p className="p-0 flex gap-3 items-center text-[18px] announcement-accordian">
+                      <strong className="bg-yellow-300 p-3">
+                        {item.date}
+                      </strong>
+                      <span>{item.title}</span>
+                    </p>
+                  </AccordionTrigger>
+                  <AccordionContent className="p-5">
+                    {item.content}
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            ))}
           </div>
 
           <div className="no-image flex w-full justify-center hidden">

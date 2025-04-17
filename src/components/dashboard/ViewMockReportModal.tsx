@@ -42,14 +42,14 @@ const ViewMockReportModal = () => {
       >
         <Button>View Report</Button>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-[1024px]">
+      <DialogContent className="w-full max-w-[1024px] mocktestreport-modal">
         <DialogHeader>
           <DialogTitle></DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
-        <div className="flex gap-5">
+        <div className="flex gap-5 mock-test-container">
           {/* Score Section */}
-          <div className="w-2/4">
+          <div className="w-2/4 mocktest-box">
             <h1 className="text-[30px] font-bold mb-5">Mock Test Report</h1>
             <h2 className="text-[25px] font-bold">Score</h2>
             <div className="mockReportrow flex flex-col gap-1">
@@ -69,9 +69,9 @@ const ViewMockReportModal = () => {
           </div>
 
           {/* Explanation Section */}
-          <div className="w-2/4">
+          <div className="w-2/4 mocktest-box">
             <h1 className="text-[30px] font-bold mb-5">Score Explanation</h1>
-            <ScrollArea className="h-[330px] w-full rounded-md p-0">
+            <ScrollArea className="h-[330px] w-full rounded-md p-0 mocktext-scroll">
               {explanations.map((item, index) => (
                 <div key={index} className="w-full flex flex-col mt-5">
                   <h2 className="text-[25px] font-bold">{item.title}</h2>

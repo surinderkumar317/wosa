@@ -133,15 +133,17 @@ const StudentRequestModal = () => {
   };
 
   return (
-    <Dialog open={isOpen}
-    onOpenChange={(open) => {
-      setIsOpen(open);
-      if (!open) {
-        conversationForm.reset(); // Reset the form when modal closes
-        setSelectedFiles([]); // Clear selected files
-        setMessageLength(0); // Reset message length
-      }
-    }}>
+    <Dialog
+      open={isOpen}
+      onOpenChange={(open) => {
+        setIsOpen(open);
+        if (!open) {
+          conversationForm.reset(); // Reset the form when modal closes
+          setSelectedFiles([]); // Clear selected files
+          setMessageLength(0); // Reset message length
+        }
+      }}
+    >
       <DialogTrigger asChild>
         <Button className="w-full max-w-[150px] bg-[#d9070a]">
           <i className="fa-solid fa-bell"></i> Conversations
@@ -153,215 +155,224 @@ const StudentRequestModal = () => {
           <DialogDescription></DialogDescription>
         </DialogHeader>
         <div className="max-h-[80vh] overflow-auto pr-2 common-scroller">
-        {studentConversations.map((request) => (
-          <div key={request.id}>
-            <div className="flex gap-5 w-full flex-wrap stu-complaint-container">
-              <div className="w-full">
-                <h2>
-                  Request ID: <strong>{request.requestId}</strong>
-                </h2>
-              </div>
-              <div className="flex w-full">
-                <div className="w-2/4">
+          {studentConversations.map((request) => (
+            <div key={request.id}>
+              <div className="flex gap-5 w-full flex-wrap stu-complaint-container">
+                <div className="w-full">
+                  <h2>
+                    Request ID: <strong>{request.requestId}</strong>
+                  </h2>
+                </div>
+                <div className="flex w-full">
+                  <div className="w-2/4">
+                    <p>
+                      Name: <strong>{request.name}</strong>
+                    </p>
+                  </div>
+                  <div className="w-2/4">
+                    <p>
+                      Mobile: <strong>{request.mobile}</strong>
+                    </p>
+                  </div>
+                </div>
+                <div className="flex w-full">
+                  <div className="w-2/4">
+                    <p>
+                      Request Status:{" "}
+                      <strong className="bg-[#d9070a] p-1 px-2 text-white">
+                        {request.requestStatus}
+                      </strong>
+                    </p>
+                  </div>
+                  <div className="w-2/4">
+                    <p>
+                      Request Subject: <strong>{request.requestSubject}</strong>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="w-full">
                   <p>
-                    Name: <strong>{request.name}</strong>
+                    Request Message: <strong>{request.requestMessage}</strong>
                   </p>
                 </div>
-                <div className="w-2/4">
+                <div className="w-full">
                   <p>
-                    Mobile: <strong>{request.mobile}</strong>
-                  </p>
-                </div>
-              </div>
-              <div className="flex w-full">
-                <div className="w-2/4">
-                  <p>
-                    Request Status:{" "}
-                    <strong className="bg-[#d9070a] p-1 px-2 text-white">
-                      {request.requestStatus}
+                    Attachment:{" "}
+                    <strong className="flex gap-3 items-center">
+                      <FilePreviewModal
+                        trigger={
+                          <span className="inline-flex gap-2 items-center cursor-pointer">
+                            <CommonImage
+                              classname="dashboard-icon"
+                              src="/images/image-gallery01.webp"
+                              alt="icon01"
+                              width={25}
+                              height={25}
+                            />
+                            <i className="fa-solid fa-download"></i>
+                          </span>
+                        }
+                        type="image"
+                        src="/images/image-gallery01.webp"
+                        title="Image Preview"
+                      />
                     </strong>
                   </p>
                 </div>
-                <div className="w-2/4">
-                  <p>
-                    Request Subject: <strong>{request.requestSubject}</strong>
-                  </p>
+                <div className="flex w-full">
+                  <div className="w-2/4">
+                    <p>
+                      Request Created By:{" "}
+                      <strong>{request.requestCreatedBy}</strong>
+                    </p>
+                  </div>
+                  <div className="w-2/4">
+                    <p>
+                      Request Created On:{" "}
+                      <strong>{request.requestCreatedOn}</strong>
+                    </p>
+                  </div>
                 </div>
               </div>
-
-              <div className="w-full">
-                <p>
-                  Request Message: <strong>{request.requestMessage}</strong>
-                </p>
-              </div>
-              <div className="w-full">
-                <p>
-                  Attachment:{" "}
-                  <strong className="flex gap-3 items-center">
-                    <FilePreviewModal 
-                      trigger={
-                        <CommonImage
-                          classname="dashboard-icon"
-                          src="/images/image-gallery01.webp"
-                          alt="icon01"
-                          width={25}
-                          height={25}
-                        />
-                      }
-                      type="image"
-                      src="/images/image-gallery01.webp"
-                      title="Image Preview"
-                    />
-                    <i className="fa-solid fa-download"></i>
-                  </strong>
-                </p>
-              </div>
-              <div className="flex w-full">
-                <div className="w-2/4">
-                  <p>
-                    Request Created By:{" "}
-                    <strong>{request.requestCreatedBy}</strong>
-                  </p>
-                </div>
-                <div className="w-2/4">
-                  <p>
-                    Request Created On:{" "}
-                    <strong>{request.requestCreatedOn}</strong>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-
-        <div className="replyby-container w-full bg-[#f1f1f1] p-3 mt-4">
-          {replybys.map((reply, index) => (
-            <div key={index} className="flex justify-between w-full">
-              <p>Reply by: {reply.nameReply}</p>
-              <p>Date: {reply.date}</p>
             </div>
           ))}
-          <p className="text-base mt-2">
-            Attachment:{" "}
-            <strong className="flex gap-3 items-center mt-2">
-              <FilePreviewModal
-                trigger={
-                  <CommonImage
-                    classname="dashboard-icon"
-                    src="/images/image-gallery01.webp"
-                    alt="icon01"
-                    width={25}
-                    height={25}
-                  />
-                }
-                type="image"
-                src="/images/image-gallery01.webp"
-                title="Image Preview"
-              /> <i className="fa-solid fa-download"></i>
-            </strong>
-          </p>
-        </div>
 
-        <Form {...conversationForm}>
-          <form
-            onSubmit={conversationForm.handleSubmit(handleConvesationSubmit)}
-            className="space-y-4 p-0 pt-4 w-full"
-          >
-            <div className="flex justify-between w-full gap-5 border-t pt-3">
-              {/* Message Field */}
-              <FormField
-                control={conversationForm.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem className="form-row w-full">
-                    <div className="flex justify-between items-center">
-                      <Label>
-                        Complaint Message<span className="text-red-500">*</span>
-                      </Label>
-                      <div className="message-text">
-                        Entered Characters : <span>{messageLength}</span>
-                      </div>
-                    </div>
-                    <FormControl>
-                      <Textarea
-                        {...field}
-                        className="h-24"
-                        onChange={(e) => {
-                          field.onChange(e.target.value);
-                          setMessageLength(e.target.value.length);
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage className="common-error-msg" />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="flex flex-col w-full gap-5">
-              {/* File Upload Field */}
-              <FormField
-                control={conversationForm.control}
-                name="attachments"
-                render={() => (
-                  <FormItem className="form-row w-full file-attachment">
-                    <div className="flex justify-between items-center">
-                      <Label
-                        htmlFor="file-upload"
-                        className="flex items-center gap-2"
-                      >
-                        <Button className="flex gap-4">
-                          <i className="fa fa-paperclip" aria-hidden="true"></i>
-                          Add Attachments
-                        </Button>
-                        <small>
-                          (Allowed: jpg, png, jpeg, pdf, webp, mp3, mp4)
-                        </small>
-                      </Label>
-                    </div>
-                    <FormControl>
-                      <Input
-                        type="file"
-                        id="file-upload"
-                        multiple
-                        onChange={handleFileChange}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-
-              {/* Display Attached Files */}
-              <div className="mt-3 w-full flex flex-wrap">
-                {selectedFiles.length > 0 ? (
-                  selectedFiles.map((file, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between bg-gray-100 p-2 rounded-md mb-2"
-                    >
-                      <span className="truncate">{file.name}</span>
-                      <button
-                        onClick={() => removeFile(index)}
-                        className="text-red-500 hover:text-red-700 ml-2"
-                      >
-                        ❌
-                      </button>
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-gray-500">No attachments added</p>
-                )}
+          <div className="replyby-container w-full bg-[#f1f1f1] p-3 mt-4">
+            {replybys.map((reply, index) => (
+              <div key={index} className="flex justify-between w-full">
+                <p>Reply by: {reply.nameReply}</p>
+                <p>Date: {reply.date}</p>
               </div>
-            </div>
+            ))}
+            <p className="text-base mt-2">
+              Attachment:{" "}
+              <strong className="flex gap-3 items-center mt-2">
+                <FilePreviewModal
+                  trigger={
+                    <span className="inline-flex gap-2 items-center cursor-pointer">
+                      <CommonImage
+                        classname="dashboard-icon"
+                        src="/images/image-gallery01.webp"
+                        alt="icon01"
+                        width={25}
+                        height={25}
+                      />
+                      <i className="fa-solid fa-download"></i>
+                    </span>
+                  }
+                  type="image"
+                  src="/images/image-gallery01.webp"
+                  title="Image Preview"
+                />
+              </strong>
+            </p>
+          </div>
 
-            {/* Submit Button */}
-            <div className="common-button-rows !justify-end flex">
-              <Button type="submit" className="">
-                Send <i className="fa fa-angle-right"></i>
-              </Button>
-            </div>
-          </form>
-        </Form>
+          <Form {...conversationForm}>
+            <form
+              onSubmit={conversationForm.handleSubmit(handleConvesationSubmit)}
+              className="space-y-4 p-0 pt-4 w-full"
+            >
+              <div className="flex justify-between w-full gap-5 border-t pt-3">
+                {/* Message Field */}
+                <FormField
+                  control={conversationForm.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem className="form-row w-full">
+                      <div className="flex justify-between items-center">
+                        <Label>
+                          Complaint Message
+                          <span className="text-red-500">*</span>
+                        </Label>
+                        <div className="message-text">
+                          Entered Characters : <span>{messageLength}</span>
+                        </div>
+                      </div>
+                      <FormControl>
+                        <Textarea
+                          {...field}
+                          className="h-24"
+                          onChange={(e) => {
+                            field.onChange(e.target.value);
+                            setMessageLength(e.target.value.length);
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage className="common-error-msg" />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="flex flex-col w-full gap-5">
+                {/* File Upload Field */}
+                <FormField
+                  control={conversationForm.control}
+                  name="attachments"
+                  render={() => (
+                    <FormItem className="form-row w-full file-attachment">
+                      <div className="flex justify-between items-center">
+                        <Label
+                          htmlFor="file-upload"
+                          className="flex items-center gap-2"
+                        >
+                          <Button className="flex gap-4">
+                            <i
+                              className="fa fa-paperclip"
+                              aria-hidden="true"
+                            ></i>
+                            Add Attachments
+                          </Button>
+                          <small>
+                            (Allowed: jpg, png, jpeg, pdf, webp, mp3, mp4)
+                          </small>
+                        </Label>
+                      </div>
+                      <FormControl>
+                        <Input
+                          type="file"
+                          id="file-upload"
+                          multiple
+                          onChange={handleFileChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+
+                {/* Display Attached Files */}
+                <div className="mt-3 w-full flex flex-wrap">
+                  {selectedFiles.length > 0 ? (
+                    selectedFiles.map((file, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between bg-gray-100 p-2 rounded-md mb-2"
+                      >
+                        <span className="truncate">{file.name}</span>
+                        <button
+                          onClick={() => removeFile(index)}
+                          className="text-red-500 hover:text-red-700 ml-2"
+                        >
+                          ❌
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-gray-500">No attachments added</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="common-button-rows !justify-end flex">
+                <Button type="submit" className="">
+                  Send <i className="fa fa-angle-right"></i>
+                </Button>
+              </div>
+            </form>
+          </Form>
         </div>
       </DialogContent>
     </Dialog>
