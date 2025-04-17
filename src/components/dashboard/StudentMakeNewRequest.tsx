@@ -115,7 +115,7 @@ const StudentMakeNewRequest = () => {
             Make New Request
           </Button>
         </DialogTrigger>
-        <DialogContent className="common-modal-form w-full max-w-xl max-h-[90vh] overflow-auto">
+        <DialogContent className="common-modal-form w-full max-w-xl">
           <DialogHeader>
             <DialogTitle>Make New Request</DialogTitle>
             <DialogDescription></DialogDescription>
@@ -127,7 +127,7 @@ const StudentMakeNewRequest = () => {
               )}
               className="space-y-4 p-0 w-full"
             >
-              <div className="max-h-[65vh] overflow-auto pr-2">
+              <div className="max-h-[65vh] overflow-auto pr-2 common-scroller">
                 <div className="flex justify-between w-full gap-5 flex-col">
                   {/* Product Servcies */}
                   <FormField
@@ -169,7 +169,7 @@ const StudentMakeNewRequest = () => {
                     control={MakeNewRequestForm.control}
                     name="subject"
                     render={({ field }) => (
-                      <FormItem className="form-row w-full">
+                      <FormItem className="form-row w-full mb-5">
                         <Label>
                           Select Subject<span className="text-red-500">*</span>
                         </Label>

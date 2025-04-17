@@ -1,5 +1,5 @@
 "use client";
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { useForm, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -43,35 +43,59 @@ const countryOptions = [
 ];
 
 // Define validation schemas for login
-const formSchema = z.object({
-  loginBy: z.enum(["phone", "email", "uniqueid"]),
+const formSchema = z
+  .object({
+    loginBy: z.enum(["phone", "email", "uniqueid"]),
+    phoneNumber: z
+      .string()
+      .min(10, "Phone number must be at least 10 digits")
+      .optional()
+      .or(z.literal("")), // Allow empty when not selected
+    loginEmail: z
+      .string()
+      .email("Invalid email address")
+      .optional()
+      .or(z.literal("")), // Allow empty when not selected
+    uniqueId: z.string().optional().or(z.literal("")), // Allow empty when not selected
+    password: z.string().min(6, "Password must be at least 6 characters"),
+  })
+  .refine(
+    (data) => {
+      if (data.loginBy === "phone") return data.phoneNumber?.trim();
+      return true;
+    },
+    { path: ["phoneNumber"], message: "Phone Number is required" }
+  )
+  .refine(
+    (data) => {
+      if (data.loginBy === "email") return data.loginEmail?.trim();
+      return true;
+    },
+    { path: ["loginEmail"], message: "Email is required" }
+  )
+  .refine(
+    (data) => {
+      if (data.loginBy === "uniqueid") return data.uniqueId?.trim();
+      return true;
+    },
+    { path: ["uniqueId"], message: "Unique ID is required" }
+  );
+
+// Validation Schemas
+const phoneSchema = z.object({
+  countryCode: z.string().min(2, "Country code is required"),
   phoneNumber: z
     .string()
-    .min(10, "Phone number must be at least 10 digits")
-    .optional()
-    .or(z.literal("")), // Allow empty when not selected
-  loginEmail: z
-    .string()
-    .email("Invalid email address")
-    .optional()
-    .or(z.literal("")), // Allow empty when not selected
-  uniqueId: z.string().optional().or(z.literal("")), // Allow empty when not selected
-  password: z.string().min(6, "Password must be at least 6 characters"),
-})
-  .refine((data) => {
-    if (data.loginBy === "phone") return data.phoneNumber?.trim();
-    return true;
-  }, { path: ["phoneNumber"], message: "Phone Number is required" })
-  .refine((data) => {
-    if (data.loginBy === "email") return data.loginEmail?.trim();
-    return true;
-  }, { path: ["loginEmail"], message: "Email is required" })
-  .refine((data) => {
-    if (data.loginBy === "uniqueid") return data.uniqueId?.trim();
-    return true;
-  }, { path: ["uniqueId"], message: "Unique ID is required" });
+    .min(10, "Phone number must be 10 digits")
+    .max(10, "Phone number must be 10 digits")
+    .regex(/^\d+$/, "Only numbers are allowed"),
+});
 
-const Login = () => {
+interface LoginProps {
+  buttonText?: string;
+}
+
+const Login: React.FC<LoginProps> = ({ buttonText = "Login",}) => {
   // const router = useRouter();
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -80,6 +104,21 @@ const Login = () => {
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState("+91");
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredOptions = countryOptions.filter((country) =>
+    country.label.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Phone Form Hook
+  const phoneForm = useForm({
+    resolver: zodResolver(phoneSchema),
+    defaultValues: {
+      countryCode: "+91",
+      phoneNumber: "",
+    },
+  });
 
   const loginForm = useForm({
     resolver: zodResolver(formSchema),
@@ -91,16 +130,13 @@ const Login = () => {
       password: "",
     },
   });
- 
 
   const handleLogin = async (data: z.infer<typeof formSchema>) => {
-    console.log("Form Data Submitted:", data); 
+    console.log("Form Data Submitted:", data);
     toast.success("Login successful! 🎉");
-      setIsLoginOpen(false);
-      loginForm.reset();   
+    setIsLoginOpen(false);
+    loginForm.reset();
   };
-
-  
 
   // Define validation schemas for forgotpassword
   const forgotPasswordSchema = z.object({
@@ -120,7 +156,9 @@ const Login = () => {
   };
 
   // on submit data for forgotpassword forms
-  const onSubmitForgotPassword = (data: z.infer<typeof forgotPasswordSchema>) => {
+  const onSubmitForgotPassword = (
+    data: z.infer<typeof forgotPasswordSchema>
+  ) => {
     console.log("Forgot Password Data:", data);
     toast.info("Password reset link sent! 📩"); // ✅ Feedback message
     setIsForgotPasswordOpen(false);
@@ -130,210 +168,232 @@ const Login = () => {
   return (
     <>
       {/* Login Dialog */}
-      <Toaster position="bottom-center" /> 
-      
-        <Dialog open={isLoginOpen} onOpenChange={setIsLoginOpen}>
-          <DialogTrigger asChild>
-            <Button variant="ghost" onClick={() => setIsLoginOpen(true)}>Login</Button>
-          </DialogTrigger>
-          <DialogContent className="common-modal-form w-full max-w-xl">
-            <DialogHeader>
-              <DialogTitle>Login</DialogTitle>
-              <DialogDescription></DialogDescription>
-            </DialogHeader>
-            <Form {...loginForm}>
-              <form
-                onSubmit={loginForm.handleSubmit(handleLogin, onInvalid)}
-                className="space-y-4 p-4 w-full"
-              >
+      <Toaster position="bottom-center" />
+
+      <Dialog open={isLoginOpen} onOpenChange={setIsLoginOpen}>
+        <DialogTrigger asChild>
+          <Button variant="ghost" onClick={() => setIsLoginOpen(true)}>
+            {buttonText}
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="common-modal-form w-full max-w-xl">
+          <DialogHeader>
+            <DialogTitle>Login</DialogTitle>
+            <DialogDescription></DialogDescription>
+          </DialogHeader>
+          <Form {...loginForm}>
+            <form
+              onSubmit={loginForm.handleSubmit(handleLogin, onInvalid)}
+              className="space-y-4 p-4 w-full"
+            >
+              <FormField
+                control={loginForm.control}
+                name="loginBy"
+                render={({ field }) => (
+                  <FormItem className="form-row">
+                    <Label>
+                      Login By<span className="text-red-500">*</span>
+                    </Label>
+                    <FormControl>
+                      <Select
+                        onValueChange={(value) => {
+                          setSelectedLoginBy(value);
+                          field.onChange(value);
+                        }}
+                        value={selectedLoginBy}
+                      >
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select login method" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectItem value="phone">Phone Number</SelectItem>
+                            <SelectItem value="email">Email</SelectItem>
+                            <SelectItem value="uniqueid">Unique ID</SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage className="common-error-msg" />
+                  </FormItem>
+                )}
+              />
+
+              {selectedLoginBy === "phone" && (
                 <FormField
                   control={loginForm.control}
-                  name="loginBy"
+                  name="phoneNumber"
                   render={({ field }) => (
                     <FormItem className="form-row">
                       <Label>
-                        Login By<span className="text-red-500">*</span>
+                        Phone Number<span className="text-red-500">*</span>
                       </Label>
                       <FormControl>
-                        <Select
-                          onValueChange={(value) => {
-                            setSelectedLoginBy(value);
-                            field.onChange(value);
-                          }}
-                          value={selectedLoginBy}
-                        >
-                          <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Select login method" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectGroup>
-                              <SelectItem value="phone">Phone Number</SelectItem>
-                              <SelectItem value="email">Email</SelectItem>
-                              <SelectItem value="uniqueid">Unique ID</SelectItem>
-                            </SelectGroup>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <FormMessage className="common-error-msg" />
-                    </FormItem>
-                  )}
-                />
-
-                {selectedLoginBy === "phone" && (
-                  <FormField
-                    control={loginForm.control}
-                    name="phoneNumber"
-                    render={({ field }) => (
-                      <FormItem className="form-row">
-                        <Label>
-                          Phone Number<span className="text-red-500">*</span>
-                        </Label>
-                        <FormControl>
-                          <div className="flex space-x-2">
-                            {/* Country Code Select */}
-                            <Select
-                              onValueChange={(value) => setSelectedCountry(value)}
-                              value={selectedCountry}
-                            >
-                              <SelectTrigger className="w-24">
-                                <SelectValue placeholder="Code" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectGroup>
-                                  {countryOptions.map((country) => (
+                        <div className="flex space-x-2">
+                          {/* Country Code Select */}
+                          <Select
+                            onValueChange={(value) => {
+                              setSelectedCountry(value);
+                              phoneForm.setValue("countryCode", value);
+                              setSearchTerm(""); // Clear search when a value is selected
+                            }}
+                            value={selectedCountry}
+                          >
+                            <SelectTrigger className="w-24">
+                              <SelectValue placeholder="Code" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {/* 🔍 Search Input inside the dropdown */}
+                              <div className="px-2 pb-2 pt-1">
+                                <Input
+                                  placeholder="Search country"
+                                  value={searchTerm}
+                                  onChange={(e) =>
+                                    setSearchTerm(e.target.value)
+                                  }
+                                  className="h-8 text-sm"
+                                />
+                              </div>
+                              <SelectGroup>
+                                {filteredOptions.length > 0 ? (
+                                  filteredOptions.map((country) => (
                                     <SelectItem
                                       key={country.value}
                                       value={country.value}
                                     >
                                       {country.label}
                                     </SelectItem>
-                                  ))}
-                                </SelectGroup>
-                              </SelectContent>
-                            </Select>
+                                  ))
+                                ) : (
+                                  <div className="px-3 py-2 text-sm text-muted-foreground">
+                                    No results found
+                                  </div>
+                                )}
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
 
-                            {/* Phone Number Input (Only Numbers Allowed) */}
-                            <Input
-                              type="tel"
-                              placeholder="Enter phone number"
-                              {...field}
-                              className="flex-1"
-                              pattern="[0-9]*"
-                              inputMode="numeric"
-                              minLength={10}
-                              maxLength={10}
-                              onChange={(e) => {
-                                const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
-                                field.onChange(value);
-                              }}
-                            />
-                          </div>
-                        </FormControl>
-                        <FormMessage className="common-error-msg" />
-                      </FormItem>
-                    )}
-                  />
-                )}
-
-                {selectedLoginBy === "email" && (
-                  <FormField
-                    control={loginForm.control}
-                    name="loginEmail"
-                    render={({ field }) => (
-                      <FormItem className="form-row">
-                        <Label>
-                          Email<span className="text-red-500">*</span>
-                        </Label>
-                        <FormControl>
+                          {/* Phone Number Input (Only Numbers Allowed) */}
                           <Input
-                            type="email"
-                            placeholder="Enter your email"
+                            type="tel"
+                            placeholder="Enter phone number"
                             {...field}
+                            className="flex-1"
+                            pattern="[0-9]*"
+                            inputMode="numeric"
+                            minLength={10}
+                            maxLength={10}
+                            onChange={(e) => {
+                              const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+                              field.onChange(value);
+                            }}
                           />
-                        </FormControl>
-                        <FormMessage className="common-error-msg" />
-                      </FormItem>
-                    )}
-                  />
-                )}
-
-                {selectedLoginBy === "uniqueid" && (
-                  <FormField
-                    control={loginForm.control}
-                    name="uniqueId"
-                    render={({ field }) => (
-                      <FormItem className="form-row">
-                        <Label>
-                          Unique ID<span className="text-red-500">*</span>
-                        </Label>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Enter your Unique ID"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage className="common-error-msg" />
-                      </FormItem>
-                    )}
-                  />
-                )}
-
-                <FormField
-                  control={loginForm.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem className="form-row">
-                      <Label>
-                        Password<span className="text-red-500">*</span>
-                      </Label>
-                      <FormControl>
-                        <div className="relative">
-                          <Input
-                            type={showPassword ? "text" : "password"}
-                            placeholder="Enter your password"
-                            {...field}
-                            className="pr-10"
-                          />
-                          <button
-                            type="button"
-                            className="absolute right-3 top-2 text-gray-500"
-                            onClick={() => setShowPassword(!showPassword)}
-                          >
-                            {showPassword ? (
-                              <Eye size={20} />
-                            ) : (
-                              <EyeOff size={20} />
-                            )}
-                          </button>
                         </div>
                       </FormControl>
                       <FormMessage className="common-error-msg" />
                     </FormItem>
                   )}
                 />
-                <div className="common-button-rows">
-                  <Button
-                    type="button"
-                    variant="link"
-                    onClick={() => {
-                      setIsLoginOpen(false);
-                      setIsForgotPasswordOpen(true);
-                      forgotPasswordForm.reset();
-                    }}
-                    className="p-0 forgot-btn"
-                  >
-                    Forgot Password?
-                  </Button>
-                  <Button variant="link" type="submit" className="submit-common">
-                    Submit <i className="fa fa-angle-right"></i>
-                  </Button>
-                </div>
-              </form>
-            </Form>
-          </DialogContent>
-        </Dialog>
-    
+              )}
+
+              {selectedLoginBy === "email" && (
+                <FormField
+                  control={loginForm.control}
+                  name="loginEmail"
+                  render={({ field }) => (
+                    <FormItem className="form-row">
+                      <Label>
+                        Email<span className="text-red-500">*</span>
+                      </Label>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="Enter your email"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="common-error-msg" />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {selectedLoginBy === "uniqueid" && (
+                <FormField
+                  control={loginForm.control}
+                  name="uniqueId"
+                  render={({ field }) => (
+                    <FormItem className="form-row">
+                      <Label>
+                        Unique ID<span className="text-red-500">*</span>
+                      </Label>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          placeholder="Enter your Unique ID"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="common-error-msg" />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              <FormField
+                control={loginForm.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem className="form-row">
+                    <Label>
+                      Password<span className="text-red-500">*</span>
+                    </Label>
+                    <FormControl>
+                      <div className="relative">
+                        <Input
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Enter your password"
+                          {...field}
+                          className="pr-10"
+                        />
+                        <button
+                          type="button"
+                          className="absolute right-3 top-2 text-gray-500"
+                          onClick={() => setShowPassword(!showPassword)}
+                        >
+                          {showPassword ? (
+                            <Eye size={20} />
+                          ) : (
+                            <EyeOff size={20} />
+                          )}
+                        </button>
+                      </div>
+                    </FormControl>
+                    <FormMessage className="common-error-msg" />
+                  </FormItem>
+                )}
+              />
+              <div className="common-button-rows">
+                <Button
+                  type="button"
+                  variant="link"
+                  onClick={() => {
+                    setIsLoginOpen(false);
+                    setIsForgotPasswordOpen(true);
+                    forgotPasswordForm.reset();
+                  }}
+                  className="p-0 forgot-btn"
+                >
+                  Forgot Password?
+                </Button>
+                <Button variant="link" type="submit" className="submit-common">
+                  Submit <i className="fa fa-angle-right"></i>
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
 
       {/* Forgot Password Dialog */}
       <Dialog

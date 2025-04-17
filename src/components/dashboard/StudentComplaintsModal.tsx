@@ -24,6 +24,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import CommonImage from "../common/Image";
 
 interface StudentConversation {
   id: number;
@@ -157,10 +158,10 @@ const StudentComlaintModal = () => {
           <DialogTitle className="text-4xl">Conversations</DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
-        <div className="max-h-[80vh] overflow-auto pr-2">
+        <div className="max-h-[80vh] overflow-auto pr-2 common-scroller">
           {studentConversations.map((request) => (
             <div key={request.id}>
-              <div className="flex gap-5 w-full flex-wrap">
+              <div className="flex gap-5 w-full flex-wrap stu-complaint-container">
                 <div className="w-full">
                   <h2>
                     Complaint ID: <strong>{request.complaintId}</strong>
@@ -188,7 +189,7 @@ const StudentComlaintModal = () => {
                   <div className="w-2/4">
                     <p>
                       Complaint Status:{" "}
-                      <strong className="bg-[#d9070a] p-1 px-2 text-white">
+                      <strong className="bg-[#d9070a] p-1 px-2 text-white complaint-status">
                         {request.complaintStatus}
                       </strong>
                     </p>
@@ -198,7 +199,7 @@ const StudentComlaintModal = () => {
                   <div className="w-2/4">
                     <p>
                       Complaint For:{" "}
-                      <strong className="bg-[#337ab7] p-1 px-2 text-white">
+                      <strong className="bg-[#337ab7] p-1 px-2 text-white complaint-status">
                         {request.complaintFor}
                       </strong>
                     </p>
@@ -220,7 +221,20 @@ const StudentComlaintModal = () => {
                   <p>
                     Attachment:{" "}
                     <strong className="flex gap-3 items-center">
-                      <FilePreviewModal />{" "}
+                      <FilePreviewModal 
+                        trigger={
+                          <CommonImage
+                            classname="dashboard-icon"
+                            src="/images/image-gallery01.webp"
+                            alt="icon01"
+                            width={25}
+                            height={25}
+                          />
+                        }
+                        type="image"
+                        src="/images/image-gallery01.webp"
+                        title="Image Preview"
+                      />
                       <i className="fa-solid fa-download"></i>
                     </strong>
                   </p>

@@ -24,7 +24,7 @@ export default function MarketingModal() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="p-1">
+      <DialogContent className="p-1 marketing-modal">
         <DialogHeader>
           <DialogTitle></DialogTitle>
           <DialogDescription>

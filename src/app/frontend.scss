@@ -378,8 +378,7 @@ input::placeholder {
         @include content-container;
         h2,h3{
             text-align: left !important;
-        }        
-        align-items: start;
+        } 
         p{
             @include comman-text;
             margin:15px 0;
@@ -425,7 +424,9 @@ input::placeholder {
     position: relative;
     .achievement-content{
         @include content-container;
-        align-items: center;
+        & {
+            align-items: center;
+          }
     }
     .achievement-numbers
     {
@@ -1076,7 +1077,7 @@ input::placeholder {
         display: flex;
         align-items: center;
         gap: 15px;
-        z-index: 99;
+        z-index:9;
         .arrow-fixed {
             background:rgba(255, 255, 255, 0.6);
             width: 40px;
@@ -1968,8 +1969,10 @@ input::placeholder {
 .our-office-container
 {
     .ouroffice-content{
-        @include content-container;
-        text-align: center; 
+        @include content-container;       
+        & {
+            text-align: center;
+        } 
     }
     .office-tab-list {
         display: flex;
@@ -2220,6 +2223,13 @@ background: #ccc;
             justify-content: end !important;
         }
         
+    }
+    .common-user-info-cont
+    {
+        p
+        {
+            padding:8px 0;
+        }
     }    
 }
 .form-row{
@@ -2413,19 +2423,36 @@ background: #ccc;
 .common-coaching-box {width: 32%;}
 
 // time zone css
+@keyframes fadeIn {
+    from {
+    opacity: 0;
+    }
+    to {
+    opacity: 1;
+    }
+}
+.animate-fadeIn {
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+// login page css
+.login-container
+{
+    .login-button
+    {
+        button{
+            background: #073255;
+            color: #fff;
+            padding: 15px 25px;
+            height: auto;
+            font-size: 1.1rem;
+            &:hover
+            {
+                background: $redColor;
+            }
+        }
     }
-  
-    .animate-fadeIn {
-      animation: fadeIn 0.5s ease-in-out forwards;
-    }
+}
 
 // responsive css
 @media screen and (min-width:1921px) and (max-width:5000px)
@@ -3039,6 +3066,7 @@ background: #ccc;
 		    height: auto;
 		    min-height: initial;
             max-width: 100%;
+            width: 100%;
             h4.tablist-heading{display:none;}
             .office-tab-scroller {
                 flex-direction: row;
@@ -3077,7 +3105,8 @@ background: #ccc;
             padding: 2%;
             margin: 55px 0 0;
             h1{
-                font-size: 2rem;
+                font-size: 2rem;                
+                line-height: 35px;
             }
             p {
                 font-size: 1.3rem;
@@ -3595,8 +3624,149 @@ background: #ccc;
         }
     }
 
-    // all modal 
-    div[role="dialog"] {
-        max-width: 95%;
+    // single classroom page
+    .single-classroom-container {
+        width: 90%;
+        padding: 10px 0;
+        .stu-classroom-header
+        {
+            flex-direction: column;
+        }
     }
-} 
+
+    // all modal 
+    div[role=dialog].common-modal-form {
+        max-width: 95%;
+        padding: 25px 0px;
+        border-radius: 10px;
+        form {
+            padding: 5px 10px;
+            .common-scroller
+            {
+                .flex.w-full.justify-between
+                {
+                    flex-direction: column;
+                    .form-row
+                    {
+                        width: 100%;
+                        button{
+                            flex-direction: row;
+                        }
+                    }
+                }
+            }
+            & + button
+            {
+                right: -8px;
+                top: -16px;
+                background: #fff;
+                opacity: 9;
+                border-radius: 100px;
+                width: 32px;
+                height: 33px;
+                border: 1px solid #000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        .common-user-info-cont
+        {
+            padding:0 10px;
+        }
+
+        .stu-complaint-container {
+            padding: 10px;
+            h2{
+                font-size: 1.6rem;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                strong{
+                    width: 100%;
+                }
+            }
+            p{
+                font-size: 16px;
+                line-height: 30px;
+                margin: 0 10px 0 0;
+                strong{
+                    display: flex;
+                    width: 100%;
+                    &.complaint-status
+                    {
+                        width: auto;
+                        display: inline-flex;
+                    }
+                }
+            }            
+        }
+        .replyby-container
+        {
+            p{
+                font-size: 16px;
+            }
+        }
+    }
+    .marketing-modal
+    {
+        max-width: 350px;
+        border-radius: 10px;
+        .marketing-btn + button
+        {
+            right: -8px;
+            top: -16px;
+            background: #fff;
+            opacity: 9;
+            border-radius: 100px;
+            width: 32px;
+            height: 33px;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .gallery-modal, .common-modal-content, .switchclass-room-modal, .fliepreview-modal, .wallet-modal
+    {
+        padding:15px 10px;
+        border-radius: 10px;
+        button
+        {
+            right: -8px;
+            top: -16px;
+            background: #fff;
+            opacity: 9;
+            border-radius: 100px;
+            width: 32px;
+            height: 33px;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        } 
+    }
+    .switchclass-room-modal, .fliepreview-modal
+    {
+        width: 95%;
+        .switchclassroom-cards
+        {
+            width: 100%;
+        }
+    }
+    .wallet-modal
+    {
+        width: 95%;
+        .wallet-box {
+            max-width: 180px;
+            width: 100%;
+        }
+        .wallet-table {
+            table {
+                white-space: nowrap;
+                overflow-y: scroll;
+            }
+        }
+        
+    }
+}

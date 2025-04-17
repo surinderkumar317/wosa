@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import {
   Dialog,
   DialogContent,
@@ -9,31 +9,48 @@ import {
 } from "@/components/ui/dialog";
 import CommonImage from "../common/Image";
 
-const FilePreviewModal = () => {
+type FilePreviewModalProps = {
+  trigger: ReactNode;
+  type: "image" | "video";
+  src: string;
+  title?: string;
+  alt?: string;
+};
+
+const FilePreviewModal: React.FC<FilePreviewModalProps> = ({
+  trigger,
+  type,
+  src,
+  title = "File Preview",
+  alt = "preview",
+}) => {
   return (
     <Dialog>
-      <DialogTrigger>
-        <CommonImage
-          classname="dashboard-icon"
-          src="/images/image-gallery01.webp"
-          alt="icon01"
-          width={25}
-          height={25}
-        />
+      <DialogTrigger asChild>
+        {trigger}
       </DialogTrigger>
-      <DialogContent className="w-full max-w-[800px] max-h-[90vh] overflow-auto">
+      <DialogContent className="w-full max-w-[800px] fliepreview-modal">
         <DialogHeader>
-          <DialogTitle>File Preview</DialogTitle>
-          <DialogDescription></DialogDescription>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription />
         </DialogHeader>
         <div className="max-h-[65vh] overflow-auto pr-2">
-          <CommonImage
-            classname="dashboard-icon"
-            src="/images/image-gallery01.webp"
-            alt="icon01"
-            width={1080}
-            height={1080}
-          />
+          {type === "image" ? (
+            <CommonImage
+              classname="w-full h-auto"
+              src={src}
+              alt={alt}
+              width={1080}
+              height={1080}
+            />
+          ) : (
+            <video
+              className="w-full h-auto"
+              controls
+              src={src}
+              title={alt}
+            />
+          )}
         </div>
       </DialogContent>
     </Dialog>

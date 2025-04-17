@@ -23,7 +23,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import CommonImage from "../common/Image";
 import FilePreviewModal from "./FilePreviewModal";
 
@@ -50,7 +49,7 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
           Wallet
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-[1300px]">
+      <DialogContent className="w-full max-w-[1300px] wallet-modal">
         <DialogHeader>
           <DialogTitle className="text-[30px] font-bold mb-0">
             Wallet Info
@@ -60,7 +59,7 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
 
         <div className="w-full  bg-gray-100 p-5 overflow-x-auto">
           <div className="flex flex-row gap-4 min-w-max">
-            <Card className="w-[15%] relative flex-shrink-0">
+            <Card className="w-[15%] relative flex-shrink-0 wallet-box">
               <CardHeader className="py-2 mt-3">
                 <CardTitle>INR</CardTitle>
                 <CardDescription></CardDescription>
@@ -79,7 +78,7 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
               </div>
             </Card>
 
-            <Card className="w-[15%] relative flex-shrink-0">
+            <Card className="w-[15%] relative flex-shrink-0 wallet-box">
               <CardHeader className="py-2 mt-3">
                 <CardTitle>INR</CardTitle>
                 <CardDescription></CardDescription>
@@ -100,7 +99,7 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
           </div>
         </div>
         <h2 className="text-xl font-bold">Previous History</h2>
-        <ScrollArea className="h-[250px] w-full rounded-md p-0">
+        <div className="h-[250px] w-full rounded-md p-0 overflow-x-auto wallet-table">
           <Table>
             <TableHeader>
               <TableRow className="text-xl">
@@ -129,7 +128,23 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
                 <TableCell>This is a test remarks.</TableCell>
                 <TableCell>Aman Bachhal</TableCell>
                 <TableCell>
-                  <FilePreviewModal /> <i className="fa-solid fa-download"></i>
+                  <FilePreviewModal
+                    trigger={
+                      <span className="inline-flex gap-2 items-center cursor-pointer">
+                        <CommonImage
+                          classname="dashboard-icon"
+                          src="/images/image-gallery01.webp"
+                          alt="icon01"
+                          width={25}
+                          height={25}
+                        />
+                        <i className="fa-solid fa-download"></i>
+                      </span>
+                    }
+                    type="image"
+                    src="/images/image-gallery01.webp"
+                    title="Image Preview"
+                  />
                 </TableCell>
                 <TableCell>18-03-2025 05:05 PM</TableCell>
               </TableRow>
@@ -144,7 +159,23 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
                 <TableCell>This is a test remarks.</TableCell>
                 <TableCell>Aman Bachhal</TableCell>
                 <TableCell>
-                  <FilePreviewModal /> <i className="fa-solid fa-download"></i>
+                  <FilePreviewModal
+                    trigger={
+                      <span className="inline-flex gap-2 items-center cursor-pointer">
+                        <CommonImage
+                          classname="dashboard-icon"
+                          src="/images/image-gallery01.webp"
+                          alt="icon01"
+                          width={25}
+                          height={25}
+                        />
+                        <i className="fa-solid fa-download"></i>
+                      </span>
+                    }
+                    type="image"
+                    src="/images/image-gallery01.webp"
+                    title="Image Preview"
+                  />
                 </TableCell>
                 <TableCell>18-03-2025 05:05 PM</TableCell>
               </TableRow>
@@ -159,13 +190,29 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
                 <TableCell>This is a test remarks.</TableCell>
                 <TableCell>Aman Bachhal</TableCell>
                 <TableCell>
-                  <FilePreviewModal /> <i className="fa-solid fa-download"></i>
+                  <FilePreviewModal
+                    trigger={
+                      <span className="inline-flex gap-2 items-center cursor-pointer">
+                        <CommonImage
+                          classname="dashboard-icon"
+                          src="/images/image-gallery01.webp"
+                          alt="icon01"
+                          width={25}
+                          height={25}
+                        />
+                        <i className="fa-solid fa-download"></i>
+                      </span>
+                    }
+                    type="image"
+                    src="/images/image-gallery01.webp"
+                    title="Image Preview"
+                  />
                 </TableCell>
                 <TableCell>18-03-2025 05:05 PM</TableCell>
               </TableRow>
             </TableBody>
           </Table>
-        </ScrollArea>
+        </div>
       </DialogContent>
     </Dialog>
   );

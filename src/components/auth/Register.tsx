@@ -100,6 +100,12 @@ const Register = () => {
     password: "",
   });
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredOptions = countryOptions.filter((country) =>
+    country.label.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   const [registrationData, setRegistrationData] =
     useState<RegistrationData | null>(null);
 
@@ -196,7 +202,7 @@ const Register = () => {
   const handleCloseModals = () => {
     setIsVarificationOpen(false);
     setIsFormInfoOpen(false);
-    phoneForm.reset(); // Reset phone form when closing any modal   
+    phoneForm.reset(); // Reset phone form when closing any modal
   };
 
   return (
@@ -235,6 +241,7 @@ const Register = () => {
                           onValueChange={(value) => {
                             setSelectedCountry(value);
                             phoneForm.setValue("countryCode", value);
+                            setSearchTerm("");
                           }}
                           value={selectedCountry}
                         >
@@ -242,15 +249,30 @@ const Register = () => {
                             <SelectValue placeholder="Code" />
                           </SelectTrigger>
                           <SelectContent>
+                            {/* 🔍 Search Input inside the dropdown */}
+                            <div className="px-2 pb-2 pt-1">
+                              <Input
+                                placeholder="Search country"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="h-8 text-sm"
+                              />
+                            </div>
                             <SelectGroup>
-                              {countryOptions.map((country) => (
-                                <SelectItem
-                                  key={country.value}
-                                  value={country.value}
-                                >
-                                  {country.label}
-                                </SelectItem>
-                              ))}
+                              {filteredOptions.length > 0 ? (
+                                filteredOptions.map((country) => (
+                                  <SelectItem
+                                    key={country.value}
+                                    value={country.value}
+                                  >
+                                    {country.label}
+                                  </SelectItem>
+                                ))
+                              ) : (
+                                <div className="px-3 py-2 text-sm text-muted-foreground">
+                                  No results found
+                                </div>
+                              )}
                             </SelectGroup>
                           </SelectContent>
                         </Select>
@@ -303,7 +325,7 @@ const Register = () => {
               onSubmit={registrationForm.handleSubmit(handleRegistrationSubmit)}
               className="space-y-4 p-0 w-full"
             >
-              <div className="max-h-[65vh] overflow-auto pr-2">
+              <div className="max-h-[65vh] overflow-auto pr-2 common-scroller">
                 <div className="flex justify-between w-full gap-5 mb-5">
                   {/* Name Field */}
                   <FormField
@@ -639,19 +661,21 @@ const Register = () => {
             <DialogTitle>Enquiry Details</DialogTitle>
             <DialogDescription></DialogDescription>
           </DialogHeader>
-          <p>
-            Dear <span>{userDetails.name}</span>,
-          </p>
-          <p>
-            Your enquiry has been submitted successfully. Here are your details:
-          </p>
-          <p>
-            Unique ID: <span>{userDetails.uniqueId}</span>
-          </p>
-          <p>
-            Password: <span>{userDetails.password}</span>
-          </p>
-          <p>Your Password and Other details are send to your email.</p>
+          <div className="common-user-info-cont">
+            <p>
+              Dear <span>{userDetails.name}</span>,
+            </p>
+            <p>
+              Your enquiry has been submitted successfully. Here are your details:
+            </p>
+            <p>
+              Unique ID: <span>{userDetails.uniqueId}</span>
+            </p>
+            <p>
+              Password: <span>{userDetails.password}</span>
+            </p>
+            <p>Your Password and Other details are send to your email.</p>
+          </div>
         </DialogContent>
       </Dialog>
     </>

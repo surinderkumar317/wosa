@@ -94,6 +94,12 @@ const EventTimeModal = ({ heading }: FormBannerProps) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredOptions = countryOptions.filter((country) =>
+    country.label.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   const phoneForm = useForm<z.infer<typeof phoneSchema>>({
     resolver: zodResolver(phoneSchema),
     defaultValues: { countryCode: "+91", phoneNumber: "" },
@@ -227,6 +233,7 @@ const EventTimeModal = ({ heading }: FormBannerProps) => {
                       onValueChange={(value) => {
                         setSelectedCountry(value);
                         phoneForm.setValue("countryCode", value);
+                        setSearchTerm(""); // Clear search when a value is selected
                       }}
                       value={selectedCountry}
                     >
@@ -234,15 +241,31 @@ const EventTimeModal = ({ heading }: FormBannerProps) => {
                         <SelectValue placeholder="Code" />
                       </SelectTrigger>
                       <SelectContent>
+                        {/* 🔍 Search Input inside the dropdown */}
+                        <div className="px-2 pb-2 pt-1">
+                          <Input
+                            placeholder="Search country"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="h-8 text-sm"
+                          />
+                        </div>
+
                         <SelectGroup>
-                          {countryOptions.map((country) => (
-                            <SelectItem
-                              key={country.value}
-                              value={country.value}
-                            >
-                              {country.label}
-                            </SelectItem>
-                          ))}
+                          {filteredOptions.length > 0 ? (
+                            filteredOptions.map((country) => (
+                              <SelectItem
+                                key={country.value}
+                                value={country.value}
+                              >
+                                {country.label}
+                              </SelectItem>
+                            ))
+                          ) : (
+                            <div className="px-3 py-2 text-sm text-muted-foreground">
+                              No results found
+                            </div>
+                          )}
                         </SelectGroup>
                       </SelectContent>
                     </Select>
@@ -280,7 +303,7 @@ const EventTimeModal = ({ heading }: FormBannerProps) => {
           <Form {...eventtestForm}>
             <form
               onSubmit={eventtestForm.handleSubmit(handleEventtimeSubmit)}
-              className="space-y-4 p-0 w-full"
+              className="space-y-4 p-0 w-full overflow-hidden"
             >
               <div className="flex flex-col">
                 <div className="flex justify-between w-full gap-5">
@@ -352,46 +375,49 @@ const EventTimeModal = ({ heading }: FormBannerProps) => {
 
               {isLocationSelected && isCourseSelected && (
                 <div className="date-time-container">
-                  <div className="max-h-[65vh] overflow-auto pr-2">
+                  <div className="max-h-[50vh] overflow-auto pr-2">
                     <div className="flex justify-between w-full flex-col gap-2 reality-datebox-cont">
                       <p>
                         Select Date<span className="text-red-500">*</span>
                       </p>
                       <div className="event-date-container max-w-[520px] min-h-[230px] overflow-x-auto">
                         <div className="event-date-box flex min-w-max">
-                          {["APR 17 2025 TO APR 17 2025", "APR 18 2025", "APR 19 2025", "APR 20 2025"].map(
-                            (date) => (
-                              <OptionBox
-                                key={date}
-                                value={date}
-                                selectedValue={selectedDate}
-                                onSelect={setSelectedDate}
-                              >
-                                <h2 className="!text-xl font-bold">
-                                  {(() => {
-                                    const parts = date.split(/ to /i); // case-insensitive split
-                                    if (parts.length === 2) {
-                                      return (
-                                        <>
-                                          <div>{parts[0]}</div>
-                                          <div className="text-sm text-muted-foreground">
-                                            TO
-                                          </div>
-                                          <div>{parts[1]}</div>
-                                        </>
-                                      );
-                                    } else {
-                                      return <div>{date}</div>;
-                                    }
-                                  })()}
-                                </h2>
-                                <p className="!text-sm py-2">Available</p>
-                                <p className="!text-base font-semibold">
-                                  INR 1000
-                                </p>
-                              </OptionBox>
-                            )
-                          )}
+                          {[
+                            "APR 17 2025 TO APR 17 2025",
+                            "APR 18 2025",
+                            "APR 19 2025",
+                            "APR 20 2025",
+                          ].map((date) => (
+                            <OptionBox
+                              key={date}
+                              value={date}
+                              selectedValue={selectedDate}
+                              onSelect={setSelectedDate}
+                            >
+                              <h2 className="!text-xl font-bold">
+                                {(() => {
+                                  const parts = date.split(/ to /i); // case-insensitive split
+                                  if (parts.length === 2) {
+                                    return (
+                                      <>
+                                        <div>{parts[0]}</div>
+                                        <div className="text-sm text-muted-foreground">
+                                          TO
+                                        </div>
+                                        <div>{parts[1]}</div>
+                                      </>
+                                    );
+                                  } else {
+                                    return <div>{date}</div>;
+                                  }
+                                })()}
+                              </h2>
+                              <p className="!text-sm py-2">Available</p>
+                              <p className="!text-base font-semibold">
+                                INR 1000
+                              </p>
+                            </OptionBox>
+                          ))}
                         </div>
                       </div>
                     </div>
@@ -453,7 +479,7 @@ const EventTimeModal = ({ heading }: FormBannerProps) => {
               )}
               className="space-y-4 p-0 w-full"
             >
-              <div className="max-h-[65vh] overflow-auto pr-2">
+              <div className="max-h-[65vh] overflow-auto pr-2 common-scroller">
                 <div className="flex justify-between w-full gap-5 mb-5">
                   {/* Name Field */}
                   <FormField
@@ -622,19 +648,21 @@ const EventTimeModal = ({ heading }: FormBannerProps) => {
             <DialogTitle>Package Details</DialogTitle>
             <DialogDescription></DialogDescription>
           </DialogHeader>
-          <p>
-            Dear <span>{userDetails.name}</span>,
-          </p>
-          <p>
-            Your enquiry has been submitted successfully. Here are your details:
-          </p>
-          <p>
-            Unique ID: <span>{userDetails.uniqueId}</span>
-          </p>
-          <p>
-            Password: <span>{userDetails.password}</span>
-          </p>
-          <p>Your Password and Other details are send to your email.</p>
+          <div className="common-user-info-cont">
+            <p>
+              Dear <span>{userDetails.name}</span>,
+            </p>
+            <p>
+              Your enquiry has been submitted successfully. Here are your details:
+            </p>
+            <p>
+              Unique ID: <span>{userDetails.uniqueId}</span>
+            </p>
+            <p>
+              Password: <span>{userDetails.password}</span>
+            </p>
+            <p>Your Password and Other details are send to your email.</p>
+          </div>
         </DialogContent>
       </Dialog>
     </div>

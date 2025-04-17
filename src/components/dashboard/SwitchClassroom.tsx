@@ -24,6 +24,45 @@ interface SwitchClassroomProps {
   onClose: () => void;
 }
 
+const classroomData = [
+  {
+    name: "ONL2301",
+    package: "Online Pack 3",
+    validity: "0th Mar 25 - 19th Mar 25",
+    daysLeft: 13,
+    status: "Expired",
+    statusColor: "text-red-600",
+    showEnter: false,
+  },
+  {
+    name: "ONL2301",
+    package: "Online Pack 3",
+    validity: "0th Mar 25 - 19th Mar 25",
+    daysLeft: 13,
+    status: "Active",
+    statusColor: "text-lime-600",
+    showEnter: true,
+  },
+  {
+    name: "ONL2301",
+    package: "Online Pack 3",
+    validity: "0th Mar 25 - 19th Mar 25",
+    daysLeft: 13,
+    status: "Expired",
+    statusColor: "text-red-600",
+    showEnter: false,
+  },
+  {
+    name: "ONL2301",
+    package: "Online Pack 3",
+    validity: "0th Mar 25 - 19th Mar 25",
+    daysLeft: 13,
+    status: "Active",
+    statusColor: "text-lime-600",
+    showEnter: true,
+  },
+];
+
 const SwitchClassroom: React.FC<SwitchClassroomProps> = ({ open, onClose }) => {
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
@@ -42,7 +81,7 @@ const SwitchClassroom: React.FC<SwitchClassroomProps> = ({ open, onClose }) => {
           Switch Classroom
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-[1000px]">
+      <DialogContent className="w-full max-w-[1000px] switchclass-room-modal">
         <DialogHeader>
           <DialogTitle className="text-[30px] font-bold mb-0">
             YOUR CLASSROOM
@@ -51,111 +90,40 @@ const SwitchClassroom: React.FC<SwitchClassroomProps> = ({ open, onClose }) => {
         </DialogHeader>
         <ScrollArea className="h-[470px] w-full rounded-md p-0">
           <div className="flex gap-5 flex-wrap">
-            <Card className="w-[48%] relative">
-              <CardHeader className="py-2 mt-3">
-                <CardTitle></CardTitle>
-                <CardDescription></CardDescription>
-              </CardHeader>
-              <CardContent className="pb-3">
-                <p>
-                  <strong>Classroom Name:</strong> ONL2301
-                </p>
-                <p>
-                  <strong>Current Package:</strong> Online Pack 3
-                </p>
-                <p>
-                  <strong>Validity:</strong> 0th Mar 25 - 19th Mar 25
-                </p>
-                <p>
-                  <strong>Days Left:</strong> 13
-                </p>
-                <p>
-                  <strong>Status:</strong>{" "}
-                  <span className="text-red-600">Expired</span>
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="w-[48%] relative">
-              <CardHeader className="py-2 mt-3">
-                <CardTitle></CardTitle>
-                <CardDescription></CardDescription>
-              </CardHeader>
-              <CardContent className="pb-3">
-                <p>
-                  <strong>Classroom Name:</strong> ONL2301
-                </p>
-                <p>
-                  <strong>Current Package:</strong> Online Pack 3
-                </p>
-                <p>
-                  <strong>Validity:</strong> 0th Mar 25 - 19th Mar 25
-                </p>
-                <p>
-                  <strong>Days Left:</strong> 13
-                </p>
-                <p>
-                  <strong>Status:</strong>{" "}
-                  <span className="text-lime-600">Active</span>
-                </p>
-                <Button asChild className="mt-3">
-                  <Link href="/student-classrooms">Enter Class</Link>
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="w-[48%] relative">
-              <CardHeader className="py-2 mt-3">
-                <CardTitle></CardTitle>
-                <CardDescription></CardDescription>
-              </CardHeader>
-              <CardContent className="pb-3">
-                <p>
-                  <strong>Classroom Name:</strong> ONL2301
-                </p>
-                <p>
-                  <strong>Current Package:</strong> Online Pack 3
-                </p>
-                <p>
-                  <strong>Validity:</strong> 0th Mar 25 - 19th Mar 25
-                </p>
-                <p>
-                  <strong>Days Left:</strong> 13
-                </p>
-                <p>
-                  <strong>Status:</strong>{" "}
-                  <span className="text-red-600">Expired</span>
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="w-[48%] relative">
-              <CardHeader className="py-2 mt-3">
-                <CardTitle></CardTitle>
-                <CardDescription></CardDescription>
-              </CardHeader>
-              <CardContent className="pb-3">
-                <p>
-                  <strong>Classroom Name:</strong> ONL2301
-                </p>
-                <p>
-                  <strong>Current Package:</strong> Online Pack 3
-                </p>
-                <p>
-                  <strong>Validity:</strong> 0th Mar 25 - 19th Mar 25
-                </p>
-                <p>
-                  <strong>Days Left:</strong> 13
-                </p>
-                <p>
-                  <strong>Status:</strong>{" "}
-                  <span className="text-lime-600">Active</span>
-                </p>
-                <Button asChild className="mt-3">
-                  <Link href="/student-classrooms">Enter Class</Link>
-                </Button>
-              </CardContent>
-            </Card>
+            {classroomData.map((cls, index) => (
+              <Card
+                key={index}
+                className="w-[48%] relative switchclassroom-cards"
+              >
+                <CardHeader className="py-2 mt-3">
+                  <CardTitle></CardTitle>
+                  <CardDescription></CardDescription>
+                </CardHeader>
+                <CardContent className="pb-3">
+                  <p>
+                    <strong>Classroom Name:</strong> {cls.name}
+                  </p>
+                  <p>
+                    <strong>Current Package:</strong> {cls.package}
+                  </p>
+                  <p>
+                    <strong>Validity:</strong> {cls.validity}
+                  </p>
+                  <p>
+                    <strong>Days Left:</strong> {cls.daysLeft}
+                  </p>
+                  <p>
+                    <strong>Status:</strong>{" "}
+                    <span className={cls.statusColor}>{cls.status}</span>
+                  </p>
+                  {cls.showEnter && (
+                    <Button asChild className="mt-3">
+                      <Link href="/student-classrooms">Enter Class</Link>
+                    </Button>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </ScrollArea>
       </DialogContent>
