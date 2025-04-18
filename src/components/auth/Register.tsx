@@ -29,7 +29,6 @@ import {
   SelectValue,
   SelectGroup,
 } from "@/components/ui/select";
-
 import { toast } from "sonner";
 import { Toaster } from "sonner";
 
@@ -59,10 +58,8 @@ const cityList = [
   "Chhindwara",
   "Calicut",
   "Churu",
-  // add more cities
 ];
 
-// Validation Schemas
 const phoneSchema = z.object({
   countryCode: z.string().min(2, "Country code is required"),
   phoneNumber: z
@@ -75,7 +72,17 @@ const phoneSchema = z.object({
 const registrationSchema = z.object({
   name: z.string().min(2, "Name is required"),
   email: z.string().email("Invalid email format"),
-  dob: z.string().min(1, "Date of Birth is required"),
+  dob: z.string().refine(
+    (val) => {
+      const year = new Date(val).getFullYear();
+      return (
+        /^\d{4}$/.test(year.toString()) &&
+        year >= 1900 &&
+        year <= new Date().getFullYear()
+      );
+    },
+    { message: "Please enter a valid date of birth" }
+  ),
   city: z.string().min(1, "Please enter a valid city"),
   source: z.string().min(1, "Please select an option"),
   interestedServcies: z.string().min(1, "Interested Services is mandatory"),
@@ -92,25 +99,15 @@ const verificationSchema = z.object({
     .regex(/^[0-9]+$/, "Only numbers allowed"),
 });
 
-type RegistrationData = {
-  name: string;
-  email: string;
-  dob: string;
-  city: string;
-  source: string;
-  interestedServcies: string;
-  interestedSubServcies: string;
-  interestedCountries: string;
-};
+type RegistrationData = z.infer<typeof registrationSchema>;
 
-const Register = () => {
+const Register: React.FC = () => {
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState("+91");
   const [selectedService, setSelectedService] = useState("");
   const [selectedSubService, setSelectedSubService] = useState("");
   const [resendTimer, setResendTimer] = useState(30);
-
   const [isVarificationOpen, setIsVarificationOpen] = useState(false);
   const [isFormInfoOpen, setIsFormInfoOpen] = useState(false);
   const [submittedPhoneNumber, setSubmittedPhoneNumber] = useState("");
@@ -119,17 +116,44 @@ const Register = () => {
     uniqueId: "",
     password: "",
   });
-
   const [searchTerm, setSearchTerm] = useState("");
+  const [registrationData, setRegistrationData] =
+    useState<RegistrationData | null>(null);
 
   const filteredOptions = countryOptions.filter((country) =>
     country.label.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const [registrationData, setRegistrationData] =
-    useState<RegistrationData | null>(null);
+  const [cityValue, setCityValue] = useState("");
+  const [filteredCities, setFilteredCities] = useState<string[]>([]);
+  const [showDropdown, setShowDropdown] = useState(false);
 
-  // Phone Form Hook
+  // Update filteredCities when cityValue changes
+  useEffect(() => {
+    const input = cityValue.toLowerCase();
+    if (input.length >= 1) {
+      const filtered = cityList.filter((city) =>
+        city.toLowerCase().startsWith(input)
+      );
+      setFilteredCities(filtered);
+      setShowDropdown(true);
+    } else {
+      setShowDropdown(false);
+    }
+  }, [cityValue]);
+
+  const handleCitySelect = (city: string) => {
+    setCityValue(city);
+    registrationForm.setValue("city", city);
+    setShowDropdown(false);
+  };
+
+  const handleCityClear = () => {
+    setCityValue("");
+    registrationForm.setValue("city", "");
+    setShowDropdown(false);
+  };
+
   const phoneForm = useForm({
     resolver: zodResolver(phoneSchema),
     defaultValues: {
@@ -138,7 +162,6 @@ const Register = () => {
     },
   });
 
-  // Registration Form Hook
   const registrationForm = useForm({
     resolver: zodResolver(registrationSchema),
     defaultValues: {
@@ -153,10 +176,13 @@ const Register = () => {
     },
   });
 
-  // Handle Phone Form Submission
+  const verifyForm = useForm({
+    resolver: zodResolver(verificationSchema),
+    defaultValues: { verificationCode: "" },
+  });
+
   const handlePhoneSubmit = (data: z.infer<typeof phoneSchema>) => {
-    console.log("Phone Data:", data);
-    setSubmittedPhoneNumber(`${data.countryCode} ${data.phoneNumber}`); // Store phone number
+    setSubmittedPhoneNumber(`${data.countryCode} ${data.phoneNumber}`);
     setIsPhoneOpen(false);
     setIsRegistrationOpen(true);
   };
@@ -164,18 +190,12 @@ const Register = () => {
   const handleRegistrationSubmit = async (
     data: z.infer<typeof registrationSchema>
   ) => {
-    console.log("Form Data Submitted:", data);
     toast.success("Register successful! 🎉");
     setIsRegistrationOpen(false);
     registrationForm.reset();
-
-    // Store form data before moving to the next step
     setRegistrationData(data);
-
-    setIsRegistrationOpen(false);
     setIsVarificationOpen(true);
 
-    // Simulate an API response with generated details
     const generatedUserDetails = {
       name: data.name,
       uniqueId: "UID123456",
@@ -184,46 +204,37 @@ const Register = () => {
     setUserDetails(generatedUserDetails);
   };
 
-  useEffect(() => {
-    if (isRegistrationOpen && registrationData) {
-      registrationForm.reset(registrationData); // ✅ Restore values when reopening
-    }
-  }, [isRegistrationOpen]);
-
-  const verifyForm = useForm({
-    resolver: zodResolver(verificationSchema),
-    defaultValues: { verificationCode: "" },
-  });
-
-  // Handle Verification Submission
   const handleVarifySubmit = async (data: { verificationCode: string }) => {
-    console.log("Verification Code Submitted:", data.verificationCode);
     setIsVarificationOpen(false);
-    setIsFormInfoOpen(true); // Open the final dialog
+    setIsFormInfoOpen(true);
   };
 
-  useEffect(() => {
-    let timer: NodeJS.Timeout; // Explicitly define the timer type
-
-    if (isVarificationOpen && resendTimer > 0) {
-      timer = setInterval(() => {
-        setResendTimer((prev) => (prev > 0 ? prev - 1 : 0));
-      }, 1000);
-    }
-
-    return () => clearInterval(timer); // Cleanup on unmount
-  }, [isVarificationOpen, resendTimer]);
-
   const handleResendCode = () => {
-    setResendTimer(30); // Reset countdown
+    setResendTimer(30);
     console.log("Resending verification code...");
   };
 
   const handleCloseModals = () => {
     setIsVarificationOpen(false);
     setIsFormInfoOpen(false);
-    phoneForm.reset(); // Reset phone form when closing any modal
+    phoneForm.reset();
   };
+
+  useEffect(() => {
+    if (isRegistrationOpen && registrationData) {
+      registrationForm.reset(registrationData);
+    }
+  }, [isRegistrationOpen]);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (isVarificationOpen && resendTimer > 0) {
+      timer = setInterval(() => {
+        setResendTimer((prev) => (prev > 0 ? prev - 1 : 0));
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [isVarificationOpen, resendTimer]);
 
   return (
     <>
@@ -425,84 +436,56 @@ const Register = () => {
                   <FormField
                     control={registrationForm.control}
                     name="city"
-                    render={({ field }) => {
-                      const [filteredCities, setFilteredCities] = useState<
-                        string[]
-                      >([]);
-                      const [showDropdown, setShowDropdown] = useState(false);
-
-                      useEffect(() => {
-                        const input = field.value?.toLowerCase() || "";
-                        if (input.length >= 1) {
-                          const filtered = cityList.filter((city) =>
-                            city.toLowerCase().startsWith(input)
-                          );
-                          setFilteredCities(filtered);
-                          setShowDropdown(true);
-                        } else {
-                          setShowDropdown(false);
-                        }
-                      }, [field.value]);
-
-                      const handleSelect = (city: string) => {
-                        field.onChange(city);
-                        setShowDropdown(false);
-                      };
-
-                      const handleClear = () => {
-                        field.onChange(""); // Clear city value
-                        setShowDropdown(false);
-                      };
-
-                      return (
-                        <FormItem className="form-row w-full relative">
-                          <Label>
-                            City<span className="text-red-500">*</span>
-                          </Label>
-                          <FormControl>
-                            <div className="relative">
-                              <Input
-                                type="text"
-                                placeholder="Enter your city"
-                                {...field}
-                                onFocus={() => {
-                                  if (field.value) setShowDropdown(true);
-                                }}
-                                onBlur={() => {
-                                  setTimeout(() => setShowDropdown(false), 100);
-                                }}
-                                className="pr-10" // Add padding for icon space
-                              />
-                              {/* Cross icon */}
-                              {field.value && (
-                                <button
-                                  type="button"
-                                  onClick={handleClear}
-                                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 text-xl"
-                                >
-                                  &times;
-                                </button>
-                              )}
-
-                              {showDropdown && filteredCities.length > 0 && (
-                                <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded shadow max-h-44 overflow-y-auto">
-                                  {filteredCities.map((city, index) => (
-                                    <div
-                                      key={index}
-                                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                                      onClick={() => handleSelect(city)}
-                                    >
-                                      {city}
-                                    </div>
-                                  ))}
-                                </div>
-                              )}
-                            </div>
-                          </FormControl>
-                          <FormMessage className="common-error-msg" />
-                        </FormItem>
-                      );
-                    }}
+                    render={({ field }) => (
+                      <FormItem className="form-row w-full relative">
+                        <Label>
+                          City<span className="text-red-500">*</span>
+                        </Label>
+                        <FormControl>
+                          <div className="relative">
+                            <Input
+                              type="text"
+                              placeholder="Enter your city"
+                              value={cityValue}
+                              onChange={(e) => {
+                                setCityValue(e.target.value);
+                                field.onChange(e.target.value);
+                              }}
+                              onFocus={() => {
+                                if (cityValue) setShowDropdown(true);
+                              }}
+                              onBlur={() => {
+                                setTimeout(() => setShowDropdown(false), 100);
+                              }}
+                              className="pr-10"
+                            />
+                            {cityValue && (
+                              <button
+                                type="button"
+                                onClick={handleCityClear}
+                                className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 text-xl"
+                              >
+                                &times;
+                              </button>
+                            )}
+                            {showDropdown && filteredCities.length > 0 && (
+                              <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded shadow max-h-44 overflow-y-auto">
+                                {filteredCities.map((city, index) => (
+                                  <div
+                                    key={index}
+                                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                    onClick={() => handleCitySelect(city)}
+                                  >
+                                    {city}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </FormControl>
+                        <FormMessage className="common-error-msg" />
+                      </FormItem>
+                    )}
                   />
                 </div>
 
@@ -760,7 +743,8 @@ const Register = () => {
               Dear <span>{userDetails.name}</span>,
             </p>
             <p>
-              Your enquiry has been submitted successfully. Here are your details:
+              Your enquiry has been submitted successfully. Here are your
+              details:
             </p>
             <p>
               Unique ID: <span>{userDetails.uniqueId}</span>
