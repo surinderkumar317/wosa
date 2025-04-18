@@ -29,7 +29,6 @@ import {
   SelectValue,
   SelectGroup,
 } from "@/components/ui/select";
-
 import { toast } from "sonner";
 import { Toaster } from "sonner";
 
@@ -59,10 +58,8 @@ const cityList = [
   "Chhindwara",
   "Calicut",
   "Churu",
-  // add more cities
 ];
 
-// Validation Schemas
 const phoneSchema = z.object({
   countryCode: z.string().min(2, "Country code is required"),
   phoneNumber: z
@@ -84,9 +81,7 @@ const registrationSchema = z.object({
         year <= new Date().getFullYear()
       );
     },
-    {
-      message: "Please enter a valid date of birth",
-    }
+    { message: "Please enter a valid date of birth" }
   ),
   city: z.string().min(1, "Please enter a valid city"),
   source: z.string().min(1, "Please select an option"),
@@ -104,16 +99,7 @@ const verificationSchema = z.object({
     .regex(/^[0-9]+$/, "Only numbers allowed"),
 });
 
-type RegistrationData = {
-  name: string;
-  email: string;
-  dob: string;
-  city: string;
-  source: string;
-  interestedServcies: string;
-  interestedSubServcies: string;
-  interestedCountries: string;
-};
+type RegistrationData = z.infer<typeof registrationSchema>;
 
 const Register: React.FC = () => {
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
@@ -122,7 +108,6 @@ const Register: React.FC = () => {
   const [selectedService, setSelectedService] = useState("");
   const [selectedSubService, setSelectedSubService] = useState("");
   const [resendTimer, setResendTimer] = useState(30);
-
   const [isVarificationOpen, setIsVarificationOpen] = useState(false);
   const [isFormInfoOpen, setIsFormInfoOpen] = useState(false);
   const [submittedPhoneNumber, setSubmittedPhoneNumber] = useState("");
@@ -131,17 +116,14 @@ const Register: React.FC = () => {
     uniqueId: "",
     password: "",
   });
-
   const [searchTerm, setSearchTerm] = useState("");
+  const [registrationData, setRegistrationData] =
+    useState<RegistrationData | null>(null);
 
   const filteredOptions = countryOptions.filter((country) =>
     country.label.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const [registrationData, setRegistrationData] =
-    useState<RegistrationData | null>(null);
-
-  // Phone Form Hook
   const phoneForm = useForm({
     resolver: zodResolver(phoneSchema),
     defaultValues: {
@@ -150,7 +132,6 @@ const Register: React.FC = () => {
     },
   });
 
-  // Registration Form Hook
   const registrationForm = useForm({
     resolver: zodResolver(registrationSchema),
     defaultValues: {
@@ -165,10 +146,13 @@ const Register: React.FC = () => {
     },
   });
 
-  // Handle Phone Form Submission
+  const verifyForm = useForm({
+    resolver: zodResolver(verificationSchema),
+    defaultValues: { verificationCode: "" },
+  });
+
   const handlePhoneSubmit = (data: z.infer<typeof phoneSchema>) => {
-    console.log("Phone Data:", data);
-    setSubmittedPhoneNumber(`${data.countryCode} ${data.phoneNumber}`); // Store phone number
+    setSubmittedPhoneNumber(`${data.countryCode} ${data.phoneNumber}`);
     setIsPhoneOpen(false);
     setIsRegistrationOpen(true);
   };
@@ -176,18 +160,12 @@ const Register: React.FC = () => {
   const handleRegistrationSubmit = async (
     data: z.infer<typeof registrationSchema>
   ) => {
-    console.log("Form Data Submitted:", data);
     toast.success("Register successful! 🎉");
     setIsRegistrationOpen(false);
     registrationForm.reset();
-
-    // Store form data before moving to the next step
     setRegistrationData(data);
-
-    setIsRegistrationOpen(false);
     setIsVarificationOpen(true);
 
-    // Simulate an API response with generated details
     const generatedUserDetails = {
       name: data.name,
       uniqueId: "UID123456",
@@ -196,46 +174,37 @@ const Register: React.FC = () => {
     setUserDetails(generatedUserDetails);
   };
 
-  useEffect(() => {
-    if (isRegistrationOpen && registrationData) {
-      registrationForm.reset(registrationData); // ✅ Restore values when reopening
-    }
-  }, [isRegistrationOpen]);
-
-  const verifyForm = useForm({
-    resolver: zodResolver(verificationSchema),
-    defaultValues: { verificationCode: "" },
-  });
-
-  // Handle Verification Submission
   const handleVarifySubmit = async (data: { verificationCode: string }) => {
-    console.log("Verification Code Submitted:", data.verificationCode);
     setIsVarificationOpen(false);
-    setIsFormInfoOpen(true); // Open the final dialog
+    setIsFormInfoOpen(true);
   };
 
-  useEffect(() => {
-    let timer: NodeJS.Timeout; // Explicitly define the timer type
-
-    if (isVarificationOpen && resendTimer > 0) {
-      timer = setInterval(() => {
-        setResendTimer((prev) => (prev > 0 ? prev - 1 : 0));
-      }, 1000);
-    }
-
-    return () => clearInterval(timer); // Cleanup on unmount
-  }, [isVarificationOpen, resendTimer]);
-
   const handleResendCode = () => {
-    setResendTimer(30); // Reset countdown
+    setResendTimer(30);
     console.log("Resending verification code...");
   };
 
   const handleCloseModals = () => {
     setIsVarificationOpen(false);
     setIsFormInfoOpen(false);
-    phoneForm.reset(); // Reset phone form when closing any modal
+    phoneForm.reset();
   };
+
+  useEffect(() => {
+    if (isRegistrationOpen && registrationData) {
+      registrationForm.reset(registrationData);
+    }
+  }, [isRegistrationOpen]);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (isVarificationOpen && resendTimer > 0) {
+      timer = setInterval(() => {
+        setResendTimer((prev) => (prev > 0 ? prev - 1 : 0));
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [isVarificationOpen, resendTimer]);
 
   return (
     <>

@@ -1,3 +1,5 @@
+"use client"; // (Optional if you are using Next.js client component)
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -11,7 +13,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const checkoutDetails: { label: string; value: string } [] = [
+const checkoutDetails: { label: string; value: string }[] = [
   { label: "Course:", value: "CELPIP | Online | 60 Days - General" },
   { label: "Branch:", value: "ONLINE" },
   { label: "Module(s):", value: "SPEAKING,WRITING,READING,LISTENING" },
@@ -26,6 +28,7 @@ const checkoutDetails: { label: string; value: string } [] = [
     value: "17-04-2025 - 15-06-2025 (60 Days)",
   },
 ];
+
 interface PaymentDetail {
   type?: "title";
   label: string;
@@ -35,7 +38,7 @@ interface PaymentDetail {
   bg?: boolean;
 }
 
-const paymentDetails = [
+const paymentDetails: PaymentDetail[] = [
   { type: "title", label: "Payment For" },
   { label: "Package Subscription", breakdown: "", total: "INR 11441" },
   { type: "title", label: "Tax Applied" },
@@ -56,10 +59,11 @@ const paymentDetails = [
   },
 ];
 
-const page: React.FC = () => {
+const CheckoutPage: React.FC = () => {
   return (
     <div className="checkout-section py-10 bg-[#e8f0fe]">
       <div className="container m-auto flex gap-5">
+        {/* Left Side */}
         <div className="w-3/4 bg-white shadow-lg rounded-lg p-5">
           <h2 className="text-2xl font-bold">Checkout Details</h2>
           <div className="checkout-container flex flex-col mt-5">
@@ -78,6 +82,7 @@ const page: React.FC = () => {
             ))}
           </div>
 
+          {/* Payment Details */}
           <div className="checkout-paymentdetails-cont mt-10">
             <div className="payment-detail-header flex justify-between gap-5 items-center">
               <h2 className="text-2xl font-bold">Payment Details</h2>
@@ -92,7 +97,7 @@ const page: React.FC = () => {
             <Table className="border mt-10">
               <TableHeader>
                 <TableRow className="bg-gray-100">
-                  <TableHead className="font-bold text-black w">
+                  <TableHead className="font-bold text-black">
                     Particulars
                   </TableHead>
                   <TableHead className="font-bold text-black text-right">
@@ -106,7 +111,7 @@ const page: React.FC = () => {
               <TableBody>
                 {paymentDetails.map((item, index) => {
                   const isTitle = item.type === "title";
-                  const rowClasses = `${item.bg ? "bg-gray-100" : ""}`;
+                  const rowClasses = item.bg ? "bg-gray-100" : "";
                   const cellClass = item.bold ? "font-bold" : "";
 
                   return (
@@ -127,6 +132,7 @@ const page: React.FC = () => {
             </Table>
           </div>
 
+          {/* Terms Checkbox and Payment Button */}
           <div className="checkout-checkbox-cont mt-5 flex justify-between">
             <div className="checkbox-checkout flex gap-3 items-center">
               <Checkbox id="terms" />
@@ -137,6 +143,8 @@ const page: React.FC = () => {
             <Button className="bg-[#d72a23]">Make Payment</Button>
           </div>
         </div>
+
+        {/* Right Side */}
         <div className="w-1/4 bg-white shadow-lg rounded-lg p-5 checkout-right-side">
           <h2 className="text-2xl font-bold">Checkout T&C</h2>
           <ScrollArea className="h-[800px] w-full pr-5 checkout-scroll-area">
@@ -212,4 +220,4 @@ const page: React.FC = () => {
   );
 };
 
-export default page;
+export default CheckoutPage;
