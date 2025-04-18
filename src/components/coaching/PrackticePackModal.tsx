@@ -85,7 +85,7 @@ const formatDate = (date: Date) => {
 };
 
 // Component
-const PrackticePackModal = ({ heading }: FormBannerProps) => {
+const PrackticePackModal: React.FC<FormBannerProps> = ({ heading }) => {
   const [selectedCountry, setSelectedCountry] = useState("+91");
   const [isCourseOpen, setIsCourseOpen] = useState(false);
   const [isCourseinfoOpen, setIsCourseinfoOpen] = useState(false);

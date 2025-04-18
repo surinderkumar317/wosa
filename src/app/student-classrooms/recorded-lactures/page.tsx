@@ -26,7 +26,15 @@ import ClassroomHeaderData from "@/components/classroom-dashboard/ClassroomHeade
 import FilePreviewModal from "@/components/dashboard/FilePreviewModal";
 
 // Dummy lecture data
-const lectureData = [
+interface Lecture {
+  id: number;
+  topic: string;
+  date: Date;
+  img: string;
+  videoUrl: string;
+}
+
+const lectureData: Lecture[] = [
   {
     id: 1,
     topic: "Lorem Ipsum is simply dummy",
@@ -55,7 +63,7 @@ const formSchema = z.object({
   date: z.date().optional(),
 });
 
-const Page = () => {
+const Page: React.FC = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: { search: "", date: undefined },

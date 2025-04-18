@@ -2,7 +2,7 @@ import React from 'react'
 import ClassroomHeaderData from './ClassroomHeaderData'
 import CommonImage from '../common/Image'
 
-const StudentServices = () => {
+const StudentServices: React.FC = () => {
   return (
     <div className='stu-classroom-cont flex flex-col w-full'>
        <ClassroomHeaderData/>

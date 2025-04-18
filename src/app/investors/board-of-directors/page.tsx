@@ -1,7 +1,16 @@
 import React from "react";
 import CommonImage from "@/components/common/Image";
 
-const directorList = [
+interface Director {
+  name: string;
+  title: string;
+  din: string;
+  img: string;
+  align: "left" | "right";
+  content: string;
+}
+
+const directorList: Director[] = [
   {
     name: "Mr. Pardeep Balyan",
     title: "Chairperson and Managing Director",
@@ -44,7 +53,7 @@ const directorList = [
   },
 ];
 
-const page = () => {
+const Page: React.FC = () => {
   return (
     <div className="borad-director-section">
       <h1 className="text-5xl text-black mb-10 flex justify-center font-bold mt-16">
@@ -85,4 +94,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import CommonImage from "@/components/common/Image";
 import { Button } from "@/components/ui/button";
@@ -11,7 +12,17 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 
-const scheduleData = [
+// Define the type for schedule data
+interface ScheduleItem {
+  topic: string;
+  status: string;
+  duration: string;
+  date: string;
+  time: string;
+  liveStatus: "red" | "green";
+}
+
+const scheduleData: ScheduleItem[] = [
   {
     topic: "CELPIP",
     status: "Online,Offline",
@@ -38,7 +49,7 @@ const scheduleData = [
   },
 ];
 
-const FullClassSchedule= () => {
+const FullClassSchedule: React.FC = () => {
   return (
     <div className="stu-classroom-row-content w-full mb-5">
       <div className="stu-classroom-heading flex justify-between mb-5">
@@ -56,14 +67,24 @@ const FullClassSchedule= () => {
               <CardDescription />
             </CardHeader>
             <CardContent className="p-5">
-              <p className="mb-2"><strong>Topic:</strong> {item.topic}</p>
-              <p className="mb-2"><strong>Status:</strong> {item.status}</p>
-              <p className="mb-2"><strong>Duration:</strong> {item.duration}</p>
-              <p className="mb-2"><strong>Date:</strong> {item.date}</p>
-              <p className="mb-2"><strong>Time:</strong> {item.time}</p>
+              <p className="mb-2">
+                <strong>Topic:</strong> {item.topic}
+              </p>
+              <p className="mb-2">
+                <strong>Status:</strong> {item.status}
+              </p>
+              <p className="mb-2">
+                <strong>Duration:</strong> {item.duration}
+              </p>
+              <p className="mb-2">
+                <strong>Date:</strong> {item.date}
+              </p>
+              <p className="mb-2">
+                <strong>Time:</strong> {item.time}
+              </p>
               <div className="full-class-btn-cont w-full justify-center flex flex-col gap-4 items-center">
                 <Button variant="outline">Join Class</Button>
-                <p>
+                <p className="flex gap-2 items-center">
                   Status
                   <i
                     className={`fa fa-circle text-${item.liveStatus}-600`}

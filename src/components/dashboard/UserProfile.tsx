@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import ProfilePicture from "@/components/dashboard/ProfilePicture";
 import ChangePassword from "@/components/dashboard/ChangePassword";
 
-const UserProfile = () => {
+const UserProfile: React.FC = () => {
   const router = useRouter();
 
   return (

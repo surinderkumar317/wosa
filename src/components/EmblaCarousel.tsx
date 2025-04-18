@@ -14,7 +14,7 @@ const slides = [
     description:
       "Try our online and offline coaching to get instant scores on English proficiency tests like IELTS, PTE, TOEFL, DUOLINGO, and Foreign Languages.",
     buttonText: "Enquire Now",
-    buttonLink: "/",
+    buttonLink: "/enquiry",
     image: "/images/1000x665(1).webp",
   },
   {
@@ -22,15 +22,15 @@ const slides = [
     description:
       "Western Overseas, the best immigration consultants located in India, Canada, and Australia, to transform your dreams into reality.",
     buttonText: "Enquire Now",
-    buttonLink: "/",
+    buttonLink: "/enquiry",
     image: "/images/1000x665(2).webp",
   },
   {
     title: "IELTS | PTE | TOEFL",
     description:
       "Try our online and offline coaching to get instant scores on English proficiency tests like IELTS, PTE, TOEFL, DUOLINGO, and Foreign Languages.",
-    buttonText: "Enquire Now",
-    buttonLink: "/",
+    buttonText: "Buy Now",
+    buttonLink: "/practice-packs",
     image: "/images/1000x665(3).webp",
   },
 ];

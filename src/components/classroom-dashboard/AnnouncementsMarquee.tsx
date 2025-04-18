@@ -8,7 +8,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const marqueeAnnouncements = [
+// Define type for announcement items
+type MarqueeAnnouncement = {
+  title: string;
+  date: string;
+  dialogTitle: string;
+  dialogDescription: string;
+};
+
+// Typed data
+const marqueeAnnouncements: MarqueeAnnouncement[] = [
   {
     title: "Rakhi 50% off",
     date: "2nd April 2025 3:07 PM",
@@ -19,14 +28,16 @@ const marqueeAnnouncements = [
   // Add more if needed
 ];
 
-const AnnouncementsMarquee = () => {
+const AnnouncementsMarquee: React.FC = () => {
   return (
     <div className="stu-classroom-header bg-yellow-100 p-4 flex justify-center items-center gap-5 rounded-xl text-black mb-6 announcement-marquee-container">
       {marqueeAnnouncements.map((item, index) => (
         <Dialog key={index}>
-          <DialogTrigger className="text-2xl annoucement-marquee-text">
-            <strong>{item.title}</strong>{" "}
-            <span className="text-red-600">{item.date}</span>
+          <DialogTrigger asChild>
+            <button className="text-2xl annoucement-marquee-text">
+              <strong>{item.title}</strong>{" "}
+              <span className="text-red-600">{item.date}</span>
+            </button>
           </DialogTrigger>
           <DialogContent className="common-modal-form w-full max-w-xl">
             <DialogHeader>

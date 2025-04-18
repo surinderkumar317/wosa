@@ -2,7 +2,7 @@ import React from "react";
 import AboutContent from "@/components/about-company/Content";
 import CommonImage from "@/components/common/Image";
 
-const AboutCompany = () => {
+const AboutCompany: React.FC = () => {
   return (
     <div className="w-full py-24">
       <div className="container m-auto flex gap-10 items-center lg:flex-row lg:px-0 flex-col px-5">

@@ -28,7 +28,7 @@ const viewProfileSchema = z.object({
   permanentAddress: z.string().min(1, "Please enter your address"),
 });
 
-const ViewProfile = () => {
+const ViewProfile: React.FC = () => {
   const router = useRouter();
 
   const viewProfileForm = useForm({

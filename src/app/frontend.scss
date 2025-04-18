@@ -83,6 +83,18 @@ $lightBlueColor:#E8F0FE;
         }
 }
 
+// firefox css hack for scrollbar
+@-moz-document url-prefix() {
+    /* Your Firefox-specific styles here */
+    .common-scroller {
+      scrollbar-width: thin;
+    }
+}
+
+// fix on focus textarea border issue
+.focus-visible\:ring-ring:focus-visible {
+    --tw-ring-color: none;
+}
 
 body{
     color:$blackColor;
@@ -406,6 +418,7 @@ input::placeholder {
                     text-transform: capitalize;
                     left: 0;
                     position: relative;
+                    line-height: 25px;
                     &:hover{
                         color:$redColor;
                         left: 10px;
@@ -1019,7 +1032,7 @@ input::placeholder {
                 button {
                     padding: 0;
                     font-size: 1.2rem;
-                    color:#fff;
+                    color:$whiteColor;
                     &:hover{
                         background:none;
                         color:$redColor;
@@ -1434,11 +1447,13 @@ input::placeholder {
         font-size: 2rem;
         font-weight: bold;
         margin: 0px 0 10px;
+        line-height: 35px;
     }
     h2, h3{
         font-weight: bold;
         font-size: 1.5rem;
         margin: 15px 0;
+        line-height: 25px;
     }
     p{
         font-size: 1rem;
@@ -1489,7 +1504,7 @@ input::placeholder {
 
 .make-new-request button {
     background: hsl(var(--primary));
-    color: #fff;
+    color: $whiteColor;
 }
 
 // coaching page css
@@ -1540,7 +1555,7 @@ input::placeholder {
                 font-weight: bold;
                 i{
                     background: $blackColor;
-                    color: #fff;
+                    color: $whiteColor;
                     padding: 8px 11px;
                     border-radius: 50px;
                     position: relative;
@@ -1676,7 +1691,7 @@ input::placeholder {
                 text-align: center;
                 &.active{
                     background: $redColor;
-                    color: #fff;
+                    color: $whiteColor;
                     border-radius: 12px;
                     padding-left: 2rem;
                     padding-right: 2rem;
@@ -1728,7 +1743,7 @@ input::placeholder {
             border-radius: 15px 0 0 15px;   
             box-shadow: 0px 2px 10px 4px #ccc;
             position: relative;
-            background: #fff;
+            background:$whiteColor;
             min-height:450px;
             .coaching-text{
                 z-index: 9;
@@ -1796,18 +1811,7 @@ input::placeholder {
 .mobile-navigation {
     height: 100vh !important;
     overflow: auto;
-    // ul{
-    //     li.submenu{
-    //         position: relative;
-    //         ul.mobile-subdropdowns{
-    //             display: none;
-    
-    //         }
-    //         &:hover ul.mobile-subdropdowns{
-    //             display: block;
-    //         }
-    //     }
-    // }
+    padding-bottom: 2%;
     .mobile-login-register{
         display: flex;
         gap:5px;
@@ -1837,6 +1841,8 @@ input::placeholder {
         }
     }
 }
+.submenu .mobile-subdropdowns {display: none;}
+.submenu.open-subdropdown .mobile-subdropdowns {display: block;}
 
 // common full width slider
 .slider-full-width{
@@ -2248,7 +2254,7 @@ background: #ccc;
         img.user-profile {
             border-radius: 150px;
             padding: 5px;
-            background: #fff;
+            background: $whiteColor;
             border: 1px solid #000;
         }
     }
@@ -2272,7 +2278,7 @@ background: #ccc;
 .make-new-request {
     button {
         background: hsl(var(--primary));
-        color: #fff;
+        color: $whiteColor;
         &:hover
         {
           background:$redColor;
@@ -2442,7 +2448,7 @@ background: #ccc;
     {
         button{
             background: #073255;
-            color: #fff;
+            color: $whiteColor;
             padding: 15px 25px;
             height: auto;
             font-size: 1.1rem;
@@ -2453,6 +2459,7 @@ background: #ccc;
         }
     }
 }
+
 
 // responsive css
 @media screen and (min-width:1921px) and (max-width:5000px)
@@ -2499,18 +2506,31 @@ background: #ccc;
                 .navi {
                     li{
                         a{
-                            font-size: 1rem;
+                            font-size:0.8rem;
+                            img{
+                                width: 30px;
+                                height: 30px;
+                            }
                         } 
                         &.complaint-feedback-btn {
                             button
                             {
-                                font-size: 1rem !important;
+                                font-size:0.8rem !important;
                             }    
                         }                                                 
                     }                                      
                 } 
             } 
         }
+    }
+    .header .header-topbar .login-reg-cont ul li button, .header .header-topbar .login-reg-cont ul li a, .header .header-topbar .login-reg-cont ul li p.time-zone-text,
+    .header .header-topbar .quick-btn-cont .quick-enquiry
+    {
+        font-size: 0.8rem !important;
+    }
+    .header .header-topbar .quick-btn-cont .quick-enquiry
+    {
+        padding:5px 15px;
     }
     .main-slider-container {
         .left-slide-content {
@@ -2645,9 +2665,9 @@ background: #ccc;
 }
 @media screen and (max-width:1152px)
 {
-    .header .header-topbar .login-reg-cont ul li button, .header .header-topbar .login-reg-cont ul li a {
-        font-size: 0.9rem !important;
-    }
+    // .header .header-topbar .login-reg-cont ul li button, .header .header-topbar .login-reg-cont ul li a {
+    //     font-size: 0.9rem !important;
+    // }
     .header {
         .header-topbar {
             .quick-btn-cont {
@@ -2662,12 +2682,12 @@ background: #ccc;
                 .navi {
                     li {
                         a {
-                            font-size: 0.8rem;
+                            font-size: 0.7rem;
                         }
                         &.complaint-feedback-btn{
                             button
                             {
-                                font-size: 0.8rem !important; 
+                                font-size: 0.7rem !important; 
                             }  
                         } 
                     }
@@ -2768,7 +2788,8 @@ background: #ccc;
             }
         }
     }
-    .header .header-topbar .login-reg-cont ul li button, .header .header-topbar .login-reg-cont ul li a {
+    .header .header-topbar .login-reg-cont ul li button, .header .header-topbar .login-reg-cont ul li a, .header .header-topbar .login-reg-cont ul li p.time-zone-text,
+    .header .header-topbar .quick-btn-cont .quick-enquiry  {
         font-size: 0.7rem !important;
     }
     .header .navigation-container .navbar .navi li ul.navi-dropdown, .header .navigation-container .navbar .navi li ul.navi-sub-dropdown
@@ -3028,7 +3049,7 @@ background: #ccc;
             flex-direction: column-reverse;
             .footer-copyright {
                 .footer-copy-text {
-                    color: #fff;
+                    color: $whiteColor;
                     font-size: 1.2rem;
                     width: 100%;
                     text-align: center;
@@ -3659,7 +3680,7 @@ background: #ccc;
             {
                 right: -8px;
                 top: -16px;
-                background: #fff;
+                background:$whiteColor;
                 opacity: 9;
                 border-radius: 100px;
                 width: 32px;
@@ -3716,7 +3737,7 @@ background: #ccc;
         {
             right: -8px;
             top: -16px;
-            background: #fff;
+            background: $whiteColor;
             opacity: 9;
             border-radius: 100px;
             width: 32px;
@@ -3735,7 +3756,7 @@ background: #ccc;
         {
             right: -8px;
             top: -16px;
-            background: #fff;
+            background:$whiteColor;
             opacity: 9;
             border-radius: 100px;
             width: 32px;
@@ -3790,7 +3811,7 @@ background: #ccc;
         {
             right: -8px;
             top: -16px;
-            background: #fff;
+            background:$whiteColor;
             opacity: 9;
             border-radius: 100px;
             width: 32px;
@@ -3800,6 +3821,41 @@ background: #ccc;
             justify-content: center;
             align-items: center;
         } 
+    }
+    .common-modal-form
+    {
+        .common-user-info-cont + button{
+            right: -8px;
+            top: -16px;
+            background:$whiteColor;
+            opacity: 9;
+            border-radius: 100px;
+            width: 32px;
+            height: 33px;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .timezone-modal
+    {
+        width: 95%;
+        padding:15px 10px;
+        border-radius: 10px;
+        .timezone-text + button{
+            right: -8px;
+            top: -16px;
+            background:$whiteColor;
+            opacity: 9;
+            border-radius: 100px;
+            width: 32px;
+            height: 33px;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
     
 }

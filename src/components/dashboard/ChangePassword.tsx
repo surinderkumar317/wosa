@@ -28,7 +28,9 @@ import CommonImage from "../common/Image";
 const passwordSchema = z
   .object({
     currentPassword: z.string().min(6, "Current Password is required"),
-    newPassword: z.string().min(6, "New Password must be at least 6 characters"),
+    newPassword: z
+      .string()
+      .min(6, "New Password must be at least 6 characters"),
     confirmPassword: z.string().min(6, "Confirm Password is required"),
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
@@ -43,7 +45,7 @@ const fieldLabels = {
   confirmPassword: "Confirm Password",
 } as const;
 
-const ChangePassword = () => {
+const ChangePassword: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [showPasswords, setShowPasswords] = useState<Record<string, boolean>>({
     currentPassword: false,
@@ -77,7 +79,10 @@ const ChangePassword = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="w-full flex justify-start p-2 h-11" variant="outline">
+        <Button
+          className="w-full flex justify-start p-2 h-11"
+          variant="outline"
+        >
           <CommonImage
             classname="view-profile"
             src="/dashboard-images/Change_Password.webp"
@@ -96,7 +101,10 @@ const ChangePassword = () => {
         </DialogHeader>
 
         <Form {...changePasswordForm}>
-          <form onSubmit={changePasswordForm.handleSubmit(handlePasswordSubmit)} className="space-y-4 p-0 w-full">
+          <form
+            onSubmit={changePasswordForm.handleSubmit(handlePasswordSubmit)}
+            className="space-y-4 p-0 w-full"
+          >
             {/** 🔹 Password Input Fields **/}
             {Object.keys(fieldLabels).map((fieldName) => (
               <FormField
@@ -106,20 +114,25 @@ const ChangePassword = () => {
                 render={({ field }) => (
                   <FormItem className="form-row">
                     <Label>
-                      {fieldLabels[fieldName as keyof typeof fieldLabels]} <span className="text-red-500">*</span>
+                      {fieldLabels[fieldName as keyof typeof fieldLabels]}{" "}
+                      <span className="text-red-500">*</span>
                     </Label>
                     <FormControl>
                       <div className="relative">
                         <Input
                           type={showPasswords[fieldName] ? "text" : "password"}
-                          placeholder={`Enter ${fieldLabels[fieldName as keyof typeof fieldLabels]}`}
+                          placeholder={`Enter ${
+                            fieldLabels[fieldName as keyof typeof fieldLabels]
+                          }`}
                           {...field}
                           className="pr-10"
                         />
                         <button
                           type="button"
                           className="absolute right-3 top-2 text-gray-500"
-                          aria-label={`Toggle ${fieldLabels[fieldName as keyof typeof fieldLabels]} visibility`}
+                          aria-label={`Toggle ${
+                            fieldLabels[fieldName as keyof typeof fieldLabels]
+                          } visibility`}
                           onClick={() =>
                             setShowPasswords((prev) => ({
                               ...prev,
@@ -127,7 +140,11 @@ const ChangePassword = () => {
                             }))
                           }
                         >
-                          {showPasswords[fieldName] ? <Eye size={20} /> : <EyeOff size={20} />}
+                          {showPasswords[fieldName] ? (
+                            <Eye size={20} />
+                          ) : (
+                            <EyeOff size={20} />
+                          )}
                         </button>
                       </div>
                     </FormControl>

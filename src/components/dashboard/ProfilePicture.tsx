@@ -43,7 +43,7 @@ const ProfileChangeSchema = z.object({
     ),
 });
 
-const ProfilePicture = () => {
+const ProfilePicture: React.FC = () => {
   const [open, setOpen] = useState(false); // State to control modal visibility
 
   const profileChangeForm = useForm<z.infer<typeof ProfileChangeSchema>>({

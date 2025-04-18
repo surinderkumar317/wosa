@@ -28,7 +28,15 @@ import ClassroomSidebarMenu from "@/components/classroom-dashboard/ClassroomSide
 import { Button } from "@/components/ui/button";
 
 // Sample data array for classroom materials
-const materials = [
+interface Material {
+  id: number;
+  title: string;
+  date: string;
+  href: string;
+  image: string;
+}
+
+const materials: Material[] = [
   {
     id: 1,
     title: "Lorem Ipsum is simply dummy",
@@ -57,7 +65,7 @@ const formSchema = z.object({
   date: z.date().optional(),
 });
 
-const Page = () => {
+const Page: React.FC = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: { search: "", date: undefined },

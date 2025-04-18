@@ -10,7 +10,7 @@ import TimeZone from "./TimeZone";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
 
-const Header = () => {
+const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -63,7 +63,7 @@ const Header = () => {
             </div>
             <div className="quick-btn-cont whitespace-nowrap">
               <Button asChild>
-                <Link href={ENQUIRY_URL} className="quick-enquiry">
+                <Link href="/enquiry" className="quick-enquiry">
                   Quick Enquiry
                 </Link>
               </Button>

@@ -7,7 +7,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-const orders = [
+// Defining TypeScript types for the order data
+interface Order {
+  title: string;
+  product: string;
+  transactionDate: string;
+  validFrom: string;
+  validTill: string;
+  status: string;
+  statusClass: string;
+}
+
+const orders: Order[] = [
   {
     title: "Zigzag package Spouse visa",
     product: "Australia",
@@ -46,7 +57,7 @@ const orders = [
   },
 ];
 
-const OrderHistory = () => {
+const OrderHistory: React.FC = () => {
   return (
     <div className="order-history-cont">
       <div className="dash-header flex justify-between items-center">

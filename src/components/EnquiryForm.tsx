@@ -72,7 +72,7 @@ type EnquiryData = {
   message: string;
 };
 
-const EnquiryForm = () => {
+const EnquiryForm: React.FC = () => {
   const [selectedCountry, setSelectedCountry] = useState("+91");
   const [selectedService, setSelectedService] = useState("");
   const [selectedSubService, setSelectedSubService] = useState("");

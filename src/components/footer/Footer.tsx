@@ -5,7 +5,7 @@ import Footercopyright from '@/components/footer/Copyright'
 import BottomarrowPhone from '@/components/footer/BottomarrowPhone';
 import Script from "next/script";
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <>
       <div className='footer py-24'>

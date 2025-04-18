@@ -12,7 +12,7 @@ import Link from "next/link";
 import WalletInfoModal from "./WalletInfoModal";
 import SwitchClassroom from "./SwitchClassroom";
 
-const DashboardStudent = () => {
+const DashboardStudent: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [isSwitchClassroomOpen, setIsSwitchClassroomOpen] = useState(false);
 

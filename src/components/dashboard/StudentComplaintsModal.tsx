@@ -87,7 +87,7 @@ const conversationSchema = z.object({
 
 const allowedFormats = ["jpg", "png", "jpeg", "pdf", "webp", "mp3", "mp4"];
 
-const StudentComlaintModal = () => {
+const StudentComlaintModal: React.FC = () => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [messageLength, setMessageLength] = useState(0);
   const [isOpen, setIsOpen] = useState(false);

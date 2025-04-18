@@ -11,8 +11,6 @@ const SidebarMenu = dynamic(() => import("@/components/dashboard/SidebarMenu"), 
   loading: () => <Loading />,
 });
 
-
-
 const page = () => {
   return (
     <div className="dashboard-section py-20">

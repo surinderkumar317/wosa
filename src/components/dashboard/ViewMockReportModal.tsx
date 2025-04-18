@@ -10,7 +10,18 @@ import {
 import { Button } from "../ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-const scores = [
+interface Score {
+  title: string;
+  score: number;
+}
+
+interface Explanation {
+  title: string;
+  description: string;
+  additionalInfo?: string;
+}
+
+const scores: Score[] = [
   { title: "Overall", score: 88 },
   { title: "Listening", score: 88 },
   { title: "Reading", score: 88 },
@@ -18,7 +29,7 @@ const scores = [
   { title: "Speaking", score: 88 },
 ];
 
-const explanations = [
+const explanations: Explanation[] = [
   {
     title: "Overall: 8",
     description:
@@ -33,7 +44,7 @@ const explanations = [
   },
 ];
 
-const ViewMockReportModal = () => {
+const ViewMockReportModal: React.FC = () => {
   return (
     <Dialog>
       <DialogTrigger

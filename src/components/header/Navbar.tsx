@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import Link from "next/link";
 import { HEADER_LINKS } from "@/app/constants/links";
 import CommonImage from "@/components/common/Image";
@@ -28,8 +29,7 @@ interface IMenuItem {
 
 const menuData: IMenuItem[] = HEADER_LINKS;
 
-const Navbar: React.FC = () => { 
-
+const Navbar: React.FC = () => {
   return (
     <>
       {/* desktop view */}
@@ -108,7 +108,9 @@ const Navbar: React.FC = () => {
         </ul>
         {/* Show Dashboard Link When Logged In */}
         <Button asChild className="relative -top-1 text-base hover:bg-red-600">
-          <Link href="/student-dashboard" prefetch={true}>Dashboard</Link>
+          <Link href="/student-dashboard" prefetch={true}>
+            Dashboard
+          </Link>
         </Button>
       </nav>
 
@@ -160,28 +162,64 @@ const Navbar: React.FC = () => {
                   >
                     {menuItem.title}
                   </Link>
+
                   {menuItem.subMenu && (
                     <ul className="ml-4 mt-2 space-y-2">
                       {menuItem.subMenu.map((sub, subIndex) => (
                         <li className="submenu" key={subIndex}>
-                          <Link
-                            href={sub.link}
-                            className={
-                              sub.disabled
-                                ? "pointer-events-none flex items-center gap-2 font-semibold"
-                                : "flex items-center gap-2 font-semibold"
-                            }
-                          >
-                            {sub.icon && (
-                              <CommonImage
-                                src={sub.icon}
-                                alt={sub.title}
-                                width={16}
-                                height={16}
-                              />
+                          <div className="flex items-center gap-2">
+                            <Link
+                              href={sub.link}
+                              className={
+                                sub.disabled
+                                  ? "pointer-events-none flex items-center gap-2 font-semibold"
+                                  : "flex items-center gap-2 font-semibold"
+                              }
+                            >
+                              {sub.icon && (
+                                <CommonImage
+                                  src={sub.icon}
+                                  alt={sub.title}
+                                  width={16}
+                                  height={16}
+                                />
+                              )}
+                              {sub.title}
+                            </Link>
+
+                            {/* Toggle arrow only if there is a nested submenu */}
+                            {sub.subMenu && (
+                              <button
+                                type="button"
+                                className="ml-auto"
+                                onClick={(e) => {
+                                  const parent =
+                                    e.currentTarget.closest(".submenu");
+                                  if (
+                                    parent?.classList.contains(
+                                      "open-subdropdown"
+                                    )
+                                  ) {
+                                    parent.classList.remove("open-subdropdown");
+                                  } else {
+                                    // Remove class from all others
+                                    document
+                                      .querySelectorAll(
+                                        ".submenu.open-subdropdown"
+                                      )
+                                      .forEach((el) =>
+                                        el.classList.remove("open-subdropdown")
+                                      );
+                                    parent?.classList.add("open-subdropdown");
+                                  }
+                                }}
+                              >
+                                <i className="fa-solid fa-angle-down"></i>
+                              </button>
                             )}
-                            {sub.title}
-                          </Link>
+                          </div>
+
+                          {/* Sub-submenu */}
                           {sub.subMenu && (
                             <ul className="ml-6 mt-1 space-y-1 mobile-subdropdowns">
                               {sub.subMenu.map((branch, branchIndex) => (
@@ -193,7 +231,18 @@ const Navbar: React.FC = () => {
                                       : ""
                                   }
                                 >
-                                  <Link href={branch.link}>{branch.title}</Link>
+                                  <Link
+                                    href={branch.link}
+                                    onClick={(e) => {
+                                      const parentSubmenu =
+                                        e.currentTarget.closest(".submenu");
+                                      parentSubmenu?.classList.remove(
+                                        "open-subdropdown"
+                                      );
+                                    }}
+                                  >
+                                    {branch.title}
+                                  </Link>
                                 </li>
                               ))}
                             </ul>
@@ -205,11 +254,14 @@ const Navbar: React.FC = () => {
                 </li>
               ))}
 
-              {/* Show Dashboard Link When Logged In */}
+              {/* Show Dashboard Link */}
               <li>
-                <Link href="/student-dashboard" prefetch={true}>Dashboard</Link>
+                <Link href="/student-dashboard" prefetch={true}>
+                  Dashboard
+                </Link>
               </li>
             </ul>
+
             <ul className="mobile-login-register">
               <li className="m-timezone-list">
                 <TimeZone />

@@ -48,7 +48,7 @@ const eventItems: EventItem[] = [
   },
 ];
 
-const EventList = () => {
+const EventList: React.FC = () => {
   return (
     <div className="event-list py-5">
       {/* Events Listing */}

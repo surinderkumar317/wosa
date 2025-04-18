@@ -48,7 +48,7 @@ const studentConversations: StudentConversation[] = [
     id: 1,
     requestId: "TWM11NNU",
     name: "Shivam test",
-    mobile: +91 - 1987984654,
+    mobile:91987984654,
     requestStatus: "Open",
     requestSubject: "Leave",
     requestMessage: " asdfasdfasdf asfasfasdfsfew qwerwqr",
@@ -83,7 +83,7 @@ const conversationSchema = z.object({
 
 const allowedFormats = ["jpg", "png", "jpeg", "pdf", "webp", "mp3", "mp4"];
 
-const StudentRequestModal = () => {
+const StudentRequestModal: React.FC = () => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [messageLength, setMessageLength] = useState(0);
   const [isOpen, setIsOpen] = useState(false);

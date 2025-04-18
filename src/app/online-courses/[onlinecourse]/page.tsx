@@ -10,9 +10,7 @@ import LazySection from "@/components/LazySection";
 const FormBanner = dynamic(() => import("@/components/coaching/FormBanner"), {
   loading: () => <Loading />,
 });
-const PageContent = dynamic(
-  () => import("@/components/pagecontent/pageContent"),
-  {
+const PageContent = dynamic(() => import("@/components/pagecontent/pageContent"), {
     loading: () => <Loading />,
   }
 );

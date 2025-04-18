@@ -41,7 +41,7 @@ export default function RootLayout({
         />
       </head> 
       <body
-        suppressHydrationWarning
+        suppressHydrationWarning={true}
         className={`${hind.className} antialiased padding-top`}
       >
         <Header />

@@ -11,7 +11,6 @@ const EventsBookings = dynamic(() => import("@/components/dashboard/EventBooking
   loading: () => <Loading />,
 });
 
-
 const page = () => {
   return (
     <div className="dashboard-section py-20">

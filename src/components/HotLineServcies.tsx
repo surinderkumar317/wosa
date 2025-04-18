@@ -58,7 +58,7 @@ const hotlineContent: HotlineData = {
     ]
 };
 
-const HotLineServices = () => {
+const HotLineServices: React.FC = () =>  {
     return (
         <div className='hotline-section py-24'>
             <div className='container flex lg:flex-row flex-col m-auto hotline-inner-container'>

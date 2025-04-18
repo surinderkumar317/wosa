@@ -3,7 +3,7 @@ import Content from "@/components/imagesgallery/Content";
 import Gallery from "@/components/imagesgallery/Gallery";
 import CommonImage from "@/components/common/Image";
 
-const ImageGallery = () => {
+const ImageGallery: React.FC = () => {
   return (
     <div className="gallery-section py-24">
       <div className="gallery-inner-section">

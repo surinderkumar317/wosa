@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import ClassroomHeaderData from "./ClassroomHeaderData";
 import CommonImage from "../common/Image";
@@ -10,7 +11,15 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const announcements = [
+// Define the type for an announcement item
+type AnnouncementItem = {
+  date: string;
+  title: string;
+  content: string;
+};
+
+// Sample data with types
+const announcements: AnnouncementItem[] = [
   {
     date: "02/04/2025 03:07 PM",
     title: "Rakhi 50% off",
@@ -23,7 +32,7 @@ const announcements = [
   },
 ];
 
-const Announcements = () => {
+const Announcements: React.FC = () => {
   return (
     <div className="stu-classroom-cont flex flex-col w-full">
       <ClassroomHeaderData />
@@ -54,9 +63,9 @@ const Announcements = () => {
 
           <div className="no-image flex w-full justify-center hidden">
             <CommonImage
-              classname={"icon"}
-              src={"/dashboard-images/no-data-found.webp"}
-              alt={"No Data Found"}
+              classname="icon"
+              src="/dashboard-images/no-data-found.webp"
+              alt="No Data Found"
               width={300}
               height={400}
             />

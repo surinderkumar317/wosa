@@ -113,7 +113,7 @@ type FeedbackData = {
   rating: number; // Default value
 };
 
-const Feedback = () => {
+const Feedback: React.FC = () => {
   const [selectedFeedbackType, setSelectedFeedbackType] = useState("phone");
   const [selectedBranch, setSelectedBranch] = useState("");
 

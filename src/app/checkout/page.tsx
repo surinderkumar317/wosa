@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const checkoutDetails = [
+const checkoutDetails: { label: string; value: string } [] = [
   { label: "Course:", value: "CELPIP | Online | 60 Days - General" },
   { label: "Branch:", value: "ONLINE" },
   { label: "Module(s):", value: "SPEAKING,WRITING,READING,LISTENING" },
@@ -26,6 +26,14 @@ const checkoutDetails = [
     value: "17-04-2025 - 15-06-2025 (60 Days)",
   },
 ];
+interface PaymentDetail {
+  type?: "title";
+  label: string;
+  breakdown?: string;
+  total?: string;
+  bold?: boolean;
+  bg?: boolean;
+}
 
 const paymentDetails = [
   { type: "title", label: "Payment For" },
@@ -48,7 +56,7 @@ const paymentDetails = [
   },
 ];
 
-const page = () => {
+const page: React.FC = () => {
   return (
     <div className="checkout-section py-10 bg-[#e8f0fe]">
       <div className="container m-auto flex gap-5">

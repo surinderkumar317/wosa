@@ -67,7 +67,7 @@ const B2bSchema = z.object({
   message: z.string().min(5, "Message is required"),
 });
 
-const B2bRegistrationEnquiry = () => {
+const B2bRegistrationEnquiry: React.FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [messageLength, setMessageLength] = useState(0);
   const [selectedCountry, setSelectedCountry] = useState("+91");

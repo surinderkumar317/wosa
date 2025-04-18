@@ -42,6 +42,26 @@ const countryOptions = [
   { value: "+81", label: "🇯🇵 +81 (Japan)" },
 ];
 
+const cityList = [
+  "Chennai",
+  "Coimbatore",
+  "Cuttack",
+  "Chandigarh",
+  "Chamba",
+  "Delhi",
+  "Mumbai",
+  "Bangalore",
+  "Hyderabad",
+  "Kolkata",
+  "Pune",
+  "Jaipur",
+  "Chikmagalur",
+  "Chhindwara",
+  "Calicut",
+  "Churu",
+  // add more cities
+];
+
 // Validation Schemas
 const phoneSchema = z.object({
   countryCode: z.string().min(2, "Country code is required"),
@@ -55,7 +75,19 @@ const phoneSchema = z.object({
 const registrationSchema = z.object({
   name: z.string().min(2, "Name is required"),
   email: z.string().email("Invalid email format"),
-  dob: z.string().min(1, "Date of Birth is required"),
+  dob: z.string().refine(
+    (val) => {
+      const year = new Date(val).getFullYear();
+      return (
+        /^\d{4}$/.test(year.toString()) &&
+        year >= 1900 &&
+        year <= new Date().getFullYear()
+      );
+    },
+    {
+      message: "Please enter a valid date of birth",
+    }
+  ),
   city: z.string().min(1, "Please enter a valid city"),
   source: z.string().min(1, "Please select an option"),
   interestedServcies: z.string().min(1, "Interested Services is mandatory"),
@@ -83,7 +115,7 @@ type RegistrationData = {
   interestedCountries: string;
 };
 
-const Register = () => {
+const Register: React.FC = () => {
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState("+91");
@@ -384,6 +416,17 @@ const Register = () => {
                             type="date"
                             placeholder="Enter your Date of Birth"
                             {...field}
+                            onInput={(e) => {
+                              const value = e.currentTarget.value;
+                              const year = value.split("-")[0];
+                              if (year.length > 4) {
+                                const trimmed = `${year.slice(0, 4)}-${
+                                  value.split("-")[1] || "01"
+                                }-${value.split("-")[2] || "01"}`;
+                                e.currentTarget.value = trimmed;
+                                field.onChange(trimmed);
+                              }
+                            }}
                           />
                         </FormControl>
                         <FormMessage className="common-error-msg" />
@@ -394,21 +437,84 @@ const Register = () => {
                   <FormField
                     control={registrationForm.control}
                     name="city"
-                    render={({ field }) => (
-                      <FormItem className="form-row w-full">
-                        <Label>
-                          City<span className="text-red-500">*</span>
-                        </Label>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Enter your city"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage className="common-error-msg" />
-                      </FormItem>
-                    )}
+                    render={({ field }) => {
+                      const [filteredCities, setFilteredCities] = useState<
+                        string[]
+                      >([]);
+                      const [showDropdown, setShowDropdown] = useState(false);
+
+                      useEffect(() => {
+                        const input = field.value?.toLowerCase() || "";
+                        if (input.length >= 1) {
+                          const filtered = cityList.filter((city) =>
+                            city.toLowerCase().startsWith(input)
+                          );
+                          setFilteredCities(filtered);
+                          setShowDropdown(true);
+                        } else {
+                          setShowDropdown(false);
+                        }
+                      }, [field.value]);
+
+                      const handleSelect = (city: string) => {
+                        field.onChange(city);
+                        setShowDropdown(false);
+                      };
+
+                      const handleClear = () => {
+                        field.onChange(""); // Clear city value
+                        setShowDropdown(false);
+                      };
+
+                      return (
+                        <FormItem className="form-row w-full relative">
+                          <Label>
+                            City<span className="text-red-500">*</span>
+                          </Label>
+                          <FormControl>
+                            <div className="relative">
+                              <Input
+                                type="text"
+                                placeholder="Enter your city"
+                                {...field}
+                                onFocus={() => {
+                                  if (field.value) setShowDropdown(true);
+                                }}
+                                onBlur={() => {
+                                  setTimeout(() => setShowDropdown(false), 100);
+                                }}
+                                className="pr-10" // Add padding for icon space
+                              />
+                              {/* Cross icon */}
+                              {field.value && (
+                                <button
+                                  type="button"
+                                  onClick={handleClear}
+                                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 text-xl"
+                                >
+                                  &times;
+                                </button>
+                              )}
+
+                              {showDropdown && filteredCities.length > 0 && (
+                                <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded shadow max-h-44 overflow-y-auto">
+                                  {filteredCities.map((city, index) => (
+                                    <div
+                                      key={index}
+                                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                      onClick={() => handleSelect(city)}
+                                    >
+                                      {city}
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          </FormControl>
+                          <FormMessage className="common-error-msg" />
+                        </FormItem>
+                      );
+                    }}
                   />
                 </div>
 
@@ -666,7 +772,8 @@ const Register = () => {
               Dear <span>{userDetails.name}</span>,
             </p>
             <p>
-              Your enquiry has been submitted successfully. Here are your details:
+              Your enquiry has been submitted successfully. Here are your
+              details:
             </p>
             <p>
               Unique ID: <span>{userDetails.uniqueId}</span>

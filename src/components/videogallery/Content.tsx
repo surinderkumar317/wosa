@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import CommonImage from "@/components/common/Image";
 
-const Content = () => {
+const Content: React.FC = () => {
   return (
     <div className="image-gallery-text">
       <h2>Video Gallery</h2>

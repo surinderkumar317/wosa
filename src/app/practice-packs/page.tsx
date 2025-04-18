@@ -59,7 +59,7 @@ const CoursesList: Course[] = [
   },
 ];
 
-const OnlineCourse = () => {
+const OnlineCourse: React.FC = () => {
   const [showCoursesMain, setShowCoursesMain] = useState(false);
 
   const [selectedProgram, setSelectedProgram] = useState<string | null>(null);

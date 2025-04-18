@@ -1,6 +1,15 @@
 import React from "react";
 
-const eventText = [
+// Define valid HTML tags
+type HTMLTags = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div';
+
+interface EventText {
+  id: number;
+  tag: HTMLTags; // Restrict tag to valid HTML tags
+  title: string;
+}
+
+const eventText: EventText[] = [
   {
     id: 1,
     tag: "h3",
@@ -9,7 +18,7 @@ const eventText = [
   { id: 2, tag: "h2", title: "Upcoming Events" },
 ];
 
-const Heading = () => {
+const Heading: React.FC = () => {
   return (
     <div className="event-content">
       {eventText.map((content) => {

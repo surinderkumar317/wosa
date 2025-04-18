@@ -48,7 +48,7 @@ const items: ServiceItem[] = [
       "Permanent Residency status allows you to be a legal resident of another country like Canada or Australia, etc. PR includes Express Entry and PNP programs.",
     buttonText: "Read More",
     buttonImage: "/images/our-services-arrow.webp",
-    link: "/permanent-residency",
+    link: "/pr-visa-landing",
   },
   {
     image: "/images/Online-Coaching.webp",
@@ -58,7 +58,7 @@ const items: ServiceItem[] = [
       "Spouse visa allows you to live with your partner. Western overseas helps you in the complete process such as eligibility check and application process.",
     buttonText: "Read More",
     buttonImage: "/images/our-services-arrow.webp",
-    link: "/spouse-visa",
+    link: "/spouse-visa-landing",
   },
   {
     image: "/images/Practice-Pack.webp",
@@ -68,7 +68,7 @@ const items: ServiceItem[] = [
       "Apply study visas today with Western Overseas to open up multiple possibilities. Studying abroad in the UK, USA, Australia, Canada, others enhances knowledge.",
     buttonText: "Read More",
     buttonImage: "/images/our-services-arrow.webp",
-    link: "/study-visa",
+    link: "/study-visa-landing",
   },
   {
     image: "/images/Reality-Test.webp",
@@ -78,7 +78,7 @@ const items: ServiceItem[] = [
       "You can visit Canada, Australia, the USA, New Zealand, the UK, and Europe as a tourist to meet friends and family. To find more options visit Western Overseas",
     buttonText: "Read More",
     buttonImage: "/images/our-services-arrow.webp",
-    link: "/visitor-visa",
+    link: "/tourist-visa-landing",
   },
   {
     image: "/images/Study-Visa.webp",
@@ -88,7 +88,7 @@ const items: ServiceItem[] = [
       "Western Overseas provides support in getting kids and spouse visas for joining all the family members together. But, A relationship must be genuine to apply.",
     buttonText: "Read More",
     buttonImage: "/images/our-services-arrow.webp",
-    link: "/dependent-visa",
+    link: "/dependent-visa-landing",
   },
   
 ];

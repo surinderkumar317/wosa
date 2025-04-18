@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation"; // Import this
@@ -7,13 +7,13 @@ import { Button } from "../ui/button";
 import WalletInfoModal from "./WalletInfoModal";
 import SwitchClassroom from "./SwitchClassroom";
 
-const SidebarMenu = () => {
+const SidebarMenu: React.FC = () => {
   const pathname = usePathname(); // Get the current path
   const [open, setOpen] = useState(false);
   const [isSwitchClassroomOpen, setIsSwitchClassroomOpen] = useState(false);
 
-   // Function to open SwitchClassroom modal
-   const handleSwitchClassroomOpen = () => {
+  // Function to open SwitchClassroom modal
+  const handleSwitchClassroomOpen = () => {
     setIsSwitchClassroomOpen(true);
   };
 
@@ -28,7 +28,11 @@ const SidebarMenu = () => {
     <div className="sidebar-navigation">
       <ul className="flex flex-col gap-2">
         <li className={isActive("/student-dashboard") ? "active" : ""}>
-          <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
+          <Button
+            asChild
+            variant="outline"
+            className="flex gap-4 items-center justify-start h-auto p-2 font-bold"
+          >
             <Link href="/student-dashboard">
               <CommonImage
                 classname="dashboard-icon"
@@ -42,7 +46,11 @@ const SidebarMenu = () => {
           </Button>
         </li>
         <li className={isActive("/student-dashboard") ? "active" : ""}>
-          <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
+          <Button
+            asChild
+            variant="outline"
+            className="flex gap-4 items-center justify-start h-auto p-2 font-bold"
+          >
             <Link href="/student-dashboard">
               <CommonImage
                 classname="dashboard-icon"
@@ -57,9 +65,13 @@ const SidebarMenu = () => {
         </li>
         <li>
           <WalletInfoModal open={open} setOpen={setOpen} />
-        </li>        
+        </li>
         <li className={isActive("/student-dashboard/orders") ? "active" : ""}>
-          <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
+          <Button
+            asChild
+            variant="outline"
+            className="flex gap-4 items-center justify-start h-auto p-2 font-bold"
+          >
             <Link href="/student-dashboard/orders">
               <CommonImage
                 classname="dashboard-icon"
@@ -71,12 +83,12 @@ const SidebarMenu = () => {
               My Orders
             </Link>
           </Button>
-        </li>        
+        </li>
         <li>
-        {/* Button to trigger SwitchClassroom Modal */}
-          <Button 
-            variant="outline" 
-            className="flex gap-4 items-center justify-start h-auto p-2 font-bold w-full" 
+          {/* Button to trigger SwitchClassroom Modal */}
+          <Button
+            variant="outline"
+            className="flex gap-4 items-center justify-start h-auto p-2 font-bold w-full"
             onClick={handleSwitchClassroomOpen}
           >
             <CommonImage
@@ -90,7 +102,11 @@ const SidebarMenu = () => {
           </Button>
         </li>
         <li>
-          <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
+          <Button
+            asChild
+            variant="outline"
+            className="flex gap-4 items-center justify-start h-auto p-2 font-bold"
+          >
             <Link href="/student-dashboard">
               <CommonImage
                 classname="dashboard-icon"
@@ -103,8 +119,16 @@ const SidebarMenu = () => {
             </Link>
           </Button>
         </li>
-        <li className={isActive("/student-dashboard/mock_test_reports") ? "active" : ""}>
-          <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
+        <li
+          className={
+            isActive("/student-dashboard/mock_test_reports") ? "active" : ""
+          }
+        >
+          <Button
+            asChild
+            variant="outline"
+            className="flex gap-4 items-center justify-start h-auto p-2 font-bold"
+          >
             <Link href="/student-dashboard/mock_test_reports">
               <CommonImage
                 classname="dashboard-icon"
@@ -117,8 +141,16 @@ const SidebarMenu = () => {
             </Link>
           </Button>
         </li>
-        <li className={isActive("/student-dashboard/reality_test_bookings") ? "active" : ""}>
-          <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
+        <li
+          className={
+            isActive("/student-dashboard/reality_test_bookings") ? "active" : ""
+          }
+        >
+          <Button
+            asChild
+            variant="outline"
+            className="flex gap-4 items-center justify-start h-auto p-2 font-bold"
+          >
             <Link href="/student-dashboard/reality_test_bookings">
               <CommonImage
                 classname="dashboard-icon"
@@ -131,8 +163,16 @@ const SidebarMenu = () => {
             </Link>
           </Button>
         </li>
-        <li className={isActive("/student-dashboard/exam_bookings") ? "active" : ""}>
-          <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
+        <li
+          className={
+            isActive("/student-dashboard/exam_bookings") ? "active" : ""
+          }
+        >
+          <Button
+            asChild
+            variant="outline"
+            className="flex gap-4 items-center justify-start h-auto p-2 font-bold"
+          >
             <Link href="/student-dashboard/exam_bookings">
               <CommonImage
                 classname="dashboard-icon"
@@ -145,8 +185,16 @@ const SidebarMenu = () => {
             </Link>
           </Button>
         </li>
-        <li className={isActive("/student-dashboard/event_bookings") ? "active" : ""}>
-          <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
+        <li
+          className={
+            isActive("/student-dashboard/event_bookings") ? "active" : ""
+          }
+        >
+          <Button
+            asChild
+            variant="outline"
+            className="flex gap-4 items-center justify-start h-auto p-2 font-bold"
+          >
             <Link href="/student-dashboard/event_bookings">
               <CommonImage
                 classname="dashboard-icon"
@@ -159,8 +207,16 @@ const SidebarMenu = () => {
             </Link>
           </Button>
         </li>
-        <li className={isActive("/student-dashboard/student_requests") ? "active" : ""}>
-          <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
+        <li
+          className={
+            isActive("/student-dashboard/student_requests") ? "active" : ""
+          }
+        >
+          <Button
+            asChild
+            variant="outline"
+            className="flex gap-4 items-center justify-start h-auto p-2 font-bold"
+          >
             <Link href="/student-dashboard/student_requests">
               <CommonImage
                 classname="dashboard-icon"
@@ -173,8 +229,14 @@ const SidebarMenu = () => {
             </Link>
           </Button>
         </li>
-        <li className={isActive("/student-dashboard/complaints") ? "active" : ""}>
-          <Button asChild variant="outline" className="flex gap-4 items-center justify-start h-auto p-2 font-bold">
+        <li
+          className={isActive("/student-dashboard/complaints") ? "active" : ""}
+        >
+          <Button
+            asChild
+            variant="outline"
+            className="flex gap-4 items-center justify-start h-auto p-2 font-bold"
+          >
             <Link href="/student-dashboard/complaints">
               <CommonImage
                 classname="dashboard-icon"
@@ -190,7 +252,10 @@ const SidebarMenu = () => {
       </ul>
 
       {/* Show the SwitchClassroom Modal only when isSwitchClassroomOpen is true */}
-      <SwitchClassroom open={isSwitchClassroomOpen} onClose={handleSwitchClassroomClose} />
+      <SwitchClassroom
+        open={isSwitchClassroomOpen}
+        onClose={handleSwitchClassroomClose}
+      />
     </div>
   );
 };

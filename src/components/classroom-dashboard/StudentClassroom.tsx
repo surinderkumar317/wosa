@@ -5,7 +5,7 @@ import FullClassSchedule from "./FullClassSchedule";
 import RecordedLactures from "./RecordedLactures";
 import ClassroomMaterial from "./ClassroomMaterial";
 
-const StudentClassroom = () => {
+const StudentClassroom: React.FC = () => {
   return (
     <div className="stu-classroom-cont flex flex-col w-full">
       <ClassroomHeaderData />

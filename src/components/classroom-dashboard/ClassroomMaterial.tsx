@@ -10,8 +10,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-// Sample data array for classroom materials
-const materials = [
+// Define type for classroom material items
+type MaterialItem = {
+  id: number;
+  title: string;
+  date: string;
+  href: string;
+  image: string;
+};
+
+// Sample data array for classroom materials with explicit types
+const materials: MaterialItem[] = [
   {
     id: 1,
     title: "Lorem Ipsum is simply dummy",
@@ -35,7 +44,7 @@ const materials = [
   },
 ];
 
-const ClassroomMaterial = () => {
+const ClassroomMaterial: React.FC = () => {
   return (
     <div className="stu-classroom-row-content w-full mb-5">
       <div className="stu-classroom-heading flex justify-between mb-5">
@@ -90,7 +99,7 @@ const ClassroomMaterial = () => {
             width={42}
             height={42}
           />
-          <p className="text-xl">There are no classroom material yet</p>
+          <p className="text-xl">There are no classroom materials yet</p>
         </div>
       )}
     </div>

@@ -36,7 +36,7 @@ interface FormBannerProps {
   modalType: "course" | "practice" | "realitytest";
 }
 
-const FormBanner = ({ heading, paragraph, modalType }: FormBannerProps) => {
+const FormBanner: React.FC<FormBannerProps> = ({ heading, paragraph, modalType }) => {
   return (
     <div className="form-slider-container form-banner lg:relative flex lg:justify-between lg:items-center lg:mx-auto 2xl:py-20 xl:py-11 lg:flex-row flex-col flex-col-reverse">
       <div className="lg:w-1/3 lg:p-6 lg:ml-11 w-full p-10 left-slideform">

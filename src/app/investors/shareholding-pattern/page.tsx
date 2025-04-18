@@ -1,7 +1,14 @@
 "use client";
 import React from "react";
 
-const shareholdingContent = {
+interface ShareholdingContent {
+  pageTitle: string;
+  sectionTitle: string;
+  description: string;
+  pdfSrc: string;
+}
+
+const shareholdingContent: ShareholdingContent = {
   pageTitle: "Shareholding Pattern",
   sectionTitle: "Shareholding Pattern of our Company",
   description:
@@ -9,7 +16,7 @@ const shareholdingContent = {
   pdfSrc: "/images/draft_prospectus.pdf",
 };
 
-const Page = () => {
+const Page: React.FC = () => {
   return (
     <div className="investor-container shareholder-container py-24">
       <div className="container m-auto">

@@ -30,7 +30,16 @@ const formSchema = z.object({
   selectTopic: z.string().optional(),
 });
 
-const classScheduleData = [
+interface ClassSchedule {
+  topic: string;
+  status: string;
+  duration: string;
+  date: string;
+  time: string;
+  isActive: boolean;
+}
+
+const classScheduleData: ClassSchedule[] = [
   {
     topic: "CELPIP",
     status: "Online,Offline",
@@ -64,7 +73,7 @@ const ClassroomSidebarMenu = dynamic( () => import("@/components/classroom-dashb
 );
 
 
-const Page = () => {
+const Page: React.FC = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: { search: "", selectTopic: "" },
@@ -176,8 +185,8 @@ const Page = () => {
                       </p>
                       <div className="full-class-btn-cont w-full justify-center flex flex-col gap-4 items-center">
                         <Button variant="outline">Join Class</Button>
-                        <p>
-                          Status{" "}
+                        <p className="flex gap-2 items-center">
+                          Status
                           <i
                             className={`fa fa-circle ${
                               cls.isActive ? "text-green-600" : "text-red-600"

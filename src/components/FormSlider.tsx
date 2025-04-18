@@ -18,7 +18,7 @@ const images: string[] = [
   "/images/1000x665(3).webp",
 ];
 
-const FormSlider = ({ heading, paragraph, modalType }: FormSliderProps) => {
+const FormSlider: React.FC<FormSliderProps> = ({ heading, paragraph, modalType }) => {
 
   const autoplayRef = useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplayRef.current]);

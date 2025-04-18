@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import CommonImage from "../common/Image";
-
 import {
   Card,
   CardContent,
@@ -12,8 +11,17 @@ import {
 } from "@/components/ui/card";
 import FilePreviewModal from "../dashboard/FilePreviewModal";
 
+// Define the type for the recorded lectures data
+interface RecordedLecture {
+  id: number;
+  topic: string;
+  date: string;
+  thumbnail: string;
+  videoUrl: string;
+}
+
 // Mock Data with video links
-const recordedLectures = [
+const recordedLectures: RecordedLecture[] = [
   {
     id: 1,
     topic: "CELPIP Strategy Session",
@@ -37,7 +45,7 @@ const recordedLectures = [
   },
 ];
 
-const RecordedLactures = () => {
+const RecordedLactures: React.FC = () => {
   return (
     <div className="stu-classroom-row-content w-full mb-5">
       <div className="stu-classroom-heading flex justify-between mb-5">

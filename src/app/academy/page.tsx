@@ -20,7 +20,6 @@ const Testimonials = dynamic(() => import("@/components/testimonials/Testimonial
   loading: () => <Loading />,
 });
 
-
 const page = () => {
   return (
     <div className="academy-container">

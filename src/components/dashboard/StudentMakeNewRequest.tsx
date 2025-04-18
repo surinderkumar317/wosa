@@ -51,7 +51,7 @@ const MakeNewRequestSchema = z.object({
 
 const allowedFormats = ["jpg", "png", "jpeg", "pdf", "webp", "mp3", "mp4"];
 
-const StudentMakeNewRequest = () => {
+const StudentMakeNewRequest: React.FC = () => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [isMakeRequestOpen, setIsMakeRequestOpen] = useState(false);
   const [messageLength, setMessageLength] = useState(0);

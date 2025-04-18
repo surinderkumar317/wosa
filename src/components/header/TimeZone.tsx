@@ -43,7 +43,7 @@ const formatTimezoneOffset = (timezone: string): string => {
   return offset.replace("GMT", "UTC").replace("UTC", "UTC ");
 };
 
-export default function CountryTimeSelector() {
+const CountryTimeSelector: React.FC = () => {
   const [selectedTimezone, setSelectedTimezone] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [isInitialSelection, setIsInitialSelection] = useState(true);
@@ -71,16 +71,16 @@ export default function CountryTimeSelector() {
     <div className="space-y-6">
       {/* The dialog only opens once on first load */}
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="w-full max-w-[700px] px-10 pt-15">
+        <DialogContent className="w-full max-w-[700px] px-10 pt-15 timezone-modal">
           <DialogHeader>
-          {isInitialSelection && (
-            <h2 className="text-2xl font-bold text-center w-full my-6">
-              Hi! There are multiple time zones in your country. Please select one to continue.
-            </h2>
+            {isInitialSelection && (
+              <h2 className="text-2xl font-bold text-center w-full my-6">
+                Hi! There are multiple time zones in your country. Please select one to continue.
+              </h2>
             )}
             <DialogTitle className="!font-normal mt-7">Select Your Country</DialogTitle>
           </DialogHeader>
-          <div className="w-full flex flex-col pb-5">
+          <div className="w-full flex flex-col pb-5 timezone-text">
             <Select onValueChange={handleSelect}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select a country" />
@@ -100,7 +100,7 @@ export default function CountryTimeSelector() {
       {/* Show selected timezone anywhere */}
       {selectedTimezone && (
         <div className="flex cursor-pointer" onClick={() => setOpen(true)}>
-          <p className="text-[1rem] font-bold flex gap-2">
+          <p className="text-[1rem] font-bold flex gap-2 time-zone-text">
             <span>{selectedCountry?.label}</span>
             <span>{formatTimezoneOffset(selectedTimezone)}</span>
           </p>
@@ -108,4 +108,6 @@ export default function CountryTimeSelector() {
       )}
     </div>
   );
-}
+};
+
+export default CountryTimeSelector;

@@ -12,7 +12,6 @@ const PageContent = dynamic(() => import("@/components/pagecontent/pageContent")
   loading: () => <Loading />,
 });
 
-
 const page = () => {
   return (
     <div className="b2b-partner">

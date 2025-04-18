@@ -71,7 +71,7 @@ const verificationSchema = z.object({
 });
 
 // Component
-const RealitytestModal = ({ heading }: FormBannerProps) => {
+const RealitytestModal: React.FC<FormBannerProps> = ({ heading }) => {
   const [selectedCountry, setSelectedCountry] = useState("+91");
   const [isCourseOpen, setIsCourseOpen] = useState(false);
   const [isCourseinfoOpen, setIsCourseinfoOpen] = useState(false);

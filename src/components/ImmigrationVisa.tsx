@@ -9,69 +9,103 @@ import CommonImage from "./common/Image";
 interface VisaCountry {
   name1: string;
   image1: string;
+  link1: string;
   name2: string;
   image2: string;
+  link2: string;
 }
-const visaCountries: VisaCountry[] = [
-    {
-        name1: "Canada",
-        image1: "/images/flag01.jpg",
-        name2: "Australia",
-        image2: "/images/flag02.jpg",
-      },
-      {
-        name1: "USA",
-        image1: "/images/flag03.jpg",
-        name2: "UK",
-        image2: "/images/flag04.jpg",
-      },
-      {
-        name1: "Germany",
-        image1: "/images/flag01.jpg",
-        name2: "France",
-        image2: "/images/flag02.jpg",
-      },
-      {
-        name1: "Canada",
-        image1: "/images/flag01.jpg",
-        name2: "Australia",
-        image2: "/images/flag02.jpg",
-      },
 
-      {
-        name1: "Canada",
-        image1: "/images/flag01.jpg",
-        name2: "Australia",
-        image2: "/images/flag02.jpg",
-      },
-      {
-        name1: "USA",
-        image1: "/images/flag03.jpg",
-        name2: "UK",
-        image2: "/images/flag04.jpg",
-      },
-      {
-        name1: "Germany",
-        image1: "/images/flag01.jpg",
-        name2: "France",
-        image2: "/images/flag02.jpg",
-      },
-      {
-        name1: "Canada",
-        image1: "/images/flag01.jpg",
-        name2: "Australia",
-        image2: "/images/flag02.jpg",
-      },
-      
+const visaCountries: VisaCountry[] = [
+  {
+    name1: "Canada",
+    image1: "/images/flag01.jpg",
+    link1: "/study-visa-landing",
+    name2: "Australia",
+    image2: "/images/flag02.jpg",
+    link2: "/tourist-visa-landing",
+  },
+  {
+    name1: "USA",
+    image1: "/images/flag03.jpg",
+    link1: "/work-visa-landing",
+    name2: "UK",
+    image2: "/images/flag04.jpg",
+    link2: "/dependent-visa-landing",
+  },
+  {
+    name1: "Germany",
+    image1: "/images/flag01.jpg",
+    link1: "/pr-visa-landing",
+    name2: "France",
+    image2: "/images/flag02.jpg",
+    link2: "/work-visa-landing",
+  },
+  {
+    name1: "New Zealand",
+    image1: "/images/flag01.jpg",
+    link1: "/study-visa-landing",
+    name2: "Ireland",
+    image2: "/images/flag02.jpg",
+    link2: "/tourist-visa-landing",
+  },
+  {
+    name1: "Italy",
+    image1: "/images/flag03.jpg",
+    link1: "/study-visa-landing",
+    name2: "Spain",
+    image2: "/images/flag04.jpg",
+    link2: "/pr-visa-landing",
+  },
+
+  {
+    name1: "Canada",
+    image1: "/images/flag01.jpg",
+    link1: "/study-visa-landing",
+    name2: "Australia",
+    image2: "/images/flag02.jpg",
+    link2: "/tourist-visa-landing",
+  },
+  {
+    name1: "USA",
+    image1: "/images/flag03.jpg",
+    link1: "/work-visa-landing",
+    name2: "UK",
+    image2: "/images/flag04.jpg",
+    link2: "/dependent-visa-landing",
+  },
+  {
+    name1: "Germany",
+    image1: "/images/flag01.jpg",
+    link1: "/pr-visa-landing",
+    name2: "France",
+    image2: "/images/flag02.jpg",
+    link2: "/work-visa-landing",
+  },
+  {
+    name1: "New Zealand",
+    image1: "/images/flag01.jpg",
+    link1: "/study-visa-landing",
+    name2: "Ireland",
+    image2: "/images/flag02.jpg",
+    link2: "/tourist-visa-landing",
+  },
+  {
+    name1: "Italy",
+    image1: "/images/flag03.jpg",
+    link1: "/study-visa-landing",
+    name2: "Spain",
+    image2: "/images/flag04.jpg",
+    link2: "/pr-visa-landing",
+  },
   
 ];
 
-interface ImmigrationContentProps{
+interface ImmigrationContentProps {
   subHeading: string;
   heading: string;
 }
 
-const ImmigrationVisaSlider = ({ subHeading, heading }: ImmigrationContentProps) => {
+const ImmigrationVisaSlider: React.FC<ImmigrationContentProps> = ({ subHeading, heading }) => {
   const autoplayInterval = 3000;
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
@@ -108,13 +142,13 @@ const ImmigrationVisaSlider = ({ subHeading, heading }: ImmigrationContentProps)
       clearInterval(autoplay);
     };
 
-    startAutoplay(); // Start autoplay initially
+    startAutoplay();
 
-    emblaApi.on("pointerDown", stopAutoplay); // Stop autoplay on manual scroll
-    emblaApi.containerNode().addEventListener("mouseenter", stopAutoplay); // Stop autoplay on hover
-    emblaApi.containerNode().addEventListener("mouseleave", startAutoplay); // Resume autoplay on leave
-    emblaApi.containerNode().addEventListener("focusin", stopAutoplay); // Stop autoplay when focused
-    emblaApi.containerNode().addEventListener("focusout", startAutoplay); // Resume autoplay when focus is lost
+    const container = emblaApi.containerNode();
+    container.addEventListener("mouseenter", stopAutoplay);
+    container.addEventListener("mouseleave", startAutoplay);
+    container.addEventListener("focusin", stopAutoplay);
+    container.addEventListener("focusout", startAutoplay);
 
     const dotsContainer = document.querySelector(".commonslider-dots");
     if (dotsContainer) {
@@ -124,15 +158,14 @@ const ImmigrationVisaSlider = ({ subHeading, heading }: ImmigrationContentProps)
 
     return () => {
       clearInterval(autoplay);
-      emblaApi.containerNode().removeEventListener("mouseenter", stopAutoplay);
-      emblaApi.containerNode().removeEventListener("mouseleave", startAutoplay);
-      emblaApi.containerNode().removeEventListener("focusin", stopAutoplay);
-      emblaApi.containerNode().removeEventListener("focusout", startAutoplay);
+      container.removeEventListener("mouseenter", stopAutoplay);
+      container.removeEventListener("mouseleave", startAutoplay);
+      container.removeEventListener("focusin", stopAutoplay);
+      container.removeEventListener("focusout", startAutoplay);
 
       if (dotsContainer) {
         dotsContainer.removeEventListener("mouseenter", stopAutoplay);
         dotsContainer.removeEventListener("mouseleave", startAutoplay);
-        dotsContainer.removeEventListener("click", stopAutoplay);
       }
     };
   }, [emblaApi, autoplayInterval]);
@@ -146,16 +179,13 @@ const ImmigrationVisaSlider = ({ subHeading, heading }: ImmigrationContentProps)
         </div>
 
         <div className="relative overflow-hidden" ref={emblaRef}>
-          <div className={`flex ${visaCountries.length <= 5 ? 'justify-center' : ''}`}>
+          <div className={`flex ${visaCountries.length <= 5 ? "justify-center" : ""}`}>
             {visaCountries.map((country, index) => (
-              <div
-                key={index}
-                className="embla__slide flex-shrink-0 lg:w-1/5 px-4 pt-10 pb-10"
-              >
+              <div key={index} className="embla__slide flex-shrink-0 lg:w-1/5 px-4 pt-10 pb-10">
                 <Card className="border-none shadow-none">
                   <CardContent className="p-0 visa-slider">
                     <div className="visa-item">
-                      <Link href="/" className="visa-item-links">
+                      <Link href={country.link1} className="visa-item-links">
                         <CommonImage
                           classname="visa-flag-icon"
                           src={country.image1}
@@ -165,7 +195,7 @@ const ImmigrationVisaSlider = ({ subHeading, heading }: ImmigrationContentProps)
                         />
                         <h3>{country.name1}</h3>
                       </Link>
-                      <Link href="/" className="visa-item-links">
+                      <Link href={country.link2} className="visa-item-links">
                         <CommonImage
                           classname="visa-flag-icon"
                           src={country.image2}
@@ -183,7 +213,11 @@ const ImmigrationVisaSlider = ({ subHeading, heading }: ImmigrationContentProps)
           </div>
         </div>
 
-        <div className={`flex justify-center mt-4 space-x-2 commonslider-dots ${visaCountries.length <= 5 ? 'hidden' : ''}`}>
+        <div
+          className={`flex justify-center mt-4 space-x-2 commonslider-dots ${
+            visaCountries.length <= 5 ? "hidden" : ""
+          }`}
+        >
           {scrollSnaps.map((_, index) => (
             <button
               key={index}

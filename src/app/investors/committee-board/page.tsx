@@ -9,7 +9,20 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const committees = [
+interface CommitteeMember {
+  name: string;
+  directorship: string;
+  designation: string;
+}
+
+interface Committee {
+  title: string;
+  description: string;
+  secretaryNote: string;
+  members: CommitteeMember[];
+}
+
+const committees: Committee[] = [
   {
     title: "Audit Committee",
     description: "The Audit committee comprises of the following:",
@@ -83,7 +96,7 @@ const committees = [
   },
 ];
 
-const Page = () => {
+const Page: React.FC = () => {
   return (
     <div className="committee-board-section">
       <div className="container m-auto py-5">
