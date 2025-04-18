@@ -29,6 +29,7 @@ import {
   SelectValue,
   SelectGroup,
 } from "@/components/ui/select";
+
 import { toast } from "sonner";
 import { Toaster } from "sonner";
 
@@ -58,8 +59,10 @@ const cityList = [
   "Chhindwara",
   "Calicut",
   "Churu",
+  // add more cities
 ];
 
+// Validation Schemas
 const phoneSchema = z.object({
   countryCode: z.string().min(2, "Country code is required"),
   phoneNumber: z
@@ -72,17 +75,7 @@ const phoneSchema = z.object({
 const registrationSchema = z.object({
   name: z.string().min(2, "Name is required"),
   email: z.string().email("Invalid email format"),
-  dob: z.string().refine(
-    (val) => {
-      const year = new Date(val).getFullYear();
-      return (
-        /^\d{4}$/.test(year.toString()) &&
-        year >= 1900 &&
-        year <= new Date().getFullYear()
-      );
-    },
-    { message: "Please enter a valid date of birth" }
-  ),
+  dob: z.string().min(1, "Date of Birth is required"),
   city: z.string().min(1, "Please enter a valid city"),
   source: z.string().min(1, "Please select an option"),
   interestedServcies: z.string().min(1, "Interested Services is mandatory"),
@@ -99,15 +92,25 @@ const verificationSchema = z.object({
     .regex(/^[0-9]+$/, "Only numbers allowed"),
 });
 
-type RegistrationData = z.infer<typeof registrationSchema>;
+type RegistrationData = {
+  name: string;
+  email: string;
+  dob: string;
+  city: string;
+  source: string;
+  interestedServcies: string;
+  interestedSubServcies: string;
+  interestedCountries: string;
+};
 
-const Register: React.FC = () => {
+const Register = () => {
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState("+91");
   const [selectedService, setSelectedService] = useState("");
   const [selectedSubService, setSelectedSubService] = useState("");
   const [resendTimer, setResendTimer] = useState(30);
+
   const [isVarificationOpen, setIsVarificationOpen] = useState(false);
   const [isFormInfoOpen, setIsFormInfoOpen] = useState(false);
   const [submittedPhoneNumber, setSubmittedPhoneNumber] = useState("");
@@ -116,14 +119,17 @@ const Register: React.FC = () => {
     uniqueId: "",
     password: "",
   });
+
   const [searchTerm, setSearchTerm] = useState("");
-  const [registrationData, setRegistrationData] =
-    useState<RegistrationData | null>(null);
 
   const filteredOptions = countryOptions.filter((country) =>
     country.label.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const [registrationData, setRegistrationData] =
+    useState<RegistrationData | null>(null);
+
+  // Phone Form Hook
   const phoneForm = useForm({
     resolver: zodResolver(phoneSchema),
     defaultValues: {
@@ -132,6 +138,7 @@ const Register: React.FC = () => {
     },
   });
 
+  // Registration Form Hook
   const registrationForm = useForm({
     resolver: zodResolver(registrationSchema),
     defaultValues: {
@@ -146,13 +153,10 @@ const Register: React.FC = () => {
     },
   });
 
-  const verifyForm = useForm({
-    resolver: zodResolver(verificationSchema),
-    defaultValues: { verificationCode: "" },
-  });
-
+  // Handle Phone Form Submission
   const handlePhoneSubmit = (data: z.infer<typeof phoneSchema>) => {
-    setSubmittedPhoneNumber(`${data.countryCode} ${data.phoneNumber}`);
+    console.log("Phone Data:", data);
+    setSubmittedPhoneNumber(`${data.countryCode} ${data.phoneNumber}`); // Store phone number
     setIsPhoneOpen(false);
     setIsRegistrationOpen(true);
   };
@@ -160,12 +164,18 @@ const Register: React.FC = () => {
   const handleRegistrationSubmit = async (
     data: z.infer<typeof registrationSchema>
   ) => {
+    console.log("Form Data Submitted:", data);
     toast.success("Register successful! 🎉");
     setIsRegistrationOpen(false);
     registrationForm.reset();
+
+    // Store form data before moving to the next step
     setRegistrationData(data);
+
+    setIsRegistrationOpen(false);
     setIsVarificationOpen(true);
 
+    // Simulate an API response with generated details
     const generatedUserDetails = {
       name: data.name,
       uniqueId: "UID123456",
@@ -174,37 +184,46 @@ const Register: React.FC = () => {
     setUserDetails(generatedUserDetails);
   };
 
+  useEffect(() => {
+    if (isRegistrationOpen && registrationData) {
+      registrationForm.reset(registrationData); // ✅ Restore values when reopening
+    }
+  }, [isRegistrationOpen]);
+
+  const verifyForm = useForm({
+    resolver: zodResolver(verificationSchema),
+    defaultValues: { verificationCode: "" },
+  });
+
+  // Handle Verification Submission
   const handleVarifySubmit = async (data: { verificationCode: string }) => {
+    console.log("Verification Code Submitted:", data.verificationCode);
     setIsVarificationOpen(false);
-    setIsFormInfoOpen(true);
+    setIsFormInfoOpen(true); // Open the final dialog
   };
 
+  useEffect(() => {
+    let timer: NodeJS.Timeout; // Explicitly define the timer type
+
+    if (isVarificationOpen && resendTimer > 0) {
+      timer = setInterval(() => {
+        setResendTimer((prev) => (prev > 0 ? prev - 1 : 0));
+      }, 1000);
+    }
+
+    return () => clearInterval(timer); // Cleanup on unmount
+  }, [isVarificationOpen, resendTimer]);
+
   const handleResendCode = () => {
-    setResendTimer(30);
+    setResendTimer(30); // Reset countdown
     console.log("Resending verification code...");
   };
 
   const handleCloseModals = () => {
     setIsVarificationOpen(false);
     setIsFormInfoOpen(false);
-    phoneForm.reset();
+    phoneForm.reset(); // Reset phone form when closing any modal
   };
-
-  useEffect(() => {
-    if (isRegistrationOpen && registrationData) {
-      registrationForm.reset(registrationData);
-    }
-  }, [isRegistrationOpen]);
-
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (isVarificationOpen && resendTimer > 0) {
-      timer = setInterval(() => {
-        setResendTimer((prev) => (prev > 0 ? prev - 1 : 0));
-      }, 1000);
-    }
-    return () => clearInterval(timer);
-  }, [isVarificationOpen, resendTimer]);
 
   return (
     <>
@@ -741,8 +760,7 @@ const Register: React.FC = () => {
               Dear <span>{userDetails.name}</span>,
             </p>
             <p>
-              Your enquiry has been submitted successfully. Here are your
-              details:
+              Your enquiry has been submitted successfully. Here are your details:
             </p>
             <p>
               Unique ID: <span>{userDetails.uniqueId}</span>
