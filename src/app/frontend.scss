@@ -3857,5 +3857,33 @@ background: #ccc;
             align-items: center;
         }
     }
+
+    .check-inner-container
+    {
+        flex-direction: column;
+        padding:0 5%;
+        .checkout-left
+        {
+            width: 100%;
+            .checkout-row {
+                flex-direction: column;
+                .checkout-col
+                {
+                    width: 100%;
+                }
+              }
+        }
+        .checkout-paymentdetails-cont
+        {
+            .payment-detail-header
+            {
+                flex-direction: column;
+            }
+        }
+        .checkout-right-side
+        {
+            width: 100%;
+        }
+    }
     
 }

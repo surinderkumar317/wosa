@@ -62,9 +62,9 @@ const paymentDetails: PaymentDetail[] = [
 const CheckoutPage: React.FC = () => {
   return (
     <div className="checkout-section py-10 bg-[#e8f0fe]">
-      <div className="container m-auto flex gap-5">
+      <div className="container m-auto flex gap-5 check-inner-container">
         {/* Left Side */}
-        <div className="w-3/4 bg-white shadow-lg rounded-lg p-5">
+        <div className="w-3/4 bg-white shadow-lg rounded-lg p-5 checkout-left">
           <h2 className="text-2xl font-bold">Checkout Details</h2>
           <div className="checkout-container flex flex-col mt-5">
             {checkoutDetails.map((item, index) => (
@@ -72,10 +72,10 @@ const CheckoutPage: React.FC = () => {
                 key={index}
                 className="checkout-row w-full flex gap-5 border-b py-3"
               >
-                <div className="w-2/4">
+                <div className="w-2/4 checkout-col">
                   <p>{item.label}</p>
                 </div>
-                <div className="w-2/4">
+                <div className="w-2/4 checkout-col">
                   <p>{item.value}</p>
                 </div>
               </div>
