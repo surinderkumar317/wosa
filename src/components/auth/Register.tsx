@@ -205,6 +205,7 @@ const Register: React.FC = () => {
   };
 
   const handleVarifySubmit = async (data: { verificationCode: string }) => {
+    console.log("Verification code submitted:", data.verificationCode); // Optional logging
     setIsVarificationOpen(false);
     setIsFormInfoOpen(true);
   };
