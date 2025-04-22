@@ -309,7 +309,7 @@ const CourseModal: React.FC<FormBannerProps> = ({ heading }) => {
 
       {/* Course Dialog */}
       <Dialog open={isCourseOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
           <DialogHeader>
             <DialogTitle>{heading}</DialogTitle>
           </DialogHeader>
@@ -399,7 +399,7 @@ const CourseModal: React.FC<FormBannerProps> = ({ heading }) => {
 
       {/* course info Dialog */}
       <Dialog open={isCourseinfoOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
           <DialogHeader>
             <DialogTitle>{heading}</DialogTitle>
             <DialogDescription></DialogDescription>
@@ -528,7 +528,7 @@ const CourseModal: React.FC<FormBannerProps> = ({ heading }) => {
 
       {/* Verification Dialog */}
       <Dialog open={isVarificationOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
           <DialogHeader>
             <DialogTitle>Verification</DialogTitle>
             <p className="!mt-10">
@@ -593,7 +593,7 @@ const CourseModal: React.FC<FormBannerProps> = ({ heading }) => {
 
       {/* User Info Dialog */}
       <Dialog open={isFormInfoOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
           <DialogHeader>
             <DialogTitle>Practicepack Details</DialogTitle>
             <DialogDescription></DialogDescription>

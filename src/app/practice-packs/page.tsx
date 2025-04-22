@@ -55,7 +55,7 @@ const CoursesList: Course[] = [
     price: "INR 14500",
     moreinfo: "More Information",
     buynow: "INR 11441",
-    link: "/inhouse-courses/duolingo-90-days",
+    link: "/practice-packs/value-pack",
   },
   {
     id: 2,
@@ -69,7 +69,7 @@ const CoursesList: Course[] = [
     price: "INR 14500",
     moreinfo: "More Information",
     buynow: "INR 11441",
-    link: "/inhouse-courses/duolingo-90-days",
+    link: "/practice-packs/value-pack",
   },
   {
     id: 3,
@@ -83,7 +83,7 @@ const CoursesList: Course[] = [
     price: "INR 14500",
     moreinfo: "More Information",
     buynow: "INR 11441",
-    link: "/inhouse-courses/duolingo-90-days",
+    link: "/practice-packs/value-pack",
   },
   {
     id: 4,
@@ -97,7 +97,7 @@ const CoursesList: Course[] = [
     price: "INR 14500",
     moreinfo: "More Information",
     buynow: "INR 11441",
-    link: "/inhouse-courses/duolingo-90-days",
+    link: "/practice-packs/value-pack",
   },
   {
     id: 5,
@@ -111,7 +111,7 @@ const CoursesList: Course[] = [
     price: "INR 14500",
     moreinfo: "More Information",
     buynow: "INR 11441",
-    link: "/inhouse-courses/duolingo-90-days",
+    link: "/practice-packs/value-pack",
   },
   {
     id: 6,
@@ -125,7 +125,7 @@ const CoursesList: Course[] = [
     price: "INR 14500",
     moreinfo: "More Information",
     buynow: "INR 11441",
-    link: "/inhouse-courses/duolingo-90-days",
+    link: "/practice-packs/value-pack",
   },
   {
     id: 7,
@@ -139,7 +139,7 @@ const CoursesList: Course[] = [
     price: "INR 14500",
     moreinfo: "More Information",
     buynow: "INR 11441",
-    link: "/inhouse-courses/duolingo-90-days",
+    link: "/practice-packs/value-pack",
   },
 ];
 
