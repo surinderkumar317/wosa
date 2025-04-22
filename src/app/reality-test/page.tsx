@@ -31,6 +31,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 
 type RealityTestItem = {
+  id: string;
   title: string;
   category: string;
   branch: string;
@@ -42,6 +43,7 @@ type RealityTestItem = {
 
 const realityTests: RealityTestItem[] = [
   {
+    id: "1",
     title: "REALITY TEST | TOEFL",
     category: "TOEFL",
     branch: "Bathinda",
@@ -51,6 +53,87 @@ const realityTests: RealityTestItem[] = [
     link: "/reality-test/toefl",
   },
   {
+    id: "2",
+    title: "REALITY TEST | CD IELTS",
+    category: "CD-IELTS",
+    branch: "Rohtak",
+    date: "Feb 08, 2025",
+    time: "10:30 AM | 01:30 PM",
+    price: "INR 254",
+    link: "/reality-test/cd-ielts",
+  },
+  {
+    id: "3",
+    title: "REALITY TEST | TOEFL",
+    category: "TOEFL",
+    branch: "Bathinda",
+    date: "Feb 28, 2025",
+    time: "10:30 AM | 01:30 PM",
+    price: "INR 254",
+    link: "/reality-test/toefl",
+  },
+  {
+    id: "4",
+    title: "REALITY TEST | CD IELTS",
+    category: "CD-IELTS",
+    branch: "Rohtak",
+    date: "Feb 08, 2025",
+    time: "10:30 AM | 01:30 PM",
+    price: "INR 254",
+    link: "/reality-test/cd-ielts",
+  },
+  {
+    id: "5",
+    title: "REALITY TEST | TOEFL",
+    category: "TOEFL",
+    branch: "Bathinda",
+    date: "Feb 28, 2025",
+    time: "10:30 AM | 01:30 PM",
+    price: "INR 254",
+    link: "/reality-test/toefl",
+  },
+  {
+    id: "6",
+    title: "REALITY TEST | CD IELTS",
+    category: "CD-IELTS",
+    branch: "Rohtak",
+    date: "Feb 08, 2025",
+    time: "10:30 AM | 01:30 PM",
+    price: "INR 254",
+    link: "/reality-test/cd-ielts",
+  },
+  {
+    id: "7",
+    title: "REALITY TEST | TOEFL",
+    category: "TOEFL",
+    branch: "Bathinda",
+    date: "Feb 28, 2025",
+    time: "10:30 AM | 01:30 PM",
+    price: "INR 254",
+    link: "/reality-test/toefl",
+  },
+  {
+    id: "8",
+    title: "REALITY TEST | CD IELTS",
+    category: "CD-IELTS",
+    branch: "Rohtak",
+    date: "Feb 08, 2025",
+    time: "10:30 AM | 01:30 PM",
+    price: "INR 254",
+    link: "/reality-test/cd-ielts",
+  },
+  {
+    id: "9",
+    title: "REALITY TEST | TOEFL",
+    category: "TOEFL",
+    branch: "Bathinda",
+    date: "Feb 28, 2025",
+    time: "10:30 AM | 01:30 PM",
+    price: "INR 254",
+    link: "/reality-test/toefl",
+  },
+  {
+    id: "10",
     title: "REALITY TEST | CD IELTS",
     category: "CD-IELTS",
     branch: "Rohtak",
@@ -216,45 +299,61 @@ const RealityTest: React.FC = () => {
 
       <div className="container m-auto py-10">
         <div className="courses-box-container reality-test-container flex flex-wrap gap-4">
-          {filteredTests.slice(0, visibleCount).map((test, index) => (
-            <div key={index} className="w-[24%] reality-test-box">
-              <Link href={test.link} className="no-underline">
-                <Card className="courses-box p-4 rounded-xl border bg-card shadow">
-                  <CardContent className="p-0">
-                    <div className="courses-heading text-center">
-                      <h2>{test.title}</h2>
-                      <p>{test.category}</p>
-                    </div>
-                    <div className="courses-list">
-                      <ul className="my-5">
-                        <li>
-                          <i className="fa-solid fa-location-dot"></i>
-                          <h2>Branch | {test.branch}</h2>
-                        </li>
-                        <li>
-                          <i className="fa-solid fa-calendar-days"></i>
-                          <p>Date: {test.date}</p>
-                        </li>
-                        <li>
-                          <i className="fa-regular fa-clock"></i>
-                          <p>Time: {test.time}</p>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="courses-btn-box flex justify-between items-center">
-                      <p>{test.price}</p>
-                      <Button>Book Now</Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+          {filteredTests.length > 0 ? (
+            filteredTests.slice(0, visibleCount).map((test) => (
+              <div key={test.id} className="w-[24%] reality-test-box">
+                <Link href={test.link} className="no-underline">
+                  <Card className="courses-box p-4 rounded-xl border bg-card shadow">
+                    <CardContent className="p-0">
+                      <div className="courses-heading text-center">
+                        <h2>{test.title}</h2>
+                        <p>{test.category}</p>
+                      </div>
+                      <div className="courses-list">
+                        <ul className="my-5">
+                          <li>
+                            <i className="fa-solid fa-location-dot"></i>
+                            <h2>Branch | {test.branch}</h2>
+                          </li>
+                          <li>
+                            <i className="fa-solid fa-calendar-days"></i>
+                            <p>Date: {test.date}</p>
+                          </li>
+                          <li>
+                            <i className="fa-regular fa-clock"></i>
+                            <p>Time: {test.time}</p>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="courses-btn-box flex justify-between items-center">
+                        <p>{test.price}</p>
+                        <Button>Book Now</Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <div className="text-center py-10 w-full">
+              <p className="text-gray-500 text-lg font-semibold">
+                No Reality Test Found
+              </p>
             </div>
-          ))}
+          )}
         </div>
+
         {visibleCount < filteredTests.length && (
           <div className="w-full loader-btn py-6 flex justify-center">
             <Button onClick={() => setVisibleCount((prev) => prev + 8)}>
               Load More
+              <CommonImage
+                classname="large-arrow"
+                src="/images/our-services-arrow.webp"
+                alt="arrow"
+                width={43}
+                height={12}
+              />
             </Button>
           </div>
         )}

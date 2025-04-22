@@ -25,6 +25,7 @@ interface IMenuItem {
   subMenu?: IMenuItem[];
   icon?: string;
   disabled?: boolean;
+  newTab?: boolean; // 👈 Add this
 }
 
 const menuData: IMenuItem[] = HEADER_LINKS;
@@ -69,7 +70,18 @@ const Navbar: React.FC = () => {
                         <ul className="navi-sub-dropdown">
                           {subItem.subMenu.map((nestedItem, nestedIndex) => (
                             <li key={nestedIndex}>
-                              <Link href={nestedItem.link} prefetch={true}>
+                              <Link
+                                href={nestedItem.link}
+                                prefetch={true}
+                                target={
+                                  nestedItem.newTab ? "_blank" : undefined
+                                }
+                                rel={
+                                  nestedItem.newTab
+                                    ? "noopener noreferrer"
+                                    : undefined
+                                }
+                              >
                                 {nestedItem.title}
                               </Link>
                             </li>
@@ -107,7 +119,7 @@ const Navbar: React.FC = () => {
           ))}
         </ul>
         {/* Show Dashboard Link When Logged In */}
-        <Button asChild className="relative -top-1 text-base hover:bg-red-600">
+        <Button asChild className="relative -top-1 text-base hover:bg-red-600 uppercase dashboard-btn tracking-widest font-bold">
           <Link href="/student-dashboard" prefetch={true}>
             Dashboard
           </Link>

@@ -149,7 +149,7 @@ const StudentRequestModal: React.FC = () => {
           <i className="fa-solid fa-bell"></i> Conversations
         </Button>
       </DialogTrigger>
-      <DialogContent className="common-modal-form w-full max-w-[1200px]">
+      <DialogContent className="common-modal-form w-full max-w-[1200px] top-[5%] translate-y-0">
         <DialogHeader>
           <DialogTitle className="text-4xl">Conversations</DialogTitle>
           <DialogDescription></DialogDescription>

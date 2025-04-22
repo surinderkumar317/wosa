@@ -162,7 +162,7 @@ const TestimonialsSlider: React.FC = () => {
       </div>
 
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="common-modal-content max-w-4xl w-full">
+        <DialogContent className="common-modal-content max-w-4xl w-full top-[5%] translate-y-0">
           {selectedTestimonial && (
             <>
               <DialogHeader>

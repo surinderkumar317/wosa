@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -36,11 +36,11 @@ import { Toaster } from "sonner";
 
 // Country Code Options
 const countryOptions = [
-  { value: "+91", label: "🇮🇳 +91 (India)" },
-  { value: "+1", label: "🇺🇸 +1 (USA)" },
-  { value: "+44", label: "🇬🇧 +44 (UK)" },
-  { value: "+61", label: "🇦🇺 +61 (Australia)" },
-  { value: "+81", label: "🇯🇵 +81 (Japan)" },
+  { value: "+91", label: "+91 - IN", searchable: "india" },
+  { value: "+1", label: "+1 - U", searchable: "usa" },
+  { value: "+44", label: "+44 - GB", searchable: "uk" },
+  { value: "+61", label: "+61 - AU", searchable: "australia" },
+  { value: "+81", label: "+81 - JP", searchable: "japan" },
 ];
 
 // Validation Schemas
@@ -55,6 +55,7 @@ const phoneSchema = z.object({
 
 const ComplaintSchema = z.object({
   name: z.string().min(2, "Name is required"),
+  lastname: z.string().optional(),
   email: z.string().email("Invalid email format"),
   source: z.string().min(1, "Please select an option"),
   complaintBranch: z.string().min(1, "Please enter a branch"),
@@ -91,6 +92,7 @@ interface ComplaintsProps {
 
 type ComplaintData = {
   name: string;
+  lastname?: string;
   email: string;
   source: string;
   complaintBranch: string;
@@ -125,8 +127,9 @@ const Complaints: React.FC<ComplaintsProps> = ({
 
   const [searchTerm, setSearchTerm] = useState("");
 
+  // Place the filter here, inside your component
   const filteredOptions = countryOptions.filter((country) =>
-    country.label.toLowerCase().includes(searchTerm.toLowerCase())
+    country.searchable.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Phone Form Hook
@@ -143,6 +146,7 @@ const Complaints: React.FC<ComplaintsProps> = ({
     resolver: zodResolver(ComplaintSchema),
     defaultValues: {
       name: "",
+      lastname: "",
       email: "",
       source: "",
       complaintBranch: "",
@@ -250,6 +254,16 @@ const Complaints: React.FC<ComplaintsProps> = ({
     phoneForm.reset(); // Reset phone form when closing any modal
   };
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      inputRef.current?.focus(); // Re-focus after dropdown opens
+    }, 50); // Small delay ensures it's mounted
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]); // Optional: focus each time dropdown resets
+
   return (
     <>
       {/* Phone Number Dialog */}
@@ -260,7 +274,7 @@ const Complaints: React.FC<ComplaintsProps> = ({
             {buttonText}
           </Button>
         </DialogTrigger>
-        <DialogContent className="common-modal-form w-full max-w-xl">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
           <DialogHeader>
             <DialogTitle>Complaints</DialogTitle>
             <DialogDescription></DialogDescription>
@@ -280,7 +294,7 @@ const Complaints: React.FC<ComplaintsProps> = ({
                       Phone Number<span className="text-red-500">*</span>
                     </Label>
                     <FormControl>
-                      <div className="flex space-x-2">
+                      <div className="flex space-x-2 common-phone-container">
                         {/* Country Code Select */}
                         <Select
                           onValueChange={(value) => {
@@ -294,32 +308,40 @@ const Complaints: React.FC<ComplaintsProps> = ({
                             <SelectValue placeholder="Code" />
                           </SelectTrigger>
                           <SelectContent>
-                            {/* 🔍 Search Input inside the dropdown */}
-                            <div className="px-2 pb-2 pt-1">
+                            {/* 🔍 Search Input */}
+                            <div
+                              className="px-2 pb-2 pt-1"
+                              onMouseDown={(e) => e.stopPropagation()} // Keep dropdown open
+                            >
                               <Input
+                                ref={inputRef}
                                 placeholder="Search country"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
+                                onKeyDown={(e) => e.stopPropagation()}
                                 className="h-8 text-sm"
                               />
                             </div>
 
-                            <SelectGroup>
-                              {filteredOptions.length > 0 ? (
-                                filteredOptions.map((country) => (
-                                  <SelectItem
-                                    key={country.value}
-                                    value={country.value}
-                                  >
-                                    {country.label}
-                                  </SelectItem>
-                                ))
-                              ) : (
-                                <div className="px-3 py-2 text-sm text-muted-foreground">
-                                  No results found
-                                </div>
-                              )}
-                            </SelectGroup>
+                            {/* Scrollable country list */}
+                            <div className="h-[100px] overflow-y-auto common-scroller">
+                              <SelectGroup>
+                                {filteredOptions.length > 0 ? (
+                                  filteredOptions.map((country) => (
+                                    <SelectItem
+                                      key={country.value}
+                                      value={country.value}
+                                    >
+                                      {country.label}
+                                    </SelectItem>
+                                  ))
+                                ) : (
+                                  <div className="px-3 py-2 text-sm text-muted-foreground">
+                                    No results found
+                                  </div>
+                                )}
+                              </SelectGroup>
+                            </div>
                           </SelectContent>
                         </Select>
 
@@ -361,7 +383,7 @@ const Complaints: React.FC<ComplaintsProps> = ({
 
       {/* Complaints Dialog */}
       <Dialog open={isComplaintOpen} onOpenChange={setIsComplaintOpen}>
-        <DialogContent className="common-modal-form w-full max-w-xl">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
           <DialogHeader>
             <DialogTitle>Complaints</DialogTitle>
             <DialogDescription></DialogDescription>
@@ -373,46 +395,67 @@ const Complaints: React.FC<ComplaintsProps> = ({
             >
               <div className="max-h-[65vh] overflow-auto pr-2 common-scroller">
                 <div className="flex justify-between w-full gap-5 mb-5">
-                  {/* Name Field */}
-                  <FormField
-                    control={complaintForm.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem className="form-row w-full">
-                        <Label>
-                          Name<span className="text-red-500">*</span>
-                        </Label>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Enter your Name"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage className="common-error-msg" />
-                      </FormItem>
-                    )}
-                  />
-                  {/* Email Field */}
-                  <FormField
-                    control={complaintForm.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem className="form-row w-full">
-                        <Label>
-                          Email<span className="text-red-500">*</span>
-                        </Label>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="Enter your email"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage className="common-error-msg" />
-                      </FormItem>
-                    )}
-                  />
+                  <div className="w-full flex flex-col mt-2 name-main-holder">
+                    <Label className="w-full mb-2">
+                      Name<span className="text-red-500">*</span>
+                    </Label>
+                    <div className="w-full flex gap-2 name-holder border p-1">
+                      {/* Name Field */}
+                      <FormField
+                        control={complaintForm.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem className="form-row w-full border-r">
+                            <FormControl>
+                              <Input
+                                type="text"
+                                placeholder="First Name"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage className="common-error-msg" />
+                          </FormItem>
+                        )}
+                      />
+
+                      {/* Lastname Field */}
+                      <FormField
+                        control={complaintForm.control}
+                        name="lastname"
+                        render={({ field }) => (
+                          <FormItem className="form-row w-full">
+                            <FormControl>
+                              <Input placeholder="Last Name" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="w-full email-holder">
+                    {/* Email Field */}
+                    <FormField
+                      control={complaintForm.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem className="form-row w-full">
+                          <Label>
+                            Email<span className="text-red-500">*</span>
+                          </Label>
+                          <FormControl>
+                            <Input
+                              type="email"
+                              placeholder="Enter your email"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage className="common-error-msg" />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                 </div>
 
                 <div className="flex justify-between w-full gap-5 mb-5">
@@ -658,13 +701,13 @@ const Complaints: React.FC<ComplaintsProps> = ({
 
       {/* Verification Dialog */}
       <Dialog open={isVarificationOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
           <DialogHeader>
             <DialogTitle>Verification</DialogTitle>
-            <DialogDescription>
+            <p className="!mt-10">
               A verification code has been sent to your mobile{" "}
               <span>{submittedPhoneNumber}</span>. Please enter the code below.
-            </DialogDescription>
+            </p>
           </DialogHeader>
           <Form {...verifyForm}>
             <form
@@ -722,7 +765,7 @@ const Complaints: React.FC<ComplaintsProps> = ({
 
       {/* User Info Dialog */}
       <Dialog open={isFormInfoOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
           <DialogHeader>
             <DialogTitle>Enquiry Details</DialogTitle>
             <DialogDescription></DialogDescription>
@@ -736,10 +779,10 @@ const Complaints: React.FC<ComplaintsProps> = ({
               details:
             </p>
             <p>
-              Unique ID: <span>{userDetails.uniqueId}</span>
+              Unique ID: <span className="userinfo-data">{userDetails.uniqueId}</span>
             </p>
             <p>
-              Password: <span>{userDetails.password}</span>
+              Password: <span className="userinfo-data">{userDetails.password}</span>
             </p>
             <p>Your Password and Other details are send to your email.</p>
           </div>

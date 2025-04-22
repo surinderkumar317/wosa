@@ -107,6 +107,7 @@ const Investors: React.FC = () => {
                   <Link
                     key={index}
                     href={href}
+                    target='_blank'
                     className={`investor-grid ${
                       href === "#" ? "cursor-default" : ""
                     }`}

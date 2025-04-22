@@ -46,14 +46,23 @@ const formatTimezoneOffset = (timezone: string): string => {
 const CountryTimeSelector: React.FC = () => {
   const [selectedTimezone, setSelectedTimezone] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
-  const [isInitialSelection, setIsInitialSelection] = useState(true);
+  const [isInitialSelection, setIsInitialSelection] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  // Show modal only if not selected before
+  const filteredCountries = countries.filter((country) =>
+    country.label.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  
+
+  // Client-side only logic
   useEffect(() => {
     const saved = localStorage.getItem("selected-timezone");
     if (saved) {
       setSelectedTimezone(saved);
+      setIsInitialSelection(false);
     } else {
+      setIsInitialSelection(true);
       setOpen(true);
     }
   }, []);
@@ -71,26 +80,55 @@ const CountryTimeSelector: React.FC = () => {
     <div className="space-y-6">
       {/* The dialog only opens once on first load */}
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="w-full max-w-[700px] px-10 pt-15 timezone-modal">
+        <DialogContent
+          className={`w-full max-w-[700px] px-10 py-20 timezone-modal ${
+            isInitialSelection ? "hide-close-icon" : ""
+          }`}
+        >
           <DialogHeader>
-            {isInitialSelection && (
-              <h2 className="text-2xl font-bold text-center w-full my-6">
-                Hi! There are multiple time zones in your country. Please select one to continue.
-              </h2>
-            )}
-            <DialogTitle className="!font-normal mt-7">Select Your Country</DialogTitle>
+            <h2
+              className={`text-2xl font-bold text-center w-full my-6 mb-10 ${
+                !isInitialSelection ? "hidden" : ""
+              }`}
+            >
+              Hi! There are multiple time zones in your country. Please select
+              one to continue.
+            </h2>
+            <DialogTitle className="!font-normal mt-7 px-10">
+              Select Your Country
+            </DialogTitle>
           </DialogHeader>
-          <div className="w-full flex flex-col pb-5 timezone-text">
+          <div className="w-full flex flex-col pb-5 px-10 timezone-text">
             <Select onValueChange={handleSelect}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select a country" />
               </SelectTrigger>
               <SelectContent>
-                {countries.map((country) => (
-                  <SelectItem key={country.value} value={country.value}>
-                    {country.label}
-                  </SelectItem>
-                ))}
+                <div
+                  className="px-2 py-2"
+                  onMouseDown={(e) => e.stopPropagation()}
+                >
+                  <input
+                    type="text"
+                    placeholder="Search country..."
+                    className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onKeyDown={(e) => e.stopPropagation()}
+                  />
+                </div>
+
+                {filteredCountries.length > 0 ? (
+                  filteredCountries.map((country) => (
+                    <SelectItem key={country.value} value={country.value}>
+                      {country.label}
+                    </SelectItem>
+                  ))
+                ) : (
+                  <div className="px-4 py-2 text-sm text-red-500">
+                    No matching country found.
+                  </div>
+                )}
               </SelectContent>
             </Select>
           </div>

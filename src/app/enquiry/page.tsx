@@ -17,6 +17,11 @@ const LatestArticles = dynamic(() => import("@/components/LatestArticles"), {
   }
 );
 
+const EvaluationsTools = dynamic(() => import("@/components/EvaluationsTools"), {
+  loading: () => <Loading />,
+}
+);
+
 const page = () => {
   return (
     <div className="enquiry-setion">
@@ -36,6 +41,9 @@ const page = () => {
         </LazySection>
         <LazySection>
           <LatestArticles />
+        </LazySection>
+        <LazySection>
+          <EvaluationsTools/>
         </LazySection>
       </Suspense>
     </div>

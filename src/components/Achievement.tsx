@@ -81,7 +81,7 @@ const Achievement: React.FC = () => {
       </div>
       
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="common-modal-content w-full max-w-4xl">
+        <DialogContent className="common-modal-content w-full max-w-4xl top-[5%] translate-y-0">
           <DialogHeader>
             <DialogTitle>{modalContent.heading}</DialogTitle>
             <DialogDescription>{modalContent.text}</DialogDescription>

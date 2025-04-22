@@ -29,7 +29,7 @@ const FilePreviewModal: React.FC<FilePreviewModalProps> = ({
       <DialogTrigger asChild>
         {trigger}
       </DialogTrigger>
-      <DialogContent className="w-full max-w-[800px] fliepreview-modal">
+      <DialogContent className="w-full max-w-[800px] fliepreview-modal top-[5%] translate-y-0">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription />

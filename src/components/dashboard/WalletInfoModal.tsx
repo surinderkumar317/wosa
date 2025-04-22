@@ -101,7 +101,7 @@ const WalletInfoModal: React.FC<WalletInfoModalProps> = ({ open, setOpen }) => {
           Wallet
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-[1300px] wallet-modal">
+      <DialogContent className="w-full max-w-[1300px] wallet-modal top-[5%] translate-y-0">
         <DialogHeader>
           <DialogTitle className="text-[30px] font-bold mb-0">
             Wallet Info

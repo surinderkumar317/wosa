@@ -55,7 +55,91 @@ const CoursesList: Course[] = [
     price: "INR 14500",
     moreinfo: "More Information",
     buynow: "INR 11441",
-    link: "/online-courses/duolingo-60-days",
+    link: "/inhouse-courses/duolingo-90-days",
+  },
+  {
+    id: 2,
+    src: "/images/course.webp",
+    title: "Ilets",
+    days: "ILETS | 90 DAYS",
+    branch: "Ambala",
+    module: "LISTENING, READING, SPEAKING, WRITING",
+    coursestype: "Day Course, Evening Course, Morning Course",
+    durations: "90 Days",
+    price: "INR 14500",
+    moreinfo: "More Information",
+    buynow: "INR 11441",
+    link: "/inhouse-courses/duolingo-90-days",
+  },
+  {
+    id: 3,
+    src: "/images/course.webp",
+    title: "CELPIP | General",
+    days: "CELPIP | 90 DAYS",
+    branch: "Ambala",
+    module: "LISTENING, READING, SPEAKING, WRITING",
+    coursestype: "Day Course, Evening Course, Morning Course",
+    durations: "90 Days",
+    price: "INR 14500",
+    moreinfo: "More Information",
+    buynow: "INR 11441",
+    link: "/inhouse-courses/duolingo-90-days",
+  },
+  {
+    id: 4,
+    src: "/images/course.webp",
+    title: "Ilets",
+    days: "ILETS | 90 DAYS",
+    branch: "Ambala",
+    module: "LISTENING, READING, SPEAKING, WRITING",
+    coursestype: "Day Course, Evening Course, Morning Course",
+    durations: "90 Days",
+    price: "INR 14500",
+    moreinfo: "More Information",
+    buynow: "INR 11441",
+    link: "/inhouse-courses/duolingo-90-days",
+  },
+  {
+    id: 5,
+    src: "/images/course.webp",
+    title: "CELPIP | General",
+    days: "CELPIP | 90 DAYS",
+    branch: "Ambala",
+    module: "LISTENING, READING, SPEAKING, WRITING",
+    coursestype: "Day Course, Evening Course, Morning Course",
+    durations: "90 Days",
+    price: "INR 14500",
+    moreinfo: "More Information",
+    buynow: "INR 11441",
+    link: "/inhouse-courses/duolingo-90-days",
+  },
+  {
+    id: 6,
+    src: "/images/course.webp",
+    title: "Ilets",
+    days: "ILETS | 90 DAYS",
+    branch: "Ambala",
+    module: "LISTENING, READING, SPEAKING, WRITING",
+    coursestype: "Day Course, Evening Course, Morning Course",
+    durations: "90 Days",
+    price: "INR 14500",
+    moreinfo: "More Information",
+    buynow: "INR 11441",
+    link: "/inhouse-courses/duolingo-90-days",
+  },
+  {
+    id: 7,
+    src: "/images/course.webp",
+    title: "CELPIP | General",
+    days: "CELPIP | 90 DAYS",
+    branch: "Ambala",
+    module: "LISTENING, READING, SPEAKING, WRITING",
+    coursestype: "Day Course, Evening Course, Morning Course",
+    durations: "90 Days",
+    price: "INR 14500",
+    moreinfo: "More Information",
+    buynow: "INR 11441",
+    link: "/inhouse-courses/duolingo-90-days",
   },
 ];
 
@@ -197,18 +281,17 @@ const OnlineCourse: React.FC = () => {
                 </form>
               </Form>
 
-              <div className="common-button-rows w-1/2 m-auto !justify-end">
-                {/* <Button onClick={handleBack} variant="link" className="back-btn !p-0">
-                                    <i className="fa fa-angle-left"></i> Back
-                                </Button> */}
-                <Button
-                  onClick={handleSearch}
-                  className="ml-4 !p-0"
-                  variant="link"
-                >
-                  Search <i className="fa fa-angle-right"></i>
-                </Button>
-              </div>
+              {selectedCourse && (
+                <div className="common-button-rows w-1/2 m-auto !justify-end">
+                  <Button
+                    onClick={handleSearch}
+                    className="ml-4 !p-0"
+                    variant="link"
+                  >
+                    Search <i className="fa fa-angle-right"></i>
+                  </Button>
+                </div>
+              )}
             </motion.div>
           )}
 
@@ -229,43 +312,43 @@ const OnlineCourse: React.FC = () => {
           {searchClicked && !showCourseForm && (
             <div className="advanced-reset-btn flex gap-5">
               {!showAdvancedForm && (
-              <>
-              <Button
-                onClick={handleAdvancedSearch}
-                className="advanced-search"
-              >
-                Advanced Search
-              </Button>
-              <Button
-                onClick={() => {
-                  setShowAdvancedForm(false); // Hide advanced search
-                  setShowCoursesMain(false); // Hide course list
-                  setSearchClicked(false); // Reset search state
+                <>
+                  <Button
+                    onClick={handleAdvancedSearch}
+                    className="advanced-search"
+                  >
+                    Advanced Search
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      setShowAdvancedForm(false); // Hide advanced search
+                      setShowCoursesMain(false); // Hide course list
+                      setSearchClicked(false); // Reset search state
 
-                  // Reset all selections
-                  // setSelectedBranch(null);
-                  setSelectedCourse(null);
-                  setSelectedModuleType(null);
-                  setSelectedModule(null);
-                  setselectedCourseType(null); // ✅ Reset Course Type
-                  setselectedDuration(null); // ✅ Reset Duration
+                      // Reset all selections
+                      // setSelectedBranch(null);
+                      setSelectedCourse(null);
+                      setSelectedModuleType(null);
+                      setSelectedModule(null);
+                      setselectedCourseType(null); // ✅ Reset Course Type
+                      setselectedDuration(null); // ✅ Reset Duration
 
-                  // Reset form values explicitly
-                  form.reset({
-                    // branch: "",
-                    course: "",
-                    moduleType: "",
-                    module: "",
-                    courseType: "",
-                    duration: "",
-                  });
-                }}
-                className="reset-btn"
-              >
-                Reset
-              </Button>
-              </>
-            )}
+                      // Reset form values explicitly
+                      form.reset({
+                        // branch: "",
+                        course: "",
+                        moduleType: "",
+                        module: "",
+                        courseType: "",
+                        duration: "",
+                      });
+                    }}
+                    className="reset-btn"
+                  >
+                    Reset
+                  </Button>
+                </>
+              )}
             </div>
           )}
 
@@ -424,7 +507,7 @@ const OnlineCourse: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="container m-auto courses-main-cont"
         >
-          <div className="courses-box-container flex flex-wrap gap-4">
+          <div className="courses-box-container flex flex-wrap gap-4 pb-20">
             {CoursesList.map((course) => (
               <div key={course.id} className="w-1/3 common-coaching-box">
                 <Card className="courses-box p-4 rounded-xl border bg-card shadow">
@@ -444,11 +527,21 @@ const OnlineCourse: React.FC = () => {
                         <p>{course.days}</p>
                       </div>
                       <ul className="my-5">
-                        <li><p>Branch: {course.branch}</p></li>
-                        <li><p>Module: {course.module}</p></li>
-                        <li><p>Course Type: {course.coursestype}</p></li>
-                        <li><p>Duration: {course.durations}</p></li>
-                        <li><p>Price: {course.price}</p></li>
+                        <li>
+                          <p>Branch: {course.branch}</p>
+                        </li>
+                        <li>
+                          <p>Module: {course.module}</p>
+                        </li>
+                        <li>
+                          <p>Course Type: {course.coursestype}</p>
+                        </li>
+                        <li>
+                          <p>Duration: {course.durations}</p>
+                        </li>
+                        <li>
+                          <p>Price: {course.price}</p>
+                        </li>
                       </ul>
                       <div className="courses-btn-box flex justify-between items-center">
                         <p className="!text-sm">{course.moreinfo}</p>

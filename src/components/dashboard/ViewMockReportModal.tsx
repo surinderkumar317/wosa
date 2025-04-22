@@ -53,7 +53,7 @@ const ViewMockReportModal: React.FC = () => {
       >
         <Button>View Report</Button>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-[1024px] mocktestreport-modal">
+      <DialogContent className="w-full max-w-[1024px] mocktestreport-modal top-[5%] translate-y-0">
         <DialogHeader>
           <DialogTitle></DialogTitle>
           <DialogDescription></DialogDescription>

@@ -57,6 +57,90 @@ const coursesList: Course[] = [
     buynow: "INR 11441",
     link: "/inhouse-courses/duolingo-90-days",
   },
+  {
+    id: 2,
+    src: "/images/course.webp",
+    title: "Ilets",
+    days: "ILETS | 90 DAYS",
+    branch: "Ambala",
+    module: "LISTENING, READING, SPEAKING, WRITING",
+    coursestype: "Day Course, Evening Course, Morning Course",
+    durations: "90 Days",
+    price: "INR 14500",
+    moreinfo: "More Information",
+    buynow: "INR 11441",
+    link: "/inhouse-courses/duolingo-90-days",
+  },
+  {
+    id: 3,
+    src: "/images/course.webp",
+    title: "CELPIP | General",
+    days: "CELPIP | 90 DAYS",
+    branch: "Ambala",
+    module: "LISTENING, READING, SPEAKING, WRITING",
+    coursestype: "Day Course, Evening Course, Morning Course",
+    durations: "90 Days",
+    price: "INR 14500",
+    moreinfo: "More Information",
+    buynow: "INR 11441",
+    link: "/inhouse-courses/duolingo-90-days",
+  },
+  {
+    id: 4,
+    src: "/images/course.webp",
+    title: "Ilets",
+    days: "ILETS | 90 DAYS",
+    branch: "Ambala",
+    module: "LISTENING, READING, SPEAKING, WRITING",
+    coursestype: "Day Course, Evening Course, Morning Course",
+    durations: "90 Days",
+    price: "INR 14500",
+    moreinfo: "More Information",
+    buynow: "INR 11441",
+    link: "/inhouse-courses/duolingo-90-days",
+  },
+  {
+    id: 5,
+    src: "/images/course.webp",
+    title: "CELPIP | General",
+    days: "CELPIP | 90 DAYS",
+    branch: "Ambala",
+    module: "LISTENING, READING, SPEAKING, WRITING",
+    coursestype: "Day Course, Evening Course, Morning Course",
+    durations: "90 Days",
+    price: "INR 14500",
+    moreinfo: "More Information",
+    buynow: "INR 11441",
+    link: "/inhouse-courses/duolingo-90-days",
+  },
+  {
+    id: 6,
+    src: "/images/course.webp",
+    title: "Ilets",
+    days: "ILETS | 90 DAYS",
+    branch: "Ambala",
+    module: "LISTENING, READING, SPEAKING, WRITING",
+    coursestype: "Day Course, Evening Course, Morning Course",
+    durations: "90 Days",
+    price: "INR 14500",
+    moreinfo: "More Information",
+    buynow: "INR 11441",
+    link: "/inhouse-courses/duolingo-90-days",
+  },
+  {
+    id: 7,
+    src: "/images/course.webp",
+    title: "CELPIP | General",
+    days: "CELPIP | 90 DAYS",
+    branch: "Ambala",
+    module: "LISTENING, READING, SPEAKING, WRITING",
+    coursestype: "Day Course, Evening Course, Morning Course",
+    durations: "90 Days",
+    price: "INR 14500",
+    moreinfo: "More Information",
+    buynow: "INR 11441",
+    link: "/inhouse-courses/duolingo-90-days",
+  },
 ];
 
 const OnlineCourse: React.FC = () => {
@@ -199,8 +283,8 @@ const OnlineCourse: React.FC = () => {
                 </form>
                 {selectedBranch && (
                   <div className="flex !justify-end w-1/2 m-auto common-button-rows">
-                    <Button onClick={handleNext} className="mt-4 !px-8">
-                      Next
+                    <Button onClick={handleNext} variant="link" className="mt-4 !p-0">
+                      Next <i className="fa fa-angle-right"></i>
                     </Button>
                   </div>
                 )}
@@ -481,9 +565,9 @@ const OnlineCourse: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="container m-auto courses-main-cont"
         >
-          <div className="courses-box-container flex flex-wrap gap-4">
+          <div className="courses-box-container flex flex-wrap gap-4 pb-20">
             {coursesList.map((course) => (
-              <div key={course.id} className="w-1/3 common-coaching-box">
+              <div key={course.id} className="w-3/12 common-coaching-box">
                 <Card className="courses-box p-4 rounded-xl border bg-card shadow">
                   <CardContent className="p-0">
                     <Link href={course.link} className="no-underline">

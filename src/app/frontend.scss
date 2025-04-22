@@ -25,8 +25,8 @@ $lightBlueColor:#E8F0FE;
         h3{font-size: 1rem;line-height:1.6rem;}
         h2{font-size:2rem;line-height:2rem;}
     }
-    @media screen and (max-width:767px){
-        h3{font-size: 1.3rem;line-height:1.6rem;}
+    @media screen and (max-width:992px){
+        h3{font-size: 1.2rem;line-height:1.5rem;}
         h2{font-size:1.5rem;line-height:2rem;}
     }
 }
@@ -83,12 +83,9 @@ $lightBlueColor:#E8F0FE;
         }
 }
 
-// firefox css hack for scrollbar
-@-moz-document url-prefix() {
-    /* Your Firefox-specific styles here */
-    .common-scroller {
-      scrollbar-width: thin;
-    }
+.common-scroller {
+    scrollbar-width: thin;
+    max-height:65vh;
 }
 
 // fix on focus textarea border issue
@@ -211,7 +208,7 @@ input::placeholder {
                     padding-bottom: 10px;
                     top:5px;
                     a {
-                        font-size:1.1rem;font-weight:600;text-transform:uppercase;padding: 0 0 10px;top:30px;
+                        font-size:1.1rem;font-weight:700;text-transform:uppercase;padding: 0 0 10px;letter-spacing: 1px;
                     }
                     ul.navi-dropdown
                     {
@@ -246,6 +243,7 @@ input::placeholder {
                                 top: -54px;
                                 right: -280px;
                                 background:$bgGrayLight;
+                                overflow: auto;
                                 li{
                                     a{
                                         text-transform:capitalize;
@@ -288,6 +286,11 @@ input::placeholder {
                         background:$bgGrayLight;
                     }
                 }
+            }
+            .dashboard-btn
+            {
+                position: relative;
+                top:-2px;
             }
         }
     }   
@@ -352,9 +355,7 @@ input::placeholder {
     {
         img{
             width: 100%;
-            border-left:25px solid $whiteColor;
-            border-top:25px solid $whiteColor;
-            border-bottom:25px solid $whiteColor;
+            border:25px solid $whiteColor;
             border-radius: 15px 0 0 15px;
             
             -webkit-transition: opacity .5s, -webkit-transform .5s;
@@ -1188,6 +1189,10 @@ input::placeholder {
     background: $bgGrayLight;
     .inverstor-content{
         @include content-container;
+        h3{
+            font-size: 1.5rem;
+            margin-top: 15px;
+        }        
     }
     .investor-grid-container {
         display: grid;
@@ -1220,7 +1225,7 @@ input::placeholder {
                 }
             }
             h2{
-                font-size:1.6rem;
+                font-size:1.1rem;
                 font-weight: 600;
                 transition: transform 0.3sease-in-out;
             }
@@ -1535,11 +1540,20 @@ input::placeholder {
     .courses-content
     {
         @include content-container;
+        text-transform: uppercase;
+        h3{
+            color: #000;
+            font-size: 1.1rem;
+            text-transform: capitalize;
+            letter-spacing: 1px;
+        }
     }
     .form-middle-container
     {
         label{
-            font-size: 1.1rem;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-left: 10px;
         }
         button{
             padding:15px 25px;
@@ -1564,11 +1578,13 @@ input::placeholder {
             }
         }
         ul.branches-course-list {
-            font-weight: bold;
+            font-weight: 600;
             display: flex;
             gap: 9px;
-            margin:25px 0;
-            font-size:1.1rem;
+            margin: 25px 0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .advanced-reset-btn {
             justify-content: center;
@@ -1591,6 +1607,7 @@ input::placeholder {
 {
     display: flex;
     gap: 25px;
+    justify-content: center;
     .course-img {
         max-height: 310px;
         overflow: hidden;
@@ -1649,6 +1666,10 @@ input::placeholder {
     background: $bgGrayLight;
     min-height:435px;
     position: relative;
+    .container {
+		z-index: 9;
+        position: relative;
+	}
     h1{
         font-size: 1.8rem;
         font-weight: bold;
@@ -1731,15 +1752,14 @@ input::placeholder {
             color:$blackColor;
             font-weight: bold;
             margin-bottom: 15px;
+            line-height: 45px;
         }
         p{
             font-size: 1.5rem;
         }
     }
     .form-slider-img{    
-            border-left: 25px solid $bgGrayLight;
-            border-top: 25px solid $bgGrayLight;
-            border-bottom: 25px solid $bgGrayLight;
+            border: 25px solid $bgGrayLight;
             border-radius: 15px 0 0 15px;   
             box-shadow: 0px 2px 10px 4px #ccc;
             position: relative;
@@ -1757,37 +1777,104 @@ input::placeholder {
         margin:0px !important;
     }
     .form-phone-input{
-        box-shadow: 1px 1px 6px 1px $bgGrayLight;
+        box-shadow:0px 1px 15px 5px rgba(0, 0, 0, 0.1607843137);
         border-radius: 5px;
-        padding: 5px;
+        padding:10px 5px;
+        position: relative;
         button{
             border-radius: 0;
-            border:none;
-            border-right: 1px solid $bgGrayLight;
+            border: none;
+            border-right: 1px solid #ccc;
+            font-weight: bold;
+            width: 100%;
+            max-width: 145px;
+            color: #000;
+            font-size: 1rem;
+            font-family: 'Hind', 'Hind Fallback';
+            position: relative;
+            z-index: 9;
+            svg{
+                color:$redColor;
+                opacity: .9;
+                font-weight: bold;
+                width: auto;
+                height: 25px;
+            }
         }
         input{
             border: none;
+            position: relative;
+            z-index: 9;
+            font-size: 1.1rem;
+            &::placeholder{
+                font-size: 1.1rem;
+                color:#555 !important;
+            }
         }
+        &:before{
+            content: "";
+            position: absolute;
+            border: #fff solid 2px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transition-duration: 0.3s;
+            transition-property: top, right, bottom, left;
+            border-radius: 5px;            
+        }
+        &:hover::before{
+            top: -8px;
+            right: -8px;
+            bottom: -8px;
+            left: -8px;
+        }
+
+        
     }
     .common-error-msg{
         bottom: -32px !important;
     }
-    .submit-common {
-        background:$whiteColor;
-        box-shadow: 1px 1px 7px 3px $bgGrayLight;
-        width: 45px;
-        height: 45px;
-        position: relative;
-        top: -2px;
-        border-radius: 100px;
-        font-size: 1.3rem;
-        &:hover{
-            text-decoration-line: none;   
+    .common-button-rows
+    {
+        .submit-common {
+            background:$whiteColor;
+            box-shadow: 0px 1px 15px 5px rgba(0, 0, 0, 0.1607843137);
+            width: 55px;
+            height: 55px;
+            position: relative;
+            top: -2px;
+            border-radius: 100px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            &:hover{
+                text-decoration-line: none;   
+            }
+            &:before{
+                content: "";
+                position: absolute;
+                border: #fff solid 2px;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                transition-duration: 0.3s;
+                transition-property: top, right, bottom, left;
+                border-radius: 100px;            
+            }
+            &:hover::before{
+                top: -8px;
+                right: -8px;
+                bottom: -8px;
+                left: -8px;
+            }
         }
     }
+    
 }
 // common enquiry form
 .enquiryform-container{
+    margin: 25px 0 0;
     .common-error-msg
     {
         font-size: 1rem !important;
@@ -1811,7 +1898,7 @@ input::placeholder {
 .mobile-navigation {
     height: 100vh !important;
     overflow: auto;
-    padding-bottom: 2%;
+    padding-bottom:10%;
     .mobile-login-register{
         display: flex;
         gap:5px;
@@ -1893,6 +1980,8 @@ input::placeholder {
 {
     .tab-content
     {
+        position: sticky;
+        margin-top:50px;
         h2{
             font-size: 2.5rem;
             font-weight: 800;
@@ -1928,7 +2017,7 @@ input::placeholder {
         padding: 15px;
         gap: 10px;
         justify-content: start;
-        align-items: start;
+        align-items: start;        
         .tab-sticky
         {
             width: 100%;
@@ -1937,21 +2026,23 @@ input::placeholder {
             gap: 15px;
             position: sticky;
             top:140px;
+            margin-top: 25px;
             button {
                 display: flex;
                 gap: 14px;
                 align-items: center;
                 justify-content: start;
-                font-size: 1.2rem;
+                font-size: 1.3rem;
                 white-space: normal;
                 text-align: left;
                 background: none !important;
                 box-shadow: none !important;
-                border-bottom: 1px solid $bgGrayLight;
+                border-bottom: 1px solid #ccc;
                 border-radius: 0 !important;
                 padding: 0 0 10px 0;
                 width: 100%;
                 color:$blackColor;
+                font-weight: 600;
                 img{
                     transform: rotate(180deg);
                     width: 30px;
@@ -2202,6 +2293,7 @@ background: #ccc;
             justify-content: right !important;
             padding: 0 !important;
             font-size: 1.3rem !important;
+            font-weight: bold;
             i {
                 font-size: 1.2rem;
                 color: $whiteColor;
@@ -2236,7 +2328,59 @@ background: #ccc;
         {
             padding:8px 0;
         }
-    }    
+    } 
+    
+    .name-holder
+    {
+        margin: 1px 0 0 0;
+        border-radius: 8px;
+        input{
+            height: auto;
+            border: none;
+            padding: 6px;
+
+        }
+        .common-error-msg
+        {
+            bottom: -25px;
+        }
+    }
+    .resend-btn
+    {
+        width: 160px;
+    }
+    .common-user-info-cont
+    {
+        span.userinfo-data{
+            background:hsl(46, 93%, 62%);
+            padding:3px 15px;
+            border-radius: 25px;
+        }
+    }
+
+    .common-phone-container
+    {
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        padding:0px 3px;
+        button, input
+        {
+            border: none;            
+        }
+        button{
+            border-right: 1px solid #ccc !important;
+            border-radius: 0px;
+            height: 30px;
+            margin: 5px;
+            svg{
+                color:$redColor;
+                opacity: 0.9;
+            }
+        }
+    }
+    label{
+        font-size: 1rem;
+    }
 }
 .form-row{
     position: relative;
@@ -2244,6 +2388,20 @@ background: #ccc;
         position: absolute;
         bottom: -20px;
         font-size: 13px !important;
+    }
+    input{
+        // border: 1px solid #ccc;
+        padding:5px 10px;
+    }
+}
+
+// reality main page css
+.reality-test-container 
+{
+    justify-content: center;
+    .reality-test-box
+    {
+        width: 23.7%;
     }
 }
 
@@ -2394,6 +2552,7 @@ background: #ccc;
 // event time page css
 .event-date-container
 {
+    scrollbar-width: thin;
     .event-date-box {
         width: 100%;
         padding: 10px 10px 20px;
@@ -2404,6 +2563,7 @@ background: #ccc;
 }
 .event-time-container
 {
+    scrollbar-width: thin;
     .event-time-box {
         width: 100%;
         padding: 10px 10px 20px;
@@ -2421,12 +2581,37 @@ background: #ccc;
     justify-content: center;
     align-items: center;
     width:100%;
-    max-width:160px;
-    min-width:160px;            
+    max-width:150px;
+    min-width:150px; 
+    &.bg-active
+    {
+        h2{
+            .text-muted-foreground
+            {
+                color:$whiteColor;
+            }
+        }
+        
+    }           
 }
 
 // coaching page css
-.common-coaching-box {width: 32%;}
+.courses-box-container
+{
+    .common-coaching-box {
+        width: 23.6%;
+        a {
+            .course-img img {
+              transition: transform 0.3s ease; // 👈 Add transition here
+            }
+      
+            &:hover .course-img img {
+              transform: scale(1.1); // 👈 Scale on hover
+            }
+          }
+    }
+}
+
 
 // time zone css
 @keyframes fadeIn {
@@ -2440,6 +2625,10 @@ background: #ccc;
 .animate-fadeIn {
     animation: fadeIn 0.5s ease-in-out forwards;
 }
+.hide-close-icon button.data-\[state\=open\]\:bg-accent {
+    display: none !important;
+}
+
 
 // login page css
 .login-container
@@ -2458,6 +2647,11 @@ background: #ccc;
             }
         }
     }
+}
+
+.date-time-scroller {
+    max-height: inherit;
+    height: 43vh;
 }
 
 
@@ -2519,6 +2713,13 @@ background: #ccc;
                             }    
                         }                                                 
                     }                                      
+                }
+                .dashboard-btn {
+                    font-size: 0.8rem;
+                    padding: 0 12px;
+                    height: auto;
+                    position: relative;
+                    top: -1px;
                 } 
             } 
         }
@@ -2642,7 +2843,30 @@ background: #ccc;
                 }
             }
         }
-    }    
+    } 
+    
+    // coaching page css
+    .courses-box-container
+    {
+        .common-coaching-box {width:31.6%;}
+    }
+
+    .form-slider-container {
+        .form-phone-input {
+            button {
+                max-width: 115px;
+            }
+        }
+    }
+    .reality-test-container {
+        .reality-test-box {
+            width: 23.4%;
+        }
+    }
+    .date-time-scroller {
+        max-height: inherit;
+        height: 55vh;
+    }
 }
 @media screen and (max-width:1366px)
 {
@@ -2653,6 +2877,15 @@ background: #ccc;
     {
         width: 32.3%;
     } 
+    .reality-test-container {
+        .reality-test-box {
+            width: 31%;
+        }
+    }
+    .date-time-scroller {
+        max-height: inherit;
+        height: 50vh;
+    }
 }
 @media screen and (max-width:1280px)
 {
@@ -2764,6 +2997,7 @@ background: #ccc;
                         a {
                             font-size: 0.6rem;
                             padding:5px 3px !important;
+                            letter-spacing: 0px;
                             img{
                                 width: 20px;
                             }
@@ -3040,6 +3274,26 @@ background: #ccc;
                         }
                     }
                 }
+                &:hover{
+                    h2{
+                        color:$blackColor;
+                        z-index: 99;
+                        position: relative;
+                    }
+                    .tool-links{
+                        z-index: 99;
+                        position: relative;
+                        a{
+                            color:$blackColor;
+                            img{
+                                filter: initial;
+                            }
+                        }
+                    }
+                    &::after{
+                        display: none;
+                    }
+                }
             }
         }
     }
@@ -3218,12 +3472,6 @@ background: #ccc;
         .investor-grid-container {
             grid-template-columns: 90%;
         }
-        .inverstor-content {
-            h2 {
-                font-size:2rem;
-                line-height: 2rem;
-            }
-        }
     }
     .borad-director-section {
         padding: 0 5%;
@@ -3369,6 +3617,7 @@ background: #ccc;
         flex-wrap: nowrap;
         overflow: auto;
         gap: 5px;
+        justify-content: start;
         .reality-test-box {
             width: 100%;
             min-width: 300px;
@@ -3883,6 +4132,55 @@ background: #ccc;
         .checkout-right-side
         {
             width: 100%;
+        }
+    }
+
+    .enquiryform-container
+    {
+        form {
+            width: 100%;
+            background: #fff;
+            box-shadow: 0px 1px 15px 5px rgba(0, 0, 0, 0.1607843137);
+            padding: 0;
+            border-radius: 5px;
+            gap: 0;
+            position: relative;
+            .space-y-2 {
+                &.w-\[80\%\] {
+                    width: 100%;
+                }
+            }
+            .form-phone-input {
+                button {
+                    max-width: 105px;
+                    z-index: 9;
+                }
+            }
+            .common-button-rows {
+                margin: 0px !important;
+                position: absolute;
+                right: 5px;
+                z-index: 9;
+                button {
+                    width: 35px !important;
+                    height: 35px !important;
+                    background: #000 !important;
+                    color: #fff;
+                    box-shadow: none !important;
+                    border: none !important;
+                }
+            }
+            input{               
+                max-width: 50%;
+                &::placeholder{
+                    font-size: 0.9rem !important;
+                    color:#555 !important;
+                }
+            }
+            .common-error-msg
+            {
+                bottom: -35px !important;
+            }
         }
     }
     

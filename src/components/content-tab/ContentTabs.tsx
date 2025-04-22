@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useState, useRef, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Accordion,
@@ -11,14 +11,14 @@ import {
 import CommonImage from "../common/Image";
 
 interface TabContent {
-  id: string;
+  id: number;
   title: string;
   content: React.ReactNode;
 }
 
 const tabData: TabContent[] = [
   {
-    id: "one",
+    id: 1,
     title: "Western Overseas Delhi",
     content: (
       <>
@@ -34,7 +34,7 @@ const tabData: TabContent[] = [
         />
         <h3>Why do we need study VISA consultants?</h3>
         <p>
-          Let&aposs find out why international education has touched the pinnacle.
+          Let&apos;s find out why international education has touched the pinnacle.
         </p>
         <h3>Our Achievements:</h3>
         <ul>
@@ -46,7 +46,7 @@ const tabData: TabContent[] = [
     ),
   },
   {
-    id: "two",
+    id: 2,
     title: "Best Visa Consultants in Delhi",
     content: (
       <>
@@ -68,7 +68,7 @@ const tabData: TabContent[] = [
     ),
   },
   {
-    id: "three",
+    id: 3,
     title: "Best Visa",
     content: (
       <>
@@ -92,33 +92,54 @@ const tabData: TabContent[] = [
 ];
 
 const ContantTabs: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<string>(String(tabData[0].id));
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const scrollTargetRef = useRef<HTMLDivElement>(null);
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    setHasInteracted(true);
+  };
+
+  useEffect(() => {
+    if (hasInteracted && scrollTargetRef.current) {
+      scrollTargetRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [activeTab, hasInteracted]);
+  
   return (
-    <div className="container m-auto">
+    <div className="container m-auto content-tab py-20" ref={scrollTargetRef}>
       {/* Tabs - Visible only on larger screens */}
       <div className="hidden md:flex">
         <Tabs
-          defaultValue="one"
+          defaultValue={activeTab}
+          value={activeTab}
+          onValueChange={handleTabChange}
           className="w-full px-4 pb-5 flex gap-4 justify-between common-main-tabcont"
         >
-          {tabData.map((tab) => (
-            <TabsContent
-              key={tab.id}
-              value={tab.id}
-              className="tab-content w-3/4"
-            >
-              {tab.content}
-            </TabsContent>
-          ))}
+            {tabData.map((tab) => (
+              <TabsContent
+                key={tab.id}
+                value={String(tab.id)}
+                className="tab-content w-3/4"
+              >
+                {tab.content}
+              </TabsContent>
+            ))}
           <TabsList className="flex flex-col gap-10 w-1/4 common-tab-list">
             <div className="tab-sticky">
               {tabData.map((tab) => (
-                <TabsTrigger key={tab.id} value={tab.id}>
+                <TabsTrigger key={tab.id} value={String(tab.id)}>
                   <CommonImage
                     src="/images/our-services-arrow.webp"
                     alt="arrow"
                     width={43}
                     height={12}
-                  /> {tab.title}
+                  />{" "}
+                  {tab.title}
                 </TabsTrigger>
               ))}
             </div>
@@ -130,7 +151,7 @@ const ContantTabs: React.FC = () => {
       <div className="md:hidden">
         <Accordion type="single" collapsible className="content-tab-mobile">
           {tabData.map((tab) => (
-            <AccordionItem key={tab.id} value={tab.id} className="content-tab-list">
+            <AccordionItem key={tab.id} value={String(tab.id)} className="content-tab-list">
               <AccordionTrigger>{tab.title}</AccordionTrigger>
               <AccordionContent className="tab-content">{tab.content}</AccordionContent>
             </AccordionItem>

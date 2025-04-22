@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useForm, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -34,12 +34,13 @@ import { Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 import { Toaster } from "sonner";
 
+// Country Code Options
 const countryOptions = [
-  { value: "+91", label: "🇮🇳 +91 (India)" },
-  { value: "+1", label: "🇺🇸 +1 (USA)" },
-  { value: "+44", label: "🇬🇧 +44 (UK)" },
-  { value: "+61", label: "🇦🇺 +61 (Australia)" },
-  { value: "+81", label: "🇯🇵 +81 (Japan)" },
+  { value: "+91", label: "+91 - IN", searchable: "india" },
+  { value: "+1", label: "+1 - U", searchable: "usa" },
+  { value: "+44", label: "+44 - GB", searchable: "uk" },
+  { value: "+61", label: "+61 - AU", searchable: "australia" },
+  { value: "+81", label: "+81 - JP", searchable: "japan" },
 ];
 
 // Define validation schemas for login
@@ -95,7 +96,7 @@ interface LoginProps {
   buttonText?: string;
 }
 
-const Login: React.FC<LoginProps> = ({ buttonText = "Login",}) => {
+const Login: React.FC<LoginProps> = ({ buttonText = "Login", }) => {
   // const router = useRouter();
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -107,8 +108,9 @@ const Login: React.FC<LoginProps> = ({ buttonText = "Login",}) => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
+  // Place the filter here, inside your component
   const filteredOptions = countryOptions.filter((country) =>
-    country.label.toLowerCase().includes(searchTerm.toLowerCase())
+    country.searchable.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Phone Form Hook
@@ -165,6 +167,16 @@ const Login: React.FC<LoginProps> = ({ buttonText = "Login",}) => {
     forgotPasswordForm.reset();
   };
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      inputRef.current?.focus(); // Re-focus after dropdown opens
+    }, 50); // Small delay ensures it's mounted
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]); // Optional: focus each time dropdown resets
+
   return (
     <>
       {/* Login Dialog */}
@@ -176,7 +188,7 @@ const Login: React.FC<LoginProps> = ({ buttonText = "Login",}) => {
             {buttonText}
           </Button>
         </DialogTrigger>
-        <DialogContent className="common-modal-form w-full max-w-xl">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
           <DialogHeader>
             <DialogTitle>Login</DialogTitle>
             <DialogDescription></DialogDescription>
@@ -229,7 +241,7 @@ const Login: React.FC<LoginProps> = ({ buttonText = "Login",}) => {
                         Phone Number<span className="text-red-500">*</span>
                       </Label>
                       <FormControl>
-                        <div className="flex space-x-2">
+                        <div className="flex space-x-2 common-phone-container">
                           {/* Country Code Select */}
                           <Select
                             onValueChange={(value) => {
@@ -244,32 +256,37 @@ const Login: React.FC<LoginProps> = ({ buttonText = "Login",}) => {
                             </SelectTrigger>
                             <SelectContent>
                               {/* 🔍 Search Input inside the dropdown */}
-                              <div className="px-2 pb-2 pt-1">
+                              <div className="px-2 pb-2 pt-1"
+                                onMouseDown={(e) => e.stopPropagation()} // Keep dropdown open
+                              >
                                 <Input
+                                  ref={inputRef}
                                   placeholder="Search country"
                                   value={searchTerm}
-                                  onChange={(e) =>
-                                    setSearchTerm(e.target.value)
-                                  }
+                                  onChange={(e) => setSearchTerm(e.target.value)}
+                                  onKeyDown={(e) => e.stopPropagation()}
                                   className="h-8 text-sm"
                                 />
                               </div>
-                              <SelectGroup>
-                                {filteredOptions.length > 0 ? (
-                                  filteredOptions.map((country) => (
-                                    <SelectItem
-                                      key={country.value}
-                                      value={country.value}
-                                    >
-                                      {country.label}
-                                    </SelectItem>
-                                  ))
-                                ) : (
-                                  <div className="px-3 py-2 text-sm text-muted-foreground">
-                                    No results found
-                                  </div>
-                                )}
-                              </SelectGroup>
+                              {/* Scrollable country list */}
+                              <div className="h-[100px] overflow-y-auto common-scroller">
+                                <SelectGroup>
+                                  {filteredOptions.length > 0 ? (
+                                    filteredOptions.map((country) => (
+                                      <SelectItem
+                                        key={country.value}
+                                        value={country.value}
+                                      >
+                                        {country.label}
+                                      </SelectItem>
+                                    ))
+                                  ) : (
+                                    <div className="px-3 py-2 text-sm text-muted-foreground">
+                                      No results found
+                                    </div>
+                                  )}
+                                </SelectGroup>
+                              </div>
                             </SelectContent>
                           </Select>
 
@@ -400,7 +417,7 @@ const Login: React.FC<LoginProps> = ({ buttonText = "Login",}) => {
         open={isForgotPasswordOpen}
         onOpenChange={setIsForgotPasswordOpen}
       >
-        <DialogContent className="common-modal-form w-full max-w-xl">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
           <DialogHeader>
             <DialogTitle>Forgot Password</DialogTitle>
             <DialogDescription></DialogDescription>

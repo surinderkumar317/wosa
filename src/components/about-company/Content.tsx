@@ -78,7 +78,7 @@ const AboutContent: React.FC = () => {
       </div>
 
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="common-modal-content w-full max-w-3xl">
+        <DialogContent className="common-modal-content w-full max-w-3xl top-[5%] translate-y-0">
           <DialogHeader>
             <DialogTitle>{modalContent.title}</DialogTitle>
             <DialogDescription>{modalContent.description}</DialogDescription>
