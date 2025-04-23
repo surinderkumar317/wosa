@@ -2,6 +2,7 @@
 //@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css');
 
 $blackColor:#000;
+$blacklightcolor:#2c3844;
 $darkBlueColor:#073255;
 $darkLightBlueColor:#11446f;
 $whiteColor:#fff;
@@ -11,32 +12,40 @@ $bgGrayLight:#f1f1f1;
 $darkGraycolor:#141b23;
 $lightBlueColor:#E8F0FE;
 
-@mixin comman-text{font-size:1.2rem;}
+@mixin comman-text{
+    font-size:1.3rem;
+    color:$darkGray;
+    @media screen and (max-width:1536px)
+    {font-size: 1rem;}
+}
 @mixin content-container{
     display: flex;
     flex-direction: column;
     h3{color:$darkGray;font-size:1.8rem;font-weight:600;line-height:35px;margin-bottom:10px; text-align: center;}
-    h2{color:$blackColor;font-size:2.9rem;margin:0;font-weight:bold;line-height:45px;text-align: center;}
+    h2{color:$blacklightcolor;font-size:2.9rem;margin:0;font-weight:bold;line-height:45px;text-align: center;}
     @media screen and (max-width:1536px){
         h3{font-size: 1.4rem;line-height:1.6rem;}
-        h2{font-size:2.3rem;line-height:2rem;}
+        h2{font-size:2rem;line-height:2.3rem;}
     }
     @media screen and (max-width:1024px){
         h3{font-size: 1rem;line-height:1.6rem;}
-        h2{font-size:2rem;line-height:2rem;}
+        h2{font-size:1.9rem;line-height:2rem;}
     }
     @media screen and (max-width:992px){
         h3{font-size: 1.2rem;line-height:1.5rem;}
         h2{font-size:1.5rem;line-height:2rem;}
     }
+    @media screen and (max-width:480px){
+        h3{max-width:350px;margin: 0 auto;}
+    }
 }
 @mixin ourservices-box{
     position: relative;
     h2{
-        font-size:1.8rem;font-weight:600;color:$blackColor;
+        font-size:1.8rem;font-weight:600;color:$blacklightcolor;
     }
     p{
-        font-size:1.2rem;color:$blackColor;
+        font-size:1.3rem;color:$darkGray;
     }
     button {
 		display: flex;
@@ -55,6 +64,10 @@ $lightBlueColor:#E8F0FE;
 			height: auto;
 		}
 	}
+    @media screen and (max-width:1536px){
+        h2{font-size:1.3rem;}
+        p{font-size: 1rem;}  
+    }
 }
 @mixin common-buttons{
         border: none;
@@ -97,7 +110,7 @@ body{
     color:$blackColor;
 }
 .padding-top{
-    padding-top:7.6rem !important;
+    padding-top:7rem !important;
 }
 a{
     transition: 0.5s;
@@ -142,7 +155,7 @@ input::placeholder {
             .quick-enquiry
             {
                 background:$redColor;
-                padding:6px;
+                padding:5px 30px;
                 font-size: 13px;
                 color:$whiteColor;
                 font-weight: 600;
@@ -154,6 +167,7 @@ input::placeholder {
                 width: 100%;
                 display:inline-flex;
                 justify-content: center;
+                height: auto;
                 &:hover{
                     background:$whiteColor;
                     color:$blackColor;
@@ -183,11 +197,15 @@ input::placeholder {
         }
     }
     .container{
-        max-width: 1800px;
+        max-width: 1750px;
     }
 
     .navigation-container
     {
+        .logo-cont {
+            width: 100%;
+            max-width: 215px;
+        }
         .navbar
         {
             .navi {
@@ -276,7 +294,7 @@ input::placeholder {
                     display: flex;
                     padding:8px 11px !important;
                     button {
-                        font-weight: 600;
+                        font-weight:bold;
                         font-size: 1.1rem;
                         &:hover{
                             background:none;
@@ -291,6 +309,7 @@ input::placeholder {
             {
                 position: relative;
                 top:-2px;
+                font-weight: 400;
             }
         }
     }   
@@ -321,18 +340,26 @@ input::placeholder {
             // font-size: 1.6vw;
             color: $whiteColor;
             opacity: 0;
+            margin: 35px 0 0;
+            font-weight: 100;
+
             -webkit-transition: opacity .8s, -webkit-transform .8s;
             -o-transition: opacity .8s, transform .8s;
             transition: opacity .8s, transform .8s, -webkit-transform .8s;
             transform: translateX(-100px);
         }
         a{
+            margin:40px 0 0;
             background:$blackColor;
             color:$whiteColor;
-            // padding:1.3vw 2vw;
-            // font-size: 1vw;
+            padding:30px 35px;
+            font-size:1.1rem;
             font-weight: 600;
+            text-transform: uppercase;
             border: 1px solid $whiteColor;
+            width: 100%;
+            max-width: 190px;
+
             opacity: 0;
             -webkit-transition: opacity .5s, -webkit-transform .5s;
             -o-transition: opacity .5s, transform .5s;
@@ -403,9 +430,9 @@ input::placeholder {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                border-bottom: 1px solid $bgGrayLight;
-                padding:5px 0;
-                margin:15px 0;
+                border-bottom: 1px solid #ccc;
+                padding: 15px 0;
+                margin: 15px 0 0;
                 button{
                     display: flex;
                     justify-content: space-between;
@@ -420,6 +447,7 @@ input::placeholder {
                     left: 0;
                     position: relative;
                     line-height: 25px;
+                    color:$blacklightcolor;
                     &:hover{
                         color:$redColor;
                         left: 10px;
@@ -448,6 +476,7 @@ input::placeholder {
         justify-content: center;
         gap: 15px;
         width: 100%;
+        margin: 25px 0 0;
         .achievement-num-container{
             max-width: 340px;
             width: 100%;
@@ -582,12 +611,13 @@ input::placeholder {
             font-size: 1.8rem;
             font-weight: 600;
             text-transform: capitalize;
+            color:$blacklightcolor;
         }
         p{
             padding: 0px;
             margin:5px 0px;
-            font-size: 1.2rem;
             line-height: 24px;
+            @include comman-text;
         }
         .article-readmore{
             a {
@@ -638,6 +668,7 @@ input::placeholder {
                     margin: 5px 0px 10px;
                     line-height: 35px;
                     font-weight: 600;
+                    color:$blacklightcolor;
                 }
             }
             .article-readmore{
@@ -668,9 +699,8 @@ input::placeholder {
     .article-readmore-readless
     {
         p{
-            font-size: 1.2rem;
-            line-height: 24px;
-            color: $blackColor;
+            @include comman-text;
+            line-height:30px;
         }
         button{
             color:$redColor;
@@ -697,7 +727,7 @@ input::placeholder {
             max-width: 1040px;
         }
         p{
-            font-size: 1.2rem;
+            @include comman-text;
             color:$whiteColor;
             margin: 30px auto;
             width: 100%;
@@ -772,7 +802,7 @@ input::placeholder {
             }
             h2{
                 font-size: 1.8rem;
-                color:$darkGraycolor;
+                color:$blacklightcolor;
                 margin:5px 0px;
                 line-height: 35px;
                 font-weight: bold;
@@ -783,11 +813,13 @@ input::placeholder {
             .tool-links{                
                 display: flex;
                 justify-content: center;
+                margin: 25px 0 0;
                 a{
                     display: flex;
                     align-items: center;
                     gap: 15px;
                     font-size: 1.3rem;
+                    color:$redColor;
                 }
             }
         }
@@ -814,6 +846,7 @@ input::placeholder {
                     font-size: 2.9rem;
                     font-weight: 800;
                     line-height: 50px;
+                    color:$blacklightcolor;
                 }
                 .gallery-btn
                 {
@@ -878,23 +911,22 @@ input::placeholder {
             h2{
                 font-size: 1.5rem;
                 text-align: center;
-                color:$darkGraycolor;
+                color:$blacklightcolor;
                 text-transform: capitalize;
                 font-weight: 800;
                 margin:10px 0;
             }
             p{
+                @include comman-text;
                 text-align: center;
-                font-size: 1.2rem;
-                color:$blackColor;
                 line-height: 26px;
                 padding: 0 10px;
                 button{
-                    color:$redColor;
+                    color:$redColor !important;
                     background:none;
                     padding:0px;
                     box-shadow: none;
-                    font-size: 1.2rem;
+                    @include comman-text;
                 }
             }
             &:hover{
@@ -915,7 +947,7 @@ input::placeholder {
         border-radius: 10px;
         .accolades-heading{
             font-size: 2.9rem;
-            color: $blackColor;
+            color: $blacklightcolor;
             font-weight: bold;
         }
         .certificate-common-box
@@ -1010,6 +1042,7 @@ input::placeholder {
 .footer
 {
     background:$darkGraycolor;
+    padding: 3rem 0 4rem;
     .footer-links
     {
         h3{
@@ -1020,7 +1053,8 @@ input::placeholder {
         ul {
             li{
                 padding: 5px 0;
-                a{
+                a{                    
+                    @include comman-text;
                     color:$whiteColor;
                     font-size: 1.2rem;
                     &:hover{
@@ -1032,7 +1066,7 @@ input::placeholder {
                 padding:0px;
                 button {
                     padding: 0;
-                    font-size: 1.2rem;
+                    @include comman-text;
                     color:$whiteColor;
                     &:hover{
                         background:none;
@@ -1053,9 +1087,9 @@ input::placeholder {
         .footer-copyright {
             flex-direction: column;
             .footer-copy-text
-            {
+            {                
+                @include comman-text;
                 color: $whiteColor;
-                font-size: 1.2rem;
             }
         }
         .footer-social-media {
@@ -1316,6 +1350,7 @@ input::placeholder {
                 
                 h4{
                     font-size: 1.2rem;
+                    font-weight: 600;
                 }
                 p{
                     font-size:1rem;
@@ -1539,13 +1574,19 @@ input::placeholder {
     background: $bgGrayLight;
     .courses-content
     {
-        @include content-container;
+        color:$blackColor;
+        font-size: 2.9rem;
+        margin: 0;
+        font-weight:600;
+        line-height: 45px;
+        text-align: center;
         text-transform: uppercase;
         h3{
-            color: #000;
+            color:$blackColor;
             font-size: 1.1rem;
             text-transform: capitalize;
             letter-spacing: 1px;
+            line-height: 25px;
         }
     }
     .form-middle-container
@@ -1617,8 +1658,9 @@ input::placeholder {
     .courses-heading
     {
         h2{
-            font-size:1.5rem;
+            font-size:1.8rem;
             font-weight: bold;
+            color:$blacklightcolor;
         }
         p{
             font-size: 1.2rem;
@@ -1627,6 +1669,8 @@ input::placeholder {
     }
     .courses-list
     {
+        min-height: 220px;
+        margin-bottom: 10px;
         ul{
             display: flex;
             flex-direction: column;
@@ -1635,9 +1679,11 @@ input::placeholder {
                 display: flex;
                 gap: 10px;
                 align-items: center;
-                font-size:1.2rem;
+                font-size:1.1rem;
+                font-weight: 600;
                 h2{
                     font-weight: bold;
+                    color:$blacklightcolor;
                 }
             }
         }
@@ -1748,11 +1794,11 @@ input::placeholder {
 .form-slider-container{
     .left-slideform{
         h1{
-            font-size: 2.5rem; 
+            font-size:3.1rem; 
             color:$blackColor;
             font-weight: bold;
             margin-bottom: 15px;
-            line-height: 45px;
+            line-height:57px;
         }
         p{
             font-size: 1.5rem;
@@ -1785,10 +1831,10 @@ input::placeholder {
             border-radius: 0;
             border: none;
             border-right: 1px solid #ccc;
-            font-weight: bold;
+            font-weight:600;
             width: 100%;
             max-width: 145px;
-            color: #000;
+            color: $blacklightcolor;
             font-size: 1rem;
             font-family: 'Hind', 'Hind Fallback';
             position: relative;
@@ -1947,18 +1993,19 @@ input::placeholder {
     h2{
         font-size: 2.5rem;
         font-weight: 800;
-        color:$blackColor;
+        color:$blacklightcolor;
     }
     h3{
         font-size: 1.5rem;
         font-weight: 800;
-        color:$blackColor;
+        color:$blacklightcolor;
         margin: 10px 0;
     }
     p{
-        font-size: 1.2rem;
-        line-height: 26px;
+        @include comman-text;
+        line-height: 30px;
         margin:10px 0 20px;
+        text-align: justify;
     }
     img{
         width: 100%;
@@ -1982,15 +2029,17 @@ input::placeholder {
     {
         position: sticky;
         margin-top:50px;
+        padding-right: 5%;
         h2{
             font-size: 2.5rem;
             font-weight: 800;
-            color:$blackColor;
+            color:$blacklightcolor;
         }
         p{
             font-size: 1.2rem;
             line-height: 26px;
             margin:10px 0 20px;
+            text-align: justify;
         }
         img{
             width: 100%;
@@ -2000,7 +2049,7 @@ input::placeholder {
         h3{
             font-size: 1.5rem;
             font-weight: 800;
-            color:$blackColor;
+            color:$blacklightcolor;
             margin: 10px 0;
         }
         ul{
@@ -2066,7 +2115,10 @@ input::placeholder {
 .our-office-container
 {
     .ouroffice-content{
-        @include content-container;       
+        @include content-container;
+        h2{
+            letter-spacing: 1px; 
+        }              
         & {
             text-align: center;
         } 
@@ -2085,8 +2137,9 @@ input::placeholder {
         h4{
             font-size: 1.8rem;
             color:$whiteColor;
-            font-weight: bold;
+            font-weight:600;
             padding: 20px 0;
+            letter-spacing: 1px;
         }
         button {
             background: none !important;
@@ -2120,8 +2173,9 @@ input::placeholder {
             background: $bgGrayLight;
             h2{
                 font-size: 1.8rem;
-                color:$blackColor;
+                color:$blacklightcolor;
                 font-weight: bold;
+                letter-spacing: 1px;
             }
             p{
                 display: flex;
@@ -2141,7 +2195,7 @@ input::placeholder {
                 }
             }
             .office-content-top {
-                border-bottom: 1px solid $bgGrayLight;
+                border-bottom: 1px solid #ccc;
                 padding: 0 0 25px 0;
                 margin: 0 0 20px 0;
             }
@@ -2164,10 +2218,16 @@ input::placeholder {
     p{
         font-size: 1.2rem;
         margin-bottom: 15px;
+        padding-right: 15%;
     }
     ul.hotlineicons{
+        margin:25px 0 0;
         li{
             margin:15px 0;
+            a{
+                font-size: 1.2rem;
+                font-weight:600;
+            }
             img{
                 width: auto;
                 height: auto;
@@ -2229,7 +2289,7 @@ input::placeholder {
         margin-bottom: 15px;
     }
     p{
-        font-size: 1.2rem;
+        @include comman-text;
         line-height: 25px;
         color: $blackColor;
     }
@@ -2654,6 +2714,22 @@ background: #ccc;
     height: 43vh;
 }
 
+.slider-full-width {
+	.container {
+		max-width: 1790px;
+	}
+}
+
+.courses-box-container {
+	.reality-test-box, .event-box {
+		.courses-list {
+			min-height: inherit;
+            h2{
+                color:$blackColor;
+            }
+		}
+	}
+}
 
 // responsive css
 @media screen and (min-width:1921px) and (max-width:5000px)
@@ -2687,10 +2763,8 @@ background: #ccc;
 @media screen and (max-width:1536px)
 {
     body.padding-top {padding-top: 6rem !important;}
-    .header .header-topbar,
-    .navigation-container {
-        padding: 0.5rem 3%;
-    }
+    .header .header-topbar{padding: 0.3rem 3%;}
+    .navigation-container {padding: 0.5rem 3%;}
     .header{
         .navigation-container{
             .logo-cont {
@@ -2728,10 +2802,12 @@ background: #ccc;
     .header .header-topbar .quick-btn-cont .quick-enquiry
     {
         font-size: 0.8rem !important;
+        font-weight: 600;
     }
     .header .header-topbar .quick-btn-cont .quick-enquiry
     {
         padding:5px 15px;
+        height: auto;
     }
     .main-slider-container {
         .left-slide-content {
@@ -2743,8 +2819,9 @@ background: #ccc;
                 line-height: 1.9rem;
             }
             a{
-                font-size: 1.2rem !important;
-                padding: 25px;
+                font-size: 0.9rem !important;
+                padding: 23px 20px;
+                max-width: 150px;
             }
         }
     }    
@@ -2780,7 +2857,7 @@ background: #ccc;
     .latest-articles-section {
         .big-article-container {
             h4 {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
             }
         }
     }
@@ -2789,7 +2866,7 @@ background: #ccc;
             .small-article-box {
                 .small-art-content-cont {
                     h4 {
-                        font-size: 1.4rem;
+                        font-size: 1.1rem;
                     }
                 }
             }
@@ -2798,14 +2875,26 @@ background: #ccc;
     .tool-section {
         .tool-content {
             h2 {
-                font-size: 2.3rem;
+                font-size: 2rem;
+                max-width: 800px;
             }
         }
         .tool-white-container {
             .tool-box {
                 h2 {
-                    font-size: 1.4rem;
-                    max-width: 145px;
+                    font-size: 1.3rem;
+                    max-width: 135px;
+                    line-height: 25px;
+                }
+                &:hover::after
+                {
+                    min-height: 375px;
+                }
+                .tool-links
+                {
+                    a{
+                        font-size: 1rem;
+                    }
                 }
             }
         }
@@ -2815,7 +2904,7 @@ background: #ccc;
             .container {
                 .image-gallery-text {
                     h2 {
-                        font-size: 2.3rem;
+                        font-size: 2rem;
                         max-width: 180px;
                     }
                 }
@@ -2867,6 +2956,133 @@ background: #ccc;
         max-height: inherit;
         height: 55vh;
     }
+    .our-services-new-section {
+        .services-content {
+            margin-bottom: 0;
+        }
+    }
+    .form-slider-container {
+        .left-slideform {
+            width:44%;
+            h1 {
+                font-size: 2.2rem;
+                line-height:40px;
+            }
+            p{
+                font-size: 1rem;
+                padding-right: 8%;
+            }
+        }
+    }
+    .hotline-section {
+        p {
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+    }
+    .our-office-container {
+        .office-tab-list {
+            h4 {
+                font-size: 1.5rem;
+            }
+        }
+        .office-tab-content {
+            .office-left-content {
+                h2 {
+                    font-size: 1.5rem;
+                }
+                p {
+                    font-size: 1rem;
+                }
+                ul {
+                    li {
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+    .common-main-tabcont {
+        .tab-content {
+            h2 {
+                font-size: 2rem;
+            }
+            p{
+                font-size: 1rem;
+            }
+        }
+    }
+    .footer {
+        .container {
+            max-width: 1250px;
+        }
+        .footer-links {
+            ul {
+                li {
+                    &.footer-complaint-feedback {
+                        button {
+                            font-size: 1rem;
+                            font-weight:400;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .immigration-visa-cont {
+        .container {
+            .visa-slider {
+                .visa-item {
+                    .visa-item-links {
+                        min-height: 175px;
+                        img {
+                            &.visa-flag-icon {
+                                width: 70px;
+                                height: 70px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .acolades-section {
+        .acolade-container {
+            .accolades-heading {
+                font-size: 2rem;
+            }
+        }
+    }
+    .common-main-tabcont {
+        .common-tab-list {
+            .tab-sticky {
+                button {
+                    font-size: 1.1rem;
+                }
+            }
+        }
+    }
+    .courses-box-container {
+        .courses-heading {
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+        .courses-list {
+            ul {
+                li {
+                    font-size: 1rem;
+                }
+            }            
+        }
+    }
+    .slider-full-width {
+        .container {
+            max-width: 1300px;
+        }
+    }
+    
 }
 @media screen and (max-width:1366px)
 {
@@ -3056,7 +3272,7 @@ background: #ccc;
             .office-left-content {
                 h2 {
                     font-size: 1.3rem;
-                    color: #000;
+                    color:$blacklightcolor;
                     font-weight: bold;
                 }
                 p{
@@ -3090,7 +3306,7 @@ background: #ccc;
 }
 @media screen and (max-width:992px)
 {
-    body.padding-top {padding-top: 4.6rem !important;}
+    body.padding-top {padding-top: 4rem !important;}
     .main-slider-container {
         .left-slide-content 
         {
@@ -3114,6 +3330,7 @@ background: #ccc;
         .event-box-container {
             padding:0 10% 5%;
             gap: 10px;
+            justify-content: start;
             a.event-box{
                 min-width: 300px;
             }
@@ -3379,12 +3596,15 @@ background: #ccc;
         .left-slideform {
             padding: 2%;
             margin: 55px 0 0;
+            width: 100%;
             h1{
-                font-size: 2rem;                
+                font-size:1.6rem;                
                 line-height: 35px;
+                text-align: center;
             }
             p {
-                font-size: 1.3rem;
+                font-size: 1rem;
+                text-align: center;
             }
         }
         .form-slider-img {
@@ -3410,6 +3630,9 @@ background: #ccc;
                 }
             }
         }
+        p{
+            padding:0px;
+        }
     }
 
     // content tab css
@@ -3433,10 +3656,10 @@ background: #ccc;
             {
                 padding:10px 0;
                 h2{
-                    font-size:1.8rem;
+                    font-size:1.6rem;
                     line-height:30px;
                     font-weight: 800;
-                    color:$blackColor;
+                    color:$blacklightcolor;
                 }
                 p{
                     font-size: 1.2rem;
@@ -3451,7 +3674,7 @@ background: #ccc;
                 h3{
                     font-size: 1.5rem;
                     font-weight: 800;
-                    color:$blackColor;
+                    color:$blacklightcolor;
                     margin: 10px 0;
                 }
                 ul{
@@ -4183,5 +4406,20 @@ background: #ccc;
             }
         }
     }
+    .common-courses {
+        .courses-content {
+            h2 {
+                font-size: 2.3rem;
+            }
+        }
+    }
     
+}
+@media screen and (max-width:480px)
+{
+    .common-courses .courses-content h3 {
+        font-size: 0.9rem;
+        max-width: 340px;
+        margin: 0 auto;
+    }
 }

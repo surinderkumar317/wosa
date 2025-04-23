@@ -62,7 +62,7 @@ const HotLineServices: React.FC = () =>  {
     return (
         <div className='hotline-section py-24'>
             <div className='container flex lg:flex-row flex-col m-auto hotline-inner-container'>
-                <div className='lg:w-3/4 md:w-full sm:w-full'>
+                <div className='lg:w-3/5 md:w-full sm:w-full'>
                     <h2>{hotlineContent.Heading}</h2>
                     <p>{hotlineContent.ParagraphContent}</p>
                     <ul className="hotlineicons">
@@ -80,7 +80,7 @@ const HotLineServices: React.FC = () =>  {
                         ))}
                     </ul>
                 </div>
-                <div className='lg:w-3/4 md:w-full sm:w-full p-1'>
+                <div className='lg:w-2/5 md:w-full sm:w-full p-1'>
                     {hotlineContent.image.map((image, imgIdx) => (
                         <CommonImage
                             key={imgIdx}

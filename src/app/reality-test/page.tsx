@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -184,6 +184,15 @@ const RealityTest: React.FC = () => {
       (!branch || test.branch === branch) &&
       (!date || test.date === formatDate(date))
   );
+
+  useEffect(() => {
+    const screenWidth = window.innerWidth;
+    if (screenWidth <= 1536) {
+      setVisibleCount(6);
+    } else {
+      setVisibleCount(8);
+    }
+  }, []);
 
   return (
     <div className="reality-container">

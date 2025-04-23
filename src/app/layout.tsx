@@ -15,7 +15,7 @@ const MarketingModal = dynamic(
 
 const hind = Hind({
   subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: ["300", "400", "500", "600", "700"],
   preload: true,
 });
 

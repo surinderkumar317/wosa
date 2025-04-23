@@ -42,7 +42,7 @@ const Header: React.FC = () => {
         isScrolled ? "!-top-32" : ""
       } transition-all duration-300`}
     >
-      <div className="header-topbar p-2">
+      <div className="header-topbar p-1">
         <div className="container 2xl m-auto flex gap-4 justify-items-center justify-between">
           <div className="social-icons-cont items-center lg:flex hidden">
             <SocialIcons />
@@ -71,7 +71,7 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="navigation-container p-2">
+      <div className="navigation-container p-3">
         <div className="container 2xl m-auto flex gap-4 justify-items-center justify-between">
           <div className="logo-cont">
             <Link href="/">

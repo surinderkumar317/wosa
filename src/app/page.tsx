@@ -79,7 +79,7 @@ export default function Home() {
           <VideoGallery />
         </LazySection>
         <LazySection>
-          <Testimonials showButton={false} />
+          <Testimonials showButton={true} />
         </LazySection>
         <LazySection>
           <Accolades />

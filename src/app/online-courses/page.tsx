@@ -526,23 +526,25 @@ const OnlineCourse: React.FC = () => {
                         <h2>{course.title}</h2>
                         <p>{course.days}</p>
                       </div>
-                      <ul className="my-5">
-                        <li>
-                          <p>Branch: {course.branch}</p>
-                        </li>
-                        <li>
-                          <p>Module: {course.module}</p>
-                        </li>
-                        <li>
-                          <p>Course Type: {course.coursestype}</p>
-                        </li>
-                        <li>
-                          <p>Duration: {course.durations}</p>
-                        </li>
-                        <li>
-                          <p>Price: {course.price}</p>
-                        </li>
-                      </ul>
+                      <div className="courses-list">
+                        <ul className="my-5">
+                          <li>
+                            <p>Branch: {course.branch}</p>
+                          </li>
+                          <li>
+                            <p>Module: {course.module}</p>
+                          </li>
+                          <li>
+                            <p>Course Type: {course.coursestype}</p>
+                          </li>
+                          <li>
+                            <p>Duration: {course.durations}</p>
+                          </li>
+                          <li>
+                            <p>Price: {course.price}</p>
+                          </li>
+                        </ul>
+                      </div>
                       <div className="courses-btn-box flex justify-between items-center">
                         <p className="!text-sm">{course.moreinfo}</p>
                         <Button className="courses-btn">
