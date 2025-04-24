@@ -264,7 +264,14 @@ const Feedback: React.FC = () => {
     <>
       {/* Phone Number Dialog */}
       <Toaster position="bottom-center" />
-      <Dialog open={isPhoneOpen} onOpenChange={setIsPhoneOpen}>
+      <Dialog open={isPhoneOpen}
+        onOpenChange={(isOpen) => {
+          setIsPhoneOpen(isOpen);
+          if (!isOpen) {
+            feedbacktypeForm.reset();
+          }
+        }}
+      >
         <DialogTrigger asChild>
           <Button variant="ghost" onClick={() => setIsPhoneOpen(true)}>
             Feedback
@@ -457,7 +464,14 @@ const Feedback: React.FC = () => {
       </Dialog>
 
       {/* Feedback Dialog */}
-      <Dialog open={isFeedbackOpen} onOpenChange={setIsFeedbackOpen}>
+      <Dialog open={isFeedbackOpen}
+        onOpenChange={(isOpen) => {
+          setIsFeedbackOpen(isOpen);
+          if (!isOpen) {
+            feedbackForm.reset();
+          }
+        }}
+      >
         <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
           <DialogHeader>
             <DialogTitle>Feedback</DialogTitle>

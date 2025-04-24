@@ -334,7 +334,8 @@ input::placeholder {
             transition: opacity .5s, transform .5s, -webkit-transform .5s;
             transform: translateX(-100px);
             font-weight: 700;
-            text-transform: capitalize
+            text-transform: capitalize;
+            font-size: 4rem;
         }
         p{
             // font-size: 1.6vw;
@@ -700,7 +701,7 @@ input::placeholder {
     {
         p{
             @include comman-text;
-            line-height:30px;
+            line-height: 30px;
         }
         button{
             color:$redColor;
@@ -1067,6 +1068,8 @@ input::placeholder {
                 button {
                     padding: 0;
                     @include comman-text;
+                    font-size: 1.2rem;
+                    font-weight: normal;
                     color:$whiteColor;
                     &:hover{
                         background:none;
@@ -2880,6 +2883,8 @@ background: #ccc;
             }
         }
         .tool-white-container {
+            max-width: 1100px;
+            margin: 0 auto;
             .tool-box {
                 h2 {
                     font-size: 1.3rem;
@@ -2888,13 +2893,16 @@ background: #ccc;
                 }
                 &:hover::after
                 {
-                    min-height: 375px;
+                    min-height:405px;
                 }
                 .tool-links
                 {
                     a{
                         font-size: 1rem;
                     }
+                }
+                .tool-img-icon {
+                    margin-bottom: 25px;
                 }
             }
         }
@@ -3080,6 +3088,13 @@ background: #ccc;
     .slider-full-width {
         .container {
             max-width: 1300px;
+        }
+    }
+    .latest-articles-section {
+        .article-readmore-readless {
+            p {
+                line-height: 25px;
+            }
         }
     }
     

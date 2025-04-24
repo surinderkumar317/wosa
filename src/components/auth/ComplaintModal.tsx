@@ -252,6 +252,7 @@ const Complaints: React.FC<ComplaintsProps> = ({
     setIsVarificationOpen(false);
     setIsFormInfoOpen(false);
     phoneForm.reset(); // Reset phone form when closing any modal
+    complaintForm.reset();
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -268,7 +269,14 @@ const Complaints: React.FC<ComplaintsProps> = ({
     <>
       {/* Phone Number Dialog */}
       <Toaster position="bottom-center" />
-      <Dialog open={isPhoneOpen} onOpenChange={setIsPhoneOpen}>
+      <Dialog open={isPhoneOpen}
+        onOpenChange={(isOpen) => {
+          setIsPhoneOpen(isOpen);
+          if (!isOpen) {
+            phoneForm.reset();
+          }
+        }}
+      >
         <DialogTrigger asChild>
           <Button variant="ghost" onClick={() => setIsPhoneOpen(true)}>
             {buttonText}
@@ -382,7 +390,14 @@ const Complaints: React.FC<ComplaintsProps> = ({
       </Dialog>
 
       {/* Complaints Dialog */}
-      <Dialog open={isComplaintOpen} onOpenChange={setIsComplaintOpen}>
+      <Dialog open={isComplaintOpen}
+        onOpenChange={(isOpen) => {
+          setIsComplaintOpen(isOpen);
+          if (!isOpen) {
+            complaintForm.reset();
+          }
+        }}
+      >
         <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
           <DialogHeader>
             <DialogTitle>Complaints</DialogTitle>

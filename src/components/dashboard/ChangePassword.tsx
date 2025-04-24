@@ -94,7 +94,7 @@ const ChangePassword: React.FC = () => {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="common-modal-form w-full max-w-[450px]">
+      <DialogContent className="common-modal-form w-full max-w-[450px] top-[5%] translate-y-0">
         <DialogHeader>
           <DialogTitle>Change Password</DialogTitle>
           <DialogDescription></DialogDescription>

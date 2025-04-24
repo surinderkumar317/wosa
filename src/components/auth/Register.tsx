@@ -185,6 +185,7 @@ const Register: React.FC = () => {
   });
 
   const handlePhoneSubmit = (data: z.infer<typeof phoneSchema>) => {
+    console.log("Phone Form Data:", data);
     setSubmittedPhoneNumber(`${data.countryCode} ${data.phoneNumber}`);
     setIsPhoneOpen(false);
     setIsRegistrationOpen(true);
@@ -193,6 +194,7 @@ const Register: React.FC = () => {
   const handleRegistrationSubmit = async (
     data: z.infer<typeof registrationSchema>
   ) => {
+    console.log("Registration Form Data:", data);
     toast.success("Register successful! 🎉");
     setIsRegistrationOpen(false);
     registrationForm.reset();
@@ -222,6 +224,7 @@ const Register: React.FC = () => {
     setIsVarificationOpen(false);
     setIsFormInfoOpen(false);
     phoneForm.reset();
+    registrationForm.reset();
   };
 
   useEffect(() => {
@@ -254,7 +257,14 @@ const Register: React.FC = () => {
     <>
       {/* Phone Number Dialog */}
       <Toaster position="bottom-center" />
-      <Dialog open={isPhoneOpen} onOpenChange={setIsPhoneOpen}>
+      <Dialog open={isPhoneOpen} 
+        onOpenChange={(isOpen) => {
+          setIsPhoneOpen(isOpen);
+          if (!isOpen) {
+            phoneForm.reset();
+          }
+        }}
+      >
         <DialogTrigger asChild>
           <Button variant="ghost" onClick={() => setIsPhoneOpen(true)}>
             Register
@@ -368,7 +378,14 @@ const Register: React.FC = () => {
       </Dialog>
 
       {/* Registration Dialog */}
-      <Dialog open={isRegistrationOpen} onOpenChange={setIsRegistrationOpen}>
+      <Dialog open={isRegistrationOpen}
+        onOpenChange={(isOpen) => {
+          setIsRegistrationOpen(isOpen);
+          if (!isOpen) {
+            registrationForm.reset();
+          }
+        }}
+      >
         <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
           <DialogHeader>
             <DialogTitle>Registration</DialogTitle>

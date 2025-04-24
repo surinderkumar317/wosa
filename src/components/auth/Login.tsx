@@ -38,7 +38,7 @@ import { Toaster } from "sonner";
 const countryOptions = [
   { value: "+91", label: "+91 - IN", searchable: "india" },
   { value: "+1", label: "+1 - U", searchable: "usa" },
-  { value: "+44", label: "+44 - GB", searchable: "uk" },
+  { value: "+44", label: "+44 - GB", searchable: "gb" },
   { value: "+61", label: "+61 - AU", searchable: "australia" },
   { value: "+81", label: "+81 - JP", searchable: "japan" },
 ];
@@ -182,7 +182,12 @@ const Login: React.FC<LoginProps> = ({ buttonText = "Login", }) => {
       {/* Login Dialog */}
       <Toaster position="bottom-center" />
 
-      <Dialog open={isLoginOpen} onOpenChange={setIsLoginOpen}>
+      <Dialog open={isLoginOpen} onOpenChange={(isOpen) => {
+        setIsLoginOpen(isOpen);
+        if (!isOpen) {
+          loginForm.reset();
+        }
+      }}>
         <DialogTrigger asChild>
           <Button variant="ghost" onClick={() => setIsLoginOpen(true)}>
             {buttonText}
@@ -415,7 +420,12 @@ const Login: React.FC<LoginProps> = ({ buttonText = "Login", }) => {
       {/* Forgot Password Dialog */}
       <Dialog
         open={isForgotPasswordOpen}
-        onOpenChange={setIsForgotPasswordOpen}
+        onOpenChange={(isOpen) => {
+          setIsForgotPasswordOpen(isOpen);
+          if (!isOpen) {
+            forgotPasswordForm.reset();
+          }
+        }}
       >
         <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
           <DialogHeader>
