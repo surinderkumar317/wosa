@@ -51,10 +51,9 @@ const formatTimezoneOffset = (timezone: string): string => {
 
 const CountryTimeSelector: React.FC = () => {
   const [selectedTimezone, setSelectedTimezone] = useState<string | null>(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [isInitialSelection, setIsInitialSelection] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectOpen, setSelectOpen] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -62,6 +61,7 @@ const CountryTimeSelector: React.FC = () => {
     country.searchable.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Client-side only logic
   useEffect(() => {
     const saved = localStorage.getItem("selected-timezone");
     if (saved) {
@@ -69,7 +69,7 @@ const CountryTimeSelector: React.FC = () => {
       setIsInitialSelection(false);
     } else {
       setIsInitialSelection(true);
-      setDialogOpen(true);
+      setOpen(true);
     }
   }, []);
 
@@ -79,19 +79,21 @@ const CountryTimeSelector: React.FC = () => {
     setSelectedTimezone(value);
     localStorage.setItem("selected-timezone", value);
     setIsInitialSelection(false);
-    setDialogOpen(false);
+    setOpen(false);
   };
 
   useEffect(() => {
-    if (selectOpen && inputRef.current) {
-      const timeout = setTimeout(() => inputRef.current?.focus(), 100);
-      return () => clearTimeout(timeout);
-    }
-  }, [selectOpen]);
+    const timer = setTimeout(() => {
+      inputRef.current?.focus(); // Re-focus after dropdown opens
+    }, 50); // Small delay ensures it's mounted
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]); // Optional: focus each time dropdown resets
 
   return (
     <div className="space-y-6">
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+      {/* The dialog only opens once on first load */}
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent
           className={`w-full max-w-[700px] px-10 py-20 timezone-modal ${
             isInitialSelection ? "hide-close-icon" : ""
@@ -112,32 +114,22 @@ const CountryTimeSelector: React.FC = () => {
           </DialogHeader>
           <div className="w-full flex flex-col pb-5 px-10 timezone-text">
             <Select
-              value={selectedTimezone || undefined}
               onValueChange={handleSelect}
-              open={selectOpen}
-              onOpenChange={setSelectOpen}
+              value={selectedTimezone || undefined}
             >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select a country" />
               </SelectTrigger>
-              <SelectContent
-                onPointerDown={(e) => {
-                  // Prevent the input from bubbling to close
-                  e.stopPropagation();
-                }}
-              >
-                <div
-                  className="px-2 py-2"
-                  onClick={(e) => e.stopPropagation()}
-                  onTouchStart={(e) => e.stopPropagation()}
-                >
+              <SelectContent>
+                <div className="px-2 py-2">
                   <input
                     type="text"
-                    ref={inputRef}
                     placeholder="Search country..."
+                    ref={inputRef}
                     className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
+                    onClick={(e) => e.stopPropagation()}
                   />
                 </div>
                 <div className="max-h-44 overflow-y-auto">
@@ -159,11 +151,9 @@ const CountryTimeSelector: React.FC = () => {
         </DialogContent>
       </Dialog>
 
+      {/* Show selected timezone anywhere */}
       {selectedTimezone && (
-        <div
-          className="flex cursor-pointer"
-          onClick={() => setDialogOpen(true)}
-        >
+        <div className="flex cursor-pointer" onClick={() => setOpen(true)}>
           <p className="text-[1rem] font-bold flex gap-2 time-zone-text">
             <span>{selectedCountry?.label}</span>
             <span>{formatTimezoneOffset(selectedTimezone)}</span>
