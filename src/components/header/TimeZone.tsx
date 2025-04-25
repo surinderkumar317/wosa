@@ -121,10 +121,7 @@ const CountryTimeSelector: React.FC = () => {
                 <SelectValue placeholder="Select a country" />
               </SelectTrigger>
               <SelectContent>
-                <div
-                  className="px-2 py-2"
-                  onMouseDown={(e) => e.stopPropagation()}
-                >
+                <div className="px-2 py-2">
                   <input
                     type="text"
                     placeholder="Search country..."
@@ -133,7 +130,6 @@ const CountryTimeSelector: React.FC = () => {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     onClick={(e) => e.stopPropagation()}
-                    onTouchStart={(e) => e.stopPropagation()}
                   />
                 </div>
                 <div className="max-h-44 overflow-y-auto">
