@@ -126,14 +126,11 @@ const CountryTimeSelector: React.FC = () => {
                     type="text"
                     placeholder="Search country..."
                     ref={inputRef}
-                    inputMode="text"
-                    autoComplete="off"
-                    autoCorrect="off"
-                    spellCheck={false}
                     className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     onClick={(e) => e.stopPropagation()}
+                    onTouchStart={(e) => e.stopPropagation()}
                   />
                 </div>
                 <div className="max-h-44 overflow-y-auto">
