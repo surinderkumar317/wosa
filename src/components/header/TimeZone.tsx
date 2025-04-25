@@ -120,12 +120,16 @@ const CountryTimeSelector: React.FC = () => {
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select a country" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent onTouchStart={(e) => e.stopPropagation()}>
                 <div className="px-2 py-2">
                   <input
                     type="text"
                     placeholder="Search country..."
                     ref={inputRef}
+                    inputMode="text"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    spellCheck={false}
                     className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
