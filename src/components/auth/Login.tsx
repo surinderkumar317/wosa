@@ -19,7 +19,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogDescription,
 } from "@/components/ui/dialog";
 import {
   Select,
@@ -193,10 +192,9 @@ const Login: React.FC<LoginProps> = ({ buttonText = "Login", }) => {
             {buttonText}
           </Button>
         </DialogTrigger>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Login</DialogTitle>
-            <DialogDescription></DialogDescription>
           </DialogHeader>
           <Form {...loginForm}>
             <form
@@ -427,10 +425,9 @@ const Login: React.FC<LoginProps> = ({ buttonText = "Login", }) => {
           }
         }}
       >
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Forgot Password</DialogTitle>
-            <DialogDescription></DialogDescription>
           </DialogHeader>
           <Form {...forgotPasswordForm}>
             <form

@@ -321,7 +321,7 @@ input::placeholder {
 // main slider
 .main-slider-container
 {
-    background: linear-gradient(175deg, rgb(224, 15, 0) 0%, rgb(119, 0, 0) 100%) 0% 0% no-repeat transparent;
+    background: linear-gradient(175deg, rgb(224, 15, 0) 0%, rgb(119, 0, 0) 100%) 0% 0% no-repeat transparent;position: relative;
     .left-slide-content
     {
         h1{
@@ -419,6 +419,7 @@ input::placeholder {
         @include content-container;
         h2,h3{
             text-align: left !important;
+            margin: inherit
         } 
         p{
             @include comman-text;
@@ -568,6 +569,7 @@ input::placeholder {
     .event-button{
         @include common-buttons;
         z-index: 9;
+        margin: 0;
     }
     .event-box-container {
         flex-wrap: nowrap;
@@ -788,7 +790,7 @@ input::placeholder {
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    min-height: 395px;
+                    min-height:445px;
                     border-radius: 10px;
                     background: $redColor;
                 }
@@ -800,6 +802,7 @@ input::placeholder {
                 height:130px;
                 align-items: center;
                 justify-content: center;
+                margin-bottom: 30px;
             }
             h2{
                 font-size: 1.8rem;
@@ -2733,6 +2736,43 @@ background: #ccc;
 		}
 	}
 }
+.form-slider-container.form-banner.pricing-banner
+{
+   .form-slider-img{
+        background: url("/images/package-img.webp");
+        background-repeat: no-repeat;
+        background-position: right bottom;
+        min-height: 550px;
+        padding: 0% 0 8%;
+        background-size: contain;
+        .coaching-text
+        {
+            width: 50%;
+            position: relative;
+        }
+        .single-reality-list{
+            margin:25px 0px;
+        }
+    } 
+}
+
+.marquee-cont {width: 55%;}
+
+.wallet-money-list
+{
+    position: relative;
+    margin-top:-25px;
+}
+.wallet-money-list li {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    position:absolute;
+    width:100%;
+    min-width:250px;
+}
+.wallet-money-list li.active {
+    opacity: 1;
+}
 
 // responsive css
 @media screen and (min-width:1921px) and (max-width:5000px)
@@ -3317,28 +3357,66 @@ background: #ccc;
                 font-size: 0.6rem;
             }
         }
-    }   
+    }
+    .aboutcomp-container {
+        .aboutcomp-list {
+            ul {
+                li {
+                    padding: 5px 0;
+                    margin: 15px 0 0;
+                    h3{
+                        line-height: 20px;
+                    }
+                }
+            }
+        }
+    } 
+    .footer .container {
+        max-width: 980px;
+    }  
 }
 @media screen and (max-width:992px)
 {
     body.padding-top {padding-top: 4rem !important;}
+    .header {
+        .navigation-container {
+            .logo-cont {
+                max-width: 200px;
+            }
+        }
+    }
     .main-slider-container {
+        min-height:700px;
+        align-items: start;
+        justify-content: start;
         .left-slide-content 
         {
+            margin: 0 auto;
+            max-width:400px;
             h1{
-                min-height: 70px;
+                min-height:inherit;
             }
             p{
-                min-height: 160px;
+                min-height:inherit;
+                margin:20px 0 0;
             }
         }
         .main-slider-img {
+            margin: 0 auto;
+            max-width: 370px;
             img {
                 border: 5px solid $whiteColor;
                 border-radius: 5px;
             }
         }
-        .slider-dots{left:4px;}
+        .slider-dots{
+            left: 0;
+            width: 100%;
+            padding: 0 5px;
+            justify-content: center;
+            bottom:20px;
+            top: inherit;
+        }
     }
     .event-main-container
     {
@@ -3402,7 +3480,7 @@ background: #ccc;
             .ourservices-content-container {
                 p {
                     max-width: 380px;
-                    min-height: 240px;
+                    // min-height: 240px;
                 }
                 button{
                     max-width: 210px;
@@ -3806,6 +3884,9 @@ background: #ccc;
             flex-wrap: nowrap;
             overflow: auto;
             padding-bottom: 20px;
+            justify-content: start;
+            margin: 0 7px;
+            gap: 0;
             .common-coaching-box {
                 width: 100%;
                 min-width: 290px;
@@ -4425,6 +4506,19 @@ background: #ccc;
         .courses-content {
             h2 {
                 font-size: 2.3rem;
+            }
+        }
+    }
+    .form-slider-container {
+        &.form-banner {
+            &.pricing-banner {
+                .form-slider-img {
+                    min-height: 480px;
+                    padding: 0% 0 40%;
+                    .coaching-text {
+                        width:100%;
+                    }
+                }
             }
         }
     }

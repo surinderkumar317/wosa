@@ -5,7 +5,7 @@ import CommonImage from "@/components/common/Image";
 
 const ImageGallery: React.FC = () => {
   return (
-    <div className="gallery-section py-24">
+    <div className="gallery-section lg:py-24 py-12">
       <div className="gallery-inner-section">
         <div className="container flex lg:flex-row flex-col m-auto py-5 gap-10 items-center">
           <div className="lg:w-4/5 w-full px-3">
@@ -16,7 +16,7 @@ const ImageGallery: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="image-shape-left">
+      <div className="image-shape-left lg:block hidden">
         <CommonImage
           classname={"shape-icon"}
           src={"/images/img-galler-up.webp"}
@@ -25,7 +25,7 @@ const ImageGallery: React.FC = () => {
           height={139}
         />
       </div>
-      <div className="image-shape-right">
+      <div className="image-shape-right lg:block hidden">
         <CommonImage
           classname={"shape-icon"}
           src={"/images/clould.webp"}

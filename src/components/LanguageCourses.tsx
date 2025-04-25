@@ -130,7 +130,7 @@ const LanguageCourses: React.FC = () => {
   }, [emblaApi, autoplayInterval]);
 
   return (
-    <div className="immigration-visa-cont py-24">
+    <div className="immigration-visa-cont lg:py-24 py-12">
       <div className="container m-auto">
         <div className="immigration-content">
           <h3>{immigrationContent.subHeading}</h3>
@@ -142,7 +142,7 @@ const LanguageCourses: React.FC = () => {
             {coursesLanguage.map((course, index) => (
               <div
                 key={index}
-                className="embla__slide flex-shrink-0 lg:w-1/5 px-4 pt-10 pb-10"
+                className="embla__slide flex-shrink-0 lg:w-1/5 px-4 pt-10 lg:pb-10 pb-0"
               >
                 <Card className="border-none shadow-none">
                   <CardContent className="p-0 visa-slider">

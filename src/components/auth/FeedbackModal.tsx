@@ -20,7 +20,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogDescription,
 } from "@/components/ui/dialog";
 import {
   Select,
@@ -277,10 +276,9 @@ const Feedback: React.FC = () => {
             Feedback
           </Button>
         </DialogTrigger>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Feedback</DialogTitle>
-            <DialogDescription></DialogDescription>
           </DialogHeader>
           <Form {...feedbacktypeForm}>
             <form
@@ -472,10 +470,9 @@ const Feedback: React.FC = () => {
           }
         }}
       >
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Feedback</DialogTitle>
-            <DialogDescription></DialogDescription>
           </DialogHeader>
           <Form {...feedbackForm}>
             <form
@@ -754,7 +751,7 @@ const Feedback: React.FC = () => {
 
       {/* Verification Dialog */}
       <Dialog open={isVarificationOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Verification</DialogTitle>
             <p className="!mt-10">
@@ -818,10 +815,9 @@ const Feedback: React.FC = () => {
 
       {/* User Info Dialog */}
       <Dialog open={isFormInfoOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Feedback Details</DialogTitle>
-            <DialogDescription></DialogDescription>
           </DialogHeader>
           <div className="common-user-info-cont">
             <p>

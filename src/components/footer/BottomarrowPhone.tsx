@@ -20,9 +20,8 @@ const BottomarrowPhone: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      const middleOfPage = document.body.scrollHeight / 2;
 
-      if (scrollPosition > middleOfPage) {
+      if (scrollPosition > 200) {
         setIsArrowVisible(true);
       } else {
         setIsArrowVisible(false);
@@ -40,7 +39,12 @@ const BottomarrowPhone: React.FC = () => {
         className={`arrow-fixed ${isArrowVisible ? "" : "hidden"}`}
         onClick={scrollToTop}
       >
-        <CommonImage src="/images/up-arrow.webp" alt="up-arrow" width={23} height={22} />
+        <CommonImage
+          src="/images/up-arrow.webp"
+          alt="up-arrow"
+          width={23}
+          height={22}
+        />
       </div>
 
       <div className="phone-fixed">
@@ -66,22 +70,46 @@ const BottomarrowPhone: React.FC = () => {
           <ul>
             <li>
               <Link href="tel:+919115017017">
-                <CommonImage src="/images/phone-call.webp" alt="Phone Icon" width={35} height={35} /> +919115017017
+                <CommonImage
+                  src="/images/phone-call.webp"
+                  alt="Phone Icon"
+                  width={35}
+                  height={35}
+                />{" "}
+                +919115017017
               </Link>
             </li>
             <li>
               <Link href="tel:+917206050110">
-                <CommonImage src="/images/phone-call.webp" alt="Phone Icon" width={35} height={35} /> +917206050110
+                <CommonImage
+                  src="/images/phone-call.webp"
+                  alt="Phone Icon"
+                  width={35}
+                  height={35}
+                />{" "}
+                +917206050110
               </Link>
             </li>
             <li>
               <Link href="https://wa.me/+919896512412?text=Hi">
-                <CommonImage src="/images/whatsapp.webp" alt="Whatsapp Icon" width={35} height={35} /> +919896512412
+                <CommonImage
+                  src="/images/whatsapp.webp"
+                  alt="Whatsapp Icon"
+                  width={35}
+                  height={35}
+                />{" "}
+                +919896512412
               </Link>
             </li>
             <li>
               <Link href="mailto:info@western-overseas.com">
-                <CommonImage src="/images/email.webp" alt="Email Icon" width={35} height={35} /> info@western-overseas.com
+                <CommonImage
+                  src="/images/email.webp"
+                  alt="Email Icon"
+                  width={35}
+                  height={35}
+                />{" "}
+                info@western-overseas.com
               </Link>
             </li>
           </ul>

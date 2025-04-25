@@ -1,5 +1,4 @@
 import React from "react";
-import CommonImage from "../common/Image";
 import CourseModal from "./CourseModal";
 import PrackticePackModal from "./PrackticePackModal";
 import RealitytestModal from "./RealitytestModal";
@@ -17,7 +16,6 @@ interface BannerContent {
   discountedPrice: string;
 }
 
-const images: string[] = ["/images/package-img.webp"];
 
 const bannerContent: BannerContent = {
   title: "CELPIP | 90 DAYS",
@@ -38,7 +36,7 @@ interface FormBannerProps {
 
 const FormBanner: React.FC<FormBannerProps> = ({ heading, paragraph, modalType }) => {
   return (
-    <div className="form-slider-container form-banner lg:relative flex lg:justify-between lg:items-center lg:mx-auto 2xl:py-20 xl:py-11 lg:flex-row flex-col flex-col-reverse">
+    <div className="form-slider-container form-banner pricing-banner lg:relative flex lg:justify-between lg:items-center lg:mx-auto 2xl:py-20 xl:py-11 lg:flex-row flex-col flex-col-reverse">
       <div className="lg:w-1/3 lg:p-6 lg:ml-11 w-full p-10 left-slideform">
         <h1>{heading}</h1>
         <p>{paragraph}</p>
@@ -67,18 +65,6 @@ const FormBanner: React.FC<FormBannerProps> = ({ heading, paragraph, modalType }
               {bannerContent.discountedPrice}
             </p>
           </div>
-        </div>
-        <div className="flex pricebanner-img">
-          {images.map((src, index) => (
-            <div key={index} className="flex-[0_0_100%]">
-              <CommonImage
-                src={src}
-                alt="Banner Image"
-                width={1470}
-                height={570}
-              />
-            </div>
-          ))}
         </div>
       </div>
     </div>

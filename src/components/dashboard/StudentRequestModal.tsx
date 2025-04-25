@@ -149,10 +149,9 @@ const StudentRequestModal: React.FC = () => {
           <i className="fa-solid fa-bell"></i> Conversations
         </Button>
       </DialogTrigger>
-      <DialogContent className="common-modal-form w-full max-w-[1200px] top-[5%] translate-y-0">
+      <DialogContent className="common-modal-form w-full max-w-[1200px] top-[5%] translate-y-0" aria-describedby={undefined}>
         <DialogHeader>
           <DialogTitle className="text-4xl">Conversations</DialogTitle>
-          <DialogDescription></DialogDescription>
         </DialogHeader>
         <div className="max-h-[80vh] overflow-auto pr-2 common-scroller">
           {studentConversations.map((request) => (

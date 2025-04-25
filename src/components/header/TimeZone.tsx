@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   Dialog,
   DialogContent,
@@ -18,14 +18,20 @@ import {
 type CountryOption = {
   label: string;
   value: string;
+  searchable: string;
 };
 
 const countries: CountryOption[] = [
-  { label: "United States", value: "America/New_York" },
-  { label: "India", value: "Asia/Kolkata" },
-  { label: "United Kingdom", value: "Europe/London" },
-  { label: "Japan", value: "Asia/Tokyo" },
-  { label: "Australia", value: "Australia/Sydney" },
+  { label: "United States", value: "America/New_York", searchable: "usa" },
+  { label: "India", value: "Asia/Kolkata", searchable: "india" },
+  { label: "United Kingdom", value: "Europe/London", searchable: "uk" },
+  { label: "Japan", value: "Asia/Tokyo", searchable: "japan" },
+  { label: "Australia", value: "Australia/Sydney", searchable: "australia" },
+  { label: "Afghanistan", value: "Asia/Kabul", searchable: "afghanistan" },
+  { label: "Albania", value: "Europe/Tirane", searchable: "albania" },
+  { label: "Algeria", value: "Africa/Algiers", searchable: "algeria" },
+  { label: "Andorra", value: "Europe/Andorra", searchable: "andorra" },
+  { label: "Angola", value: "Africa/Luanda", searchable: "angola" },
 ];
 
 const formatTimezoneOffset = (timezone: string): string => {
@@ -49,11 +55,11 @@ const CountryTimeSelector: React.FC = () => {
   const [isInitialSelection, setIsInitialSelection] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredCountries = countries.filter((country) =>
-    country.label.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  
+  const filteredCountries = countries.filter((country) =>
+    country.searchable.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   // Client-side only logic
   useEffect(() => {
@@ -75,6 +81,14 @@ const CountryTimeSelector: React.FC = () => {
     setIsInitialSelection(false);
     setOpen(false);
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      inputRef.current?.focus(); // Re-focus after dropdown opens
+    }, 50); // Small delay ensures it's mounted
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]); // Optional: focus each time dropdown resets
 
   return (
     <div className="space-y-6">
@@ -99,7 +113,10 @@ const CountryTimeSelector: React.FC = () => {
             </DialogTitle>
           </DialogHeader>
           <div className="w-full flex flex-col pb-5 px-10 timezone-text">
-            <Select onValueChange={handleSelect}>
+            <Select
+              onValueChange={handleSelect}
+              value={selectedTimezone || undefined}
+            >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select a country" />
               </SelectTrigger>
@@ -111,24 +128,27 @@ const CountryTimeSelector: React.FC = () => {
                   <input
                     type="text"
                     placeholder="Search country..."
+                    ref={inputRef}
                     className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    onKeyDown={(e) => e.stopPropagation()}
+                    onClick={(e) => e.stopPropagation()}
+                    onTouchStart={(e) => e.stopPropagation()}
                   />
                 </div>
-
-                {filteredCountries.length > 0 ? (
-                  filteredCountries.map((country) => (
-                    <SelectItem key={country.value} value={country.value}>
-                      {country.label}
-                    </SelectItem>
-                  ))
-                ) : (
-                  <div className="px-4 py-2 text-sm text-red-500">
-                    No matching country found.
-                  </div>
-                )}
+                <div className="max-h-44 overflow-y-auto">
+                  {filteredCountries.length > 0 ? (
+                    filteredCountries.map((country) => (
+                      <SelectItem key={country.value} value={country.value}>
+                        {country.label}
+                      </SelectItem>
+                    ))
+                  ) : (
+                    <div className="px-4 py-2 text-sm text-red-500">
+                      No matching country found.
+                    </div>
+                  )}
+                </div>
               </SelectContent>
             </Select>
           </div>

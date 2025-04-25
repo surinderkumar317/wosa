@@ -10,13 +10,13 @@ interface TestimonialsProps {
 
 const Testimonials: React.FC<TestimonialsProps> = ({ showButton = true }) => {
   return (
-    <div className="testimonials-section py-24">
+    <div className="testimonials-section lg:py-24 py-5">
       <div className="container m-auto relative">
         <div className="w-full testimonial-text items-center">
           <h3 className="text-center">What The People Thinks About Us</h3>
           <h2>Testimonials</h2>
         </div>
-        <div className="w-full testimonails-slider my-10 relative gap-10 flex lg:px-0 px-5">
+        <div className="w-full testimonails-slider my-10 relative lg:gap-10 gap-0 flex lg:px-0 px-5">
           <TestimonialsSlider />
         </div>
 

@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -12,81 +11,101 @@ import {
 } from "@/components/ui/dialog";
 
 const marqueeItems = [
-  { heading: "Variations we denounce with", content: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire," },
-  { heading: "Lorem Ipsum we denounce with", content: "Dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire," },
-  { heading: "Random Words we denounce with", content: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire," },
-  { heading: "Model we denounce with", content: "Righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire," },
-  { heading: "Variations we denounce with", content: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire," },
-  { heading: "Lorem Ipsum we denounce with", content: "Dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire," },
-  { heading: "Random Words we denounce with", content: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire," },
-  { heading: "Model we denounce with", content: "Righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire," },
+  {
+    heading: "Variations we denounce with",
+    content: "On the other hand, we denounce...",
+  },
+  {
+    heading: "Lorem Ipsum we denounce with",
+    content: "Dislike men who are so beguiled...",
+  },
+  {
+    heading: "Random Words we denounce with",
+    content: "On the other hand, we denounce...",
+  },
+  {
+    heading: "Model we denounce with",
+    content: "Righteous indignation and dislike men...",
+  },
 ];
 
-const Marquee: React.FC = () => {
-  const [selectedItem, setSelectedItem] = useState<{ heading: string; content: string } | null>(null);
-  const controls = useAnimation();
+const SPEED = 60; // pixels per second
 
-  const startAnimation = () => {
-    controls.start({
-      x: "-100%",
-      transition: { repeat: Infinity, ease: "linear", duration: 30 },
-    });
+const Marquee: React.FC = () => {
+  const marqueeRef = useRef<HTMLDivElement>(null);
+  const offset = useRef<number>(0);
+  const lastTime = useRef<number | null>(null);
+  const animationId = useRef<number | null>(null);
+
+  const [isPaused, setIsPaused] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<{
+    heading: string;
+    content: string;
+  } | null>(null);
+
+  const animate = (timestamp: number) => {
+    if (!lastTime.current) lastTime.current = timestamp;
+
+    const elapsed = (timestamp - lastTime.current) / 1000;
+    lastTime.current = timestamp;
+
+    if (!isPaused && marqueeRef.current) {
+      const contentWidth = marqueeRef.current.scrollWidth / 2;
+      offset.current -= SPEED * elapsed;
+
+      if (-offset.current >= contentWidth) {
+        offset.current = 0;
+      }
+
+      marqueeRef.current.style.transform = `translateX(${offset.current}px)`;
+    }
+
+    animationId.current = requestAnimationFrame(animate);
   };
 
   useEffect(() => {
-    startAnimation(); // Start animation on mount
+    animationId.current = requestAnimationFrame(animate);
+    return () => {
+      if (animationId.current) cancelAnimationFrame(animationId.current);
+    };
   }, []);
 
   useEffect(() => {
     if (!selectedItem) {
-      startAnimation(); // Restart animation when modal closes
+      setIsPaused(false);
+      lastTime.current = null;
+    } else {
+      setIsPaused(true);
     }
   }, [selectedItem]);
 
-  const handleMouseEnter = () => {
-    controls.stop(); // Pause animation
-  };
-
-  const handleMouseLeave = () => {
-    startAnimation(); // Resume animation
-  };
-
-  const handleFocus = () => {
-    controls.stop(); // Pause animation
-  };
-
-  const handleBlur = () => {
-    startAnimation(); // Resume animation
-  };
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative w-full overflow-hidden bg-black text-white py-2">
       <Dialog
         open={!!selectedItem}
         onOpenChange={(open) => {
-          if (!open) {
-            setSelectedItem(null);
-          }
+          if (!open) setSelectedItem(null);
         }}
       >
-        <motion.div
-          className="flex gap-3 whitespace-nowrap text-white"
-          initial={{ x: 0 }}
-          animate={controls}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+        <div
+          ref={marqueeRef}
+          className="flex whitespace-nowrap gap-12 px-4 will-change-transform"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => {
+            if (!selectedItem) setIsPaused(false);
+          }}
         >
-          {marqueeItems.map((item, index) => (
+          {[...marqueeItems, ...marqueeItems].map((item, index) => (
             <DialogTrigger
               key={index}
+              className="cursor-pointer font-semibold hover:underline"
               onClick={() => setSelectedItem(item)}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
             >
               {item.heading}
             </DialogTrigger>
           ))}
-        </motion.div>
+        </div>
 
         {selectedItem && (
           <DialogContent className="common-modal-content w-full max-w-3xl">

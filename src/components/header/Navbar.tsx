@@ -7,6 +7,7 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Button } from "@/components/ui/button";
 import TimeZone from "./TimeZone";
 import Login from "../auth/Login";
+import { VIRTUALOFFICE_URL } from "@/app/constants/common";
 
 import {
   Sheet,
@@ -119,7 +120,10 @@ const Navbar: React.FC = () => {
           ))}
         </ul>
         {/* Show Dashboard Link When Logged In */}
-        <Button asChild className="relative -top-1 text-base hover:bg-red-600 uppercase dashboard-btn tracking-widest font-bold">
+        <Button
+          asChild
+          className="relative -top-1 text-base hover:bg-red-600 uppercase dashboard-btn tracking-widest font-bold"
+        >
           <Link href="/student-dashboard" prefetch={true}>
             Dashboard
           </Link>
@@ -145,20 +149,24 @@ const Navbar: React.FC = () => {
           </SheetHeader>
           <SheetContent className="mobile-navigation">
             <div className="mobile-logo flex justify-center mt-6">
-              <CommonImage
-                classname={"logo"}
-                src={"/images/logo-wide.svg"}
-                alt={"Logo"}
-                width={277}
-                height={34}
-              />
+              <Link href="/">
+                <CommonImage
+                  classname={"logo"}
+                  src={"/images/logo-wide.svg"}
+                  alt={"Logo"}
+                  width={277}
+                  height={54}
+                />
+              </Link>
             </div>
             <div className="mobile-buttons flex gap-4 justify-center my-8">
               <Button variant="outline" asChild>
-                <Link href="/">Book Counselling</Link>
+                <Link href={VIRTUALOFFICE_URL} target="_blank">
+                  Book Counselling
+                </Link>
               </Button>
               <Button variant="destructive" asChild>
-                <Link href="/">Quick Enquiry</Link>
+                <Link href="/enquiry">Quick Enquiry</Link>
               </Button>
             </div>
             <ul className="flex flex-col gap-4 mt-4 mobile-list">

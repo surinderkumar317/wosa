@@ -20,7 +20,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogDescription,
 } from "@/components/ui/dialog";
 import {
   Select,
@@ -282,10 +281,9 @@ const Complaints: React.FC<ComplaintsProps> = ({
             {buttonText}
           </Button>
         </DialogTrigger>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Complaints</DialogTitle>
-            <DialogDescription></DialogDescription>
           </DialogHeader>
           <Form {...phoneForm}>
             <form
@@ -398,10 +396,9 @@ const Complaints: React.FC<ComplaintsProps> = ({
           }
         }}
       >
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Complaints</DialogTitle>
-            <DialogDescription></DialogDescription>
           </DialogHeader>
           <Form {...complaintForm}>
             <form
@@ -716,7 +713,7 @@ const Complaints: React.FC<ComplaintsProps> = ({
 
       {/* Verification Dialog */}
       <Dialog open={isVarificationOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Verification</DialogTitle>
             <p className="!mt-10">
@@ -780,10 +777,9 @@ const Complaints: React.FC<ComplaintsProps> = ({
 
       {/* User Info Dialog */}
       <Dialog open={isFormInfoOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Enquiry Details</DialogTitle>
-            <DialogDescription></DialogDescription>
           </DialogHeader>
           <div className="common-user-info-cont">
             <p>

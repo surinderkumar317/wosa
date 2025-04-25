@@ -73,7 +73,7 @@ const toolsData: Tool[] = [
 
 const EvaluationsTools: React.FC = () => {
   return (
-    <div className="tool-section py-24">
+    <div className="tool-section lg:py-24 py-12">
       <div className="container m-auto lg:px-0 px-4">
         {contentData.map((content) => (
           <div className="tool-content" key={content.id}>

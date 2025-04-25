@@ -319,7 +319,7 @@ const EventTimeModal: React.FC<FormBannerProps> = ({ heading }) => {
 
       {/* Course Dialog */}
       <Dialog open={isCourseOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>{heading}</DialogTitle>
           </DialogHeader>
@@ -490,10 +490,9 @@ const EventTimeModal: React.FC<FormBannerProps> = ({ heading }) => {
 
       {/* course info Dialog */}
       <Dialog open={isCourseinfoOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>{heading}</DialogTitle>
-            <DialogDescription></DialogDescription>
           </DialogHeader>
           <Form {...realityinfoForm}>
             <form
@@ -621,7 +620,7 @@ const EventTimeModal: React.FC<FormBannerProps> = ({ heading }) => {
 
       {/* Verification Dialog */}
       <Dialog open={isVarificationOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Verification</DialogTitle>
             <p className="!mt-10">
@@ -686,10 +685,9 @@ const EventTimeModal: React.FC<FormBannerProps> = ({ heading }) => {
 
       {/* User Info Dialog */}
       <Dialog open={isFormInfoOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Package Details</DialogTitle>
-            <DialogDescription></DialogDescription>
           </DialogHeader>
           <div className="common-user-info-cont">
             <p>

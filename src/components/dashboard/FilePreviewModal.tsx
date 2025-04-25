@@ -2,7 +2,6 @@ import React, { ReactNode } from "react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -29,10 +28,9 @@ const FilePreviewModal: React.FC<FilePreviewModalProps> = ({
       <DialogTrigger asChild>
         {trigger}
       </DialogTrigger>
-      <DialogContent className="w-full max-w-[800px] fliepreview-modal top-[5%] translate-y-0">
+      <DialogContent className="w-full max-w-[800px] fliepreview-modal top-[5%] translate-y-0" aria-describedby={undefined}>
         <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription />
+          <DialogTitle className="text-3xl">{title}</DialogTitle>
         </DialogHeader>
         <div className="max-h-[65vh] overflow-auto pr-2">
           {type === "image" ? (

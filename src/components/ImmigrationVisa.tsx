@@ -171,7 +171,7 @@ const ImmigrationVisaSlider: React.FC<ImmigrationContentProps> = ({ subHeading, 
   }, [emblaApi, autoplayInterval]);
 
   return (
-    <div className="immigration-visa-cont py-24">
+    <div className="immigration-visa-cont lg:py-24 py-12">
       <div className="container m-auto">
         <div className="immigration-content">
           <h3>{subHeading}</h3>
@@ -181,7 +181,7 @@ const ImmigrationVisaSlider: React.FC<ImmigrationContentProps> = ({ subHeading, 
         <div className="relative overflow-hidden" ref={emblaRef}>
           <div className={`flex ${visaCountries.length <= 5 ? "justify-center" : ""}`}>
             {visaCountries.map((country, index) => (
-              <div key={index} className="embla__slide flex-shrink-0 lg:w-1/5 px-4 pt-10 pb-10">
+              <div key={index} className="embla__slide flex-shrink-0 lg:w-1/5 px-4 pt-10 lg:pb-10 pb-0">
                 <Card className="border-none shadow-none">
                   <CardContent className="p-0 visa-slider">
                     <div className="visa-item">

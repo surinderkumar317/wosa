@@ -160,7 +160,7 @@ const OurservicesSlider: React.FC = () => {
   }, [emblaApi, autoplayInterval]);
 
   return (
-    <div className="our-services-new-section py-24">
+    <div className="our-services-new-section lg:py-24 py-12">
       <div className="container m-auto">
         <div className="services-content mb-10 text-center">
           {servicesText.map((service) => {

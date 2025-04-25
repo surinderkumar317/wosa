@@ -230,7 +230,7 @@ export const SOCIAL_LINKS_HEADER = [
           icon: "/menu-icons/english-language-assess.webp",
         },
         {
-          title: "CRS Calculato",
+          title: "CRS Calculator",
           link: "https://western-overseas.com/assessment-tools/crs-calculator",
           icon: "/menu-icons/crs-calculator.webp",
         },

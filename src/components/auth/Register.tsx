@@ -19,7 +19,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogDescription,
 } from "@/components/ui/dialog";
 import {
   Select,
@@ -36,7 +35,7 @@ import { Toaster } from "sonner";
 const countryOptions = [
   { value: "+91", label: "+91 - IN", searchable: "india" },
   { value: "+1", label: "+1 - U", searchable: "usa" },
-  { value: "+44", label: "+44 - GB", searchable: "uk" },
+  { value: "+44", label: "+44 - GB", searchable: "gb" },
   { value: "+61", label: "+61 - AU", searchable: "australia" },
   { value: "+81", label: "+81 - JP", searchable: "japan" },
 ];
@@ -270,10 +269,9 @@ const Register: React.FC = () => {
             Register
           </Button>
         </DialogTrigger>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Registration</DialogTitle>
-            <DialogDescription></DialogDescription>
           </DialogHeader>
           <Form {...phoneForm}>
             <form
@@ -314,7 +312,8 @@ const Register: React.FC = () => {
                                 placeholder="Search country"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                onKeyDown={(e) => e.stopPropagation()}
+                                onClick={(e) => e.stopPropagation()}
+                                onTouchStart={(e) => e.stopPropagation()}
                                 className="h-8 text-sm"
                               />
                             </div>
@@ -386,10 +385,9 @@ const Register: React.FC = () => {
           }
         }}
       >
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Registration</DialogTitle>
-            <DialogDescription></DialogDescription>
           </DialogHeader>
           <Form {...registrationForm}>
             <form
@@ -728,7 +726,7 @@ const Register: React.FC = () => {
 
       {/* Verification Dialog */}
       <Dialog open={isVarificationOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Verification</DialogTitle>
             <p className="!mt-10">
@@ -792,10 +790,9 @@ const Register: React.FC = () => {
 
       {/* User Info Dialog */}
       <Dialog open={isFormInfoOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Enquiry Details</DialogTitle>
-            <DialogDescription></DialogDescription>
           </DialogHeader>
           <div className="common-user-info-cont">
             <p>

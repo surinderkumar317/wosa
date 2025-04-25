@@ -9,6 +9,7 @@ import { VIRTUALOFFICE_URL } from "@/app/constants/common";
 import TimeZone from "./TimeZone";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
+// import Marquee from "./Marquee";
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);

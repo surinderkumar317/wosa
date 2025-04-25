@@ -111,7 +111,7 @@ const ContantTabs: React.FC = () => {
   }, [activeTab, hasInteracted]);
   
   return (
-    <div className="container m-auto content-tab py-20" ref={scrollTargetRef}>
+    <div className="container m-auto content-tab lg:py-20 py-5" ref={scrollTargetRef}>
       {/* Tabs - Visible only on larger screens */}
       <div className="hidden md:flex">
         <Tabs

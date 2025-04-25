@@ -49,7 +49,7 @@ const Achievement: React.FC = () => {
 
   return (
     <>
-      <div ref={ref} className="achievements-container py-24 justify-items-center">
+      <div ref={ref} className="achievements-container lg:py-24 py-12 justify-items-center">
         <div className="container m-auto lg:p-0 px-3">
           {contentItems.map((item, index) => (
             <div className="achievement-content relative z-10" key={index}>

@@ -20,7 +20,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogDescription,
 } from "@/components/ui/dialog";
 import {
   Select,
@@ -128,10 +127,9 @@ const B2bRegistrationEnquiry: React.FC = () => {
         <DialogTrigger asChild>
           <Button className="py-6 px-6 text-2xl mt-5">Join Us</Button>
         </DialogTrigger>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>B2B Registration & Enquiry</DialogTitle>
-            <DialogDescription></DialogDescription>
           </DialogHeader>
           <Form {...b2bForm}>
             <form

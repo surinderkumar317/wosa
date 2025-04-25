@@ -81,7 +81,7 @@ interface SheetContentProps
   //console.log("Link element:", link);
   //console.log("Is inside .mobile-list:", link?.closest(".mobile-list"));
 
-  if (link && link.closest(".mobile-list")) {
+  if (link && link.closest(".mobile-logo, .mobile-list, .mobile-buttons")) {
     setTimeout(() => {
       closeSheet();
     }, 50);

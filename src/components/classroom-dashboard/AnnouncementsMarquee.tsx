@@ -39,7 +39,7 @@ const AnnouncementsMarquee: React.FC = () => {
               <span className="text-red-600">{item.date}</span>
             </button>
           </DialogTrigger>
-          <DialogContent className="common-modal-form w-full max-w-xl">
+          <DialogContent className="common-modal-content w-full max-w-xl top-[5%] translate-y-0">
             <DialogHeader>
               <DialogTitle>{item.dialogTitle}</DialogTitle>
               <DialogDescription className="!my-6 text-black">

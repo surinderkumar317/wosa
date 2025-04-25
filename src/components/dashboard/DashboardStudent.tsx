@@ -11,6 +11,7 @@ import CommonImage from "../common/Image";
 import Link from "next/link";
 import WalletInfoModal from "./WalletInfoModal";
 import SwitchClassroom from "./SwitchClassroom";
+import WalletBox from "./WalletBox";
 
 const DashboardStudent: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -54,24 +55,7 @@ const DashboardStudent: React.FC = () => {
         </div>
         <div className="w-[32.2%] dashboard-boxes" onClick={() => setOpen(true)}>
           <Link href="#">
-            <Card className="p-5 bg-green-100">
-              <CardHeader className="p-0">
-                <CardTitle>Wallet</CardTitle>
-                <CardDescription></CardDescription>
-              </CardHeader>
-              <CardContent className="p-0 d-card-content">
-                <p>0 INR</p>
-                <div className="dash-icon">
-                  <CommonImage
-                    classname={"icon"}
-                    src={"/dashboard-images/wallet-icn.webp"}
-                    alt={"Profile Image"}
-                    width={42}
-                    height={42}
-                  />
-                </div>
-              </CardContent>
-            </Card>
+             <WalletBox/>
           </Link>
         </div>
         <div className="w-[32.2%] dashboard-boxes">

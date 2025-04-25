@@ -19,7 +19,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogDescription,
 } from "@/components/ui/dialog";
 import { Eye, EyeOff } from "lucide-react";
 import CommonImage from "../common/Image";
@@ -93,11 +92,10 @@ const ChangePassword: React.FC = () => {
           Change Password
         </Button>
       </DialogTrigger>
-
-      <DialogContent className="common-modal-form w-full max-w-[450px] top-[5%] translate-y-0">
+ 
+      <DialogContent className="common-modal-form w-full max-w-[450px] top-[5%] translate-y-0" aria-describedby={undefined}>
         <DialogHeader>
           <DialogTitle>Change Password</DialogTitle>
-          <DialogDescription></DialogDescription>
         </DialogHeader>
 
         <Form {...changePasswordForm}>

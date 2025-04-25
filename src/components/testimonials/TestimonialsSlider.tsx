@@ -116,7 +116,7 @@ const TestimonialsSlider: React.FC = () => {
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="embla__slide px-4 pt-10 pb-10 w-full cursor-pointer flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] testimonail-boxs-holder"
+                className="embla__slide px-4 lg:py-10 py-0 w-full cursor-pointer flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] testimonail-boxs-holder"
                 onClick={() => openModal(testimonial)}
               >
                 <Card className="testimonials-box w-full bg-white p-4 rounded-lg shadow-md">

@@ -2,7 +2,6 @@ import React from "react";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -31,10 +30,9 @@ const MockTestReport: React.FC = () => {
 
       <div className="mock-card-container mt-5 flex flex-wrap gap-3">
         {mockTests.map((test) => (
-          <Card key={test.id} className="w-[32.6%] min-h-[250px] relative mocktest-box">
+          <Card key={test.id} className="w-[32.6%] min-h-[250px] relative mocktest-box" aria-describedby={undefined}>
             <CardHeader className="pb-2">
               <CardTitle>{test.title}</CardTitle>
-              <CardDescription></CardDescription>
             </CardHeader>
             <CardContent>
               <p><strong>Report Date:</strong> {test.reportDate}</p>

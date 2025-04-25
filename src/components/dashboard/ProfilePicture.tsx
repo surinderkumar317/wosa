@@ -14,7 +14,6 @@ import {
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -84,10 +83,9 @@ const ProfilePicture: React.FC = () => {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="common-modal-form w-full max-w-[450px] top-[5%] translate-y-0">
+      <DialogContent className="common-modal-form w-full max-w-[450px] top-[5%] translate-y-0" aria-describedby={undefined}>
         <DialogHeader>
           <DialogTitle>Change Profile Picture</DialogTitle>
-          <DialogDescription></DialogDescription>
         </DialogHeader>
 
         <div className="profile-img w-full max-w-[180px] m-auto p-3">

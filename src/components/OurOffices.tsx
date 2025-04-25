@@ -17,8 +17,8 @@ const contentItems: ContentItem[] = [
 
 const OurOffices: React.FC = () => {
   return (
-    <div className="our-office-container py-10">
-      <div className="ouroffice-content py-10">
+    <div className="our-office-container lg:py-10 py-5">
+      <div className="ouroffice-content lg:py-10 pb-5">
         {contentItems.map((item, index) => (
           <div key={index}>
             <h3 className="text-center">{item.heading}</h3>
