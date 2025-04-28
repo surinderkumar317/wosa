@@ -1950,7 +1950,7 @@ input::placeholder {
 .mobile-navigation {
     height: 100vh !important;
     overflow: auto;
-    padding-bottom:10%;
+    padding-bottom:20%;
     .mobile-login-register{
         display: flex;
         gap:5px;
@@ -2774,6 +2774,13 @@ background: #ccc;
     opacity: 1;
 }
 
+.header .header-topbar .marquee-modal button {
+    font-size: 21px;
+    font-weight: bold;
+    position: relative;
+    top: -15px;
+}
+
 // responsive css
 @media screen and (min-width:1921px) and (max-width:5000px)
 {
@@ -3137,6 +3144,11 @@ background: #ccc;
             }
         }
     }
+
+    .marquee-cont {
+        width: 48%;
+        margin: 0 5% 0 0;
+    }
     
 }
 @media screen and (max-width:1366px)
@@ -3165,6 +3177,10 @@ background: #ccc;
     }
     .common-coaching-box {
         width: 31.5%;
+    }
+    .marquee-cont {
+        width: 46%;
+        margin: 0 8% 0 0;
     }
 }
 @media screen and (max-width:1152px)
@@ -3246,7 +3262,10 @@ background: #ccc;
             font-size: 0.8rem;
         }
     }
-    
+    .marquee-cont {
+        width: 40%;
+        margin: 0 11% 0 0;
+    }
     
 }
 @media screen and (max-width:1024px)
@@ -3377,7 +3396,7 @@ background: #ccc;
 }
 @media screen and (max-width:992px)
 {
-    body.padding-top {padding-top: 4rem !important;}
+    body.padding-top {padding-top:5.7rem !important;}
     .header {
         .navigation-container {
             .logo-cont {
@@ -3504,7 +3523,7 @@ background: #ccc;
         }
     }
     .common-modal-content, .gallery-modal {
-        width: 95% !important;
+        width: 90% !important;
     }
     .achievements-container {
         .achievement-content
@@ -4225,7 +4244,7 @@ background: #ccc;
 
     // all modal 
     div[role=dialog].common-modal-form {
-        max-width: 95%;
+        max-width: 90%;
         padding: 25px 0px;
         border-radius: 10px;
         form {
@@ -4337,7 +4356,7 @@ background: #ccc;
     }
     .switchclass-room-modal, .fliepreview-modal, .mocktestreport-modal
     {
-        width: 95%;
+        width: 90%;
         .switchclassroom-cards
         {
             width: 100%;
@@ -4345,7 +4364,7 @@ background: #ccc;
     }
     .wallet-modal
     {
-        width: 95%;
+        width: 90%;
         .wallet-box {
             max-width: 180px;
             width: 100%;
@@ -4408,7 +4427,7 @@ background: #ccc;
     }
     .timezone-modal
     {
-        width: 95%;
+        width:90%;
         padding:15px 10px;
         border-radius: 10px;
         .timezone-text + button{
@@ -4518,6 +4537,35 @@ background: #ccc;
                     .coaching-text {
                         width:100%;
                     }
+                }
+            }
+        }
+    }
+
+    .header {
+        top:0px !important;
+        .header-topbar {
+            padding: 0.1rem 3%;
+            .marquee-cont
+            {
+                width: 99%;
+            }
+            .marquee-modal {
+                width: 100% !important;
+                padding: 25px 15px;
+                button {
+                    font-size: 21px;
+                    font-weight: bold;
+                    position: absolute;
+                    top: -10px;
+                    right: -8px;
+                    z-index: 999;
+                }
+                h2{
+                    text-align: center;
+                }
+                p{
+                    text-align: center;
                 }
             }
         }

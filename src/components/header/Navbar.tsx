@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { HEADER_LINKS } from "@/app/constants/links";
 import CommonImage from "@/components/common/Image";
@@ -32,6 +32,56 @@ interface IMenuItem {
 const menuData: IMenuItem[] = HEADER_LINKS;
 
 const Navbar: React.FC = () => {
+
+  const [isSheetOpen, setIsSheetOpen] = useState(false); // State for sheet open/close
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredMenuData, setFilteredMenuData] = useState(menuData);
+
+  useEffect(() => {
+    // Reset search state whenever the sheet is opened
+    if (isSheetOpen) {
+      setSearchQuery("");
+      setFilteredMenuData(menuData);
+    }
+  }, [isSheetOpen]);
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+  
+    const filteredData = menuData
+      .map((item) => {
+        // Check if the main menu title matches
+        const mainMatch = item.title.toLowerCase().includes(query);
+  
+        // Check if any submenu title matches
+        const subMenuMatch = item.subMenu?.filter((subItem) =>
+          subItem.title.toLowerCase().includes(query)
+        );
+  
+        // If a match is found, return the item with filtered subMenu
+        if (mainMatch || (subMenuMatch && subMenuMatch.length > 0)) {
+          return {
+            ...item,
+            subMenu: subMenuMatch, // Only include matched submenus
+          };
+        }
+  
+        // Exclude items that don't match
+        return null;
+      })
+      .filter(Boolean); // Filter out null values
+  
+    setFilteredMenuData(filteredData as IMenuItem[]); // Cast to IMenuItem[]
+  };
+  
+  
+  const handleSheetClose = () => {
+    console.log("Sheet is closing, resetting search...");
+    setSearchQuery("");
+    setFilteredMenuData(menuData);
+  };
+
   return (
     <>
       {/* desktop view */}
@@ -132,7 +182,20 @@ const Navbar: React.FC = () => {
 
       {/* mobile view */}
       <div className="lg:hidden block">
-        <Sheet>
+        <Sheet 
+         open={isSheetOpen}
+         onOpenChange={(isOpen) => {
+           setIsSheetOpen(isOpen); // Manage the sheet's open state
+           if (isOpen) {
+             // Reset search state when the sheet is opened
+             setSearchQuery("");
+             setFilteredMenuData(menuData);
+           }
+           if (!isOpen) {
+             handleSheetClose(); // Reset menu when closing the sheet
+           }
+         }}
+        >
           <SheetTrigger>
             <CommonImage
               classname={"mobile-menu"}
@@ -169,110 +232,124 @@ const Navbar: React.FC = () => {
                 <Link href="/enquiry">Quick Enquiry</Link>
               </Button>
             </div>
+
+             {/* Search Input */}
+            <div className="mt-4">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={handleSearch}
+                placeholder="Search menu..."
+                className="w-full p-2 border rounded"
+              />
+            </div>
             <ul className="flex flex-col gap-4 mt-4 mobile-list">
-              {menuData.map((menuItem, index) => (
-                <li key={index}>
-                  <Link
-                    href={menuItem.link}
-                    className={
-                      menuItem.disabled
-                        ? "pointer-events-none text-lg font-semibold"
-                        : ""
-                    }
-                  >
-                    {menuItem.title}
-                  </Link>
+            {filteredMenuData.length > 0 ? (
+                filteredMenuData.map((menuItem, index) => (
+                  <li key={index}>
+                    {/* your Link rendering logic here */}
+                    <Link
+                      href={menuItem.link}
+                      className={menuItem.disabled ? "pointer-events-none text-lg font-semibold" : ""}
+                      onClick={() => setIsSheetOpen(false)} // Close the sheet when a link is clicked
+                    >
+                      {menuItem.title}
+                    </Link>
 
-                  {menuItem.subMenu && (
-                    <ul className="ml-4 mt-2 space-y-2">
-                      {menuItem.subMenu.map((sub, subIndex) => (
-                        <li className="submenu" key={subIndex}>
-                          <div className="flex items-center gap-2">
-                            <Link
-                              href={sub.link}
-                              className={
-                                sub.disabled
-                                  ? "pointer-events-none flex items-center gap-2 font-semibold"
-                                  : "flex items-center gap-2 font-semibold"
-                              }
-                            >
-                              {sub.icon && (
-                                <CommonImage
-                                  src={sub.icon}
-                                  alt={sub.title}
-                                  width={16}
-                                  height={16}
-                                />
-                              )}
-                              {sub.title}
-                            </Link>
-
-                            {/* Toggle arrow only if there is a nested submenu */}
-                            {sub.subMenu && (
-                              <button
-                                type="button"
-                                className="ml-auto"
-                                onClick={(e) => {
-                                  const parent =
-                                    e.currentTarget.closest(".submenu");
-                                  if (
-                                    parent?.classList.contains(
-                                      "open-subdropdown"
-                                    )
-                                  ) {
-                                    parent.classList.remove("open-subdropdown");
-                                  } else {
-                                    // Remove class from all others
-                                    document
-                                      .querySelectorAll(
-                                        ".submenu.open-subdropdown"
-                                      )
-                                      .forEach((el) =>
-                                        el.classList.remove("open-subdropdown")
-                                      );
-                                    parent?.classList.add("open-subdropdown");
-                                  }
-                                }}
+                    {/* submenus */}
+                    {menuItem.subMenu && (
+                      <ul className="ml-4 mt-2 space-y-2">
+                        {menuItem.subMenu.map((sub, subIndex) => (
+                          <li className="submenu" key={subIndex}>
+                            <div className="flex items-center gap-2">
+                              <Link
+                                href={sub.link}
+                                className={
+                                  sub.disabled
+                                    ? "pointer-events-none flex items-center gap-2 font-semibold"
+                                    : "flex items-center gap-2 font-semibold"
+                                }
+                                onClick={() => setIsSheetOpen(false)} // Close the sheet when a link is clicked
                               >
-                                <i className="fa-solid fa-angle-down"></i>
-                              </button>
-                            )}
-                          </div>
+                                {sub.icon && (
+                                  <CommonImage
+                                    src={sub.icon}
+                                    alt={sub.title}
+                                    width={16}
+                                    height={16}
+                                  />
+                                )}
+                                {sub.title}
+                              </Link>
 
-                          {/* Sub-submenu */}
-                          {sub.subMenu && (
-                            <ul className="ml-6 mt-1 space-y-1 mobile-subdropdowns">
-                              {sub.subMenu.map((branch, branchIndex) => (
-                                <li
-                                  key={branchIndex}
-                                  className={
-                                    branch.disabled
-                                      ? "opacity-50 pointer-events-none"
-                                      : ""
-                                  }
-                                >
-                                  <Link
-                                    href={branch.link}
-                                    onClick={(e) => {
-                                      const parentSubmenu =
-                                        e.currentTarget.closest(".submenu");
-                                      parentSubmenu?.classList.remove(
+                              {/* nested submenu toggle button */}
+                              {sub.subMenu && (
+                                <button
+                                  type="button"
+                                  className="ml-auto"
+                                  onClick={(e) => {
+                                    const parent =
+                                      e.currentTarget.closest(".submenu");
+                                    if (
+                                      parent?.classList.contains(
+                                        "open-subdropdown"
+                                      )
+                                    ) {
+                                      parent.classList.remove(
                                         "open-subdropdown"
                                       );
-                                    }}
+                                    } else {
+                                      document
+                                        .querySelectorAll(
+                                          ".submenu.open-subdropdown"
+                                        )
+                                        .forEach((el) =>
+                                          el.classList.remove(
+                                            "open-subdropdown"
+                                          )
+                                        );
+                                      parent?.classList.add("open-subdropdown");
+                                    }
+                                  }}
+                                >
+                                  <i className="fa-solid fa-angle-down"></i>
+                                </button>
+                              )}
+                            </div>
+
+                            {/* sub-submenu */}
+                            {sub.subMenu && (
+                              <ul className="ml-6 mt-1 space-y-1 mobile-subdropdowns">
+                                {sub.subMenu.map((branch, branchIndex) => (
+                                  <li
+                                    key={branchIndex}
+                                    className={
+                                      branch.disabled
+                                        ? "opacity-50 pointer-events-none"
+                                        : ""
+                                    }
                                   >
-                                    {branch.title}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                                    <Link
+                                      href={branch.link}
+                                      onClick={() => setIsSheetOpen(false)} // Close the sheet when a link is clicked
+                                    >
+                                      {branch.title}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))
+              ) : (
+                <li className="text-center text-muted-foreground text-sm py-4">
+                  No menu found
                 </li>
-              ))}
+              )}
 
               {/* Show Dashboard Link */}
               <li>

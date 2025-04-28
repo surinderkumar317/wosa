@@ -304,13 +304,16 @@ const Register: React.FC = () => {
                           <SelectContent>
                             {/* 🔍 Search Input */}
                             <div
-                              className="px-2 pb-2 pt-1">
+                              className="px-2 pb-2 pt-1"
+                              onMouseDown={(e) => e.stopPropagation()} // Keep dropdown open
+                            >
                               <Input
                                 ref={inputRef}
                                 placeholder="Search country"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 onClick={(e) => e.stopPropagation()}
+                                onTouchStart={(e) => e.stopPropagation()}
                                 className="h-8 text-sm"
                               />
                             </div>

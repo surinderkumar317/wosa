@@ -1,121 +1,144 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { motion } from "framer-motion";
+import MarqueeModal from "@/components/header/MarqueeModal"; // Import your custom modal
 
 const marqueeItems = [
   {
     heading: "Variations we denounce with",
-    content: "On the other hand, we denounce...",
+    content:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting",
   },
   {
     heading: "Lorem Ipsum we denounce with",
-    content: "Dislike men who are so beguiled...",
+    content:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting",
   },
   {
     heading: "Random Words we denounce with",
-    content: "On the other hand, we denounce...",
+    content:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting",
   },
   {
     heading: "Model we denounce with",
-    content: "Righteous indignation and dislike men...",
+    content:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting",
   },
 ];
 
-const SPEED = 60; // pixels per second
-
-const Marquee: React.FC = () => {
-  const marqueeRef = useRef<HTMLDivElement>(null);
-  const offset = useRef<number>(0);
-  const lastTime = useRef<number | null>(null);
-  const animationId = useRef<number | null>(null);
-
-  const [isPaused, setIsPaused] = useState(false);
+const Marquee: React.FC<{ speed?: number }> = ({ speed = 20 }) => {
+  const marqueeRef = useRef<HTMLDivElement>(null); // Ref for the marquee element
   const [selectedItem, setSelectedItem] = useState<{
     heading: string;
     content: string;
   } | null>(null);
-
-  const animate = (timestamp: number) => {
-    if (!lastTime.current) lastTime.current = timestamp;
-
-    const elapsed = (timestamp - lastTime.current) / 1000;
-    lastTime.current = timestamp;
-
-    if (!isPaused && marqueeRef.current) {
-      const contentWidth = marqueeRef.current.scrollWidth / 2;
-      offset.current -= SPEED * elapsed;
-
-      if (-offset.current >= contentWidth) {
-        offset.current = 0;
-      }
-
-      marqueeRef.current.style.transform = `translateX(${offset.current}px)`;
-    }
-
-    animationId.current = requestAnimationFrame(animate);
-  };
+  const [currentPosition, setCurrentPosition] = useState(0); // Track the current position
+  const [isPaused, setIsPaused] = useState(false);
+  const [contentWidth, setContentWidth] = useState(0);
+  const [isAnimated, setIsAnimated] = useState(false); // Enable animation only for > 2 items
 
   useEffect(() => {
-    animationId.current = requestAnimationFrame(animate);
-    return () => {
-      if (animationId.current) cancelAnimationFrame(animationId.current);
-    };
+    const content = document.getElementById("marquee-content");
+    if (content) {
+      setContentWidth(content.scrollWidth / 2); // Calculate total marquee width
+    }
+
+    // Enable animation only if there are more than 2 items
+    setIsAnimated(marqueeItems.length > 2);
   }, []);
 
-  useEffect(() => {
-    if (!selectedItem) {
-      setIsPaused(false);
-      lastTime.current = null;
-    } else {
-      setIsPaused(true);
+  // Get the current transform value to accurately pause animation
+  const handlePause = () => {
+    const marqueeElement = marqueeRef.current;
+    if (marqueeElement) {
+      const computedStyle = window.getComputedStyle(marqueeElement);
+      const matrix = computedStyle.transform.match(/matrix\(([^)]+)\)/);
+      if (matrix) {
+        const translateX = parseFloat(matrix[1].split(",")[4]); // Get the current X translation
+        setCurrentPosition(translateX); // Save the position
+      }
     }
-  }, [selectedItem]);
+    setIsPaused(true); // Pause animation
+  };
 
+  // Resume animation from the last saved position
+  const handleResume = () => {
+    setIsPaused(false); // Resume animation
+  };
+
+  const handleModalOpen = () => {
+    handlePause(); // Pause animation when opening the modal
+  };
+
+  const handleModalClose = () => {
+    handleResume(); // Resume animation when closing the modal
+  };
 
   return (
-    <div className="relative w-full overflow-hidden bg-black text-white py-2">
-      <Dialog
-        open={!!selectedItem}
-        onOpenChange={(open) => {
-          if (!open) setSelectedItem(null);
+    <div className="relative w-full overflow-hidden text-white py-1">
+      {/* Custom Modal */}
+      <MarqueeModal
+        isOpen={!!selectedItem}
+        onClose={() => {
+          setSelectedItem(null);
+          handleModalClose();
         }}
-      >
-        <div
-          ref={marqueeRef}
-          className="flex whitespace-nowrap gap-12 px-4 will-change-transform"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => {
-            if (!selectedItem) setIsPaused(false);
-          }}
-        >
-          {[...marqueeItems, ...marqueeItems].map((item, index) => (
-            <DialogTrigger
-              key={index}
-              className="cursor-pointer font-semibold hover:underline"
-              onClick={() => setSelectedItem(item)}
-            >
-              {item.heading}
-            </DialogTrigger>
-          ))}
-        </div>
+        title={selectedItem?.heading || ""}
+        description={selectedItem?.content || ""}
+      />
 
-        {selectedItem && (
-          <DialogContent className="common-modal-content w-full max-w-3xl">
-            <DialogHeader>
-              <DialogTitle>{selectedItem.heading}</DialogTitle>
-              <DialogDescription>{selectedItem.content}</DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        )}
-      </Dialog>
+      {/* Marquee Content */}
+      <motion.div
+        id="marquee-content"
+        ref={marqueeRef}
+        className={`flex gap-10 px-4 ${
+          marqueeItems.length <= 2 ? "justify-center whitespace-normal" : "whitespace-nowrap"
+        }`}
+        animate={
+          isAnimated && !isPaused
+            ? { x: [currentPosition, -contentWidth] }
+            : { x: currentPosition }
+        }
+        transition={{
+          x: isAnimated && !isPaused
+            ? {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: (contentWidth + Math.abs(currentPosition)) / speed,
+                ease: "linear",
+              }
+            : { duration: 0 },
+        }}
+        onMouseEnter={isAnimated ? handlePause : undefined} // Pause animation on hover
+        onMouseLeave={isAnimated ? handleResume : undefined} // Resume animation on hover out
+      >
+        {marqueeItems.length > 2
+          ? [...marqueeItems, ...marqueeItems].map((item, index) => (
+              <button
+                key={index}
+                className="cursor-pointer font-semibold hover:underline"
+                onClick={() => {
+                  setSelectedItem(item);
+                  handleModalOpen();
+                }}
+              >
+                {item.heading}
+              </button>
+            ))
+          : marqueeItems.map((item, index) => (
+              <button
+                key={index}
+                className="cursor-pointer font-semibold hover:underline"
+                onClick={() => {
+                  setSelectedItem(item);
+                  handleModalOpen();
+                }}
+              >
+                {item.heading}
+              </button>
+            ))}
+      </motion.div>
     </div>
   );
 };

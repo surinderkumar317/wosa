@@ -9,6 +9,7 @@ import { VIRTUALOFFICE_URL } from "@/app/constants/common";
 import TimeZone from "./TimeZone";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
+import Marquee from "./Marquee";
 // import Marquee from "./Marquee";
 
 const Header: React.FC = () => {
@@ -49,7 +50,7 @@ const Header: React.FC = () => {
             <SocialIcons />
           </div>
           <div className="xl:w-[50%] 2xl:w-[60%] marquee-cont text-white flex items-center">
-            {/* <Marquee /> */}
+            <Marquee />
           </div>
           <div className="w-1/3 justify-end gap-3 items-center lg:flex hidden">
             <div className="login-reg-cont text-white">
