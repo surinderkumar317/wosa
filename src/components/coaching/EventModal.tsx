@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import OptionBox from "@/components/coaching/OptionBox";
+import PhoneCountryCodeSelect from "@/components/PhoneCountrySelect/PhoneCountrycodeSelect";
 import {
   Form,
   FormControl,
@@ -27,7 +28,6 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  SelectGroup,
 } from "@/components/ui/select";
 
 interface FormBannerProps {
@@ -35,13 +35,13 @@ interface FormBannerProps {
 }
 
 // Country Code Options
-const countryOptions = [
-  { value: "+91", label: "+91 - IN", searchable: "india" },
-  { value: "+1", label: "+1 - U", searchable: "usa" },
-  { value: "+44", label: "+44 - GB", searchable: "uk" },
-  { value: "+61", label: "+61 - AU", searchable: "australia" },
-  { value: "+81", label: "+81 - JP", searchable: "japan" },
-];
+// const countryOptions = [
+//   { value: "+91", label: "+91 - IN", searchable: "india" },
+//   { value: "+1", label: "+1 - U", searchable: "usa" },
+//   { value: "+44", label: "+44 - GB", searchable: "uk" },
+//   { value: "+61", label: "+61 - AU", searchable: "australia" },
+//   { value: "+81", label: "+81 - JP", searchable: "japan" },
+// ];
 
 // Zod Schemas
 const phoneSchema = z.object({
@@ -73,7 +73,7 @@ const verificationSchema = z.object({
 
 // Component
 const EventTimeModal: React.FC<FormBannerProps> = ({ heading }) => {
-  const [selectedCountry, setSelectedCountry] = useState("+91");
+  //const [selectedCountry, setSelectedCountry] = useState("+91");
   const [isCourseOpen, setIsCourseOpen] = useState(false);
   const [isCourseinfoOpen, setIsCourseinfoOpen] = useState(false);
   const [shouldResetForms, setShouldResetForms] = useState(true);
@@ -94,17 +94,26 @@ const EventTimeModal: React.FC<FormBannerProps> = ({ heading }) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm] = useState("");
 
   // Place the filter here, inside your component
-  const filteredOptions = countryOptions.filter((country) =>
-    country.searchable.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredOptions = countryOptions.filter((country) =>
+  //   country.searchable.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   const phoneForm = useForm<z.infer<typeof phoneSchema>>({
     resolver: zodResolver(phoneSchema),
     defaultValues: { countryCode: "+91", phoneNumber: "" },
   });
+
+  const [selectedCountry, setSelectedCountry] = useState<{
+    value: string;
+    label: string;
+  } | null>(null);
+
+  useEffect(() => {
+    setSelectedCountry({ value: "+91", label: "+91 - IN" });
+  }, []);
 
   const eventtestForm = useForm<z.infer<typeof eventtimeSchema>>({
     resolver: zodResolver(eventtimeSchema),
@@ -242,54 +251,15 @@ const EventTimeModal: React.FC<FormBannerProps> = ({ heading }) => {
                 <FormControl>
                   <div className="flex space-x-2 w-full p-2 form-phone-input">
                     {/* Country Code Select */}
-                    <Select
-                      onValueChange={(value) => {
-                        setSelectedCountry(value);
-                        phoneForm.setValue("countryCode", value);
-                        setSearchTerm("");
-                      }}
-                      value={selectedCountry}
-                    >
-                      <SelectTrigger className="w-28">
-                        <SelectValue placeholder="Code" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {/* 🔍 Search Input */}
-                        <div
-                          className="px-2 pb-2 pt-1"
-                          onMouseDown={(e) => e.stopPropagation()} // Keep dropdown open
-                        >
-                          <Input
-                            ref={inputRef}
-                            placeholder="Search country"
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            onKeyDown={(e) => e.stopPropagation()}
-                            className="h-8 text-sm"
-                          />
-                        </div>
-
-                        {/* Scrollable country list */}
-                        <div className="h-[100px] overflow-y-auto common-scroller">
-                          <SelectGroup>
-                            {filteredOptions.length > 0 ? (
-                              filteredOptions.map((country) => (
-                                <SelectItem
-                                  key={country.value}
-                                  value={country.value}
-                                >
-                                  {country.label}
-                                </SelectItem>
-                              ))
-                            ) : (
-                              <div className="px-3 py-2 text-sm text-muted-foreground">
-                                No results found
-                              </div>
-                            )}
-                          </SelectGroup>
-                        </div>
-                      </SelectContent>
-                    </Select>
+                    <div className="w-[180px] phone-contry-code">
+                      <PhoneCountryCodeSelect
+                        value={selectedCountry}
+                        onChange={(value) => {
+                          setSelectedCountry(value);
+                          phoneForm.setValue("countryCode", value?.value || "");
+                        }}
+                      />
+                    </div>
 
                     <Input
                       type="tel"
@@ -318,7 +288,10 @@ const EventTimeModal: React.FC<FormBannerProps> = ({ heading }) => {
 
       {/* Course Dialog */}
       <Dialog open={isCourseOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
+        <DialogContent
+          className="common-modal-form w-full max-w-xl top-[5%] translate-y-0"
+          aria-describedby={undefined}
+        >
           <DialogHeader>
             <DialogTitle>{heading}</DialogTitle>
           </DialogHeader>
@@ -489,7 +462,10 @@ const EventTimeModal: React.FC<FormBannerProps> = ({ heading }) => {
 
       {/* course info Dialog */}
       <Dialog open={isCourseinfoOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
+        <DialogContent
+          className="common-modal-form w-full max-w-xl top-[5%] translate-y-0"
+          aria-describedby={undefined}
+        >
           <DialogHeader>
             <DialogTitle>{heading}</DialogTitle>
           </DialogHeader>
@@ -619,7 +595,10 @@ const EventTimeModal: React.FC<FormBannerProps> = ({ heading }) => {
 
       {/* Verification Dialog */}
       <Dialog open={isVarificationOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
+        <DialogContent
+          className="common-modal-form w-full max-w-xl top-[5%] translate-y-0"
+          aria-describedby={undefined}
+        >
           <DialogHeader>
             <DialogTitle>Verification</DialogTitle>
             <p className="!mt-10">
@@ -684,7 +663,10 @@ const EventTimeModal: React.FC<FormBannerProps> = ({ heading }) => {
 
       {/* User Info Dialog */}
       <Dialog open={isFormInfoOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
+        <DialogContent
+          className="common-modal-form w-full max-w-xl top-[5%] translate-y-0"
+          aria-describedby={undefined}
+        >
           <DialogHeader>
             <DialogTitle>Package Details</DialogTitle>
           </DialogHeader>
@@ -693,13 +675,16 @@ const EventTimeModal: React.FC<FormBannerProps> = ({ heading }) => {
               Dear <span>{userDetails.name}</span>,
             </p>
             <p>
-              Your enquiry has been submitted successfully. Here are your details:
+              Your enquiry has been submitted successfully. Here are your
+              details:
             </p>
             <p>
-              Unique ID: <span className="userinfo-data">{userDetails.uniqueId}</span>
+              Unique ID:{" "}
+              <span className="userinfo-data">{userDetails.uniqueId}</span>
             </p>
             <p>
-              Password: <span className="userinfo-data">{userDetails.password}</span>
+              Password:{" "}
+              <span className="userinfo-data">{userDetails.password}</span>
             </p>
             <p>Your Password and Other details are send to your email.</p>
           </div>

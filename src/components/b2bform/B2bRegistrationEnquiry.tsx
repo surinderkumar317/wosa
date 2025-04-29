@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import PhoneCountryCodeSelect from "@/components/PhoneCountrySelect/PhoneCountrycodeSelect";
 import {
   Form,
   FormControl,
@@ -21,26 +22,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  SelectGroup,
-} from "@/components/ui/select";
 
 import { toast } from "sonner";
 import { Toaster } from "sonner";
 
 // Country Code Options
-const countryOptions = [
-  { value: "+91", label: "+91 - IN", searchable: "india" },
-  { value: "+1", label: "+1 - U", searchable: "usa" },
-  { value: "+44", label: "+44 - GB", searchable: "uk" },
-  { value: "+61", label: "+61 - AU", searchable: "australia" },
-  { value: "+81", label: "+81 - JP", searchable: "japan" },
-];
+// const countryOptions = [
+//   { value: "+91", label: "+91 - IN", searchable: "india" },
+//   { value: "+1", label: "+1 - U", searchable: "usa" },
+//   { value: "+44", label: "+44 - GB", searchable: "uk" },
+//   { value: "+61", label: "+61 - AU", searchable: "australia" },
+//   { value: "+81", label: "+81 - JP", searchable: "japan" },
+// ];
 
 // Validation Schemas
 const phoneSchema = z.object({
@@ -70,14 +63,14 @@ const B2bSchema = z.object({
 const B2bRegistrationEnquiry: React.FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [messageLength, setMessageLength] = useState(0);
-  const [selectedCountry, setSelectedCountry] = useState("+91");
+  //const [selectedCountry, setSelectedCountry] = useState("+91");
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm] = useState("");
 
   // Place the filter here, inside your component
-  const filteredOptions = countryOptions.filter((country) =>
-    country.searchable.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredOptions = countryOptions.filter((country) =>
+  //   country.searchable.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   // B2B Form Hook
   const b2bForm = useForm({
@@ -100,6 +93,14 @@ const B2bRegistrationEnquiry: React.FC = () => {
       phoneNumber: "",
     },
   });
+  const [selectedCountry, setSelectedCountry] = useState<{
+    value: string;
+    label: string;
+  } | null>(null);
+
+  useEffect(() => {
+    setSelectedCountry({ value: "+91", label: "+91 - IN" });
+  }, []);
 
   const handleb2bSubmit = async (data: z.infer<typeof B2bSchema>) => {
     console.log("Form Data Submitted:", data);
@@ -127,7 +128,10 @@ const B2bRegistrationEnquiry: React.FC = () => {
         <DialogTrigger asChild>
           <Button className="py-6 px-6 text-2xl mt-5">Join Us</Button>
         </DialogTrigger>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
+        <DialogContent
+          className="common-modal-form w-full max-w-xl top-[5%] translate-y-0"
+          aria-describedby={undefined}
+        >
           <DialogHeader>
             <DialogTitle>B2B Registration & Enquiry</DialogTitle>
           </DialogHeader>
@@ -212,56 +216,18 @@ const B2bRegistrationEnquiry: React.FC = () => {
                         <FormControl>
                           <div className="flex space-x-2 common-phone-container">
                             {/* Country Code Select */}
-                            <Select
-                              onValueChange={(value) => {
-                                setSelectedCountry(value);
-                                phoneForm.setValue("countryCode", value);
-                                setSearchTerm("");
-                              }}
-                              value={selectedCountry}
-                            >
-                              <SelectTrigger className="w-28">
-                                <SelectValue placeholder="Code" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {/* 🔍 Search Input */}
-                                <div
-                                  className="px-2 pb-2 pt-1"
-                                  onMouseDown={(e) => e.stopPropagation()} // Keep dropdown open
-                                >
-                                  <Input
-                                    ref={inputRef}
-                                    placeholder="Search country"
-                                    value={searchTerm}
-                                    onChange={(e) =>
-                                      setSearchTerm(e.target.value)
-                                    }
-                                    onKeyDown={(e) => e.stopPropagation()}
-                                    className="h-8 text-sm"
-                                  />
-                                </div>
-
-                                {/* Scrollable country list */}
-                                <div className="h-[100px] overflow-y-auto common-scroller">
-                                  <SelectGroup>
-                                    {filteredOptions.length > 0 ? (
-                                      filteredOptions.map((country) => (
-                                        <SelectItem
-                                          key={country.value}
-                                          value={country.value}
-                                        >
-                                          {country.label}
-                                        </SelectItem>
-                                      ))
-                                    ) : (
-                                      <div className="px-3 py-2 text-sm text-muted-foreground">
-                                        No results found
-                                      </div>
-                                    )}
-                                  </SelectGroup>
-                                </div>
-                              </SelectContent>
-                            </Select>
+                            <div className="w-[120px] phone-contry-code">
+                              <PhoneCountryCodeSelect
+                                value={selectedCountry}
+                                onChange={(value) => {
+                                  setSelectedCountry(value);
+                                  phoneForm.setValue(
+                                    "countryCode",
+                                    value?.value || ""
+                                  );
+                                }}
+                              />
+                            </div>
 
                             {/* Phone Number Input */}
                             <Input

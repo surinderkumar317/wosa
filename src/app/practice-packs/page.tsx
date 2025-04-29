@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -234,6 +234,11 @@ const OnlineCourse: React.FC = () => {
     form.setValue("duration", value); // ✅ Correct field updated
     form.clearErrors("duration"); // ✅ Clear validation error when a value is selected
   };
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <div className="online-course-section common-courses py-6 flex flex-col">
@@ -243,16 +248,16 @@ const OnlineCourse: React.FC = () => {
           <h3>Let&apos;s Find Your Courses. What are you looking for?</h3>
         </div>
 
-        <div className="m-auto w-3/4 mt-10 form-middle-container">
-          {!showProgramForm && !showAdvancedForm && !searchClicked && (
+        <div className="m-auto w-full mt-10 form-middle-container overflow-hidden">
+          {!showProgramForm && !showAdvancedForm && !searchClicked && isClient && (
             <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -100, opacity: 0 }}
-              transition={{ duration: 0.5 }}
+              initial={{ x: -2000 }} // ✅ Keeps animation simple
+              animate={{ x: 0 }}
+              exit={{ x: -300 }}
+              transition={{ duration: 0.8 }}
             >
               <Form {...form}>
-                <form className="m-auto w-1/2">
+                <form className="m-auto w-2/5">
                   <FormField
                     control={form.control}
                     name="course"
@@ -282,8 +287,12 @@ const OnlineCourse: React.FC = () => {
                   />
                 </form>
                 {selectedCourse && (
-                  <div className="flex !justify-end w-1/2 m-auto common-button-rows">
-                    <Button onClick={handleNext} variant="link" className="mt-4 !p-0">
+                  <div className="flex !justify-end w-2/5 m-auto common-button-rows">
+                    <Button
+                      onClick={handleNext}
+                      variant="link"
+                      className="mt-4 !p-0"
+                    >
                       Next <i className="fa fa-angle-right"></i>
                     </Button>
                   </div>
@@ -292,15 +301,15 @@ const OnlineCourse: React.FC = () => {
             </motion.div>
           )}
 
-          {showProgramForm && (
-            <motion.div
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: 100, opacity: 0 }}
-              transition={{ duration: 0.5 }}
+          {showProgramForm && isClient && (
+           <motion.div
+              initial={{ x: 2000 }} // ✅ Keeps animation simple
+              animate={{ x: 0 }}
+              exit={{ x: -100 }}
+              transition={{ duration: 0.8 }}
             >
               <Form {...form}>
-                <form className="mb-5 m-auto w-1/2">
+                <form className="mb-5 m-auto w-2/5">
                   <FormField
                     control={form.control}
                     name="program"
@@ -330,7 +339,7 @@ const OnlineCourse: React.FC = () => {
                   />
                 </form>
               </Form>
-              <div className="common-button-rows w-1/2 m-auto">
+              <div className="common-button-rows w-2/5 m-auto">
                 <Button
                   onClick={handleBack}
                   variant="link"
@@ -366,44 +375,44 @@ const OnlineCourse: React.FC = () => {
           {searchClicked && !showCourseForm && (
             <div className="advanced-reset-btn flex gap-5">
               {!showAdvancedForm && (
-              <>
-              <Button
-                onClick={handleAdvancedSearch}
-                className="advanced-search"
-              >
-                Advanced Search
-              </Button>
-              <Button
-                onClick={() => {
-                  setShowAdvancedForm(false); // Hide advanced search
-                  setShowCourseForm(false); // Hide course selection form
-                  setShowCoursesMain(false); // Hide course list
-                  setSearchClicked(false); // Reset search state
+                <>
+                  <Button
+                    onClick={handleAdvancedSearch}
+                    className="advanced-search"
+                  >
+                    Advanced Search
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      setShowAdvancedForm(false); // Hide advanced search
+                      setShowCourseForm(false); // Hide course selection form
+                      setShowCoursesMain(false); // Hide course list
+                      setSearchClicked(false); // Reset search state
 
-                  // Reset all selections
-                  setSelectedProgram(null);
-                  setSelectedCourse(null);
-                  setSelectedModuleType(null);
-                  setSelectedModule(null);
-                  setselectedCourseType(null); // ✅ Reset Course Type
-                  setselectedDuration(null); // ✅ Reset Duration
+                      // Reset all selections
+                      setSelectedProgram(null);
+                      setSelectedCourse(null);
+                      setSelectedModuleType(null);
+                      setSelectedModule(null);
+                      setselectedCourseType(null); // ✅ Reset Course Type
+                      setselectedDuration(null); // ✅ Reset Duration
 
-                  // Reset form values explicitly
-                  form.reset({
-                    program: "",
-                    course: "",
-                    moduleType: "",
-                    module: "",
-                    courseType: "",
-                    duration: "",
-                  });
-                }}
-                className="reset-btn"
-              >
-                Reset
-              </Button>
-              </>
-            )}
+                      // Reset form values explicitly
+                      form.reset({
+                        program: "",
+                        course: "",
+                        moduleType: "",
+                        module: "",
+                        courseType: "",
+                        duration: "",
+                      });
+                    }}
+                    className="reset-btn"
+                  >
+                    Reset
+                  </Button>
+                </>
+              )}
             </div>
           )}
 

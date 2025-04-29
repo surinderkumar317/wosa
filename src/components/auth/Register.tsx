@@ -6,6 +6,7 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import PhoneCountryCodeSelect from "@/components/PhoneCountrySelect/PhoneCountrycodeSelect";
 import {
   Form,
   FormControl,
@@ -26,19 +27,18 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  SelectGroup,
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Toaster } from "sonner";
 
 // Country Code Options
-const countryOptions = [
-  { value: "+91", label: "+91 - IN", searchable: "india" },
-  { value: "+1", label: "+1 - U", searchable: "usa" },
-  { value: "+44", label: "+44 - GB", searchable: "gb" },
-  { value: "+61", label: "+61 - AU", searchable: "australia" },
-  { value: "+81", label: "+81 - JP", searchable: "japan" },
-];
+// const countryOptions = [
+//   { value: "+91", label: "+91 - IN", searchable: "india" },
+//   { value: "+1", label: "+1 - U", searchable: "usa" },
+//   { value: "+44", label: "+44 - GB", searchable: "gb" },
+//   { value: "+61", label: "+61 - AU", searchable: "australia" },
+//   { value: "+81", label: "+81 - JP", searchable: "japan" },
+// ];
 
 const cityList = [
   "Chennai",
@@ -104,7 +104,7 @@ type RegistrationData = z.infer<typeof registrationSchema>;
 const Register: React.FC = () => {
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState("+91");
+  //const [selectedCountry, setSelectedCountry] = useState("+91");
   const [selectedService, setSelectedService] = useState("");
   const [selectedSubService, setSelectedSubService] = useState("");
   const [resendTimer, setResendTimer] = useState(30);
@@ -116,14 +116,14 @@ const Register: React.FC = () => {
     uniqueId: "",
     password: "",
   });
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm] = useState("");
   const [registrationData, setRegistrationData] =
     useState<RegistrationData | null>(null);
 
   // Place the filter here, inside your component
-  const filteredOptions = countryOptions.filter((country) =>
-    country.searchable.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredOptions = countryOptions.filter((country) =>
+  //   country.searchable.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   const [cityValue, setCityValue] = useState("");
   const [filteredCities, setFilteredCities] = useState<string[]>([]);
@@ -162,6 +162,15 @@ const Register: React.FC = () => {
       phoneNumber: "",
     },
   });
+
+  const [selectedCountry, setSelectedCountry] = useState<{
+    value: string;
+    label: string;
+  } | null>(null);
+  
+  useEffect(() => {
+    setSelectedCountry({ value: "+91", label: "+91 - IN" });
+  }, []);
 
   const registrationForm = useForm({
     resolver: zodResolver(registrationSchema),
@@ -289,56 +298,16 @@ const Register: React.FC = () => {
                     </Label>
                     <FormControl>
                       <div className="flex space-x-2 common-phone-container">
-                        {/* Country Code Select */}
-                        <Select
-                          onValueChange={(value) => {
-                            setSelectedCountry(value);
-                            phoneForm.setValue("countryCode", value);
-                            setSearchTerm("");
-                          }}
-                          value={selectedCountry}
-                        >
-                          <SelectTrigger className="w-28">
-                            <SelectValue placeholder="Code" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {/* 🔍 Search Input */}
-                            <div
-                              className="px-2 pb-2 pt-1"
-                              onMouseDown={(e) => e.stopPropagation()} // Keep dropdown open
-                            >
-                              <Input
-                                ref={inputRef}
-                                placeholder="Search country"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                onClick={(e) => e.stopPropagation()}
-                                onTouchStart={(e) => e.stopPropagation()}
-                                className="h-8 text-sm"
-                              />
-                            </div>
-
-                            {/* Scrollable country list */}
-                            <div className="h-[100px] overflow-y-auto common-scroller">
-                              <SelectGroup>
-                                {filteredOptions.length > 0 ? (
-                                  filteredOptions.map((country) => (
-                                    <SelectItem
-                                      key={country.value}
-                                      value={country.value}
-                                    >
-                                      {country.label}
-                                    </SelectItem>
-                                  ))
-                                ) : (
-                                  <div className="px-3 py-2 text-sm text-muted-foreground">
-                                    No results found
-                                  </div>
-                                )}
-                              </SelectGroup>
-                            </div>
-                          </SelectContent>
-                        </Select>
+                         {/* Country Code Select */}
+                         <div className="w-[120px] phone-contry-code">
+                          <PhoneCountryCodeSelect
+                            value={selectedCountry}
+                            onChange={(value) => {
+                              setSelectedCountry(value);
+                              phoneForm.setValue("countryCode", value?.value || "");
+                            }}                          
+                          />
+                        </div>
 
                         {/* Phone Number Input */}
                         <Input

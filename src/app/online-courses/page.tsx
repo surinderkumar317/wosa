@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -231,6 +231,11 @@ const OnlineCourse: React.FC = () => {
     form.setValue("duration", value); // ✅ Correct field updated
     form.clearErrors("duration"); // ✅ Clear validation error when a value is selected
   };
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <div className="online-course-section common-courses py-6 flex flex-col">
@@ -240,17 +245,17 @@ const OnlineCourse: React.FC = () => {
           <h3>Let&apos;s Find Your Courses. What are you looking for?</h3>
         </div>
 
-        <div className="m-auto w-3/4 mt-10 form-middle-container">
+        <div className="m-auto w-full mt-10 form-middle-container overflow-hidden">
           {/* Course Selection (Back button now returns to branch form) */}
-          {!showAdvancedForm && !searchClicked && (
+          {!showAdvancedForm && !searchClicked && isClient && (
             <motion.div
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: 100, opacity: 0 }}
-              transition={{ duration: 0.5 }}
+              initial={{ x: -2000 }} // ✅ Keeps animation simple
+              animate={{ x: 0 }}
+              exit={{ x: -300 }}
+              transition={{ duration: 0.8 }}
             >
               <Form {...form}>
-                <form className="mb-5 m-auto w-1/2">
+                <form className="mb-5 m-auto w-2/5">
                   <FormField
                     control={form.control}
                     name="course"
@@ -282,7 +287,7 @@ const OnlineCourse: React.FC = () => {
               </Form>
 
               {selectedCourse && (
-                <div className="common-button-rows w-1/2 m-auto !justify-end">
+                <div className="common-button-rows w-2/5 m-auto !justify-end">
                   <Button
                     onClick={handleSearch}
                     className="ml-4 !p-0"

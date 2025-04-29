@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -231,6 +231,11 @@ const OnlineCourse: React.FC = () => {
     form.setValue("duration", value); // ✅ Correct field updated
     form.clearErrors("duration"); // ✅ Clear validation error when a value is selected
   };
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <div className="online-course-section common-courses py-6 flex flex-col">
@@ -240,68 +245,75 @@ const OnlineCourse: React.FC = () => {
           <h3>Let&apos;s Find Your Courses. What are you looking for?</h3>
         </div>
 
-        <div className="m-auto w-3/4 mt-10 form-middle-container">
+        <div className="m-auto w-full mt-10 form-middle-container overflow-hidden">
           {/* Branch Selection - Hidden when Advanced Search or Reset Button is visible */}
-          {!showCourseForm && !showAdvancedForm && !searchClicked && (
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -100, opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Form {...form}>
-                <form className="m-auto w-1/2">
-                  <FormField
-                    control={form.control}
-                    name="branch"
-                    render={({ field }) => (
-                      <FormItem className="form-row w-full">
-                        <Label>Select Your Preferred Branch</Label>
-                        <Select
-                          onValueChange={(value) => {
-                            field.onChange(value);
-                            handleBranchChange(value);
-                          }}
-                          value={field.value}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select Branch" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Ambala">Ambala</SelectItem>
-                            <SelectItem value="Amritsar">Amritsar</SelectItem>
-                            <SelectItem value="Bathinda">Bathinda</SelectItem>
-                            <SelectItem value="Chandigarh">
-                              Chandigarh
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </form>
-                {selectedBranch && (
-                  <div className="flex !justify-end w-1/2 m-auto common-button-rows">
-                    <Button onClick={handleNext} variant="link" className="mt-4 !p-0">
-                      Next <i className="fa fa-angle-right"></i>
-                    </Button>
-                  </div>
-                )}
-              </Form>
-            </motion.div>
-          )}
+          {!showCourseForm &&
+            !showAdvancedForm &&
+            !searchClicked &&
+            isClient && (
+              <motion.div
+                initial={{ x: -2000 }} // ✅ Keeps animation simple
+                animate={{ x: 0 }}
+                exit={{ x: -300 }}
+                transition={{ duration: 0.8 }}
+              >
+                <Form {...form}>
+                  <form className="m-auto w-2/5">
+                    <FormField
+                      control={form.control}
+                      name="branch"
+                      render={({ field }) => (
+                        <FormItem className="form-row w-full">
+                          <Label>Select Your Preferred Branch</Label>
+                          <Select
+                            onValueChange={(value) => {
+                              field.onChange(value);
+                              handleBranchChange(value);
+                            }}
+                            value={field.value}
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select Branch" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Ambala">Ambala</SelectItem>
+                              <SelectItem value="Amritsar">Amritsar</SelectItem>
+                              <SelectItem value="Bathinda">Bathinda</SelectItem>
+                              <SelectItem value="Chandigarh">
+                                Chandigarh
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </form>
+                  {selectedBranch && (
+                    <div className="flex !justify-end w-2/5 m-auto common-button-rows">
+                      <Button
+                        onClick={handleNext}
+                        variant="link"
+                        className="mt-4 !p-0"
+                      >
+                        Next <i className="fa fa-angle-right"></i>
+                      </Button>
+                    </div>
+                  )}
+                </Form>
+              </motion.div>
+            )}
 
           {/* Course Selection (Back button now returns to branch form) */}
-          {showCourseForm && (
+          {showCourseForm && isClient && (
             <motion.div
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: 100, opacity: 0 }}
-              transition={{ duration: 0.5 }}
+              initial={{ x: 2000 }} // ✅ Keeps animation simple
+              animate={{ x: 0 }}
+              exit={{ x: -100 }}
+              transition={{ duration: 0.8 }}
             >
               <Form {...form}>
-                <form className="mb-5 m-auto w-1/2">
+                <form className="mb-5 m-auto w-2/5">
                   <FormField
                     control={form.control}
                     name="course"
@@ -331,7 +343,7 @@ const OnlineCourse: React.FC = () => {
                   />
                 </form>
               </Form>
-              <div className="common-button-rows w-1/2 m-auto">
+              <div className="common-button-rows w-2/5 m-auto">
                 <Button
                   onClick={handleBack}
                   variant="link"
@@ -407,7 +419,6 @@ const OnlineCourse: React.FC = () => {
               )}
             </div>
           )}
-
 
           {/* Advanced Search Form */}
           {showAdvancedForm && (

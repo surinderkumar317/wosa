@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import PhoneCountryCodeSelect from "@/components/PhoneCountrySelect/PhoneCountrycodeSelect";
 import {
   Form,
   FormControl,
@@ -26,16 +27,15 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  SelectGroup,
 } from "@/components/ui/select";
 
-const countryOptions = [
-  { value: "+91", label: "+91 - IN", searchable: "india" },
-  { value: "+1", label: "+1 - U", searchable: "usa" },
-  { value: "+44", label: "+44 - GB", searchable: "uk" },
-  { value: "+61", label: "+61 - AU", searchable: "australia" },
-  { value: "+81", label: "+81 - JP", searchable: "japan" },
-];
+// const countryOptions = [
+//   { value: "+91", label: "+91 - IN", searchable: "india" },
+//   { value: "+1", label: "+1 - U", searchable: "usa" },
+//   { value: "+44", label: "+44 - GB", searchable: "uk" },
+//   { value: "+61", label: "+61 - AU", searchable: "australia" },
+//   { value: "+81", label: "+81 - JP", searchable: "japan" },
+// ];
 
 const phoneSchema = z.object({
   countryCode: z.string().min(2, "Country code is required"),
@@ -75,7 +75,7 @@ type EnquiryData = {
 };
 
 const EnquiryForm: React.FC = () => {
-  const [selectedCountry, setSelectedCountry] = useState("+91");
+  //const [selectedCountry, setSelectedCountry] = useState("+91");
   const [selectedService, setSelectedService] = useState("");
   const [selectedSubService, setSelectedSubService] = useState("");
   const [messageLength, setMessageLength] = useState(0);
@@ -93,17 +93,26 @@ const EnquiryForm: React.FC = () => {
 
   const [enquiryData, setEnquiryData] = useState<EnquiryData | null>(null);
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm] = useState("");
 
-  // Place the filter here, inside your component
-  const filteredOptions = countryOptions.filter((country) =>
-    country.searchable.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // // Place the filter here, inside your component
+  // const filteredOptions = countryOptions.filter((country) =>
+  //   country.searchable.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   const phoneForm = useForm({
     resolver: zodResolver(phoneSchema),
     defaultValues: { countryCode: "+91", phoneNumber: "" },
   });
+
+  const [selectedCountry, setSelectedCountry] = useState<{
+    value: string;
+    label: string;
+  } | null>(null);
+
+  useEffect(() => {
+    setSelectedCountry({ value: "+91", label: "+91 - IN" });
+  }, []);
 
   const enquiryForm = useForm({
     resolver: zodResolver(enquirySchema),
@@ -211,54 +220,16 @@ const EnquiryForm: React.FC = () => {
               <FormItem className="w-[80%]">
                 <FormControl>
                   <div className="flex space-x-2 w-full p-2 form-phone-input">
-                    <Select
-                      onValueChange={(value) => {
-                        setSelectedCountry(value);
-                        phoneForm.setValue("countryCode", value);
-                        setSearchTerm(""); // Clear search
-                      }}
-                      value={selectedCountry}
-                    >
-                      <SelectTrigger className="w-24">
-                        <SelectValue placeholder="Code" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {/* 🔍 Search Input */}
-                        <div
-                          className="px-2 pb-2 pt-1"
-                          onMouseDown={(e) => e.stopPropagation()} // Keep dropdown open
-                        >
-                          <Input
-                            ref={inputRef}
-                            placeholder="Search country"
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            onKeyDown={(e) => e.stopPropagation()}
-                            className="h-8 text-sm"
-                          />
-                        </div>
-
-                        {/* Scrollable country list */}
-                        <div className="h-[100px] overflow-y-auto common-scroller">
-                          <SelectGroup>
-                            {filteredOptions.length > 0 ? (
-                              filteredOptions.map((country) => (
-                                <SelectItem
-                                  key={country.value}
-                                  value={country.value}
-                                >
-                                  {country.label}
-                                </SelectItem>
-                              ))
-                            ) : (
-                              <div className="px-3 py-2 text-sm text-muted-foreground">
-                                No results found
-                              </div>
-                            )}
-                          </SelectGroup>
-                        </div>
-                      </SelectContent>
-                    </Select>
+                    {/* Country Code Select */}
+                    <div className="w-[180px] phone-contry-code">
+                      <PhoneCountryCodeSelect
+                        value={selectedCountry}
+                        onChange={(value) => {
+                          setSelectedCountry(value);
+                          phoneForm.setValue("countryCode", value?.value || "");
+                        }}
+                      />
+                    </div>
                     <Input
                       type="tel"
                       placeholder="Enter Phone Number"
@@ -286,7 +257,7 @@ const EnquiryForm: React.FC = () => {
 
       {/* Enquiry Dialog */}
       <Dialog open={isEnquiryOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Enquiry</DialogTitle>
           </DialogHeader>
@@ -546,7 +517,7 @@ const EnquiryForm: React.FC = () => {
 
       {/* Verification Dialog */}
       <Dialog open={isVarificationOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Verification</DialogTitle>
             <p className="!mt-10">
@@ -610,7 +581,7 @@ const EnquiryForm: React.FC = () => {
 
       {/* User Info Dialog */}
       <Dialog open={isFormInfoOpen} onOpenChange={handleCloseModals}>
-        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0">
+        <DialogContent className="common-modal-form w-full max-w-xl top-[5%] translate-y-0" aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>Enquiry Details</DialogTitle>
           </DialogHeader>
