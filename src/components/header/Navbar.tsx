@@ -229,7 +229,9 @@ const Navbar: React.FC = () => {
                 </Link>
               </Button>
               <Button variant="destructive" asChild>
-                <Link href="/enquiry">Quick Enquiry</Link>
+                <Link href="/enquiry"
+                   onClick={() => setIsSheetOpen(false)} // ✅ Close sheet on click
+                >Quick Enquiry</Link>
               </Button>
             </div>
 
@@ -353,7 +355,10 @@ const Navbar: React.FC = () => {
 
               {/* Show Dashboard Link */}
               <li>
-                <Link href="/student-dashboard" prefetch={true}>
+                <Link href="/student-dashboard" 
+                  onClick={() => setIsSheetOpen(false)} // ✅ Close sheet on click
+                  prefetch={true}
+                >
                   Dashboard
                 </Link>
               </li>
