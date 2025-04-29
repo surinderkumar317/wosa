@@ -422,8 +422,9 @@ input::placeholder {
             margin: inherit
         } 
         p{
-            @include comman-text;
             margin:15px 0;
+            @include comman-text;
+            
         }
     }
     .aboutcomp-list{
@@ -702,8 +703,8 @@ input::placeholder {
     .article-readmore-readless
     {
         p{
-            @include comman-text;
             line-height: 30px;
+            @include comman-text;            
         }
         button{
             color:$redColor;
@@ -730,12 +731,13 @@ input::placeholder {
             max-width: 1040px;
         }
         p{
-            @include comman-text;
             color:$whiteColor;
             margin: 30px auto;
             width: 100%;
             max-width: 1000px;
             text-align: center;
+            @include comman-text;
+           
         }
     }
     .tool-white-container
@@ -921,10 +923,10 @@ input::placeholder {
                 margin:10px 0;
             }
             p{
-                @include comman-text;
                 text-align: center;
                 line-height: 26px;
                 padding: 0 10px;
+                @include comman-text;                
                 button{
                     color:$redColor !important;
                     background:none;
@@ -1057,10 +1059,11 @@ input::placeholder {
         ul {
             li{
                 padding: 5px 0;
-                a{                    
-                    @include comman-text;
+                a{
                     color:$whiteColor;
-                    font-size: 1.2rem;
+                    font-size: 1.2rem;                    
+                    @include comman-text;
+                    
                     &:hover{
                         color:$redColor;
                     }
@@ -1070,10 +1073,10 @@ input::placeholder {
                 padding:0px;
                 button {
                     padding: 0;
-                    @include comman-text;
                     font-size: 1.2rem;
                     font-weight: normal;
                     color:$whiteColor;
+                    @include comman-text;                    
                     &:hover{
                         background:none;
                         color:$redColor;
@@ -1093,9 +1096,9 @@ input::placeholder {
         .footer-copyright {
             flex-direction: column;
             .footer-copy-text
-            {                
-                @include comman-text;
-                color: $whiteColor;
+            {
+                color: $whiteColor;                
+                @include comman-text;                
             }
         }
         .footer-social-media {
@@ -2008,10 +2011,10 @@ input::placeholder {
         margin: 10px 0;
     }
     p{
-        @include comman-text;
         line-height: 30px;
         margin:10px 0 20px;
         text-align: justify;
+        @include comman-text;        
     }
     img{
         width: 100%;
