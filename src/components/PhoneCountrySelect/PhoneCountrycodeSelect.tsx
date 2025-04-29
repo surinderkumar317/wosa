@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { GroupBase, StylesConfig } from "react-select"; // Import correct types
 import Select from "react-select";
 
 type CountryOption = {
@@ -88,17 +89,17 @@ const PhoneCountryCodeSelect: React.FC<{
 
   if (!isHydrated) return null; // Prevent mismatched rendering during SSR
 
-  const customStyles = {
-    menuList: (provided: any) => ({
+  const customStyles: StylesConfig<CountryOption, false, GroupBase<CountryOption>> = {
+    menuList: (provided) => ({
       ...provided,
       maxHeight: 200, // Set max height for the dropdown
       overflowY: "auto", // Enable scrolling when options exceed max height
     }),
-    option: (provided: any, state: any) => ({
+    option: (provided, state) => ({
       ...provided,
       backgroundColor: state.isSelected ? "#f1f1f1" : state.isFocused ? "#f1f1f1" : "#fff",
       color: state.isSelected ? "#000" : "#000",
-      padding:5,
+      padding: 5,
     }),
   };
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Select, { SingleValue } from "react-select";
+import { StylesConfig, GroupBase } from "react-select";
 import {
   Dialog,
   DialogContent,
@@ -158,12 +159,12 @@ const CountryTimeSelector: React.FC = () => {
     }
   };
 
-  const customStyles = {
-    option: (provided: any, state: any) => ({
+  const customStyles: StylesConfig<CountryOption, false, GroupBase<CountryOption>> = {
+    option: (provided, state) => ({
       ...provided,
       backgroundColor: state.isSelected ? "#f1f1f1" : state.isFocused ? "#f1f1f1" : "#fff",
       color: state.isSelected ? "#000" : "#000",
-      padding:8,
+      padding: 8,
     }),
   };
 
