@@ -49,7 +49,7 @@ const PostDetail: React.FC = () => {
 
   return (
     <div className="container m-auto article-container">
-      <div className="post-detail">
+      <div className="post-detail mt-10">
         <div className="post-date">{post.publishedAt}</div>
         <div className="title__past-inner">{post.title}</div>
         <img src={post.image} alt={post.title} className="w-full h-60 object-cover rounded-md" />
