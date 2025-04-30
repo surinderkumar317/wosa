@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import MarqueeModal from "@/components/header/MarqueeModal"; // Import your custom modal
+import MarqueeModal from "@/components/header/MarqueeModal";
 
 const marqueeItems = [
   {
@@ -28,56 +28,55 @@ const marqueeItems = [
 ];
 
 const Marquee: React.FC<{ speed?: number }> = ({ speed = 20 }) => {
-  const marqueeRef = useRef<HTMLDivElement>(null); // Ref for the marquee element
-  const [selectedItem, setSelectedItem] = useState<{
-    heading: string;
-    content: string;
-  } | null>(null);
-  const [currentPosition, setCurrentPosition] = useState(0); // Track the current position
+  const marqueeRef = useRef<HTMLDivElement>(null);
+  const [selectedItem, setSelectedItem] = useState<{ heading: string; content: string } | null>(null);
+  const [currentPosition, setCurrentPosition] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [contentWidth, setContentWidth] = useState(0);
-  const [isAnimated, setIsAnimated] = useState(false); // Enable animation only for > 2 items
+  const [isAnimated, setIsAnimated] = useState(false);
 
   useEffect(() => {
     const content = document.getElementById("marquee-content");
     if (content) {
-      setContentWidth(content.scrollWidth / 2); // Calculate total marquee width
+      setContentWidth(content.scrollWidth / 2);
     }
 
-    // Enable animation only if there are more than 2 items
+    // ✅ Start looping **only if there are more than 2 items**
     setIsAnimated(marqueeItems.length > 2);
   }, []);
 
-  // Get the current transform value to accurately pause animation
-  const handlePause = () => {
-    const marqueeElement = marqueeRef.current;
-    if (marqueeElement) {
-      const computedStyle = window.getComputedStyle(marqueeElement);
-      const matrix = computedStyle.transform.match(/matrix\(([^)]+)\)/);
-      if (matrix) {
-        const translateX = parseFloat(matrix[1].split(",")[4]); // Get the current X translation
-        setCurrentPosition(translateX); // Save the position
+  useEffect(() => {
+    let frameId: number;
+
+    const smoothAnimate = () => {
+      if (!isPaused && marqueeRef.current && isAnimated) {
+        const nextPosition = currentPosition - 1;
+        setCurrentPosition(nextPosition);
+        marqueeRef.current.style.transform = `translateX(${nextPosition}px)`;
+
+        // 🔄 Reset position when reaching the end
+        if (Math.abs(nextPosition) >= contentWidth) {
+          setCurrentPosition(0);
+        }
       }
+
+      frameId = requestAnimationFrame(smoothAnimate);
+    };
+
+    if (isAnimated) {
+      frameId = requestAnimationFrame(smoothAnimate);
     }
-    setIsPaused(true); // Pause animation
-  };
 
-  // Resume animation from the last saved position
-  const handleResume = () => {
-    setIsPaused(false); // Resume animation
-  };
+    return () => cancelAnimationFrame(frameId);
+  }, [currentPosition, isPaused, isAnimated]);
 
-  const handleModalOpen = () => {
-    handlePause(); // Pause animation when opening the modal
-  };
-
-  const handleModalClose = () => {
-    handleResume(); // Resume animation when closing the modal
-  };
+  const handlePause = () => setIsPaused(true);
+  const handleResume = () => setIsPaused(false);
+  //const handleModalOpen = () => handlePause();
+  const handleModalClose = () => handleResume();
 
   return (
     <div className="relative w-full overflow-hidden text-white py-1">
-      {/* Custom Modal */}
       <MarqueeModal
         isOpen={!!selectedItem}
         onClose={() => {
@@ -88,53 +87,28 @@ const Marquee: React.FC<{ speed?: number }> = ({ speed = 20 }) => {
         description={selectedItem?.content || ""}
       />
 
-      {/* Marquee Content */}
       <motion.div
         id="marquee-content"
         ref={marqueeRef}
-        className={`flex gap-10 px-4 ${
-          marqueeItems.length <= 2 ? "justify-center whitespace-normal" : "whitespace-nowrap"
-        }`}
-        animate={
+        className={`flex gap-10 px-4 ${marqueeItems.length <= 2 ? "justify-center" : "whitespace-nowrap"}`}
+        animate={isAnimated && !isPaused ? { x: [currentPosition, -contentWidth] } : { x: currentPosition }}
+        transition={
           isAnimated && !isPaused
-            ? { x: [currentPosition, -contentWidth] }
-            : { x: currentPosition }
+            ? { repeat: Infinity, repeatType: "loop", duration: contentWidth / (speed * 0.5), ease: "linear" } // 🔄 Slower speed
+            : { duration: 0 }
         }
-        transition={{
-          x: isAnimated && !isPaused
-            ? {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: (contentWidth + Math.abs(currentPosition)) / speed,
-                ease: "linear",
-              }
-            : { duration: 0 },
-        }}
-        onMouseEnter={isAnimated ? handlePause : undefined} // Pause animation on hover
-        onMouseLeave={isAnimated ? handleResume : undefined} // Resume animation on hover out
+        onMouseEnter={handlePause}
+        onMouseLeave={handleResume}
+        style={{ willChange: "transform" }}
       >
-        {marqueeItems.length > 2
+        {isAnimated
           ? [...marqueeItems, ...marqueeItems].map((item, index) => (
-              <button
-                key={index}
-                className="cursor-pointer font-semibold hover:underline"
-                onClick={() => {
-                  setSelectedItem(item);
-                  handleModalOpen();
-                }}
-              >
+              <button key={index} className="cursor-pointer font-semibold hover:underline" onClick={() => setSelectedItem(item)}>
                 {item.heading}
               </button>
             ))
           : marqueeItems.map((item, index) => (
-              <button
-                key={index}
-                className="cursor-pointer font-semibold hover:underline"
-                onClick={() => {
-                  setSelectedItem(item);
-                  handleModalOpen();
-                }}
-              >
+              <button key={index} className="cursor-pointer font-semibold hover:underline" onClick={() => setSelectedItem(item)}>
                 {item.heading}
               </button>
             ))}
