@@ -2852,6 +2852,30 @@ background: #ccc;
     }
 }
 
+.cursor-light {
+    position: fixed;
+    width: 10px; /* ✅ Start small */
+    height: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-10%, -50%) scale(0.2); /* ✅ Initially hidden */
+    transition: transform 0.4s ease-out, opacity 0.4s ease, background 0.4s;
+    z-index: 9999;
+    opacity: 0;
+}
+
+.cursor-light.appear {
+    width: 60px; /* ✅ Expand when appearing */
+    height: 60px;
+    transform: translate(-10%, -50%) scale(1); /* ✅ Smooth scaling */
+    background: rgba(255, 255, 255, 0.8);
+    opacity: 1;
+}
+.cursor-light {
+    opacity: 1 !important; /* ✅ Ensures it appears */
+}
+
 // responsive css
 @media screen and (min-width:1921px) and (max-width:5000px)
 {
