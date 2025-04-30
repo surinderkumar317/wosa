@@ -5,13 +5,7 @@ import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import Providers from "@/components/Providers";
 import { Hind } from "next/font/google";
-import dynamic from "next/dynamic";
-import Loading from "@/app/loading"; // ✅ Correct import for Next.js 15
-
-const MarketingModal = dynamic(
-  () => import("@/components/MarketingPopup"),
-  { loading: () => <Loading /> }
-);
+import MarketingModal from "@/components/MarketingPopup";
 
 const hind = Hind({
   subsets: ["latin"],
