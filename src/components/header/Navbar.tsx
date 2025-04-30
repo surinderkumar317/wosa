@@ -230,7 +230,7 @@ const Navbar: React.FC = () => {
               </Button>
               <Button variant="destructive" asChild>
                 <Link href="/enquiry"
-                   onClick={() => setIsSheetOpen(false)} // ✅ Close sheet on click
+                  onClick={() => setIsSheetOpen(false)} // ✅ Close sheet on click
                 >Quick Enquiry</Link>
               </Button>
             </div>

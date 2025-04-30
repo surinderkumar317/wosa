@@ -210,7 +210,7 @@ const CountryTimeSelector: React.FC = () => {
           className="cursor-pointer"
           onClick={() => setOpen(true)} // Allow user to reopen the dialog
         >
-          <p className="text-[1rem] font-bold flex gap-2 time-zone-text">
+          <p className="text-[1rem] flex gap-2 time-zone-text">
             {selectedCountry.label} {formatTimezoneOffset(selectedCountry.value)}
           </p>
         </div>

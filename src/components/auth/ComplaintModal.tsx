@@ -53,7 +53,7 @@ const phoneSchema = z.object({
 });
 
 const ComplaintSchema = z.object({
-  name: z.string().min(2, "Name is required"),
+  name: z.string().min(1, "Name is required"),
   lastname: z.string().optional(),
   email: z.string().email("Invalid email format"),
   source: z.string().min(1, "Please select an option"),
@@ -273,6 +273,15 @@ const Complaints: React.FC<ComplaintsProps> = ({
     return () => clearTimeout(timer);
   }, [searchTerm]); // Optional: focus each time dropdown resets
 
+  const phoneInputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (isPhoneOpen) {
+      setTimeout(() => {
+        phoneInputRef.current?.focus();
+      }, 100); // Short delay to ensure correct focus
+    }
+  }, [isPhoneOpen]);
+
   return (
     <>
       {/* Phone Number Dialog */}
@@ -338,6 +347,7 @@ const Complaints: React.FC<ComplaintsProps> = ({
                           inputMode="numeric"
                           minLength={10}
                           maxLength={10}
+                          ref={phoneInputRef}  // Attach reference here
                           onChange={(e) => {
                             const value = e.target.value.replace(/\D/g, "");
                             field.onChange(value);

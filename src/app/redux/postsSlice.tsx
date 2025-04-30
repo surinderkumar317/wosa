@@ -25,19 +25,19 @@ const initialState: PostsState = {
 
 // ✅ Fetch all posts
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
-  const response = await axios.get("https://jsonplaceholder.org/posts");
-  return response.data.slice(0, 50); // Limit to 16 posts
+  const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
+  return response.data.slice(0, 50); // Limit to 50 posts
 });
 
 // ✅ Fetch a single post by ID
 export const fetchPostById = createAsyncThunk("posts/fetchPostById", async (id: string) => {
-  const response = await axios.get(`https://jsonplaceholder.org/posts/${id}`);
+  const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`);
   return response.data;
 });
 
-// ✅ Fetch related posts (excluding the current post)
+// ✅ Fetch related posts
 export const fetchRelatedPosts = createAsyncThunk("posts/fetchRelatedPosts", async (id: string) => {
-  const response = await axios.get("https://jsonplaceholder.org/posts");
+  const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
   return response.data.filter((post: Post) => post.id !== Number(id)).slice(0, 7);
 });
 

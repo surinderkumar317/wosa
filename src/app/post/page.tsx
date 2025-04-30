@@ -86,7 +86,7 @@ const PostArticle: React.FC = () => {
                   <div className="item_title text-lg font-semibold mt-2">{item.title}</div>
                   <div className="item_publishedAt text-sm text-gray-500">{item.publishedAt}</div>
                   <div className="item_description text-gray-700 mt-2">
-                    {item.content.slice(0, 100)}...
+                      {item.content ? `${item.content.slice(0, 100)}...` : "Content not available"}
                   </div>
                 </Link>
               ))}

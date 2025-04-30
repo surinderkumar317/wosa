@@ -47,7 +47,7 @@ const phoneSchema = z.object({
 
 // b2b form
 const B2bSchema = z.object({
-  name: z.string().min(2, "Name is required"),
+  name: z.string().min(1, "Name is required"),
   lastname: z.string().optional(),
   email: z.string().email("Invalid email format"),
   countryCode: z.string().min(2, "Country code is required"),

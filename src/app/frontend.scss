@@ -422,8 +422,8 @@ input::placeholder {
             margin: inherit
         } 
         p{
-            @include comman-text;
             margin:15px 0;
+            @include comman-text;            
         }
     }
     .aboutcomp-list{
@@ -702,8 +702,8 @@ input::placeholder {
     .article-readmore-readless
     {
         p{
-            @include comman-text;
             line-height: 30px;
+            @include comman-text;            
         }
         button{
             color:$redColor;
@@ -730,12 +730,12 @@ input::placeholder {
             max-width: 1040px;
         }
         p{
-            @include comman-text;
-            color:$whiteColor;
+            color:$whiteColor !important;
             margin: 30px auto;
             width: 100%;
             max-width: 1000px;
             text-align: center;
+            @include comman-text;            
         }
     }
     .tool-white-container
@@ -921,10 +921,10 @@ input::placeholder {
                 margin:10px 0;
             }
             p{
-                @include comman-text;
                 text-align: center;
                 line-height: 26px;
                 padding: 0 10px;
+                @include comman-text;                
                 button{
                     color:$redColor !important;
                     background:none;
@@ -1057,27 +1057,29 @@ input::placeholder {
         ul {
             li{
                 padding: 5px 0;
-                a{                    
-                    @include comman-text;
-                    color:$whiteColor;
+                a{   
+                    color:$whiteColor !important;
                     font-size: 1.2rem;
                     &:hover{
-                        color:$redColor;
-                    }
+                        color:$redColor !important;
+                    }                                    
+                    @include comman-text;
+                   
                 }
               &.footer-complaint-feedback
               {
                 padding:0px;
                 button {
                     padding: 0;
-                    @include comman-text;
                     font-size: 1.2rem;
                     font-weight: normal;
-                    color:$whiteColor;
+                    color:$whiteColor !important;
                     &:hover{
                         background:none;
-                        color:$redColor;
+                        color:$redColor !important;
                     }
+                    @include comman-text;                  
+                    
                 }
               } 
             }
@@ -1093,9 +1095,9 @@ input::placeholder {
         .footer-copyright {
             flex-direction: column;
             .footer-copy-text
-            {                
-                @include comman-text;
-                color: $whiteColor;
+            {
+                color: $whiteColor !important;                
+                @include comman-text;                
             }
         }
         .footer-social-media {
@@ -1490,7 +1492,7 @@ input::placeholder {
 // talent hunt css
 .talenthunt-container, .eticketing-container, .forex-container, .term-condition-section{
     h1{
-        font-size: 2rem;
+        font-size: 2.3rem;
         font-weight: bold;
         margin: 0px 0 10px;
         line-height: 35px;
@@ -2008,10 +2010,10 @@ input::placeholder {
         margin: 10px 0;
     }
     p{
-        @include comman-text;
         line-height: 30px;
         margin:10px 0 20px;
         text-align: justify;
+        @include comman-text;        
     }
     img{
         width: 100%;
@@ -2295,10 +2297,10 @@ input::placeholder {
         margin-bottom: 15px;
     }
     p{
-        @include comman-text;
-        line-height: 25px;
-        color: $blackColor;
-    }
+        line-height:30px;
+        color: $blackColor !important;
+        @include comman-text;        
+    } 
 }
 .gallery-modal{
     h2{
@@ -2815,9 +2817,11 @@ background: #ccc;
                 {
                     font-weight:600;
                 }
-                .css-tj5bde-Svg
+                .css-1xc3v61-indicatorContainer
                 {
-                    color:$redColor;
+                    svg{
+                        color:$redColor;
+                    }
                 }
             }
         }
@@ -2837,6 +2841,15 @@ background: #ccc;
         }
     }
 }
+
+.login-reg-cont
+{
+    .time-zone-text
+    {
+        font-weight: 600;
+    }
+}
+
 // responsive css
 @media screen and (min-width:1921px) and (max-width:5000px)
 {
@@ -4645,7 +4658,25 @@ background: #ccc;
                 }
             }
         }
-    }    
+    }
+    .post__widget {
+        .post__widget-inner {
+            width: 90%;
+        }
+    }
+    .article-container
+    {
+        flex-direction: column;
+        width: 95%;
+        .post-detail
+        {
+            width: 100%;
+        }
+        .article-right {
+            width:100%;
+        }
+
+    }     
     
 }
 @media screen and (max-width:480px)

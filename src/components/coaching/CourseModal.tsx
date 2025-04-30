@@ -63,7 +63,7 @@ const courseSchema = z.object({
 });
 
 const courseinfoSchema = z.object({
-  name: z.string().min(2, "Name is required"),
+  name: z.string().min(1, "Name is required"),
   lastname: z.string().optional(),
   email: z.string().email("Invalid email format"),
   howdidyouhear: z.string().min(2, "Please select how did you hear about us"),
