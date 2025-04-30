@@ -69,8 +69,8 @@ const ViewMockReportModal: React.FC = () => {
                   key={index}
                   className="flex justify-between items-center border-b py-2"
                 >
-                  <p className="font-bold text-[15px]">{item.title}</p>
-                  <p>{item.score}</p>
+                  <p className="font-semibold text-[15px]">{item.title}</p>
+                  <p className="font-semibold">{item.score}</p>
                 </div>
               ))}
             </div>
