@@ -3220,17 +3220,16 @@ background: #ccc;
         width: 48%;
         margin: 0 5% 0 0;
     }
-    
+    .reality-box, .mocktest-box, .exambooking-box, .event-booking 
+    {
+        width: 32.3%;
+    } 
 }
 @media screen and (max-width:1366px)
 {
     .main-slider-container{
         padding:30px 0 !important;
     }
-    .reality-box, .mocktest-box, .exambooking-box, .event-booking 
-    {
-        width: 32.3%;
-    } 
     .reality-test-container {
         .reality-test-box {
             width: 31%;
