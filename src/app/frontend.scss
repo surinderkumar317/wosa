@@ -2835,9 +2835,11 @@ background: #ccc;
         {
             font-weight:600;
         }
-        .css-tj5bde-Svg
+        .css-1xc3v61-indicatorContainer
         {
-            color:$redColor;
+            svg{
+                color:$redColor;
+            }
         }
     }
 }
