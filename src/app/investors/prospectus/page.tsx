@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import React from "react";
 
 const page = () => {
@@ -15,6 +17,13 @@ const page = () => {
             style={{ border: "none" }}
             allowFullScreen
           />
+          <div className="lg:hidden md:hidden block w-full text-center mt-10">
+            <Button asChild>
+              <Link href="/images/draft_prospectus.pdf" target="_blank">
+                Download PDF
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </div>
