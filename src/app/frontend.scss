@@ -2876,6 +2876,11 @@ background: #ccc;
     opacity: 1 !important; /* ✅ Ensures it appears */
 }
 
+.conversation-container {
+    border-top: 1px solid #ccc;
+    padding-top: 25px;
+}
+
 // responsive css
 @media screen and (min-width:1921px) and (max-width:5000px)
 {
