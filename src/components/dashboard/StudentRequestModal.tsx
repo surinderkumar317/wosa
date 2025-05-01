@@ -152,12 +152,12 @@ const StudentRequestModal: React.FC = () => {
         <DialogHeader>
           <DialogTitle className="text-4xl">Conversations</DialogTitle>
         </DialogHeader>
-        <div className="max-h-[80vh] overflow-auto pr-2 common-scroller">
+        <div className="max-h-[80vh] overflow-auto pr-2 common-scroller conversation-container">
           {studentConversations.map((request) => (
             <div key={request.id}>
               <div className="flex gap-5 w-full flex-wrap stu-complaint-container">
                 <div className="w-full">
-                  <h2>
+                  <h2 className="!text-2xl">
                     Request ID: <strong>{request.requestId}</strong>
                   </h2>
                 </div>

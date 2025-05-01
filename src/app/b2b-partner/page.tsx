@@ -19,7 +19,7 @@ const page = () => {
       <FormSlider
         heading={`Partner With Us`}
         paragraph={'Let us connect for immigration industry'}
-        modalType="B2bRegistration"
+        modalType="B2bRegistration"        
       />
 
       {/* Wrap non-critical sections inside Suspense */}

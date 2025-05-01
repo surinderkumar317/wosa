@@ -5,7 +5,15 @@ import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import Providers from "@/components/Providers";
 import { Hind } from "next/font/google";
-import MarketingModal from "@/components/MarketingPopup";
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+import Loading from "@/app/loading"; // ✅ Correct import for Next.js 15
+import LazySection from "@/components/LazySection";
+import CursorLight from "@/components/cursor-light/CursorLight";
+
+const MarketingModal = dynamic(() => import("@/components/MarketingPopup"), {
+  loading: () => <Loading />,
+});
 
 const hind = Hind({
   subsets: ["latin"],
@@ -25,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">  
+    <html lang="en">       
       <head>
         <link
           rel="stylesheet"
@@ -38,14 +46,16 @@ export default function RootLayout({
         suppressHydrationWarning={true}
         className={`${hind.className} antialiased padding-top`}
       >
+        {/* cursor effect */}
+        <CursorLight/>       
+        {/* marketing modal */}         
+        <MarketingModal/>
+        
         <Header />
         <main>
           <Providers>{children}</Providers>
         </main>
-        <Footer />
-
-        {/* marketing modal */}
-         <MarketingModal/>
+        <Footer />  
       </body>
     </html>
   );

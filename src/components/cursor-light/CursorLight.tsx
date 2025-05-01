@@ -12,26 +12,37 @@ const CursorLight = () => {
       setPosition({ x: e.clientX, y: e.clientY });
     };
   
-    const handleMouseEnter = () => {
-      setVisible(true); // ✅ Ensure light appears when hovering any section
-      setEffectKey(prev => prev + 1); // ✅ Reset animation
-    };
+    const handleMouseEnter = (e: MouseEvent) => {
+      const target = e.target;    
+      // ✅ Ensure target is an HTMLElement before calling `closest()`
+      if (target instanceof HTMLElement && target.closest(".hover-section")) {
+        setVisible(true);
+        setEffectKey(prev => prev + 1);
+      }
+    };    
     
-    const handleMouseLeave = () => {
-      setVisible(false);
+    const handleMouseLeave = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;    
+      if (!target) {
+        console.warn("Mouse leave event triggered with no target.");
+        return; // 🚀 Exit early if `target` is `undefined`
+      }
+    
+      if (target.classList?.contains("hover-section")) {
+        setVisible(false);
+      }
     };
   
-    document.querySelectorAll(".hover-section").forEach((section) => {
-      section.addEventListener("mouseenter", handleMouseEnter);
-      section.addEventListener("mouseleave", handleMouseLeave);
-    });
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseenter", handleMouseEnter, true);
+    document.addEventListener("mouseleave", handleMouseLeave, true);
   
-    window.addEventListener("mousemove", handleMouseMove);
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseenter", handleMouseEnter, true);
+      document.removeEventListener("mouseleave", handleMouseLeave, true);
     };
-  }, []);
-  
+  }, []);  
 
   return (
     <div

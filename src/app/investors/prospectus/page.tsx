@@ -17,6 +17,7 @@ const page = () => {
             style={{ border: "none" }}
             allowFullScreen
           />
+
           <div className="lg:hidden md:hidden block w-full text-center mt-10">
             <Button asChild>
               <Link href="/images/draft_prospectus.pdf" target="_blank">

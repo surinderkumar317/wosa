@@ -104,7 +104,7 @@ const EmblaCarousel: React.FC = () => {
       <div className={`lg:w-[35%] lg:p-6 lg:ml-11 w-full p-5 left-slide-content ${selectedIndex === selectedIndex ? "slider-active" : ""}`}>
         <h1 className="text-3xl lg:text-5xl font-bold">{slides[selectedIndex].title}</h1>
         <p className="mt-3 text-base lg:text-3xl">{slides[selectedIndex].description}</p>
-        <Button className="mt-4 px-6 text-white rounded-lg text-base lg:text-2xl py-5 lg:py-8" asChild>
+        <Button className="mt-4 px-6 text-white rounded-lg text-base lg:text-2xl py-5 lg:py-8 hover-section" asChild>
           <Link href={slides[selectedIndex].buttonLink} passHref>
               {slides[selectedIndex].buttonText}
           </Link>

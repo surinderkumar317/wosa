@@ -62,7 +62,7 @@ const AboutContent: React.FC = () => {
         <div className="aboutcomp-list">
           <ul>
             {listItems.map((item, index) => (
-              <li key={index} onClick={() => openModal(item.title, item.description)} className="cursor-pointer">
+              <li key={index} onClick={() => openModal(item.title, item.description)} className="cursor-pointer hover-section">
                 <h3>{item.title}</h3>
                 <CommonImage
                 classname={"large-arrow"}

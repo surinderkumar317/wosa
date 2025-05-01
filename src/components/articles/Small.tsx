@@ -38,7 +38,7 @@ const articles: Article[] = [
 
 const SmallArticles: React.FC = () => {
   return (
-    <div className="small-article-container lg:my-0 my-5">
+    <div className="small-article-container lg:my-0 my-5 hover-section">
       {articles.map((article) => (
         <div key={article.id} className="small-article-box lg:flex lg:flex-row flex-col gap-10">
           <div className="small-art-img">

@@ -188,7 +188,7 @@ export const SOCIAL_LINKS_HEADER = [
           icon: "/menu-icons/online-course.webp",
         },
         {
-          title: "Pratice Packs",
+          title: "Practice Packs",
           link: "/practice-packs",
           icon: "/menu-icons/practice-pack.webp",
         },
@@ -268,6 +268,7 @@ export const SOCIAL_LINKS_HEADER = [
     {
       title: "Other",
       link: "/",
+      "disabled": true,
       subMenu: [
         {
           title: "More Services",

@@ -19,7 +19,7 @@ const articleData = {
 
 const BigArticle: React.FC = () => {
   return (
-    <div className="big-article-container">
+    <div className="big-article-container hover-section">
       <div className="article-big-img">
         <CommonImage
           src={articleData.images.main}

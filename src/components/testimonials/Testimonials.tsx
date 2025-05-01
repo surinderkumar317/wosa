@@ -22,7 +22,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ showButton = true }) => {
 
         {/* Conditionally Render Button */}
         {showButton && (
-          <div className="w-full loader-btn pb-10 flex justify-center">
+          <div className="w-full loader-btn pb-10 flex justify-center hover-section">
             <Button asChild>
               <Link href="/testimonials">
                 View All

@@ -7,7 +7,7 @@ const Content: React.FC = () => {
   return (
     <div className="image-gallery-text">
       <h2>Video Gallery</h2>
-      <Button className="gallery-btn" asChild>
+      <Button className="gallery-btn hover-section" asChild>
         <Link href="/web-media">
           View All{" "}          
            <CommonImage

@@ -126,7 +126,7 @@ const B2bRegistrationEnquiry: React.FC = () => {
       <Toaster position="bottom-center" />
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogTrigger asChild>
-          <Button className="py-6 px-6 text-2xl mt-5">Join Us</Button>
+          <Button className="py-6 px-6 text-2xl mt-5 mobile-join">Join Us</Button>
         </DialogTrigger>
         <DialogContent
           className="common-modal-form w-full max-w-xl top-[5%] translate-y-0"

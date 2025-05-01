@@ -37,7 +37,7 @@ const LatestArticles: React.FC = () => {
           </div>
         </div>
         <div className="flex justify-center">
-          <Button className="article-button flex justify-center mb-12" asChild>
+          <Button className="article-button flex justify-center mb-12 hover-section" asChild>
             <Link href="/post">
               View All{" "}
               <CommonImage
