@@ -3521,8 +3521,8 @@ background: #ccc;
         justify-content: start;
         .left-slide-content 
         {
-            margin: 0 auto;
-            max-width:400px;
+            // margin: 0 auto;
+            // max-width:400px;
             h1{
                 min-height:inherit;
             }
@@ -3532,8 +3532,8 @@ background: #ccc;
             }
         }
         .main-slider-img {
-            margin: 0 auto;
-            max-width: 370px;
+            // margin: 0 auto;
+            // max-width: 370px;
             img {
                 border: 5px solid $whiteColor;
                 border-radius: 5px;
