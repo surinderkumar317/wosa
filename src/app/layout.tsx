@@ -7,9 +7,11 @@ import Providers from "@/components/Providers";
 import { Hind } from "next/font/google";
 import dynamic from "next/dynamic";
 import Loading from "@/app/loading"; // ✅ Correct import for Next.js 15
-import CursorLight from "@/components/cursor-light/CursorLight";
 
 const MarketingModal = dynamic(() => import("@/components/MarketingPopup"), {
+  loading: () => <Loading />,
+});
+const CursorLight = dynamic(() => import("@/components/cursor-light/CursorLight"), {
   loading: () => <Loading />,
 });
 
