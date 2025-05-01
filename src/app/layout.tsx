@@ -5,10 +5,8 @@ import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import Providers from "@/components/Providers";
 import { Hind } from "next/font/google";
-import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Loading from "@/app/loading"; // ✅ Correct import for Next.js 15
-import LazySection from "@/components/LazySection";
 import CursorLight from "@/components/cursor-light/CursorLight";
 
 const MarketingModal = dynamic(() => import("@/components/MarketingPopup"), {
